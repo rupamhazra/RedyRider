@@ -1,0 +1,17 @@
+<ion-content>
+  <div class="inner_div" margin>
+    <div *ngIf="payment_success">
+      <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="" style="font-size: 140px;"></ion-icon>
+      <h1>Booking Confirmed</h1>
+      <p *ngFor="let receipt of transactionDetails">Receipt Number : <span style="font-weight: bold;">{{receipt.invoice_no}}</span></p>
+    </div>
+    <div *ngIf="!payment_success">
+      <ion-icon ios="ios-close-circle" md="md-close-circle" color="danger" style="font-size: 140px;"></ion-icon>
+      <p>Your payment has been declined</p>
+      <p>Please try again</p>
+    </div>
+    <ion-button margin-top size="large"  type="button" expand="full" (click)="backToHomePage()">
+        GOT IT!
+    </ion-button>
+  </div>
+</ion-content>

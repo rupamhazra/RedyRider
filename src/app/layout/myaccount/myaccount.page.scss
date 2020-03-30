@@ -1,0 +1,37 @@
+._c_top_image{
+    --size: 90px;
+    --border-radius:50%!important;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid white;
+    position: relative;  
+}
+.top_div{
+    background: linear-gradient(45deg, #0A5999 0%, #02A1EB 100%);
+    color:#fff;
+    padding: 25px;
+    text-align: center;
+}
+.f-icons{margin-top: 70px;margin-left: 15px;}
+.sch-pool-car{margin: 70px 15px 35px;background: #ffffff;}
+.select-tour-sector{padding: 15px 0;}
+.card_class{
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: #ffffff;
+}
+.toolbar-class-top{
+    --background: transparent;
+    --color:white;
+}
+.toolbar-class{
+    --background: transparent;
+    
+}
+ion-title{
+    font-size: 15px;
+    font-weight: normal;
+}
+ion-toolbar{
+    --min-height:30px;
+}

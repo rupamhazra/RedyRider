@@ -1,0 +1,103 @@
+
+.personal-fields h2 {
+    font-weight: 600;
+    margin: 0px !important;
+    color: #4285F4;
+}
+.personal-fields p {
+    font-size: 13.5px;
+    color: #757575;
+    margin-top: 0px;
+}
+.hr-border {
+    border-bottom: 1px solid #ffffff;
+}
+hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+.app-heading h1{text-transform: uppercase; letter-spacing: 1px;}
+.small-content {color: #616161; letter-spacing: 0.5px;}
+.inner_div{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.cs-title-padding{
+    margin-left: 0px;
+    //font-size: 20px;
+}
+ion-icon {
+    font-size: 24px; //Preferred size here
+}
+.cs-p{
+    font-size: 13px;
+    font-weight: 500;
+}
+
+ .background-gif ion-img{border-bottom: 3px solid #33b5e5;}
+ ._c_col_back{background: #0d47a1;}
+ ._c_p_text_color{color: #757575; letter-spacing: 1px;}
+ .rstar-margin{
+     margin:0 0 10px 0;
+ }
+.rstar-icon{
+    font-size: 17px;
+}
+.rstar-seat-div{
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    background: #ffffff;
+    margin-top: 15px;
+    padding:10px 15px 0px 15px;
+    border-top: 10px solid #ffd31a;
+    border-radius: 10px;
+}
+.rstar-row{
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+.rstar-grid{
+    margin-bottom: -10px;
+    margin-top: -10px;
+    padding: 10px 0 0px 0;
+}
+.ion-align-self-center{
+    text-align: center;
+    //margin-right: 10px;
+}
+.rstar-grid p{
+    padding: 0px 0px 0px 8px;
+    margin: -7px 0px 2px 0px;
+    font-size: 12px;
+}
+.rstar-last-grid p{
+    padding: 0px 0px 0px 8px;
+    margin: -7px 0px 15px 0px;
+    font-size: 12px;
+}
+.rstar-grid-top{
+    margin-bottom: -18px;
+    margin-top: -12px;
+}
+.rstar-first-grid,.rstar-second-grid{
+    margin-top: -22px;
+}
+.booked rect{
+    fill: #B0B1AF;
+    stroke: #FFFFFF;
+}
+.selected rect{
+    fill: #02A1EB;
+    stroke: #FFFFFF;
+}
+.driver_p{
+    margin: 10px !important;
+    padding: 10px 0 10px 0 !important;
+    text-align: center;
+    font-size: 19px !important;
+    background: #ffd31a;
+    color: white !important;
+}
+
+

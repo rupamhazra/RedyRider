@@ -1,0 +1,75 @@
+.inner_div{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.p_left{
+    margin-left: 10px;
+}
+.badge_class{
+    padding: 7px;
+    font-size: 18px;
+}
+.rstar-radio{
+    opacity: 0;
+    height: 0;
+    margin: 0;
+}
+.item-radio-checked ion-label {
+    color: #fff;
+    background-color: #0A5999;
+    border-color: #0A5999;
+}
+.radio-button-personal{
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
+.radio-button-personal p {
+    font-size: 17px;
+    color: #757575;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    vertical-align: middle;
+}
+.rstar-ion-item{
+    --padding-end: 0px;
+    --padding-bottom: 0px;
+    --padding-start: 0px;
+    --padding-top: 0px;
+    --inner-padding-bottom:0px;
+    --inner-padding-top:0px;
+    --inner-padding-start:0px;
+    --inner-padding-end:2px;
+
+}
+.rstar-label {
+    display: inline-block;
+    font-weight: 400;
+    //color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: initial;
+    border: 1px solid;
+    border-bottom-color: initial;
+    padding: .375rem .75rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+ion-title{
+    font-size: 16px;
+}
+.fa-icon-input{
+    margin-top: 13px;
+    opacity: 0.4;
+}

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar style="padding:0 10px 0px 0px;">
+    <!-- <ion-searchbar type="text" debounce="10000" (ionInput)="getItems($event)" placeholder="Enter pickup location"></ion-searchbar> -->
+    <ion-searchbar type="text" debounce="10000"  (ionInput)="updateSearchResults($event)" placeholder="Enter pickup location" [(ngModel)]="search_address"></ion-searchbar>
+    <ion-buttons slot="start" class="border_button">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="{{network_check_class}}" *ngIf="network_check_class_show" [style.background]="network_check_class=='disconnect'?'red':'#4CAF50'">{{network_msg}}</div>
+</ion-header>
+<ion-content>
+  <ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+  <div *ngIf="quick_actions" style="margin: 0 0 0 10px;" (click)="currentLocation()">
+    <p style="margin: 10px;">Quick Selections</p>
+    <ion-grid no-padding no-margin>
+      <ion-row no-padding no-margin>
+        <ion-col size="5" text-center>
+          <ion-card no-padding no-margin>
+            <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 30px;margin: 10px 0px 0px 50px;"></ion-img>
+          <p>Current Location</p>
+        </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  
+    <ion-list [hidden]="autocompleteItems.length == 0">
+      
+      <ion-item *ngFor="let item of autocompleteItems" tappable lines="full" class="item-class" (click)="selectLocation(item.description,which_type_search)"><p>{{ item.description  }}</p></ion-item>
+    </ion-list>
+    <!-- <ion-list *ngIf="isItemAvailable">
+      <ion-item *ngFor="let item of items" lines="full" class="item-class" (click)="selectLocation(item.location_name,which_type_search)"><p>{{ item.location_name }}</p></ion-item>
+    </ion-list> -->
+    <ion-text color="danger" *ngIf="isNoItemAvailable" >
+      <p style="text-align: center;">No location Found</p>
+    </ion-text>
+</ion-content>

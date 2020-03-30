@@ -1,0 +1,52 @@
+ion-item{
+    --background: transparent;
+}
+.inner_div{
+    margin-top:15px;
+    margin-bottom:10px;
+ }
+ .inner_div_1{
+    margin-bottom:0px;
+    background-color: white;
+    padding: 0 15px 0 15px;
+ }
+ .rupee_sign{
+    margin-right: 10px;
+    opacity: 0.2;
+    margin-left: -13px;
+ }
+ ion-input{
+    --placeholder-opacity:0.3;
+ }
+ hr { 
+    border-width: 0px;
+    margin: 0px;
+}
+.hr_1{
+    border-top: 4px solid #0d47a1;
+}
+.hr_2{
+    border-top: 2px solid #045ff6;
+}
+ion-card{
+    box-shadow: none !important;
+}
+ion-toolbar{
+    --background:transparent;
+
+}
+.icon-payment{
+    font-size: 24px;
+    display: block;
+    border: 1px solid gray;
+    border-radius: 35px;
+    padding: 8px;
+    color:#0d47a1;
+    margin-top: 10px;
+}
+ion-col{
+    padding: 0 15px 0px 15px;
+}
+
+ 
+ 

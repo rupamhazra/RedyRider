@@ -1,0 +1,37 @@
+.form_content{
+    --background:  url('/assets/images/map-image.png') no-repeat center center / cover;
+}
+.sch-pool-car{margin: 70px 15px 35px;background: #ffffff;}
+.f-icons{margin-top: 55px;}
+.f-section{border: 2px solid #eeeeee; background: #ffffff;}
+.f-section h4{color: #212121; margin-bottom: 10px; font-weight:600;
+    text-transform: uppercase; font-size: 19px;}
+.f-section p{color: #757575; font-size: 13px; margin: 25px 0 10px 0;}
+.f-section:hover .border-bot{background: #3F729B; transition: all 0.3s linear;}
+.select-tour-sector{padding: 15px 0;}
+.f-section .select-tour-sector p{color: #212121; font-size: 13px; margin: 10px 0; font-weight: 700; text-transform: uppercase;}
+.border-bot{height: 3px; width: 100px; border-radius: 50%; background: #000;}
+.d-flex {display: -ms-flexbox!important;display: flex!important;}
+.justify-content-center {-ms-flex-pack: center!important;justify-content: center!important;
+}
+._c_col_padd{padding:10px;}
+._c_top_image{
+    position: absolute;
+    z-index: 10000000;
+    top: -33px;
+    left: 35%;
+    --border-radius: 50%!important;
+}
+.middle-of-the-page-whole{position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+.border-circle-asd h2{color: #007E33; text-transform: uppercase; border: 2px solid #007E33; padding: 40px 20px; border-radius: 50%; text-align: center;}
+.border-circle-asd h5{color: #616161; text-transform: uppercase; text-align: center; padding-top: 15px; letter-spacing: 1px;}
+.border-circle-asd p{color: #757575; font-size: 13px; text-align: center; padding-top: 5px;}
+.border-circle-asd h6 a{color: #0d47a1; font-size: 14px; }
+.border-circle-asd h6{text-transform: uppercase; text-align: center; padding-top: 25px;}
+._c_icon_size{
+    font-size: 3em;
+}
+
+.f-icons i{border: 2px solid #3880ff; border-radius: 50px; padding: 25px; margin-bottom: 25px; background: #3880ff; color: #ffffff; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);}
+
+

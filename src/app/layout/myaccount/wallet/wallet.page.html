@@ -1,0 +1,80 @@
+<app-header></app-header>
+<div slot="fixed">
+    <ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+    <div class="inner_div">
+    <p class="no_margin_p">Add Money To</p>
+    <ion-toolbar>
+        <h3>Your Wallet</h3>
+        <ion-img src="./assets/svg/my_wallet.svg" style="width: 40px;" slot="end"></ion-img>
+        
+    </ion-toolbar>
+    <p class="no_margin_p">Available Balance &nbsp;&nbsp;<fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon> {{walletAmount ? walletAmount: '0.00'}}</p>
+    <form [formGroup]="form"  novalidate>
+        <ion-item lines="full">
+            <ion-input autofocus="on" type="number" formControlName="amount" maxlength="10" clearInput="true" inputmode="number" required="true" style="font-size: 30px;" placeholder="Amount"></ion-input>
+            <fa-icon [icon]="['fas','rupee-sign']" size="2x" slot="start" class="rupee_sign"></fa-icon> 
+        </ion-item>
+        <ion-button class="ion-margin-top"  size="large" type="button" [disabled]="form.invalid || net_connection_check" expand="full" (click)="addMoneyToWallet()">
+            Proceed To Add Money 
+            <ion-icon name="arrow-round-forward"></ion-icon>
+        </ion-button>
+    </form>
+    </div>
+<hr class="hr_1"> 
+<hr class="hr_2">   
+</div>
+<ion-content>
+    <div class=" inner_div_1">
+        <ion-toolbar>
+            <p class="no_margin_p" slot="start">Recent Transactions</p>
+            <ion-chip slot="end" color="tertiary" outline="true" (click)="filterTransactions()">Filter<ion-icon name="ios-options" ></ion-icon></ion-chip>
+        </ion-toolbar>
+    </div>
+    <ion-text>
+            <p *ngIf="transactionList.length==0" padding>No Transaction History Found</p>
+    </ion-text>
+    <ion-virtual-scroll [items]="transactionList">
+        
+        <div *virtualItem="let item">
+            <p style="margin: 15px 0px 15px 15px;">{{item.trans_date}}</p>
+            <ion-card no-padding no-margin>
+                <ion-grid no-margin no-padding>
+                    <ion-row no-margin>
+                      <ion-col>
+                        <ion-toolbar>
+                            <ion-img src="./assets/svg/my_wallet_blue.svg" slot="start"  class="icon-payment" *ngIf="item.pay_for_no == '2'" style="width: 48px;"></ion-img>
+                        
+                        <fa-icon [icon]="['fas','bus']" slot="start" class="icon-payment" *ngIf="item.pay_for_no == '1'"></fa-icon>
+
+                        <ion-img src="./assets/svg/referal_blue.svg" slot="start"  class="" *ngIf="item.pay_for_no == '3'" style="width: 48px;"></ion-img>
+
+                       
+                        <p slot="start" style="font-size:16px;margin:0px 0px 0px 10px;">
+                            {{item.pay_for}}
+                            <span style="display: block;
+                            opacity: 0.6;
+                            font-size: 12px;">
+                                {{item.transaction_id}}
+                            </span>
+                        </p>
+                        <p slot="end" style="color: red;" *ngIf="item.transaction_type=='Debit'"> - <fa-icon [icon]="['fas','rupee-sign']" size="1x" class=""></fa-icon> {{item.amount}}</p>
+                        <p slot="end" *ngIf="item.transaction_type=='Credit'" style="color:green;"> + <fa-icon [icon]="['fas','rupee-sign']" size="1x" class=""></fa-icon> {{item.amount}}</p>
+                    </ion-toolbar>
+                    <ion-toolbar style="--min-height:45px;">
+                        <p slot="start" style="margin: 0 0 0 60px;
+                        opacity: 0.6;">{{item.trans_time}}</p>
+                        <p slot="end" style="opacity: 0.6;">Closing Balance : <fa-icon [icon]="['fas','rupee-sign']" size="1x" class=""></fa-icon> {{item.closing_balance ? item.closing_balance : 0.00}}</p>
+                    </ion-toolbar>
+                </ion-col>
+                </ion-row>
+            </ion-grid>
+            </ion-card>
+        </div>
+    </ion-virtual-scroll> 
+    <ion-infinite-scroll threshold="300px" (ionInfinite)="loadData($event)" position="bottom">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

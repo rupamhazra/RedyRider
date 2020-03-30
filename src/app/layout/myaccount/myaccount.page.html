@@ -1,0 +1,99 @@
+<app-header></app-header>
+<ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+<ion-content>
+  <div class="top_div">
+    <ion-thumbnail class="_c_top_image">
+      <img [(src)] = "profile_img" alt="" style="opacity: 0.8;" /> 
+      <ion-icon ios="ios-camera" md="md-camera" (click)="presentActionSheet()" style="    position: absolute;
+      top: 55px;
+      right: 28px;
+      font-size: 25px;
+  "></ion-icon>
+    </ion-thumbnail>
+    
+    <h4>{{user_details.name}}</h4>
+    <p style="font-size: 13px;margin: 15px 0 4px 0;">{{user_details.mobile}}</p>
+    <ion-toolbar class="toolbar-class-top">
+      <p style="font-size: 13px;margin: 0 0 0 0;">{{user_details.email}}</p>
+      <fa-icon [icon]="['fas','edit']"  class="fa-icon-input" (click)="openModal('myaccount-personal')" slot="end"></fa-icon>
+    </ion-toolbar>
+  </div>
+  <div class="inner_div">
+    <ion-card class="card_class">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-toolbar class="toolbar-class">
+              <ion-text class="ion-text-center"><p><fa-icon [icon]="['fas','address-card']" style="font-size: 15px;opacity: 0.4;margin-bottom: 15px;"></fa-icon>&nbsp;ADDRESS</p></ion-text>
+              <hr class="hr-border">
+              <fa-icon [icon]="['fas','edit']" style="font-size: 17px;opacity: 0.4;margin-bottom: 15px;" (click)="openModal1('myaccount-address')" slot="end"></fa-icon>
+            </ion-toolbar>
+            
+            <ion-toolbar class="toolbar-class">
+              <ion-title>Address : {{address_details.address}} </ion-title>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <ion-title>Country : {{address_details.country_name}}</ion-title>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <ion-title>City : {{address_details.city_name}}</ion-title>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <ion-title>State : {{address_details.state_name}}</ion-title>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <ion-title>Pincocde : {{address_details.pin_code}}</ion-title>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <ion-card class="card_class">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-toolbar class="toolbar-class">
+              <ion-text class="ion-text-center"><p style="margin: 0 0 0 0;"><fa-icon [icon]="['fas','key']" style="font-size: 15px;opacity: 0.4;"></fa-icon>&nbsp;CHANGE PASSWORD</p></ion-text>
+              <fa-icon [icon]="['fas','edit']" style="font-size: 17px;opacity: 0.4;" (click)="changePassword()" slot="end"></fa-icon>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <ion-card class="card_class">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-toolbar class="toolbar-class" (click)="logoutUser()">
+              <ion-text class="ion-text-center"><p style="margin: 0 0 0 0;color:red;"><fa-icon [icon]="['fas','sign-out-alt']" style="font-size: 15px;opacity: 0.4;"></fa-icon>&nbsp;LOGOUT</p></ion-text>
+              <!-- <fa-icon [icon]="['fas','edit']" style="font-size: 17px;opacity: 0.4;" (click)="logoutUser()" slot="end"></fa-icon> -->
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <!-- <ion-card class="card_class">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-toolbar class="toolbar-class">
+              <ion-text class="ion-text-center"><p><fa-icon [icon]="['fas','address-card']" style="font-size: 15px;opacity: 0.4;margin-bottom: 15px;"></fa-icon>&nbsp;DEVICE DETAILS</p></ion-text>
+              <hr class="hr-border">
+            </ion-toolbar>
+            
+            <ion-toolbar class="toolbar-class">
+              <ion-title>Model : Redmi Note 5 </ion-title>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <ion-title>UUID : uuid001</ion-title>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <ion-title>Version : 9</ion-title>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card> -->
+  </div>
+</ion-content>

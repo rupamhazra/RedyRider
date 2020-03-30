@@ -1,0 +1,695 @@
+<app-header></app-header>
+<ion-progress-bar type="indeterminate"class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+<ion-content>
+  <div class="inner_div">
+    <ion-grid class="rstar-grid-top">
+        <ion-row color="primary" class="ion-justify-content-center rstar-row-margin rstar-row">
+          <ion-col class="ion-align-self-center">
+              <p>
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="#B0B1AF" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#FFFFFF" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.50805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#B0B1AF" height="4.62722" id="svg_16" stroke="#FFFFFF" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16508" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#B0B1AF" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#FFFFFF" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.50805" y="23.77219"></rect>
+                  <rect fill="#B0B1AF" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#FFFFFF" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+               
+               Booked
+               </p>
+          </ion-col>
+          <ion-col class="ion-align-self-center">
+            
+            <p> 
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+               <g class="layer">
+                <title>Layer 1</title>
+                <g id="svg_1">
+                 <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                 <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                 <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                 <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                </g>
+               </g>
+              </svg>
+              Available
+            </p>
+            
+          </ion-col>
+          <ion-col class="ion-align-self-center">
+            
+            <p>
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+               <g class="layer">
+                <title>Layer 1</title>
+                <g id="svg_1">
+                 <rect fill="#02A1EB" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#FFFFFF" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                 <rect fill="#02A1EB" height="4.62722" id="svg_16" stroke="#FFFFFF" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                 <rect fill="#02A1EB" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#FFFFFF" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                 <rect fill="#02A1EB" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#FFFFFF" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                </g>
+               </g>
+              </svg>
+              Selected
+            </p>
+            
+          </ion-col>
+        </ion-row>
+        
+    </ion-grid>
+
+
+    <!--- Seat Layout For Tata Winger 15 seater---->
+    <div class="rstar-seat-div">
+      <ion-grid class="rstar-first-grid rstar-grid">
+          <!-- First row with extra seat-->
+        <ion-row class="rstar-row-bottom" *ngFor="let seat_no of allSeats.first_row">
+          <ion-col class="ion-align-self-center" size="2">
+            <div *ngIf="seat_no.booked == true">
+            <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+              <g class="layer">
+               <title>Layer 1</title>
+               <g id="svg_1">
+                <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+               </g>
+              </g>
+             </svg>
+             </div>
+             <div *ngIf="seat_no.booked == false" (click)="toggleClass(seat_no,allSeats.car_id)"  [ngClass]="{'selected': seat_no.selected}">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+              </div>
+             <p>S1</p>
+          </ion-col>
+          <ion-col class="" size="9">
+            <!-- <ion-chip color="secondary" style="margin: 15px 0px 0px 10px;border-radius: 0px;font-size: 15px;">
+              <ion-icon name="bus" color=""></ion-icon>
+              <ion-label>{{allSeats.pickup_location}} to {{allSeats.drop_location}}</ion-label></ion-chip> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid class="rstar-middle-grid rstar-grid">
+        <!-- After First row with extra seat-->
+        <div *ngFor="let middle_seat_no of allSeats.middle_row;let i = index">
+          <ion-row  class="rstar-row" *ngIf="i%4 == 0">
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats.middle_row[i].booked" class="booked">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats.middle_row[i].booked == false" (click)="toggleClass(allSeats.middle_row[i],allSeats.car_id)"  [ngClass]="{'selected': allSeats.middle_row[i].selected}">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats.middle_row[i].number}}</p>
+            </ion-col>
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats.middle_row[i+1].booked" class="booked">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats.middle_row[i+1].booked == false" (click)="toggleClass(allSeats.middle_row[i+1],allSeats.car_id)"  [ngClass]="{'selected': allSeats.middle_row[i+1].selected}">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats.middle_row[i+1].number}}</p>
+            </ion-col>
+            <ion-col class="ion-align-self-center" size="2">&nbsp;</ion-col>
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats.middle_row[i+2].booked" class="booked">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats.middle_row[i+2].booked == false" (click)="toggleClass(allSeats.middle_row[i+2],allSeats.car_id)"  [ngClass]="{'selected': allSeats.middle_row[i+2].selected}">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats.middle_row[i+2].number}}</p>
+            </ion-col>
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats.middle_row[i+3].booked" class="booked">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats.middle_row[i+3].booked == false" (click)="toggleClass(allSeats.middle_row[i+3],allSeats.car_id)"  [ngClass]="{'selected': allSeats.middle_row[i+3].selected}">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats.middle_row[i+3].number}}</p>
+            </ion-col>
+          </ion-row>
+        </div> 
+      </ion-grid>
+      <ion-grid class="rstar-last-grid">
+        <ion-row>
+          <ion-col class="ion-align-self-center" size="2" *ngFor="let seat_no of allSeats.last_row">
+            <div *ngIf="seat_no.booked" class="booked">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+            </div>
+            <div *ngIf="seat_no.booked == false" (click)="toggleClass(seat_no,allSeats.car_id)"  [ngClass]="{'selected': seat_no.selected}">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+            </div>
+            <p>S{{seat_no.number}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+
+
+    <!--- Seat Layout For Old---->
+    <div class="rstar-seat-div">
+      <ion-grid class="rstar-first-grid rstar-grid">
+          <!-- First row with extra seat-->
+        <ion-row class="rstar-row-bottom" *ngFor="let seat_no of allSeats.first_row">
+          <ion-col class="ion-align-self-center" size="2">
+            <div *ngIf="seat_no.booked == true">
+            <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+              <g class="layer">
+               <title>Layer 1</title>
+               <g id="svg_1">
+                <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+               </g>
+              </g>
+             </svg>
+             </div>
+             <div *ngIf="seat_no.booked == false" (click)="toggleClass(seat_no,allSeats.car_id)"  [ngClass]="{'selected': seat_no.selected}">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+              </div>
+             <p>S1</p>
+          </ion-col>
+          <ion-col class="" size="9">
+            <!-- <ion-chip color="secondary" style="margin: 15px 0px 0px 10px;border-radius: 0px;font-size: 15px;">
+              <ion-icon name="bus" color=""></ion-icon>
+              <ion-label>{{allSeats.pickup_location}} to {{allSeats.drop_location}}</ion-label></ion-chip> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid class="rstar-middle-grid rstar-grid">
+        <!-- After First row with extra seat-->
+        <div *ngFor="let middle_seat_no of allSeats.middle_row;let i = index">
+          <ion-row  class="rstar-row" *ngIf="i%4 == 0">
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats.middle_row[i].booked" class="booked">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats.middle_row[i].booked == false" (click)="toggleClass(allSeats.middle_row[i],allSeats.car_id)"  [ngClass]="{'selected': allSeats.middle_row[i].selected}">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats.middle_row[i].number}}</p>
+            </ion-col>
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats.middle_row[i+1].booked" class="booked">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats.middle_row[i+1].booked == false" (click)="toggleClass(allSeats.middle_row[i+1],allSeats.car_id)"  [ngClass]="{'selected': allSeats.middle_row[i+1].selected}">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats.middle_row[i+1].number}}</p>
+            </ion-col>
+            <ion-col class="ion-align-self-center" size="2">&nbsp;</ion-col>
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats.middle_row[i+2].booked" class="booked">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats.middle_row[i+2].booked == false" (click)="toggleClass(allSeats.middle_row[i+2],allSeats.car_id)"  [ngClass]="{'selected': allSeats.middle_row[i+2].selected}">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats.middle_row[i+2].number}}</p>
+            </ion-col>
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats.middle_row[i+3].booked" class="booked">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats.middle_row[i+3].booked == false" (click)="toggleClass(allSeats.middle_row[i+3],allSeats.car_id)"  [ngClass]="{'selected': allSeats.middle_row[i+3].selected}">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats.middle_row[i+3].number}}</p>
+            </ion-col>
+          </ion-row>
+        </div> 
+      </ion-grid>
+      <ion-grid class="rstar-last-grid">
+        <ion-row>
+          <ion-col class="ion-align-self-center" size="2" *ngFor="let seat_no of allSeats.last_row">
+            <div *ngIf="seat_no.booked" class="booked">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+            </div>
+            <div *ngIf="seat_no.booked == false" (click)="toggleClass(seat_no,allSeats.car_id)"  [ngClass]="{'selected': seat_no.selected}">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+            </div>
+            <p>S{{seat_no.number}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+
+
+
+
+
+
+    <div class="rstar-seat-div" *ngIf="mode==1">
+      <ion-grid class="rstar-first-grid rstar-grid">
+          <!-- First row with extra seat-->
+        <ion-row class="rstar-row-bottom"  *ngFor="let seat_no of allSeats_round.first_row">
+          <ion-col class="ion-align-self-center" size="2">
+            <div *ngIf="seat_no.booked == true">
+            <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+              <g class="layer">
+               <title>Layer 1</title>
+               <g id="svg_1">
+                <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+               </g>
+              </g>
+             </svg>
+             </div>
+             <div *ngIf="seat_no.booked == false" (click)="toggleClass(seat_no)"  [ngClass]="{'selected': seat_no.selected}">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+              </div>
+             <p>S1</p>
+          </ion-col>
+          <ion-col class="" size="9">
+            <ion-chip color="secondary" style="margin: 15px 0px 0px 0px;border-radius: 0px;font-size: 15px;">
+              <ion-icon name="bus" color=""></ion-icon>
+              <ion-label>{{allSeats_round.pickup_location}} to {{allSeats_round.drop_location}}</ion-label>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid class="rstar-middle-grid rstar-grid">
+        <!-- After First row with extra seat-->
+        <div *ngFor="let middle_seat_no of allSeats_round.middle_row;let i = index">
+          <ion-row  class="rstar-row" *ngIf="i%4 == 0">
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats_round.middle_row[i].booked" class="booked">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats_round.middle_row[i].booked == false" (click)="toggleClass(allSeats_round.middle_row[i],allSeats_round.car_id)"  [ngClass]="{'selected': allSeats_round.middle_row[i].selected}">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats_round.middle_row[i].number}}</p>
+            </ion-col>
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats_round.middle_row[i+1].booked" class="booked">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats_round.middle_row[i+1].booked == false" (click)="toggleClass(allSeats_round.middle_row[i+1],allSeats_round.car_id)"  [ngClass]="{'selected': allSeats_round.middle_row[i+1].selected}">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats_round.middle_row[i+1].number}}</p>
+            </ion-col>
+            <ion-col class="ion-align-self-center" size="2">&nbsp;</ion-col>
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats_round.middle_row[i+2].booked" class="booked">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats_round.middle_row[i+2].booked == false" (click)="toggleClass(allSeats_round.middle_row[i+2],allSeats_round.car_id)"  [ngClass]="{'selected': allSeats_round.middle_row[i+2].selected}">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats_round.middle_row[i+2].number}}</p>
+            </ion-col>
+            <ion-col class="ion-align-self-center" size="2">
+              <div *ngIf="allSeats_round.middle_row[i+3].booked" class="booked">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+              </div>
+              <div *ngIf="allSeats_round.middle_row[i+3].booked == false" (click)="toggleClass(allSeats_round.middle_row[i+3],allSeats_round.car_id)"  [ngClass]="{'selected': allSeats_round.middle_row[i+3].selected}">
+                
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+              <p>S{{allSeats_round.middle_row[i+3].number}}</p>
+            </ion-col>
+          </ion-row>
+        </div> 
+      </ion-grid>
+      <ion-grid class="rstar-last-grid">
+        <ion-row>
+          <ion-col class="ion-align-self-center" size="2" *ngFor="let seat_no of allSeats_round.last_row">
+            <div *ngIf="seat_no.booked" class="booked">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+            </div>
+            <div *ngIf="seat_no.booked == false" (click)="toggleClass(seat_no,allSeats_round.car_id)"  [ngClass]="{'selected': seat_no.selected}">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+            </div>
+            <p>S{{seat_no.number}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <ion-button class="ion-margin-bottom" style="border-radius: 10px;"  size="large" type="button" expand="full" (click)="confirmBooking()" [disabled]="net_connection_check">
+      BOOK YOUR SEAT 
+      <ion-icon name="arrow-round-forward"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>

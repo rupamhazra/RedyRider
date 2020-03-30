@@ -1,0 +1,128 @@
+<app-header></app-header>
+<ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+<ion-content>
+  <div class="inner_div">
+    <div *ngFor="let bookedDetails of bookedDetails_res">
+      <ion-card class="card_class">
+        <ion-grid  no-padding margin-top>
+          <ion-row style="margin: 0 10px 0 10px;">
+            <ion-col text-center style="padding: 0px;" size="1">
+              <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;"></ion-img>
+              <ion-img src="./assets/svg/dot.svg" alt="." style="width: 3px;margin: 5px 0 5px 8px;" ></ion-img>
+              <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;"></ion-img>
+            </ion-col>
+            <ion-col text-left style="padding: 0px;" size="11">
+              <p class="p_location">{{pickup_location}}</p>
+              <p style="margin:20px 0 0px 0px;">{{drop_location}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <ion-toolbar class="toolbar-class">
+                <ion-icon name="bus" slot="start" class="icon-margin-top"></ion-icon> 
+                <p class="no_margin_p_travel_details">{{bookedDetails.travel_details.Bus_no}}</p>
+              </ion-toolbar>
+              <ion-toolbar class="toolbar-class">
+                <ion-icon name="calendar" slot="start" class="icon-margin-top"></ion-icon>
+                <p class="no_margin_p_travel_details">{{bookedDetails.travel_details.journy_date}}</p>
+              </ion-toolbar>   
+            </ion-col>
+            <ion-col size="6">
+              <ion-toolbar class="toolbar-class">
+                <fa-icon [icon]="['fas','chair']" size="1x" class="icon-margin-top" style="font-size: 15px;margin-right: 5px;margin-left: 5px;" slot="start"></fa-icon>
+                <p class="no_margin_p_travel_details">
+                  <ion-badge *ngFor="let s_number of bookedDetails.seat_details.seats">{{s_number}}&nbsp; </ion-badge>
+                </p>
+              </ion-toolbar>
+              <ion-toolbar class="toolbar-class">
+                <ion-icon name="clock" slot="start" class="icon-margin-top"></ion-icon>
+                <p class="no_margin_p_travel_details">{{bookedDetails.travel_details.journy_time}}</p>
+              </ion-toolbar>
+            </ion-col>
+          </ion-row>
+          <ion-row class="fare_details_class">
+            <ion-col>
+              <ion-toolbar class="toolbar-class">
+                <p slot="start" size="small" class="no_margin_p">Base Fare</p>
+                <p slot="end" size="small" class="no_margin_p">
+                  <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>  {{bookedDetails.fare_details.base_fare}}
+                </p>
+              </ion-toolbar>
+              <ion-toolbar class="toolbar-class">
+                <p slot="start" size="small" class="no_margin_p">Total Fare</p>
+                <p slot="end" size="small" class="no_margin_p">
+                  <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>  {{bookedDetails.fare_details.total_fare}}
+                </p>
+              </ion-toolbar>
+              <ion-toolbar class="toolbar-class">
+                <p slot="start" size="small" class="no_margin_p">GST</p>
+                <p slot="end" size="small" class="no_margin_p">
+                  <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>  {{bookedDetails.fare_details.gst}}
+                </p>
+              </ion-toolbar>
+                
+              <ion-toolbar class="toolbar-class">
+                <p slot="start" size="small" style="font-weight: bold;" class="no_margin_p">TOTAL PAYABLE</p>
+                <p slot="end" size="small" style="font-weight: bold;" class="no_margin_p">
+                  <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>  {{bookedDetails.fare_details.payable_fare}}
+                </p>
+              </ion-toolbar>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </div>
+    <ion-card class="card_class" style="background: #02A1EB;">
+      <ion-grid>
+        <ion-row class="">
+          <ion-col>
+            <ion-text class="ion-text-center"><p class="no_margin_p">TOTAL FARE DETAILS</p></ion-text>
+            <hr/>
+            <ion-toolbar class="toolbar-class">
+              <p slot="start" size="small" class="no_margin_p">Total Fare</p>
+              <p slot="end" size="small" class="no_margin_p">
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>  {{total_seat_fare_details.total_fare}}
+              </p>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <p slot="start" size="small" class="no_margin_p">GST</p>
+              <p slot="end" size="small" class="no_margin_p">
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>  {{total_seat_fare_details.gst}}
+              </p>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class" *ngIf="coupan_div">
+              <p slot="start" size="small" color="tertiary" class="no_margin_p">Coupon Amount</p>
+              <p slot="end" size="small" color="tertiary" class="no_margin_p">
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon> -{{total_seat_fare_details.coupan_rs}}
+              </p>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <p slot="start" size="small" style="font-weight: bold;" class="no_margin_p">TOTAL PAYABLE</p>
+              <p slot="end" size="small" style="font-weight: bold;" class="no_margin_p">
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>  {{total_seat_fare_details.payable_fare}}
+              </p>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <form  [formGroup]="form" novalidate>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8" style="padding-right: 0px;">
+            <ion-input formControlName="coupon_code" autofocus="on" type="text" clearInput="true" color="primary" inputmode="text" required="true" style="background: #ffffff;height:45px;font-size: 18px;" required></ion-input>
+          </ion-col>
+          <ion-col size="4" style="padding: 0 0 0 0;">
+            <ion-button class="ion-margin-top" size="large" style="margin-top: 0px;border-radius:0px;padding: 4px 0px 6px 0px;"   type="button" [disabled]="net_connection_check || form.invalid" color="success" (click)="applyCoupon()">
+              APPLY
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <ion-button class="ion-margin-top"  [disabled]="net_connection_check"  size="large" type="button" expand="full" (click)="goPaymentPage()">
+      CONFIRM YOUR BOOKING 
+      <ion-icon name="arrow-round-forward"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>

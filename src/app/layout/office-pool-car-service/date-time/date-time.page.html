@@ -1,0 +1,48 @@
+<app-header></app-header>
+<ion-content>
+  <div class="personal_details">
+    <div class="inner_div">
+      <div class="personal-fields">
+        <h5>Date and Time :: </h5>
+        <p>Help us to know what's your timing.</p>
+        <hr class="hr-border">
+      </div>
+      <form  [formGroup]="form" novalidate>
+        <ion-grid>
+          <ion-row class="ion-justify-content-center rstar-row-margin">
+            <ion-col class="ion-align-self-center">
+              <ion-label class="rstar-label-text">Start Date</ion-label>
+              <ion-item class="rstar-border rstar-item rstar-margin-top rstar-ion-item">
+                <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="journey_date" class="rstar-date" [(ngModel)]="myDate" required></ion-datetime>
+              </ion-item>
+              <!-- <ion-item class="rstar-border rstar-item rstar-margin-top rstar-ion-item">
+                <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="journey_date" class="rstar-date" [(ngModel)]="myDate" (ionChange)="changeTime()"  required></ion-datetime>
+              </ion-item> -->
+              <!-- <ion-label class="rstar-label-text">Start Time</ion-label>
+              <ion-item class="rstar-border  rstar-item rstar-margin-bottom rstar-margin-top rstar-ion-item">
+                <ion-datetime min="{{minTime}}" displayFormat="HH:mm" class="rstar-time" formControlName="journey_time" placeholder="h:mm a" required [(ngModel)]="myTime"></ion-datetime>
+              </ion-item> -->
+              <div *ngIf="roundTripDiv">
+                <ion-label class="rstar-label-text">Return Date</ion-label>
+                <ion-item class="rstar-border rstar-item rstar-margin-top rstar-ion-item">
+                  <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="return_date" class="rstar-date" [(ngModel)]="myReturnDate"  required ></ion-datetime>
+                </ion-item>
+                <!-- <ion-item class="rstar-border rstar-item rstar-margin-top rstar-ion-item">
+                  <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="return_date" class="rstar-date" [(ngModel)]="myReturnDate" (ionChange)="changeTime('round')"  required ></ion-datetime>
+                </ion-item> -->
+                <!-- <ion-label class="rstar-label-text">Return Time</ion-label>
+                <ion-item class="rstar-border  rstar-item rstar-margin-bottom rstar-margin-top rstar-ion-item">
+                  <ion-datetime min="{{minReturnTime}}" displayFormat="HH:mm" class="rs0ar-time" formControlName="return_time" placeholder="h:mm a" required [(ngModel)]="myReturnTime"></ion-datetime>
+                </ion-item> -->
+              </div>
+              <ion-button class="ion-margin-top"  size="large" type="button" [disabled]="form.invalid || net_connection_check" expand="full" (click)="savaData()">
+                SAVE & CONTINUE 
+                <ion-icon name="arrow-round-forward"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+  </div>
+</ion-content>

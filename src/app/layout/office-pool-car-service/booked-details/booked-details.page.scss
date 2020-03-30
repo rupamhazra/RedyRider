@@ -1,0 +1,62 @@
+.inner_div{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.card_class{
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: #ffffff;
+    //color: white;
+}
+.toolbar-class{
+    --background: transparent;
+    margin-left: 5px;
+    padding: 3px;
+}
+ion-title{
+    font-size: 15px;
+    font-weight: normal;
+    padding-left: 5px;
+}
+ion-toolbar{
+    --min-height:18px;
+}
+ion-badge{
+    margin-bottom: -5px;
+    margin-right: 3px;
+    border-radius: 10px;
+    padding: 3px 2px 3px 5px;
+    background: #0A5999;
+}
+ion-icon{
+    font-size: 20px;
+}
+.rstar-icon{
+    font-size: 15px;
+}
+.no_margin_p{
+    margin : 0 15px 0px 0px !important; 
+    color: white;
+}
+.no_margin_p_travel_details{
+    margin: 0px;
+    opacity: 0.7;
+}
+.fare_details_class{
+    background: #B0B1AF;
+    color: white !important;
+    border-radius: 5px;
+    margin: 0px 5px 5px 5px;
+}
+hr{
+    border-top: 1px solid white !important;
+}
+ion-button{
+    padding: 0px 0px 10px 0px;
+    --background: linear-gradient(45deg, #0A5999 0%, #02A1EB 100%);
+    margin: 0px 0 0px 0px;
+}
+.p_location{
+    // text-align: left;
+    margin: 0 0 0 0px;
+}

@@ -1,0 +1,33 @@
+<ion-content>
+  <ion-item-divider>
+      <ion-text padding text-center color="dark">
+          Please select the appropriate package that you want to choose.
+      </ion-text>
+  </ion-item-divider>
+  <ion-list padding>
+    <ion-radio-group>
+      <ion-item>
+        <ion-label color="light">Golden Package</ion-label>
+        <ion-radio color="light" slot="start" value="Golden" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+          <ion-label color="light">Deluxe Package</ion-label>
+          <ion-radio color="light" slot="start" value="Deluxe"></ion-radio>
+      </ion-item>
+      <ion-item>
+          <ion-label color="light">Premium Package</ion-label>
+          <ion-radio color="light" slot="start" value="Premium"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-item-divider></ion-item-divider>
+  <ion-toolbar class="_c_toolbar">
+    <ion-button slot="secondary"  size="default" type="button" color="danger" expand="full" (click)="closePackegeModal()">
+        CANCEL
+    </ion-button>
+    <ion-button slot="end" (click)="sendRequestForm('2')"  size="default" type="button" color="success" expand="full">
+        SEND REQUEST
+    </ion-button>
+  </ion-toolbar>
+</ion-content>
+

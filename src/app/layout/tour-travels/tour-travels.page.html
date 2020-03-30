@@ -1,0 +1,59 @@
+<app-header></app-header>
+<ion-content>
+  <ion-thumbnail class="_c_top_image">
+      <img src="/assets/images/logo-form.jpg" alt=""/>
+  </ion-thumbnail>
+  <ion-card class="sch-pool-car f-section">
+    <ion-card-content class="f-icons" text-center>
+      <h4>Tour and travel</h4>
+      <div class="d-flex justify-content-center" text-center>
+        <div class="border-bot"></div>
+      </div>
+      <p>Please tap any one of them</p>
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col text-center class="_c_col_padd"> 
+            <div class="select-tour-sector" (click)="goDetailsPage(1)">
+              <img src="/assets/images/delhi.png" alt="">
+              <p>Delhi</p>
+            </div> 
+          </ion-col>
+          <ion-col text-center class="_c_col_padd">
+            <div class="select-tour-sector">
+              <img src="/assets/images/andaman.png" alt="">
+              <p>Andaman</p>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center class="_c_col_padd"> 
+              <div class="select-tour-sector">
+                <img src="/assets/images/benaras.png" alt="">
+                <p>Benaras</p>
+              </div> 
+            </ion-col>
+            <ion-col text-center class="_c_col_padd">
+              <div class="select-tour-sector">
+                <img src="/assets/images/goa.png" alt="">
+                <p>Goa</p>
+              </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center class="_c_col_padd"> 
+              <div class="select-tour-sector">
+                <img src="/assets/images/kashmir.png" alt="">
+                <p>kashmir</p>
+              </div> 
+            </ion-col>
+            <ion-col text-center class="_c_col_padd">
+              <div class="select-tour-sector">
+                <img src="/assets/images/kerala.png" alt="">
+                <p>kerala</p>
+              </div>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

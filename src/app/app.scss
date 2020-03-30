@@ -1,0 +1,148 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These 
+// styles are for the entire app and not just one component. Additionally, this 
+// file can hold Sass mixins, functions, and placeholder classes to be imported 
+// and used throughout the application.
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap');
+$font-family-base: "Roboto", sans-serif !default;
+
+.parent-active {
+    font-weight: 500;
+}
+.sub-item {
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+// For Toaster
+.my-toast{
+    --background: #ffce00;
+    --color: white;
+    --border-radius: 0px;
+}
+
+
+._c_modal_css .modal-wrapper {
+    height: 57%;
+    position: absolute; 
+    display: block;
+    width:90%;
+ }
+ ._c_modal_otp_css .modal-wrapper {
+    height: 215px;
+    position: absolute; 
+    display: block;
+    width:90%;
+    border-radius: 10px;
+ }
+ ion-content{
+    --ion-background-color:#f5f5f5;
+}
+.picker-toolbar.sc-ion-picker-md{
+    background-color: #4285F4 !important;
+}
+.picker-button.sc-ion-picker-md{
+    color: #fff !important;
+}
+._c_modal_forgot_pass_css .modal-wrapper {
+    height: 210px;
+    display: block;
+    width: 90%;
+    border-radius: 10px;
+ }
+.cs-custom-loading{
+    padding: 0px 15px 15px 15px !important;
+    --width:450px;
+}
+.alert-cancel-button{
+    color:#f04141 !important;
+}
+.menu-footer{
+    border-bottom: 10px solid #02A1EB;
+    background-color: #f5f5f5 !important;
+}
+.item-has-focus ion-label {
+    color: initial !important;
+}
+ion-header {
+    --ion-background-color: linear-gradient(45deg, #0A5999 0%, #02A1EB 100%);
+    --ion-text-color:#fff;
+}
+.item-class{
+    --ion-background-color:#fff;
+}
+ .searchbar-input{
+    box-shadow: none !important;
+    border-bottom: 1px solid white !important;
+}
+.stoppage_modal_css .modal-wrapper {
+    height: 80%;
+    position: absolute; 
+    display: block;
+    width:90%;
+ }
+ .p_class{
+    color: initial !important;
+ }
+ .inner_div{
+    margin-left: 15px;
+    margin-right: 15px;
+ }
+ ion-card{ 
+    --background: #FFFFFF !important;
+ }
+ .no_margin_p{
+     margin: 0 0 0 0;
+ }
+ .action-sheet-title{
+    border-bottom: 1px solid #7e57ff !important;
+}
+ion-button{
+    padding: 6px;
+    --background: linear-gradient(45deg, #0A5999 0%, #02A1EB 100%);
+}
+.personal-fields{
+    margin-top: 15px;
+}
+
+.personal-fields h5 {
+    font-weight: 600;
+    margin: 0px !important;
+    color: #02A1EB;
+}
+.personal-fields p {
+    font-size: 13.5px;
+    color: #B0B1AF;
+    margin-top: 0px;
+}
+.hr-border {
+    border-bottom: 1px solid #ffffff;
+}
+hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+.header-menu{
+    --min-height: 60px;
+}
+.country_modal .searchbar-input{
+    background: white !important;
+}
+
+
+.eb_left{float:left}
+.clear {clear: both;}
+
+.progress_bar{
+    --progress-background: #ffce00 !important;
+}
+.border_button{
+    border: 1px solid #ffffff;
+    margin-right: 10px;
+    border-radius: 26px;
+    background: white;
+    color: #0A5999;
+}

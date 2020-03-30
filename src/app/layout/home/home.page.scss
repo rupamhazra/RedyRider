@@ -1,0 +1,82 @@
+ion-icon {
+    font-size: 24px; //Preferred size here
+}
+.cs-p{
+    font-size: 13px;
+    font-weight: 500;
+}
+.background-gif ion-img{border-bottom: 3px solid #02A1EB;}
+ ._c_col_back{background: #02A1EB;}
+ ._c_p_text_color{color: #757575; letter-spacing: 1px;}
+
+ .inner_div{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.card_class{
+    margin-left: 0px;
+    margin-right: 0px;
+    //background-color: #0A5999 !important;
+    //color: white;
+    margin-top: 0px;
+    border-radius: 0px;
+}
+.toolbar-class{
+    --background: transparent;
+   // --color: white;
+}
+ion-toolbar{
+    --min-height:25px;
+}
+ion-badge{
+    margin-bottom: -5px;
+    margin-right: 3px;
+    border-radius: 10px;
+    padding: 3px 2px 3px 5px;
+    background: #0A5999;
+}
+ion-icon{
+    font-size: 20px;
+}
+.rstar-icon{
+    font-size: 15px;
+}
+.no_margin_p{
+    margin : 0 10px 0px 0px !important; 
+    // color: white;
+}
+.no_margin_p_travel_details{
+    margin: 0px 0px 0px 3px;
+    font-size: 12px;
+}
+.fare_details_class{
+    background: #B0B1AF;
+    color: white !important;
+    border-radius: 5px;
+}
+hr{
+    border-top: 1px solid #B0B1AF !important;
+}
+ion-button{
+    padding: 0px 0px 10px 0px;
+    --background: linear-gradient(45deg, #0A5999 0%, #02A1EB 100%);
+    margin: 0px 0 0px 0px;
+}
+#tt {
+    font-size:20px;
+    font-family: "Raleway";
+  }
+
+.eb_left{float:left}
+.clear {clear: both;}
+.p_location{
+    // text-align: left;
+    margin: 0 0 0 0px;
+}
+.button-row{
+    margin-top: 10px;
+    text-align: center;
+}
+ion-button{
+    padding:0px !important;
+}

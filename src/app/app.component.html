@@ -1,0 +1,79 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu type="overlay">
+      <ion-header class="top_header_app">
+          <ion-item *ngIf="name">
+            <ion-toolbar class="header-menu">
+              <ion-avatar slot="start">
+                <img [(src)] = "profile_img" alt="" />
+              </ion-avatar> 
+              <div style="text-align: left;">
+              <p style="margin: 20px 0px 0px 15px;">{{name}}</p>
+              <p style="margin: 5px 0px 20px 15px;font-size: 13px;">{{number}}</p>
+              </div>
+            </ion-toolbar>
+         </ion-item>
+      </ion-header>
+      <ion-content>
+        <div *ngFor="let p of appPages">
+          <!-- Standard Menu Item -->
+          <ion-menu-toggle *ngIf="p.url">
+            <ion-item class="item-class"  [routerLink]="p.url" routerDirection="root" routerLinkActive="active" lines="none">
+              <!-- <ion-icon [name]="p.icon" slot="start"></ion-icon> -->
+              <ion-icon [src] ="p.icon" slot="start" style="width: 40px;"></ion-icon>
+              <ion-label>
+                {{ p.title }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <!-- Item with Children -->
+     
+          <ion-item class="item-class" button *ngIf="p.chileMenu?.length > 0" (click)="p.open = !p.open" [class.parent-active]="p.open" detail="false">
+            <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+            <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+     
+          <!-- Children List for clicked Item -->
+          <ion-list *ngIf="p.open">
+            <ion-menu-toggle>
+              <ion-item *ngFor="let sub of p.chileMenu" class="sub-item" [routerLink]="sub.url" routerDirection="root"
+                routerLinkActive="active">
+                <!-- <ion-icon [name]="sub.icon" slot="start"></ion-icon> -->
+                <ion-img [src] ="sub.icon" slot="start" style="width: 24px;"></ion-img>
+                <ion-label>
+                  {{ sub.title }}
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </div>
+      </ion-content>
+      <ion-footer class="menu-footer">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-text text-center>
+                <p class="no_text_decoration" style="margin-top: 0px;margin-bottom: 0px;">
+                  App Version : 1.0
+                </p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-text text-center>
+                <p class="no_text_decoration" style="margin-top: 0px;">
+                  Copyright &copy; 2020 Redy Rider.
+                </p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-footer>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
+
+

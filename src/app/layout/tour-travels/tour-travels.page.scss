@@ -1,0 +1,27 @@
+ion-content{
+    --background:  url('/assets/images/map-image.png') no-repeat center center / cover;
+}
+
+.sch-pool-car{margin: 70px 15px 35px;background: #ffffff;}
+.f-icons{margin-top: 55px;}
+.f-section{border: 2px solid #eeeeee; background: #ffffff;}
+.f-section h4{color: #212121; margin-bottom: 10px; font-weight:600;
+    text-transform: uppercase; font-size: 19px;}
+.f-section p{color: #757575; font-size: 13px; margin: 25px 0 10px 0;}
+.f-section:hover .border-bot{background: #3F729B; transition: all 0.3s linear;}
+.select-tour-sector{padding: 15px 0;}
+.f-section .select-tour-sector p{color: #212121; font-size: 13px; margin: 10px 0; font-weight: 700; text-transform: uppercase;}
+.border-bot{height: 3px; width: 100px; border-radius: 50%; background: #000;}
+.d-flex {display: -ms-flexbox!important;display: flex!important;}
+.justify-content-center {-ms-flex-pack: center!important;justify-content: center!important;
+}
+._c_col_padd{padding:10px;}
+._c_top_image{
+    --size: 100px;
+    position: absolute;
+    z-index: 10000000;
+    top: 18px;
+    left: 35%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.7);
+    --border-radius:50%!important;
+}

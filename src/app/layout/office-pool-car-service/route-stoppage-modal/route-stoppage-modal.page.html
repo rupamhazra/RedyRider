@@ -1,0 +1,213 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="calling_page=='refer-earn-page-earn'">How To Earn</ion-title>
+    <ion-title *ngIf="calling_page=='refer-earn-page-terms'">Terms & Conditions</ion-title>
+    <ion-title *ngIf="calling_page=='bus-route-details-page'">Route Stoppage</ion-title>
+    <ion-title *ngIf="calling_page=='myaccount-personal'"><fa-icon [icon]="['fas','edit']"  class=""></fa-icon>&nbsp;Edit Personal Information</ion-title>
+    <ion-title *ngIf="calling_page=='myaccount-address'"><fa-icon [icon]="['fas','edit']"  class=""></fa-icon>&nbsp;Edit Address</ion-title>
+    <ion-title *ngIf="calling_page=='my-booking-history'"><fa-icon [icon]="['fas','bus']"  class=""></fa-icon>&nbsp;Booking Details</ion-title>
+    <ion-title *ngIf="calling_page=='booking-history-details'"><fa-icon [icon]="['fas','qrcode']"  class=""></fa-icon>&nbsp; QR Code</ion-title>
+    <ion-title *ngIf="calling_page=='location-tracking-page'"><fa-icon [icon]="['fas','route']"  class=""></fa-icon>&nbsp; Stoppage Wise Passengers</ion-title>
+    <ion-icon ios="ios-close-circle" md="md-close-circle" 
+    slot="end" style="zoom: 1.5;margin-right: 10px;" (click)="closeModal();"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="inner_div">
+    <div style="padding: 0px 15px 0px 15px;" *ngIf="calling_page=='refer-earn-page-earn'">
+      <p>FOLLOW THESE STEPS </p>
+      <ion-toolbar> 
+        <ion-badge color="danger" slot="start" class="badge_class">1</ion-badge> 
+        <p class="p_left">Login with Redy Rider</p>
+      </ion-toolbar>
+      <ion-toolbar>
+        <ion-badge color="warning" slot="start" class="badge_class">2</ion-badge>
+        <p class="p_left">Referral code share with your friends</p>
+      </ion-toolbar>
+      <ion-toolbar>
+        <ion-badge color="success" slot="start" class="badge_class">3</ion-badge>
+        <p class="p_left">Get Rs 50 when your friend completes his/her first trip with us. </p>
+      </ion-toolbar>
+      <fa-icon [icon]="['fas','gift']" style="font-size: 40px;color:#7e57ff;display: block;text-align: center;"  class="rstar-icon" slot="start"></fa-icon>
+    </div>
+    <ion-toolbar *ngIf="calling_page=='refer-earn-page-terms'" style="padding:10px;">
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </p>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </p>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </p>
+    </ion-toolbar>
+    <ion-grid *ngIf="calling_page=='bus-route-details-page'">
+      <ion-row>
+        <ion-col>
+          <div *ngFor="let item of items; let i = index; let lst = last;">
+            <ion-toolbar style="--min-height: 24px;margin-top: 5px;">
+              <fa-icon [icon]="['fas','map-marker-alt']" style="font-size: 27px;color:#7e57ff;"  class="rstar-icon" slot="start" *ngIf="!item.is_active"></fa-icon>
+              <fa-icon [icon]="['fas','map-marker-alt']" style="font-size: 27px;color:#0ec254;"  class="rstar-icon" slot="start" *ngIf="item.is_active"></fa-icon>
+              <!-- <ion-icon name="locate" slot="start" style="font-size: 22px;" color="tertiary"></ion-icon> -->
+              <p style="margin:0 0 0 5px;font-size: 12px;">&nbsp;{{item.location_name}}</p>
+
+            </ion-toolbar>
+            <div *ngIf="!lst">
+              <!-- <ion-toolbar style="--min-height:25px;">
+                <ion-icon name="more" slot="start" style="opacity: 0.5;"></ion-icon>
+              </ion-toolbar> -->
+              <ion-toolbar style="--min-height:25px;">
+                <ion-icon name="more" slot="start" style="opacity: 0.5;"></ion-icon>
+              </ion-toolbar>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div *ngIf="calling_page=='myaccount-personal'">
+      <form  [formGroup]="form_personal" novalidate>
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-align-self-center">
+              <ion-item>
+                <ion-label position="floating">Enter your Name</ion-label>
+                <ion-input  autofocus="on" formControlName="name" type="text" minlength="2" clearInput="true" inputmode="text" required="true" ngModel value="{{result_data.name}}"></ion-input>
+                <ion-icon name="person" slot="start"></ion-icon>
+              </ion-item>
+              <ion-item>
+                  <ion-label position="floating">Enter your email</ion-label>
+                  <ion-input autofocus="on" formControlName="email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$" clearInput="true"  type="email" inputmode="email" required="true" ngModel value="{{result_data.email}}"></ion-input>
+                  <ion-icon name="mail" slot="start"></ion-icon>
+              </ion-item>
+              <div class="radio-button-personal">
+                <p>Gender</p>
+                
+                <ion-radio-group formControlName="gender">
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <ion-item lines="none" class="rstar-ion-item">
+                      <ion-label class="rstar-label-bg rstar-label">
+                        <ion-icon ios="ios-woman" md="md-woman"></ion-icon><br>
+                        <ion-radio slot="start" value="F"  [checked]="this.result_data.gender == 'F'?true:false" class="rstar-radio"></ion-radio>Female
+                      </ion-label>
+                    </ion-item>
+                    <ion-item lines="none" class="rstar-ion-item">
+                      <ion-label class="rstar-label-bg rstar-label">
+                        <ion-icon ios="ios-transgender" md="md-transgender"></ion-icon><br>
+                        <ion-radio slot="start" value="T" [checked]="this.result_data.gender == 'T'?true:false"  class="rstar-radio"></ion-radio>Transgender
+                      </ion-label>
+                    </ion-item>
+                    <ion-item lines="none" class="rstar-ion-item">
+                      <ion-label class="rstar-label-bg rstar-label">
+                        <ion-icon ios="ios-man" md="md-man"></ion-icon><br>
+                        <ion-radio slot="start" value="M" [checked]="this.result_data.gender == 'M'?true:false"  class="rstar-radio"></ion-radio>Male
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </ion-radio-group>
+              </div>
+              <ion-button class="ion-margin-top"  size="large" [disabled]="form_personal.invalid || net_connection_check"  type="button" expand="full" (click)="saveProfile()">
+                SAVE 
+                <ion-icon name="arrow-round-forward"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+    <div *ngIf="calling_page=='myaccount-address'">
+      <form  [formGroup]="form_add" novalidate>
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-align-self-center">
+              <ion-item>
+                <ion-label class="label_cs" position="floating">Address</ion-label>
+                <ion-textarea formControlName="address" type="text" inputmode="text" 
+                value="{{result_data.address}}" style="font-size: 13px;" required></ion-textarea>
+                <ion-icon ios="ios-locate" md="md-locate" slot="start"></ion-icon>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Country</ion-label>
+                <ionic-selectable
+                  [(ngModel)] = "country_selected"
+                  formControlName="country_id"
+                  [items]="countries"
+                  itemValueField="id"
+                  itemTextField="name"
+                  [canSearch]="true"
+                  [hasVirtualScroll]="true"
+                  modalCssClass="country_modal"
+                  (onChange)="countryChange($event)">
+                </ionic-selectable>
+                <fa-icon [icon]="['fas','city']"  class="fa-icon-input" slot="start"></fa-icon>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">State</ion-label>
+                <ionic-selectable
+                  [(ngModel)] = "state_selected"
+                  formControlName="state_id"
+                  [items]="states"
+                  itemValueField="id"
+                  itemTextField="name"
+                  [canSearch]="true"
+                  [hasVirtualScroll]="true"
+                  modalCssClass="country_modal"
+                  (onChange)="stateChange($event)">
+                </ionic-selectable>
+                <fa-icon [icon]="['fas','city']"  class="fa-icon-input" slot="start"></fa-icon>
+              </ion-item>
+              <ion-item>
+                  <ion-label position="floating">City</ion-label>
+                  <ionic-selectable
+                  [(ngModel)] = "city_selected"
+                  formControlName="city_id"
+                  [items]="cities"
+                  itemValueField="id"
+                  itemTextField="name"
+                  [canSearch]="true"
+                  modalCssClass="country_modal"
+                  >
+                </ionic-selectable>
+                  <fa-icon [icon]="['fas','city']"  class="fa-icon-input" slot="start"></fa-icon>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Pincode</ion-label>
+                <ion-input autofocus="on" formControlName="pin_code" clearInput="true"  type="tel" inputmode="tel" required="true" ngModel value="{{result_data.pin_code}}"></ion-input>
+                <ion-icon ios="ios-pin" md="md-pin" slot="start"></ion-icon>
+              </ion-item>
+              <ion-button class="ion-margin-top"  size="large" [disabled]="form_add.invalid || net_connection_check"  type="button" expand="full" (click)="saveAddress()">
+                SAVE 
+                <ion-icon name="arrow-round-forward"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+    <div *ngIf="calling_page=='booking-history-details'">
+      <ion-img src="{{qr_image}}"></ion-img>
+    </div>
+    <ion-grid *ngIf="calling_page=='location-tracking-page'">
+      <ion-row>
+        <ion-col>
+          <div *ngFor="let item of stoppage_list; let i = index; let lst = last;">
+            <ion-toolbar style="--min-height: 24px;margin-top: 5px;">
+              <fa-icon [icon]="['fas','map-marker-alt']" style="font-size: 27px;color:#7e57ff;"  class="rstar-icon" slot="start" *ngIf="!item.is_active"></fa-icon>
+              <fa-icon [icon]="['fas','map-marker-alt']" style="font-size: 27px;color:#0ec254;"  class="rstar-icon" slot="start" *ngIf="item.is_active"></fa-icon>
+              <!-- <ion-icon name="locate" slot="start" style="font-size: 22px;" color="tertiary"></ion-icon> -->
+              <p style="margin:0 0 0 5px;font-size: 12px;">&nbsp;{{item.location_name}}</p>
+              <p slot="end" style="font-size: 12px;"><ion-badge>{{item.total_passenger}}</ion-badge></p>
+            </ion-toolbar>
+            <div *ngIf="!lst">
+              <!-- <ion-toolbar style="--min-height:25px;">
+                <ion-icon name="more" slot="start" style="opacity: 0.5;"></ion-icon>
+              </ion-toolbar> -->
+              <ion-toolbar style="--min-height:25px;">
+                <ion-icon name="more" slot="start" style="opacity: 0.5;"></ion-icon>
+              </ion-toolbar>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

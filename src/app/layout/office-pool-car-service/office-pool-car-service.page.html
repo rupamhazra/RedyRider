@@ -1,0 +1,69 @@
+<app-header></app-header>
+<ion-content>
+  <div class="personal_details">
+    <div class="inner_div">
+      <div class="personal-fields">
+        <h5>Pick and Drop location :: </h5>
+        <p>Help us to know where you want to go.</p>
+        <hr class="hr-border">
+      </div>
+      <form  [formGroup]="form" novalidate>
+        <ion-grid>
+          <ion-row class="ion-justify-content-center rstar-row-margin">
+            <ion-col class="ion-align-self-center">
+              <ion-item text-wrap>
+                <ion-label position="floating">Pick up location</ion-label>
+                <ion-textarea formControlName="pick_up" type="text" inputmode="text" readonly="true" (click)="openSearchPage('pickup')" value="{{select_pickup_location}}" style="font-size: 13px;" required></ion-textarea>
+                <ion-icon ios="ios-locate" md="md-locate" slot="start"></ion-icon>
+              </ion-item>
+              <ion-card (click)="changeLocation(select_pickup_location,select_drop_location)">
+                <ion-icon name="swap"></ion-icon>
+              </ion-card>
+              <ion-item text-wrap>
+                <ion-label position="floating">Drop location</ion-label>
+                <ion-textarea  formControlName="drop_off" type="text" inputmode="text" value="{{select_drop_location}}" (click)="openSearchPage('drop')" style="font-size: 13px;" required></ion-textarea>
+                <ion-icon ios="ios-locate" md="md-locate" slot="start"></ion-icon>
+              </ion-item>
+              <div class="radio-button-personal">
+                <p>Select which trip want to choose</p>
+                <ion-radio-group formControlName="trip" >
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <ion-item lines="none" class="rstar-ion-item">
+                      <ion-label class="rstar-label-bg rstar-label">
+                        <ion-icon name="redo" class="rotate-90"></ion-icon><br>
+                        <ion-radio slot="start" value="0" class="rstar-radio" required (ionSelect)="tripSelect('0')"></ion-radio>Single Trip
+                      </ion-label>
+                    </ion-item>
+                    <ion-item lines="none" class="rstar-ion-item">
+                      <ion-label class="rstar-label-bg rstar-label">
+                        <ion-icon ios="ios-sync" md="md-sync" class="ion-looping"></ion-icon><br>
+                        <ion-radio slot="start" value="1" class="rstar-radio" required (ionSelect)="tripSelect('1')"></ion-radio>Round Trip
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </ion-radio-group>
+              </div>
+              <div *ngIf="singleTripDiv">
+                <p style="margin: 0px;color:#B0B1AF;">Start Date</p>
+                <ion-item class="rstar-border rstar-item rstar-margin-top rstar-ion-item">
+                  <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="journey_date" class="rstar-date" [(ngModel)]="myDate" required></ion-datetime>
+                </ion-item>
+              </div>
+              <div *ngIf="roundTripDiv">
+                <p style="margin: 0px;color:#B0B1AF;">Return Date</p>
+                <ion-item class="rstar-border rstar-item rstar-margin-top rstar-ion-item">
+                  <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="return_date" class="rstar-date" [(ngModel)]="myReturnDate"  required ></ion-datetime>
+                </ion-item>
+              </div>
+              
+              <ion-button class="ion-margin-top"  [disabled]="net_connection_check || form.invalid"  size="large" type="button" expand="full" (click)="savaData()">
+                Save & Continue 
+                <ion-icon name="arrow-round-forward"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+  </div>
+</ion-content>

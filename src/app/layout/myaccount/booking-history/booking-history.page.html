@@ -1,0 +1,56 @@
+<app-header></app-header>
+<ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+<ion-content>
+  <!-- <div slot="fixed">
+    <ion-card style="margin: 0px;border-radius: 0px;">
+      
+      <ion-item lines="none">
+        <p class="no_margin_p" slot="start">Recent Bookings</p>
+        <ion-chip slot="end" color="tertiary" outline="true" (click)="filterTransactions()">Filter<ion-icon name="ios-options" ></ion-icon></ion-chip>
+      </ion-item>
+    </ion-card>
+  </div> -->
+  <!-- <div style="margin-top: 60px;"> -->
+    <div>
+      <ion-virtual-scroll [items]="transactionList">
+        <ion-card style="margin:0px 0px 5px 0;border-radius: 0px;" *virtualItem="let item" (click)="openBooking(item.booking_id)">
+          <ion-item lines="none">
+            <ion-label>
+              <div>
+              <ion-img src="./assets/svg/my_ride.svg" style="width: 35px;float: left;margin-right: 10px;"></ion-img>
+              <h2 style="font-size: 14px;float: left;">{{item.booking_date}}&nbsp;,&nbsp;{{item.booking_time}}</h2>
+              <h2 style="font-size: 14px;float: right;">
+              <fa-icon [icon]="['fas','rupee-sign']" style="opacity: 0.6;font-size: 13px;
+                margin-right: 2px;"></fa-icon>{{item.paid_amount}}</h2>
+              </div>
+              <h6 style="clear: both;margin-left: 46px;font-size: 12px;">{{item.car_name}} &nbsp; {{item.car_no}}</h6>
+              <div>
+                <div style="margin-left: 44px;float: left;width: 70%;">
+                  <div class="div_elipse_class" style="margin-top: 10px;">
+                    <ion-icon name="locate" style="font-size: 16px;float: left;"color="success"></ion-icon>
+                    <p style="margin:0px;opacity: 0.7;font-size: 13px;">&nbsp;{{item.stoppage_start}}</p>
+                  </div>
+                  <ion-icon name="more" style="opacity: 0.5;"></ion-icon>
+                  <div class="div_elipse_class">
+                    <ion-icon name="locate" style="font-size: 16px;float: left;" color="danger"></ion-icon>
+                    <p style="margin:0px;opacity: 0.7;font-size: 13px;">&nbsp;{{item.stoppage_end}}</p>
+                  </div>
+                </div>
+                <div style="float: right;">
+                  <ion-avatar slot="start" style="height: 50px;width: 50px;margin-top: 10px;">
+                    <img src = "{{item.driver_photo}}" alt="" />
+                  </ion-avatar> 
+                </div>
+              </div>
+            </ion-label>
+          </ion-item>
+          </ion-card>
+      </ion-virtual-scroll>
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" position="top">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    </div>
+</ion-content>

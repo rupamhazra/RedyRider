@@ -1,0 +1,75 @@
+<app-header></app-header>
+<ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+<ion-content>
+    <div class="inner_div">
+      <ion-card *ngIf="no_bus_saturday">
+        <ion-text color="danger" text-center>
+          <p style="padding: 10px;">{{no_bus_saturday_msg}}</p>
+        </ion-text>
+      </ion-card>
+      <ion-card  *ngIf="dataList_show">
+        <ion-text color="danger" text-center>
+          <p>No car has been available </p>
+        </ion-text>
+      </ion-card>
+      <ion-virtual-scroll [items]="dataList"  @fadein>
+        <ion-card class="card_back" [disabled]="net_connection_check" *virtualItem="let item">
+            <ion-grid no-padding margin-top>
+              
+              <ion-row style="margin: 0 8px 0 10px;">
+                <ion-col text-center style="padding: 0px;" size="1">
+                  <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;margin-top: 5px;"></ion-img>
+                  <ion-img src="./assets/svg/dot.svg" alt="." style="width: 3px;margin: 10px 0 10px 8px;" ></ion-img>
+                  <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;"></ion-img>
+                </ion-col>
+                <ion-col text-left style="padding: 0px;" size="11">
+                  <p class="p_location">{{item.start_point}}</p>
+                  <p style="margin: 10px 0 10px 0;color:#02A1EB;" (click)="viewRoute(item.route_master_id,item.start_point_id,item.end_point_id)"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
+                  <p class="p_location">{{item.end_point}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row no-padding no-margin style="margin-left: 10px;">
+                <ion-col no-padding no-margin>
+                  <ion-toolbar style="--min-height:35px;">
+                    <ion-icon name="bus" slot="start"></ion-icon>
+                    <p style="margin:0px;">&nbsp;{{item.carname}}</p>
+                    <p style="margin:0 26px 0px 0px;font-size: 13px;" slot="end"><fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>&nbsp;&nbsp;Available Seats : <ion-text color="success">{{item.available_seat}}</ion-text></p>
+                  </ion-toolbar>
+                  <p style="margin:-7px 0px 2px 24px;">&nbsp;{{item.carno}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="6">
+                  <p style="font-size: 19px;margin: 0 0 0 30px;color:#000000;">{{item.start_time}}</p>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-toolbar style="--min-height:24px;">
+                    <ion-icon name="alarm" slot="start" style="font-size: 20px;opacity: 0.6;"></ion-icon>
+                    <p style="opacity: 0.6;margin: 0 0px 0 0;">&nbsp; You will reach by</p>
+                  </ion-toolbar>
+                  <p style="margin:0px 0px 5px 27px;opacity: 0.6;font-size: 13px;">{{item.arrival_time}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row no-padding no-margin>
+                <ion-col>
+                  <ion-button [ngClass]="{'car_selected': item.car_selected}" size="large" type="button"  expand="block"  (click)="reserveSeat(item,$event)">
+                    SELECT THIS CAR
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        </ion-card>
+      </ion-virtual-scroll>
+      <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" *ngIf="dataList!=0">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Loading more route...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll> -->
+    </div>
+</ion-content>
+<ion-footer class="footer-bus-route-details" (click)="goToNextPage()" *ngIf="!no_bus_saturday">
+  <ion-toolbar>
+    <p style="margin: 0px 20px 0px 0px;color: white;text-align: center;"><fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon> &nbsp;RESERVE YOUR SEAT</p>
+  </ion-toolbar>
+</ion-footer>

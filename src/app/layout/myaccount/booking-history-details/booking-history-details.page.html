@@ -1,0 +1,136 @@
+<ion-header>
+  <ion-toolbar class="header-menu">
+    <ion-buttons slot="start" class="border_button">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-card slot="start" style="padding: 0px;
+    background: transparent;
+    box-shadow: none;
+    color: white;
+    margin: 0px;">
+        <p style="margin:0px;">{{result_data.journy_date_time}}</p>
+        <p style="margin:5px 0 0 0;">{{result_data.car_name}} {{result_data.car_no}}</p>
+    </ion-card>
+  </ion-toolbar>
+</ion-header>
+  <div slot="fixed">
+    
+    <ion-fab vertical="center" horizontal="start" slot="fixed">
+      <ion-fab-button color="danger" class="main_fab_bt">
+       <ion-img src="/assets/svg/sos.svg"></ion-img>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button color="success" type="button" class="main_fab_bt" (click)="callNow()"><ion-icon ios="ios-call" md="md-call"></ion-icon></ion-fab-button>
+        <ion-fab-button color="warning" type="button" class="main_fab_bt" (click)="smsNow()"><ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon></ion-fab-button>
+        <ion-fab-button color="light" type="button" class="main_fab_bt" (click)="sendMail()"><ion-img src="/assets/svg/gmail.svg"></ion-img></ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+    <div #map id="map"></div>
+  </div>
+  <ion-content>
+    
+    <ion-card class="card_class">
+      <ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+      <ion-grid no-margin no-padding>
+        <ion-row style="border-bottom: 1px solid #B0B1AF;">
+          <ion-col size="2" style="margin:0 0 0px 8px;">
+              <ion-toolbar style="--background: transparent;">
+                <ion-avatar style="height: 50px;width: 50px;">
+                  <img src = "{{result_data.driver_photo}}" alt="" />
+                </ion-avatar>
+              </ion-toolbar>
+          </ion-col>
+          <ion-col size="9">
+            <p style="margin: 10px 0px 0px 0px;font-weight: bold;">{{result_data.driver_name | uppercase }}</p>
+            <p style="margin: 2px 0px 5px 0px;font-size: 12px;">{{result_data.driver_contact}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row style="border-bottom: 1px solid #B0B1AF;">
+          <ion-col size="6">
+            <ion-toolbar class="toolbar-class">
+              <div style="float: left;">
+                <ion-img src="./assets/svg/my_ride.svg" slot="start" alt="redy rider" style="width: 33px;margin: 10px 10px 0px 0;"></ion-img>
+              </div>
+              <div>
+                <p class="no_margin_p_travel_details" style="margin-left: 5px;">{{result_data.car_name}} 
+                <p class="no_margin_p_travel_details" style="margin-left: 5px;">{{result_data.car_no}}</p>
+              </div>  
+            </ion-toolbar>
+          </ion-col>
+       <ion-col size="6">
+        <ion-toolbar class="toolbar-class">
+          <fa-icon [icon]="['fas','chair']" size="1x" class="icon-margin-top" style="font-size: 20px;margin-right: 5px;opacity: 0.7;" slot="start"></fa-icon>
+          <p class="" style="margin: 5px 0 0 0;">
+            <ion-badge *ngFor="let s_number of result_data.seats" style="margin-right: 5px;">{{s_number}}</ion-badge>
+          </p>
+        </ion-toolbar>
+      </ion-col>
+        </ion-row>
+        <ion-row style="margin: 10px 8px 10px 10px;">
+        <ion-col text-center style="padding: 0px;" size="1">
+          <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;margin-top: 5px;"></ion-img>
+          <ion-img src="./assets/svg/dot.svg" alt="." style="width: 3px;margin: 10px 0 10px 8px;" ></ion-img>
+          <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;"></ion-img>
+        </ion-col>
+        <ion-col text-left style="padding: 0px;" size="11">
+          <p class="p_location">{{result_data.pick_up}}</p>
+          <p style="margin: 10px 0 10px 0;color:#02A1EB;" (click)="viewRoute(result_data.route_master_id,result_data.stoppage_start_id,result_data.stoppage_end_id)"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
+          <p class="p_location">{{result_data.drop}}</p>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <ion-card class="card_class">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h5 style="color: initial;margin-left: 10px;">Fare Details</h5>
+            <ion-toolbar class="toolbar-class">
+              <p slot="start" size="small" class="no_margin_p">Base Fare</p>
+              <p slot="end" size="small" class="no_margin_p">
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon> {{result_data.fare_details.base_fare}}
+              </p>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <p slot="start" size="small" class="no_margin_p">GST</p>
+              <p slot="end" size="small" class="no_margin_p">
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon> {{result_data.fare_details.gst}}
+              </p>
+            </ion-toolbar>
+            <ion-toolbar class="toolbar-class">
+              <p slot="start" size="small" class="no_margin_p">Total Fare</p>
+              <p slot="end" size="small" class="no_margin_p">
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>  {{result_data.fare_details.total_fare}}
+              </p>
+            </ion-toolbar>
+            <!-- <ion-toolbar class="toolbar-class" *ngIf="coupan_div">
+              <p slot="start" size="small" color="tertiary" class="no_margin_p">Coupon Amount</p>
+              <p slot="end" size="small" color="tertiary" class="no_margin_p">
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon> -20.00
+              </p>
+            </ion-toolbar> -->
+            <ion-toolbar class="toolbar-class">
+              <p slot="start" size="small" style="font-weight: bold;" class="no_margin_p">TOTAL PAID</p>
+              <p slot="end" size="small" style="font-weight: bold;" class="no_margin_p">
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>  {{result_data.fare_details.payable_fare}}
+              </p>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+</ion-content>
+<ion-footer class="footer-bus-route-details">
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col text-center >
+        <fa-icon [icon]="['fas','qrcode']" size="x" class="rstar-icon" style="font-size: 20px;" (click)="scanQrCode(result_data.qr_code)"></fa-icon>
+        <p class="no_margin_p" style="font-size:13px;">QR Code</p>
+      </ion-col>
+      <ion-col text-center>
+        <ion-icon ios="ios-share" md="md-share" style="font-size: 20px;" (click)="shareYourRoute()"></ion-icon>
+        <p class="no_margin_p" style="font-size:13px;">Share Booking Info.</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

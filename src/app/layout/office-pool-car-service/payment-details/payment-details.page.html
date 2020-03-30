@@ -1,0 +1,54 @@
+<app-header></app-header>
+<ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+<ion-content>
+    <div class="inner_div">
+        <ion-toolbar class="toolbar-class">
+            <ion-title slot="start" class="toolbar-class">
+                <p>Credit Point Balance</p>
+                <p><fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon> {{wallet_balance}}</p>
+            </ion-title>
+            <ion-button class="ion-margin-top" size="default" 
+            style="margin-top: 0px;border-radius:0px;font-size: 12px;padding: 0px;"   
+            type="button" [disabled]="net_connection_check" color="danger" (click)="buyCreditPoints()">
+                Buy Credit Points
+            </ion-button>
+        </ion-toolbar>
+        <ion-item-divider></ion-item-divider>
+        <ion-toolbar class="toolbar-class" style="margin-top: 20px;">
+            <ion-title slot="start" class="toolbar-class">
+                <p>Referral Point Balance</p>
+                <p><fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon> {{referral_balance}}</p>
+            </ion-title>
+            <ion-button class="ion-margin-top" size="default" 
+            style="margin-top: 0px;border-radius:0px;font-size: 12px;width:150px;padding: 0px;"   type="button" [disabled]="net_connection_check" color="tertiary" (click)="referFriends()">
+                Refer Friends
+            </ion-button>
+        </ion-toolbar>
+        <ion-item-divider></ion-item-divider>
+        <div style="text-align: center;margin-top: 30px;">
+            <p>Total Amount</p>
+            <span>
+                <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
+            </span>
+            <p class="amount_cs">{{payableFare}}/-</p>
+            <ion-grid no-margin no-padding>
+                <ion-row no-margin no-padding>
+                    <ion-col size="4">
+                        <ion-button size="default" style="margin-top: 0px;border-radius:0px;font-size: 12px;padding: 0px;--background: linear-gradient(45deg, #02A1EB 0%, #0A5999 100%);"   type="button"[disabled]=" net_connection_check" (click)="payDirect()">
+                            <fa-icon [icon]="['fas','money-bill-alt']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
+                            PAY DIRECT
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="1">&nbsp;</ion-col>
+                    <ion-col size="6">
+                        <ion-button size="default" style="margin-top: 0px;border-radius:0px;font-size: 12px;padding: 0px;--background: linear-gradient(45deg, #0A5999 0%, #02A1EB 100%);"   type="button"[disabled]=" net_connection_check" (click)="payThroughWallet()">
+                            <ion-icon name="ios-wallet"></ion-icon>
+                            &nbsp;PAY THROUGH WALLET
+                            
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+</ion-content>

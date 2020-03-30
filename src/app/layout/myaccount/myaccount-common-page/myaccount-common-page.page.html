@@ -1,0 +1,72 @@
+<app-header></app-header>
+<ion-progress-bar type="indeterminate"class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+<ion-content>
+  <div *ngIf="which_page == 'refer-earn'">
+    <div class="inner_div">
+      <div>
+          <ion-img src="/assets/svg/Gift2.svg"></ion-img>
+      </div>
+      <div style="text-align: center;">
+          <ion-text><h2 style="margin: 0 0 10px 0px;">Refer & Earn upto Rs 200</h2></ion-text>
+          <p class="no_margin_p">Get Rs 50 when your friend completes his/her first trip with us.</p>
+          <p style="margin: 15px 0 5px 0;">Your Code</p>
+          <div class="div_class">
+              <ion-text text-center>{{refer_code}} </ion-text>
+              <fa-icon [icon]="['far','clone']" size="1x" class="rstar-icon" (click)="copyText(refer_code)"></fa-icon>
+          </div>
+          <p style="margin: 25px 0 5px 0;">
+              Generated Refer link
+          </p>
+          <div class="div_class" style="margin-bottom: 30px;">
+              <p color="primary" class="div_link_class"> 
+                  {{generate_link}}
+              </p>
+              <fa-icon [icon]="['far','clone']" size="1x" class="link-icon" (click)="copyText(generate_link)"></fa-icon>
+          </div>
+          <ion-toolbar style="border: 1px dashed;--background: white;--min-height:42px;">
+              <fa-icon [icon]="['fab','whatsapp-square']" size="1x" class="social-whatsapp-icon" (click)="shareVia('whatsapp')"></fa-icon>
+              <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 288 288" enable-background="new 0 0 288 288" xml:space="preserve" class="social-icon" (click)="shareVia('facebook')">
+                  <g>
+                      <path fill="#314A9F" d="M287.111,256.911c0,16.196-13.132,29.327-29.327,29.327H31.898c-16.196,0-29.328-13.131-29.328-29.327
+                          V31.025c0-16.199,13.131-29.329,29.328-29.329h225.886c16.195,0,29.327,13.13,29.327,29.329V256.911z"/>
+                      <path fill="#FFFFFF" d="M242.967,40.302H204.68c0,0-36.053,3.716-38.282,37.913v32.709h-21.557v38.288h21.557v105.186h43.115
+                          V149.212h28.994l4.46-37.545h-32.712V87.134c0,0,2.975-8.919,10.411-8.919l22.301,0.742"/>
+                  </g>
+              </svg>
+              <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 288 288" enable-background="new 0 0 288 288" xml:space="preserve" class="social-icon" (click)="shareVia('gmail')">
+                  <g>
+                      <path fill="#EDEDED" d="M286.334,257.06c0,16.141-13.087,29.228-29.228,29.228H31.987c-16.141,0-29.228-13.087-29.228-29.228
+                          V31.941c0-16.143,13.087-29.229,29.228-29.229h225.12c16.141,0,29.228,13.086,29.228,29.229V257.06z"/>
+                      <path fill="#D42E2A" d="M273.376,50.707v201.372c0,0-0.999,12.839-11.37,12.164l-21.364,0.026V67.601L273.376,50.707z"/>
+                      <path fill="#EF4337" d="M15.717,50.707v201.372c0,0,1.062,12.839,12.139,12.164l22.803,0.026V67.601L15.717,50.707z"/>
+                      <polygon fill="#D42E2A" points="15.857,54.767 15.857,83.352 50.101,87.204 40.431,58.821 	"/>
+                      <path fill="#EF4337" d="M35.83,25.765l108.787,97.308l107.952-97.308c0,0,15.627-4.731,20.808,11.487v17.569l-128.76,116.904
+                          L15.857,57.525V37.929C15.857,37.929,19.795,20.358,35.83,25.765z"/>
+                  </g>
+              </svg>
+              <fa-icon [icon]="['fas','ellipsis-v']" size="1x" class="more-icon" (click)='referFriends()'></fa-icon>
+          </ion-toolbar>
+          <ion-toolbar style="top:15px;">
+              <p slot="start" (click)="showHowToEarn()">How To Earn ?</p>
+              <p slot="end" (click)="showTerms()">* Terms & Conditions</p>
+          </ion-toolbar>
+      </div>
+  </div>
+  </div>
+  <div *ngIf="which_page == 'notifications'" style="background: white;">
+    <div class="inner_div">
+      <p *ngIf="blank_div" style="text-align: center;">
+          No Notification Found
+      </p>
+      <ion-grid no-marign no-padding *ngIf="!blank_div">
+          <ion-row *ngFor="let item of dataList">
+              <ion-col>
+                  <p style="margin-top: 10px;">{{item.notice_title}}</p>
+                  <p *ngFor="let i of item.notice_txt">{{i}}</p>
+                  <p style="opacity: 0.5;font-size: 11px;">{{item.notice_date}}</p>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+  </div> 
+  </div>
+</ion-content>

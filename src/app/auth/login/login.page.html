@@ -1,0 +1,59 @@
+<app-header></app-header>
+<ion-content>
+    <div class="inner_div">
+      <form [formGroup]="form"  novalidate>
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-col align-self-center>
+                
+              <div style="padding-top: 10px;">
+                <ion-item>
+                    <ion-label position="floating">10 digit mobile number</ion-label>
+                    <ion-input autofocus="on" formControlName="contact" maxlength="10" clearInput="true" inputmode="tel" pattern="[0-9]{10}" required="true"></ion-input>
+                    <ion-icon name="phone-portrait" slot="start"></ion-icon>
+                </ion-item>
+            </div>
+            <div text-center margin>
+              <!-- <ion-icon name="ios-finger-print" class="_cs_icon_class" (click)="showFingerprintAuthDlg()"></ion-icon> -->
+              <ion-button size="default"  type="button" [disabled]="form.invalid || net_connection_check" (click)="otpModal()">Login with OTP</ion-button>
+              <ion-text><p>OR</p></ion-text>
+              <ion-button  size="default"  type="button" [disabled]="form.invalid || net_connection_check" (click)="passwordModal()">Login with Password</ion-button>
+             
+            </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-text text-center>
+                <p class="no_text_decoration">
+                  <a routerLink='/register'>New User</a> | <a (click)="forgotPasswordModal()">Forgot Password</a>
+                </p>
+              </ion-text>
+              </ion-col>
+          </ion-row>
+          
+        </ion-grid>
+      </form>
+    </div>
+    <div class="background-gif">
+      <ion-img src="/assets/images/car_home.png"></ion-img>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-text text-center>
+            <p>
+              <a style="display: inline-block;" (click)="goToPage('contact-us')">Contact Us</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a (click)="goToPage('terms-conditions')">Terms</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+              <a (click)="goToPage('privacy-policy')">Privacy Policy</a>
+            </p>
+            <p class="no_text_decoration" style="margin-top: 22px;">
+              Copyright &copy; 2020 Redy Rider.
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    
+</ion-content>
