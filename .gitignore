@@ -12,7 +12,6 @@ log.txt
 .vscode/
 npm-debug.log*
 
-node_modules/
 .idea/
 .ionic/
 .sourcemaps/
@@ -20,8 +19,14 @@ node_modules/
 .tmp/
 .versions/
 coverage/
+www/
+node_modules/
 tmp/
 temp/
+platforms/
+plugins/
+plugins/android.json
+plugins/ios.json
 $RECYCLE.BIN/
 .history/
 

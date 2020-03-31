@@ -123,6 +123,9 @@
     "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "com.rskart.commerce"
     },
+    "cordova-plugin-insomnia": {
+      "PACKAGE_NAME": "com.rskart.commerce"
+    },
     "cordova-plugin-ionic-keyboard": {
       "PACKAGE_NAME": "com.rskart.commerce"
     },
@@ -180,7 +183,7 @@
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.rskart.commerce"
     },
-    "cordova-plugin-insomnia": {
+    "cordova-plugin-file": {
       "PACKAGE_NAME": "com.rskart.commerce"
     }
   },
@@ -192,9 +195,6 @@
       "PACKAGE_NAME": "com.rskart.commerce"
     },
     "cordova-plugin-badge": {
-      "PACKAGE_NAME": "com.rskart.commerce"
-    },
-    "cordova-plugin-file": {
       "PACKAGE_NAME": "com.rskart.commerce"
     },
     "es6-promise-plugin": {
