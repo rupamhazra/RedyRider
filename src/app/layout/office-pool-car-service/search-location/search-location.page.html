@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar style="padding:0 10px 0px 0px;">
     <!-- <ion-searchbar type="text" debounce="10000" (ionInput)="getItems($event)" placeholder="Enter pickup location"></ion-searchbar> -->
-    <ion-searchbar type="text" debounce="10000"  (ionInput)="updateSearchResults($event)" placeholder="Enter pickup location" [(ngModel)]="search_address"></ion-searchbar>
+    <ion-searchbar type="text" debounce="10000"  (ionInput)="updateSearchResults($event)" [(placeholder)]="location_placeholder" [(ngModel)]="search_address"></ion-searchbar>
     <ion-buttons slot="start" class="border_button">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>

@@ -25,23 +25,23 @@
           "./": [
             {
               "xml": "<uses-permission android:name=\"android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS\" />",
-              "count": 24
+              "count": 25
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.FOREGROUND_SERVICE\" />",
-              "count": 24
+              "count": 25
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.SEND_SMS\" />",
-              "count": 24
+              "count": 25
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.RECEIVE_SMS\" />",
-              "count": 24
+              "count": 25
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_SMS\" />",
-              "count": 24
+              "count": 25
             }
           ]
         }

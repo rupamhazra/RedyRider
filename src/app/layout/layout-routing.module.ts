@@ -13,7 +13,6 @@ const routes: Routes = [
       { path: 'tour-travels', loadChildren: './tour-travels/tour-travels.module#TourTravelsPageModule' },
       { path: 'school-pool-car', loadChildren: './school-pool-car/school-pool-car.module#SchoolPoolCarPageModule' },
       { path: 'office-pool-car-service', loadChildren: './office-pool-car-service/office-pool-car-service.module#OfficePoolCarServicePageModule' },
-      { path: 'date-time', loadChildren: './office-pool-car-service/date-time/date-time.module#DateTimePageModule' },
       { path: 'bus-route-details', loadChildren: './office-pool-car-service/bus-route-details/bus-route-details.module#BusRouteDetailsPageModule' },
       { path: 'seat-layout-details', loadChildren: './office-pool-car-service/seat-layout-details/seat-layout-details.module#SeatLayoutDetailsPageModule' },
       { path: 'booked-details', loadChildren: './office-pool-car-service/booked-details/booked-details.module#BookedDetailsPageModule' },

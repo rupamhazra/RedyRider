@@ -61,9 +61,16 @@
       <ion-grid no-marign no-padding *ngIf="!blank_div">
           <ion-row *ngFor="let item of dataList">
               <ion-col>
-                  <p style="margin-top: 10px;">{{item.notice_title}}</p>
-                  <p *ngFor="let i of item.notice_txt">{{i}}</p>
-                  <p style="opacity: 0.5;font-size: 11px;">{{item.notice_date}}</p>
+                  <p style="margin-top: 10px;font-weight: bold;margin: 10px 0 0 0;">{{item.notice_title}}</p>
+                  <ion-row>
+                      <ion-col>
+                        <p class="noti_p"><ion-icon ios="ios-locate" md="md-locate"></ion-icon>&nbsp;Pick Up : {{item.notice_body.pick_up}}</p>
+                        <p class="noti_p"><ion-icon ios="ios-clock" md="md-clock"></ion-icon>&nbsp;Time of Journey: {{item.notice_body.time }}</p>
+                        <p class="noti_p"><ion-icon ios="ios-cash" md="md-cash"></ion-icon>&nbsp;Total Fare : {{item.notice_body.total_fare}}</p>
+                        <p class="noti_p"><fa-icon [icon]="['fas','chair']" size="1x"></fa-icon>&nbsp;Your Seats No: <span>{{item.notice_body.seats}}</span></p>
+                      </ion-col>
+                  </ion-row>
+                  <p style="opacity: 0.5;font-size: 11px;">{{item.notice_body.notice_date}}</p>
               </ion-col>
           </ion-row>
       </ion-grid>

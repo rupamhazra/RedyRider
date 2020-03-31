@@ -38,6 +38,7 @@ export class SearchLocationPage implements OnInit {
   search_location_event: Events;
   which_type_search: any;
   isNoItemAvailable: boolean;
+  location_placeholder: string = "Enter pickup location";
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -58,6 +59,7 @@ export class SearchLocationPage implements OnInit {
     this.which_type_search = this.route.snapshot.paramMap.get("type")
     if (this.which_type_search == 'drop') {
       this.quick_actions = false;
+      this.location_placeholder = "Enter drop location"
     }
   }
   initializeItems(search_word: any = '') {
@@ -124,7 +126,7 @@ export class SearchLocationPage implements OnInit {
         //console.log('ifeeeeeeeeeeeee')
         let val1 = val;
         if (type == 'pickup') {
-          val1['pickup_location'] = location;
+          val1['pickup_location'] = location ? location : this.search_address;
           this.storage.set('select_location', val1)
         }
         else if (type == 'drop') {
@@ -135,7 +137,7 @@ export class SearchLocationPage implements OnInit {
       else {
         //console.log('elseeeeeeeeeee')
         if (type == 'pickup') {
-          this.storage.set('select_location', { 'pickup_location': location })
+          this.storage.set('select_location', { 'pickup_location': location ? location : this.search_address })
         }
         else if (type == 'drop') {
           this.storage.set('select_location', { 'drop_location': location })

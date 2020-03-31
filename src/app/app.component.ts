@@ -92,28 +92,28 @@ export class AppComponent {
       /**
        * For authentication User
        */
-      //this.getMenu('3');
-      this.authenticationService.authState.subscribe(state => {
-        if (state) {
-          this.router.navigate(['home']);
-          this.menuCtrl.enable(true);
-          this.storage.get('USER_INFO').then((val) => {
-            if (val) {
-              this.name = val.name;
-              this.number = val.mobile
-              this.logout_visible = true;
-              this.userType = val.user_type_id
-              this.profile_img = val.photo;
-              this.getMenu(this.userType);
-            }
-            else
-              this.name = ''
-          });
-        } else {
-          this.router.navigate(['login']);
+      this.getMenu('2');
+      // this.authenticationService.authState.subscribe(state => {
+      //   if (state) {
+      //     this.router.navigate(['home']);
+      //     this.menuCtrl.enable(true);
+      //     this.storage.get('USER_INFO').then((val) => {
+      //       if (val) {
+      //         this.name = val.name;
+      //         this.number = val.mobile
+      //         this.logout_visible = true;
+      //         this.userType = val.user_type_id
+      //         this.profile_img = val.photo;
+      //         this.getMenu(this.userType);
+      //       }
+      //       else
+      //         this.name = ''
+      //     });
+      //   } else {
+      //     this.router.navigate(['login']);
 
-        }
-      });
+      //   }
+      // });
 
       this.app_component_event.subscribe("update_profile_image", (data) => {
         //console.log('data', data)
