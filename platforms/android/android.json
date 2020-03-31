@@ -25,23 +25,23 @@
           "./": [
             {
               "xml": "<uses-permission android:name=\"android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS\" />",
-              "count": 24
+              "count": 3
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.FOREGROUND_SERVICE\" />",
-              "count": 24
+              "count": 3
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.SEND_SMS\" />",
-              "count": 24
+              "count": 3
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.RECEIVE_SMS\" />",
-              "count": 24
+              "count": 3
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_SMS\" />",
-              "count": 24
+              "count": 3
             }
           ]
         }
@@ -114,6 +114,10 @@
               "count": 1
             },
             {
+              "xml": "<feature name=\"Insomnia\"><param name=\"android-package\" value=\"nl.xservices.plugins.Insomnia\" /></feature>",
+              "count": 1
+            },
+            {
               "xml": "<feature name=\"LocalNotification\"><param name=\"android-package\" value=\"de.appplant.cordova.plugin.localnotification.LocalNotification\" /></feature>",
               "count": 1
             },
@@ -171,10 +175,6 @@
             },
             {
               "xml": "<feature name=\"BarcodeScanner\"><param name=\"android-package\" value=\"com.phonegap.plugins.barcodescanner.BarcodeScanner\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"Insomnia\"><param name=\"android-package\" value=\"nl.xservices.plugins.Insomnia\" /></feature>",
               "count": 1
             }
           ]
@@ -657,6 +657,9 @@
     "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "com.rskart.commerce"
     },
+    "cordova-plugin-insomnia": {
+      "PACKAGE_NAME": "com.rskart.commerce"
+    },
     "cordova-plugin-ionic-keyboard": {
       "PACKAGE_NAME": "com.rskart.commerce"
     },
@@ -715,9 +718,6 @@
     },
     "phonegap-plugin-barcodescanner": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "com.rskart.commerce"
-    },
-    "cordova-plugin-insomnia": {
       "PACKAGE_NAME": "com.rskart.commerce"
     }
   },
@@ -1053,6 +1053,14 @@
       "runs": true
     },
     {
+      "id": "cordova-plugin-insomnia.Insomnia",
+      "file": "plugins/cordova-plugin-insomnia/www/Insomnia.js",
+      "pluginId": "cordova-plugin-insomnia",
+      "clobbers": [
+        "window.plugins.insomnia"
+      ]
+    },
+    {
       "id": "cordova-plugin-ionic-keyboard.keyboard",
       "file": "plugins/cordova-plugin-ionic-keyboard/www/android/keyboard.js",
       "pluginId": "cordova-plugin-ionic-keyboard",
@@ -1220,14 +1228,6 @@
       "clobbers": [
         "cordova.plugins.barcodeScanner"
       ]
-    },
-    {
-      "id": "cordova-plugin-insomnia.Insomnia",
-      "file": "plugins/cordova-plugin-insomnia/www/Insomnia.js",
-      "pluginId": "cordova-plugin-insomnia",
-      "clobbers": [
-        "window.plugins.insomnia"
-      ]
     }
   ],
   "plugin_metadata": {
@@ -1249,6 +1249,7 @@
     "cordova-plugin-fingerprint-aio": "2.0.0",
     "cordova-plugin-firebasex": "7.0.1",
     "cordova-plugin-geolocation": "4.0.2",
+    "cordova-plugin-insomnia": "4.3.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-ionic-webview": "4.1.1",
     "cordova-plugin-local-notification": "0.9.0-beta.2",
@@ -1267,7 +1268,6 @@
     "cordova-sms-plugin": "1.0.0",
     "cordova-sqlite-storage": "3.3.0",
     "mx.ferreyra.callnumber": "0.0.2",
-    "phonegap-plugin-barcodescanner": "8.1.0",
-    "cordova-plugin-insomnia": "4.3.0"
+    "phonegap-plugin-barcodescanner": "8.1.0"
   }
 }

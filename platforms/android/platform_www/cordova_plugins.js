@@ -330,6 +330,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "runs": true
     },
     {
+      "id": "cordova-plugin-insomnia.Insomnia",
+      "file": "plugins/cordova-plugin-insomnia/www/Insomnia.js",
+      "pluginId": "cordova-plugin-insomnia",
+      "clobbers": [
+        "window.plugins.insomnia"
+      ]
+    },
+    {
       "id": "cordova-plugin-ionic-keyboard.keyboard",
       "file": "plugins/cordova-plugin-ionic-keyboard/www/android/keyboard.js",
       "pluginId": "cordova-plugin-ionic-keyboard",
@@ -497,14 +505,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "cordova.plugins.barcodeScanner"
       ]
-    },
-    {
-      "id": "cordova-plugin-insomnia.Insomnia",
-      "file": "plugins/cordova-plugin-insomnia/www/Insomnia.js",
-      "pluginId": "cordova-plugin-insomnia",
-      "clobbers": [
-        "window.plugins.insomnia"
-      ]
     }
   ];
   module.exports.metadata = {
@@ -526,6 +526,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-fingerprint-aio": "2.0.0",
     "cordova-plugin-firebasex": "7.0.1",
     "cordova-plugin-geolocation": "4.0.2",
+    "cordova-plugin-insomnia": "4.3.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-ionic-webview": "4.1.1",
     "cordova-plugin-local-notification": "0.9.0-beta.2",
@@ -544,7 +545,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-sms-plugin": "1.0.0",
     "cordova-sqlite-storage": "3.3.0",
     "mx.ferreyra.callnumber": "0.0.2",
-    "phonegap-plugin-barcodescanner": "8.1.0",
-    "cordova-plugin-insomnia": "4.3.0"
+    "phonegap-plugin-barcodescanner": "8.1.0"
   };
 });
