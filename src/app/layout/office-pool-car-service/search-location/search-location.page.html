@@ -10,7 +10,8 @@
 </ion-header>
 <ion-content>
   <ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
-  <div *ngIf="quick_actions" style="margin: 0 0 0 10px;" (click)="currentLocation()">
+  <div #map id="map"></div>
+  <!-- <div *ngIf="quick_actions" style="margin: 0 0 0 10px;" (click)="currentLocation()">
     <p style="margin: 10px;">Quick Selections</p>
     <ion-grid no-padding no-margin>
       <ion-row no-padding no-margin>
@@ -22,7 +23,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </div>
+  </div> -->
   
     <ion-list [hidden]="autocompleteItems.length == 0">
       

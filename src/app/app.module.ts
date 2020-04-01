@@ -34,7 +34,6 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 /** 
  * Get Current Address and tracking
 */
-//import { BackgroundGeolocation} from '@ionic-native/background-geolocation/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
@@ -60,7 +59,6 @@ import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 import { Device } from '@ionic-native/device/ngx';
 
-import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
@@ -156,7 +154,6 @@ import { Insomnia } from '@ionic-native/insomnia/ngx';
     Network,
     FirebaseX,
     Device,
-    BackgroundMode,
     LocalNotifications,
     SocialSharing,
     Clipboard,

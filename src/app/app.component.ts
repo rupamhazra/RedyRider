@@ -10,13 +10,8 @@ import { environment } from '../environments/environment';
 import { ToasterService } from './core/services/toaster.service';
 import { Network } from '@ionic-native/network/ngx';
 import { AlertService } from './core/services/alert.service';
-//import { NavController } from '@ionic/angular';
 import { FirebaseX } from "@ionic-native/firebase-x/ngx";
 import { Events } from '@ionic/angular';
-//import { NavigationExtras } from '@angular/router';
-//import { Device } from '@ionic-native/device/ngx';
-import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
 
 declare var window;
 
@@ -56,8 +51,6 @@ export class AppComponent {
     private fcm: FirebaseX,
     //public fcmService: FcmService,
     //private device: Device,
-    private backgroundMode: BackgroundMode,
-    private backgroundGeolocation: BackgroundGeolocation
   ) {
     this.arr = [];
     this.initializeApp();

@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
@@ -15,7 +15,7 @@ declare var google;
   styleUrls: ['./search-location.page.scss'],
 })
 export class SearchLocationPage implements OnInit {
-
+  @ViewChild('map') mapElement: ElementRef;
   GoogleAutocomplete;
   autocomplete: { input: string; };
   autocompleteItems: any[];
@@ -39,6 +39,8 @@ export class SearchLocationPage implements OnInit {
   which_type_search: any;
   isNoItemAvailable: boolean;
   location_placeholder: string = "Enter pickup location";
+  map: any;
+  markers = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -56,11 +58,31 @@ export class SearchLocationPage implements OnInit {
   }
 
   ngOnInit() {
+
     this.which_type_search = this.route.snapshot.paramMap.get("type")
     if (this.which_type_search == 'drop') {
       this.quick_actions = false;
       this.location_placeholder = "Enter drop location"
     }
+  }
+  ionViewDidEnter() {
+    this.loadMap();
+  }
+  loadMap() {
+    console.log('dsfddfdsfsdfsdf')
+    this.map = new google.maps.Map(this.mapElement.nativeElement, {
+      center: { lat: -34.9011, lng: -56.1645 },
+      //center: this.location_source,
+      zoom: 18,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      //tilt: 45,
+      mapTypeControl: true,
+      streetViewControl: true,
+      fullscreenControl: true
+      //disableDefaultUI: true,
+    });
+    //let pos1 = { lat: 22.5764753, lng: 88.4306861 };
+
   }
   initializeItems(search_word: any = '') {
     this.loadingService.dismiss();

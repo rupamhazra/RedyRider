@@ -5,7 +5,6 @@ import { environment } from '../../../environments/environment';
 import { LoadingService } from '../../core/services/loading.service';
 import { ToasterService } from '../../core/services/toaster.service';
 import { Platform } from '@ionic/angular';
-import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { Device } from '@ionic-native/device/ngx';
@@ -73,7 +72,6 @@ export class HomePage implements OnInit {
     public loadingService: LoadingService,
     private toasterService: ToasterService,
     private device: Device,
-    public backgroundMode: BackgroundMode,
     public platform: Platform,
     public localNotifications: LocalNotifications,
     private fcm: FirebaseX,

@@ -183,8 +183,8 @@ export class PaymentDetailsPage implements OnInit {
           this.storage.set('transactionDetails', res.result);
           this.storage.remove('bookingDetails');
           this.storage.remove('route_search_parameters');
-          setTimeout(function () { this.loadingService.dismiss(); this.router.navigateByUrl('booking-thankyou') }, 1000);
-          //this.router.navigateByUrl('booking-thankyou');
+          console.log('check')
+          this.router.navigateByUrl('booking-thankyou');
         }
 
 

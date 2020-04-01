@@ -5,7 +5,6 @@ import { environment } from '../../../environments/environment';
 import { LoadingService } from '../../../core/services/loading.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { Platform } from '@ionic/angular';
-import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 import { Events } from '@ionic/angular';
@@ -26,7 +25,6 @@ export class TodayRidesPage implements OnInit {
     private router: Router,
     public loadingService: LoadingService,
     private toasterService: ToasterService,
-    public backgroundMode: BackgroundMode,
     public platform: Platform,
     public localNotifications: LocalNotifications,
     public officePoolCarService: OfficePoolCarService,
