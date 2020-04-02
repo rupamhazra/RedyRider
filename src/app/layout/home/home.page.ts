@@ -83,54 +83,27 @@ export class HomePage implements OnInit {
     private barcodeScanner: BarcodeScanner,
   ) {
     platform.ready().then(() => {
-      /**
-       * Firebase Token
-       */
       if (this.platform.is("cordova"))
         this.firebaseX.getToken()
           .then(token => this.device_token = token)
           .catch(error => console.error('Error getting token', error));
     })
     this.storage.get('USER_INFO').then((val) => {
-      //console.log('user_details_val_val', val)
       if (val) {
         this.userId = val.id;
         this.name = val.name;
         this.userType = val.user_type_id;
-        //console.log('userType', this.userType)
         if (val.user_type_id == 2)
           this.getTodayRides();
-
       }
     });
   }
   getNotification() {
     this.fcm.onMessageReceived().subscribe(data => {
-
-      //console.log('data', this.fcm.getBadgeNumber)
-      //this.home_page_event.publish('notification_count', this.fcm.getBadgeNumber);
       if (data.wasTapped) {
-        //console.log("Received in background");
-
-        //console.log(JSON.parse(this.pushes))
-        //this.home_page_event.publish('notification_count', this.fcm.getBadgeNumber);
-        //this.app_component_event.publish('notification_count_e', 1);
-        // this.storage.get('noti_count').then((val) => {
-        //   if (val) {
-        //     this.storage.set('noti_count', val + 1)
-        //   }
-        //   else {
-        //     this.storage.set('noti_count', 1)
-        //   }
-        // });
-        //this.storage.set('noti_count', 1)
         this.router.navigate(['myaccount/notification', { pushes: JSON.stringify(data) }]);
-
       } else {
-        //console.log("Received in foreground");
         this.toasterService.showToast('Received in foreground', 3000);
-        //this.home_page_event.publish('notification_count', this.fcm.getBadgeNumber);
-
       };
     });
   }
@@ -139,16 +112,9 @@ export class HomePage implements OnInit {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
     });
-    //console.log('this.disabled_check', this.disabled_check);
-
-    //this.loadingService.present();
     this.title = this.router.url;
-
     if (this.platform.is("cordova"))
       setTimeout(() => {
-        /**
-         * Device Details
-         */
         let device_details = {
           "uuid": this.device.uuid,
           "model": this.device.model,
@@ -168,31 +134,25 @@ export class HomePage implements OnInit {
       }, 3000);
   }
   public insertDeviceDetails(request_data) {
-    //console.log('request_data111', request_data)
     this.homeService.insertDeviceDetailsService(request_data).subscribe(
       res => {
-        //console.log('res', res)
         if (res.status.toLowerCase() == 'success') {
         }
       },
       error => {
-        //console.log("error::::" + error.error);
       }
     );
   }
   getTodayRides() {
-    //console.log('userId', this.userId)
     this.progress_bar = true;
     let request_data = { "type": "driver", "user_id": this.userId };
     this.officePoolCarService.todayRidesService(request_data).subscribe(
       res => {
-        //console.log('res', res)
         this.car_details_d = res.result[0];
         this.storage.set('car_details', res.result);
         this.progress_bar = false;
       },
       error => {
-        //console.log("error::::" + error.error);
         this.progress_bar = false;
         this.toasterService.showToast(error.error.msg);
       }
@@ -216,7 +176,6 @@ export class HomePage implements OnInit {
   }
   scanQrCode(car_id = '') {
     this.barcodeScanner.scan().then(barcodeData => {
-      //console.log('Barcode data', barcodeData);
       this.progress_bar = true;
       let request_data = { "type": "qr_code_val", "car_id": car_id, 'qr_code': barcodeData.text };
       this.officePoolCarService.todayRidesService(request_data).subscribe(
@@ -231,14 +190,8 @@ export class HomePage implements OnInit {
           this.toasterService.showToast(error.error.msg, 2000);
         }
       );
-
-      // this.toasterService.showToast('Your seats has been confirmed, have a safe journey', 6000)
-
-      // this.toasterService.showToast('Qr code does not match! please contact to Redy Rider Help Line', 6000)
-
     }).catch(err => {
       console.log('Error', err);
     });
-
   }
 }

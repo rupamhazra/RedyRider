@@ -1,15 +1,7 @@
-
-
-.app-heading h1{text-transform: uppercase; letter-spacing: 1px;}
-.small-content {color: #616161; letter-spacing: 0.5px;}
 .inner_div{
     margin-left: 15px;
     margin-right: 15px;
     margin-top: 15px;
-}
-.cs-title-padding{
-    margin-left: 0px;
-    //font-size: 20px;
 }
 .radio-button-personal{
     padding-bottom: 10px;
@@ -27,12 +19,9 @@
     display: inline-flex;
     vertical-align: middle;
 }
-
-
 .rstar-label {
     display: inline-block;
     font-weight: 400;
-    //color: #fff;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
@@ -71,7 +60,6 @@ ion-icon{
     --inner-padding-top:0px;
     --inner-padding-start:0px;
     --inner-padding-end:2px;
-
 }
 .pass-icon-active{
     opacity: 1;
@@ -87,7 +75,6 @@ ion-icon{
         font-size: 14px;
         border-bottom: 2px solid #86888f;
         width: 16%;
-      
     }
     input {
       text-align: center;
@@ -95,7 +82,6 @@ ion-icon{
   }
   .otp-input2 button {
     margin-top: 5%;
-    
   }
   .item-md.item-input:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
   .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
@@ -118,5 +104,4 @@ ion-icon{
   .ion-margin-top{
       margin-top: 30px;
   }
-
   

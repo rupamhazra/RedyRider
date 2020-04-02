@@ -3,7 +3,7 @@ ion-searchbar{
     padding:0px;
 }
 ion-header{
-    --ion-background-color:#3880ff;
+   
     --ion-text-color:#fff;
 }
 .border_button{
@@ -11,4 +11,14 @@ ion-header{
     border: 1px solid #3880ff;
     margin-right: 10px;
     border-radius: 23px;
+}
+#map {
+    height: 100%;
+}
+.ion-list-class{
+    position: absolute;
+    top: 0;
+}
+ion-button{
+    --border-radius:0px;
 }

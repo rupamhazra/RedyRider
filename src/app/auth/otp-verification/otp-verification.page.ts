@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../../core/services/modal.service';
-// import { Router, ActivatedRoute } from '@angular/router';
 import { NavParams } from '@ionic/angular';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { AuthenticationService } from '../../core/services/authentication.service';
-// import { Storage } from '@ionic/storage';
 import { LoginRegisterService } from '../../core/services/login-register.service';
 import { LoadingService } from '../../core/services/loading.service';
 import { ToasterService } from '../../core/services/toaster.service';
@@ -19,29 +17,20 @@ declare var SMSReceive: any;
 export class OtpVerificationPage implements OnInit {
   form1: FormGroup;
   mobileNo: any;
-
   otp1: any = "";
   otp2: any = "";
   otp3: any = "";
   otp4: any = "";
-
   which_page: string;
   userDetails: any;
   request_data: any;
   form: FormGroup;
   register_otp: string;
-
-  // otp_resend_register: boolean = false;
   OTP: string = '';
-
   constructor(
     public modalService: ModalService,
-    // private route: ActivatedRoute,
-    // private router: Router,
     private navParams: NavParams,
-    // private formBuilder: FormBuilder,
     private authService: AuthenticationService,
-    // private storage: Storage,
     private loginRegisterService: LoginRegisterService,
     private loadingService: LoadingService,
     private toasterService: ToasterService,
@@ -87,7 +76,6 @@ export class OtpVerificationPage implements OnInit {
       this.otp2 = this.OTP[1]
       this.otp3 = this.OTP[2]
       this.otp4 = this.OTP[3]
-      //console.log('this.OTP', this.otp1);
       this.stop();
     }
   }
@@ -113,23 +101,18 @@ export class OtpVerificationPage implements OnInit {
       res => {
         //console.log('res_details', res)
         if (res.status.toLowerCase() == 'success') {
-          //this.toasterService.showToast(res.msg, 2000)
-
           this.authService.login(res.result);
           this.loadingService.dismiss();
         }
       },
       error => {
-        //console.log("error::::" + error.error);
         this.loadingService.dismiss();
         this.toasterService.showToast(error.error.msg, 2000)
       }
     );
   }
   sendRequestForm(package_id: BigInteger) {
-    //console.log('package_id', package_id)
     this.modalService.closeModal();
-    // this.router.navigateByUrl('/tour-travels/tour-details/tour-details-package-form/' + this.tourId + '/' + package_id);
   }
   closeOtpModal() {
     this.otpModal.publish('fromOtpmodal', 1);

@@ -16,14 +16,11 @@ ion-icon {
 .card_class{
     margin-left: 0px;
     margin-right: 0px;
-    //background-color: #0A5999 !important;
-    //color: white;
     margin-top: 0px;
     border-radius: 0px;
 }
 .toolbar-class{
     --background: transparent;
-   // --color: white;
 }
 ion-toolbar{
     --min-height:25px;
@@ -43,7 +40,6 @@ ion-icon{
 }
 .no_margin_p{
     margin : 0 10px 0px 0px !important; 
-    // color: white;
 }
 .no_margin_p_travel_details{
     margin: 0px 0px 0px 3px;
@@ -70,7 +66,6 @@ ion-button{
 .eb_left{float:left}
 .clear {clear: both;}
 .p_location{
-    // text-align: left;
     margin: 0 0 0 0px;
 }
 .button-row{

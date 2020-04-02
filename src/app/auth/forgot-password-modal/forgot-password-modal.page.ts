@@ -25,9 +25,7 @@ export class ForgotPasswordModalPage implements OnInit {
     private storage: Storage,
     private loadingService: LoadingService,
     public forgot_pass_event: Events,
-
   ) { }
-
   ngOnInit() {
     this.forgot_pass_event.subscribe('check_net_connection', (data) => {
       if (data == 'connect') this.net_connection_check = false;
@@ -39,37 +37,27 @@ export class ForgotPasswordModalPage implements OnInit {
     this.forgot_pass_event.subscribe('resendForgotOTPModal', (data) => {
       this.sendOTP(true);
     });
-
   }
   sendOTP(resendOtp: boolean = false) {
     //this.router.navigateByUrl('/forgot-password')
     //this.modalService.closeModal();
-
     this.loadingService.present();
     this.form.value['type'] = 'log_by_otp';
     this.loginRegisterService.loginService(this.form.value).subscribe(
       res => {
-
-
         //console.log("res:::" + res.msg);
         this.storage.set('user_details', {
-          //"otp": res.result.otp_pass,
           "contact": res.result.mobile, 'resend': resendOtp
         })
-        //this.storage.set('contact', res.result.mobile)
         this.modalService.closeModal();
         this.loadingService.dismiss();
         this.router.navigateByUrl('/forgot-password')
-
       },
       error => {
-        //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
         this.toasterService.showToast(error.error.msg, 2000)
       }
     );
-
-
   }
   openForgotPasswordModal() {
     let data = {}
@@ -78,5 +66,4 @@ export class ForgotPasswordModalPage implements OnInit {
   closeForgotPasswordModal() {
     this.modalService.closeModal();
   }
-
 }

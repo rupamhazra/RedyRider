@@ -41,6 +41,8 @@ export class SearchLocationPage implements OnInit {
   location_placeholder: string = "Enter pickup location";
   map: any;
   markers = [];
+  showList: boolean = false;
+  net_connection_check: boolean = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -50,6 +52,7 @@ export class SearchLocationPage implements OnInit {
     public zone: NgZone,
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder,
+    public search_loc_page_event: Events,
   ) {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
@@ -58,7 +61,10 @@ export class SearchLocationPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.search_loc_page_event.subscribe('check_net_connection', (data) => {
+      if (data == 'connect') this.net_connection_check = false;
+      if (data == 'disconnect') this.net_connection_check = true;
+    });
     this.which_type_search = this.route.snapshot.paramMap.get("type")
     if (this.which_type_search == 'drop') {
       this.quick_actions = false;
@@ -66,23 +72,40 @@ export class SearchLocationPage implements OnInit {
     }
   }
   ionViewDidEnter() {
-    this.loadMap();
+    this.currentLocation();
   }
-  loadMap() {
+  currentLocation(which_type_search = '') {
+    this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
+      console.log('resp', resp)
+
+      this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
+      if (which_type_search) this.selectLocation('pickup')
+      this.loadMap(resp.coords.latitude, resp.coords.longitude);
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+  loadMap(lat, lng) {
+    this.showList = false;
     console.log('dsfddfdsfsdfsdf')
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      center: { lat: -34.9011, lng: -56.1645 },
-      //center: this.location_source,
-      zoom: 18,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      //tilt: 45,
-      mapTypeControl: true,
-      streetViewControl: true,
-      fullscreenControl: true
-      //disableDefaultUI: true,
+      center: { lat: lat, lng: lng },
+      zoom: 15,
     });
-    //let pos1 = { lat: 22.5764753, lng: 88.4306861 };
-
+    let marker = new google.maps.Marker({
+      position: { lat: lat, lng: lng },
+      map: this.map,
+      draggable: true,
+    });
+    this.markers.push(marker);
+    this.lastLatLng(marker);
+  }
+  lastLatLng(marker) {
+    google.maps.event.addListener(marker, 'dragend', () => {
+      console.log(marker.position.lat(), marker.position.lng())
+      this.getGeoencoder(marker.position.lat(), marker.position.lng());
+    });
   }
   initializeItems(search_word: any = '') {
     this.loadingService.dismiss();
@@ -135,6 +158,7 @@ export class SearchLocationPage implements OnInit {
         this.quick_actions = false;
         this.autocompleteItems = [];
         this.zone.run(() => {
+          this.showList = true;
           predictions.forEach((prediction) => {
             this.autocompleteItems.push(prediction);
           });
@@ -142,33 +166,40 @@ export class SearchLocationPage implements OnInit {
       });
   }
 
-  selectLocation(location: any, type: any) {
+  selectSearchLocation(location: any, type: any) {
+    this.showList = false;
+    this.search_address = location;
+    let geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'address': location }, (results, status) => {
+      this.loadMap(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+    });
+  }
+  selectLocation(type: any) {
     this.storage.get('select_location').then((val) => {
       if (val != null) {
         //console.log('ifeeeeeeeeeeeee')
         let val1 = val;
         if (type == 'pickup') {
-          val1['pickup_location'] = location ? location : this.search_address;
+          val1['pickup_location'] = this.search_address;
           this.storage.set('select_location', val1)
         }
         else if (type == 'drop') {
-          val1['drop_location'] = location;
+          val1['drop_location'] = this.search_address;
           this.storage.set('select_location', val1);
         }
       }
       else {
         //console.log('elseeeeeeeeeee')
         if (type == 'pickup') {
-          this.storage.set('select_location', { 'pickup_location': location ? location : this.search_address })
+          this.storage.set('select_location', { 'pickup_location': this.search_address })
         }
         else if (type == 'drop') {
-          this.storage.set('select_location', { 'drop_location': location })
+          this.storage.set('select_location', { 'drop_location': this.search_address })
         }
       }
     });
     this.router.navigateByUrl('office-pool-car-service');
   }
-
   // selectSearchResult(item, curren_location) {
   //   this.progress_bar = true;
   //   console.log(item)
@@ -199,17 +230,18 @@ export class SearchLocationPage implements OnInit {
   //     }
   //   );
   // }
-  currentLocation() {
-    console.log('sdffdfsdff')
-    this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
-      console.log('resp', resp)
-      this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
-      this.selectLocation(this.search_address, 'pickup')
+  // currentLocation() {
+  //   console.log('sdffdfsdff')
+  //   this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
+  //     console.log('resp', resp)
+  //     this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
+  //     this.selectLocation(this.search_address, 'pickup')
 
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-  }
+
+  //   }).catch((error) => {
+  //     console.log('Error getting location', error);
+  //   });
+  // }
   //geocoder method to fetch address from coordinates passed as arguments
   getGeoencoder(latitude, longitude) {
     this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
