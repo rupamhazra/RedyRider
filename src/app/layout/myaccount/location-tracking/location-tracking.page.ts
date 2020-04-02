@@ -21,6 +21,7 @@ import { ModalService } from '../../../core/services/modal.service';
 
 declare var google;
 import { map } from 'rxjs/operators';
+import { element } from '@angular/core/src/render3';
 declare var window;
 @Component({
   selector: 'app-location-tracking',
@@ -37,6 +38,11 @@ export class LocationTrackingPage implements OnInit {
   lat;
   lng;
   last_driver_postion;
+  driver_distance_from_next_destination;
+  next_stoppage_list_array;
+  next_stoppage_info;
+  
+
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
   distanceService = new google.maps.DistanceMatrixService;
@@ -106,6 +112,9 @@ export class LocationTrackingPage implements OnInit {
             console.log(element);
             this.route_id = element.route_id;
             this.stoppage_list = element.stoppage_list;
+            this.next_stoppage_list_array=element.stoppage_list;
+            this.next_stoppage_info=this.next_stoppage_list_array[0];
+            //console.log('next_stoppage ',this.next_stoppage_info);
             this.start_location = element.start_location;
             this.end_location = element.end_location;
             this.car_type = element.car_type;
@@ -406,6 +415,9 @@ export class LocationTrackingPage implements OnInit {
           this.driver_current_lat = position.coords.latitude;
           this.driver_current_lng = position.coords.longitude;
           let new_driver_location = new google.maps.LatLng(this.driver_current_lat, this.driver_current_lng);
+
+          this.get_next_stoppage_info(new_driver_location);
+
           if (this.last_driver_postion != undefined) {
             //console.log('last postion ',this.last_driver_postion);
             var heading = google.maps.geometry.spherical.computeHeading(this.last_driver_postion, new_driver_location);
@@ -611,5 +623,54 @@ export class LocationTrackingPage implements OnInit {
   viewRoute() {
     let data = { 'from_which_page': 'location-tracking-page', 'stoppage_list': this.stoppage_list }
     this.modalService.openModal(RouteStoppageModalPage, data, 'stoppage_modal_css');
+  }
+
+
+  get_next_stoppage_info(current_location){
+    const that = this;
+     var reached_stoppage;
+
+     //this.next_stoppage_list_array.forEach(element=>{
+
+        let pos_marker = {
+          lat: parseFloat(this.next_stoppage_list_array[0].lat),
+          lng: parseFloat(this.next_stoppage_list_array[0].lng)
+        };
+
+        this.distanceService.getDistanceMatrix({
+          origins: [current_location],
+          destinations: [pos_marker],
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.METRIC,
+          avoidHighways: false,
+          avoidTolls: false
+        }, function (response, status) {
+          if (status !== 'OK') {
+            alert('Error was: ' + status);
+          } else {
+  
+            // var originList = response.originAddresses;
+            // var destinationList = response.destinationAddresses;
+  
+            // var get_distance=response.rows[0].elements;
+             that.driver_distance_from_next_destination = parseFloat(response.rows[0].elements[0].distance.text);
+            if(that.driver_distance_from_next_destination<=200){
+              reached_stoppage=1;
+             
+            }
+          }
+        });
+
+        if(reached_stoppage==1){
+           //console.log('laststoppage list1',that.next_stoppage_list_array);
+           this.next_stoppage_list_array.shift();
+           this.next_stoppage_info=this.next_stoppage_list_array[0];
+           console.log('next_stoppage_info ', this.next_stoppage_info.location_name);
+           //console.log('laststoppage list',that.next_stoppage_list_array);
+        }
+
+      //})
+    
+
   }
 }
