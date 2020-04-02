@@ -654,7 +654,7 @@ export class LocationTrackingPage implements OnInit {
   
             // var get_distance=response.rows[0].elements;
              that.driver_distance_from_next_destination = parseFloat(response.rows[0].elements[0].distance.text);
-            if(that.driver_distance_from_next_destination<=200){
+            if(that.driver_distance_from_next_destination<=0.2){
               reached_stoppage=1;
              
             }
