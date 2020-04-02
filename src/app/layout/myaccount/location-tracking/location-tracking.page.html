@@ -19,7 +19,43 @@
 </ion-header>
 <ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
 <ion-content>
-  <div #map id="map"></div>
+  <div #map id="map" style="display:none"></div>
+
+  <ion-card style="display:none">
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>previous locations</ion-label>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      last Stoppage
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Next Stop</ion-card-subtitle>
+      <ion-card-title *ngIf="next_stoppage_info" >{{next_stoppage_info.location_name}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-badge color="primary" *ngIf="next_stoppage_info" >{{next_stoppage_info.total_passenger}}</ion-badge>
+       Boardings
+    </ion-card-content>
+  </ion-card>
+  
+  
+
+  <ion-card>
+    <ion-item href="#" class="ion-activated" *ngFor="let stoppage of stoppage_list; let i = index; let lst = last;">
+      <ion-icon name="wifi" slot="start"></ion-icon>
+      
+      <ion-label><ion-badge color="primary">{{stoppage.total_passenger}} Boardings</ion-badge> {{stoppage.location_name}}</ion-label>
+    </ion-item>
+  
+  </ion-card>
+  
  
   <!-- <ion-button type="button"  size="default" color="tertiary" (click)="startTracking()">
     <ion-icon name="locate"></ion-icon>
