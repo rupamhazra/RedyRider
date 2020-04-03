@@ -17,6 +17,8 @@ import { ToasterService } from '../../../core/services/toaster.service';
 import { AlertController } from '@ionic/angular';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { RouteStoppageModalPage } from '../../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
+import { MapModalPage } from '../../office-pool-car-service/route-stoppage-modal/map-modal.page';
+
 import { ModalService } from '../../../core/services/modal.service';
 
 declare var google;
@@ -41,6 +43,7 @@ export class LocationTrackingPage implements OnInit {
   driver_distance_from_next_destination;
   next_stoppage_list_array;
   next_stoppage_info;
+  maphideMe;
   
 
   directionsService = new google.maps.DirectionsService;
@@ -197,8 +200,8 @@ export class LocationTrackingPage implements OnInit {
       this.driver_marker = new google.maps.Marker({
         position: pos,
         map: this.map,
-        //icon: "http://tobuekalabya.com/carservice_manage/icon/car_top.png",
-        icon: "http://tobuekalabya.com/carservice_manage/icon/icon_map_baloon.png",
+        icon: "http://tobuekalabya.com/carservice_manage/icon/car_top.png",
+        //icon: "http://tobuekalabya.com/carservice_manage/icon/icon_map_baloon.png",
         title: 'you are here!',
         //animation: google.maps.Animation.DROP,
       });
@@ -673,4 +676,8 @@ export class LocationTrackingPage implements OnInit {
     
 
   }
+
+  
+    
+ 
 }
