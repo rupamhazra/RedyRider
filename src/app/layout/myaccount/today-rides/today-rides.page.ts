@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { LoadingService } from '../../../core/services/loading.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { Platform } from '@ionic/angular';

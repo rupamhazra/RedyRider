@@ -8,13 +8,11 @@ import { RouteStoppageModalPage } from '../office-pool-car-service/route-stoppag
 import { LoginRegisterService } from '../../core/services/login-register.service';
 import { OfficePoolCarService } from '../../core/services/office-pool-car.service';
 import { Events, ActionSheetController, Platform } from '@ionic/angular';
-
 import { File } from '@ionic-native/File/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 import { environment } from '../../../environments/environment';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AlertService } from '../../core/services/alert.service';
 
 declare var cordova: any;
@@ -53,10 +51,7 @@ export class MyaccountPage implements OnInit {
     private alertService: AlertService,
     public my_account_event: Events,
   ) {
-    //this.modalService.closeModal();
-    //this.modalService.openModal(LoginPage,null);
   }
-
   ngOnInit() {
     this.myaccount_event.subscribe('profile_update', (data) => {
       console.log('data', data)
@@ -65,8 +60,6 @@ export class MyaccountPage implements OnInit {
       } else {
         this.getData('myaccount-address', data.user_id);
       }
-
-
     });
     this.storage.get('USER_INFO').then((val) => {
       if (val) {
@@ -83,8 +76,6 @@ export class MyaccountPage implements OnInit {
         this.visible_myaccount_details_div = false
       }
     });
-
-
   }
   openModal(which) {
     let data = { 'from_which_page': which, 'userId': this.userId }
@@ -96,7 +87,6 @@ export class MyaccountPage implements OnInit {
     this.modalService.openModal(RouteStoppageModalPage, data, 'stoppage_modal_css');
   }
   changePassword(resendOtp: boolean = false) {
-
     this.loadingService.present();
     let request_data = { 'type': 'log_by_otp', 'contact': this.contact }
     this.loginRegisterService.loginService(request_data).subscribe(
@@ -105,40 +95,33 @@ export class MyaccountPage implements OnInit {
         this.router.navigateByUrl('/forgot-password')
       },
       error => {
-        //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
         this.toasterService.showToast(error.error.msg, 2000)
       }
     );
   }
   getData(which, user_id) {
-    //this.loadingService.present();
     if (which == 'myaccount-personal') {
       this.progress_bar = true;
       let request_data = { "user_id": user_id };
       this.officePoolCarService.personalService(request_data).subscribe(
         res => {
-          //console.log("res:::" + res.msg);
           this.user_details = res.result;
           this.progress_bar = false;
         },
         error => {
-          //console.log("error::::" + error.error.msg);
           this.progress_bar = false;
           this.toasterService.showToast(error.error.msg, 2000)
         }
       );
     } else {
-      //this.loadingService.present();
       let request_data = { "user_id": user_id };
       this.officePoolCarService.addressService(request_data).subscribe(
         res => {
-          //console.log("res:::" + res.msg);
           this.address_details = res.result;
           this.progress_bar = false;
         },
         error => {
-          //console.log("error::::" + error.error.msg);
           this.progress_bar = false;
           this.toasterService.showToast(error.error.msg, 2000)
         }
@@ -194,8 +177,6 @@ export class MyaccountPage implements OnInit {
     });
 
   }
-
-  // Copy the image to a local folder
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
@@ -205,7 +186,6 @@ export class MyaccountPage implements OnInit {
       this.toasterService.showToast('Error while storing file.');
     });
   }
-  // Create a new name for the image
   private createFileName() {
     var d = new Date(),
       n = d.getTime(),
@@ -213,7 +193,6 @@ export class MyaccountPage implements OnInit {
     return newFileName;
   }
   public uploadImage() {
-    //let filePath = this.file.dataDirectory + this.lastImage;
     var targetPath = this.pathForImage(this.lastImage);
     var filename = this.lastImage;
     console.log('filename', filename)
@@ -223,22 +202,15 @@ export class MyaccountPage implements OnInit {
       fileKey: "profile_pic",
       fileName: filename,
       chunkedMode: false,
-      // mimeType: "multipart/form-data",
       params: { 'fileName': filename, 'upload_date': this.currentDate, 'user_id': this.userId, 'type': "update_photo", },
-
     };
 
     const fileTransfer: FileTransferObject = this.transfer.create()
     this.loadingService.present();
-    // Use the FileTransfer to upload the image
-    //console.log('url1111111111111111', environment.apiEndpoint + 'usr/')
-    //console.log('targetPath', targetPath)
     fileTransfer.upload(targetPath, environment.apiEndpoint + 'usr/', options).then(data => {
       this.loadingService.dismiss()
       this.toasterService.showToast('Image succesful uploaded.', 3000);
-      //console.log('data', data)
       var userUpdateImg = JSON.parse(data.response);
-      //console.log('userUpdateImg', userUpdateImg)
       this.profile_img = userUpdateImg.result;
 
       this.storage.get('USER_INFO').then((val) => {
@@ -247,8 +219,6 @@ export class MyaccountPage implements OnInit {
         this.storage.set('USER_INFO', val1);
         this.my_account_event.publish('update_profile_image', '1');
       });
-      //this.getImgList();
-
     }, err => {
       this.loadingService.dismiss()
       this.toasterService.showToast('Error while uploading file.', 3000);

@@ -1,16 +1,6 @@
 <app-header></app-header>
 <ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
 <ion-content>
-  <!-- <div slot="fixed">
-    <ion-card style="margin: 0px;border-radius: 0px;">
-      
-      <ion-item lines="none">
-        <p class="no_margin_p" slot="start">Recent Bookings</p>
-        <ion-chip slot="end" color="tertiary" outline="true" (click)="filterTransactions()">Filter<ion-icon name="ios-options" ></ion-icon></ion-chip>
-      </ion-item>
-    </ion-card>
-  </div> -->
-  <!-- <div style="margin-top: 60px;"> -->
     <div>
       <ion-virtual-scroll [items]="transactionList">
         <ion-card style="margin:0px 0px 5px 0;border-radius: 0px;" *virtualItem="let item" (click)="openBooking(item.booking_id)">

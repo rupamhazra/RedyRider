@@ -27,7 +27,7 @@
       </ion-button>
       </ion-col>
       <ion-col text-center no-padding no-margin *ngIf="which_type_search=='pickup'">
-        <ion-button size="default" expand="block"  style="margin-top: 0px;font-size: 12px;padding: 0px;"   type="button" [disabled]=" net_connection_check" (click)="currentLocation()">
+        <ion-button size="default" expand="block"  style="margin-top: 0px;font-size: 12px;padding: 0px;"   type="button" [disabled]=" net_connection_check" (click)="currentLocation('pickup')">
           <ion-icon name="locate" style="font-size: 16px;float: left;"></ion-icon>&nbsp;
           CURRENT LOCATION
       </ion-button>

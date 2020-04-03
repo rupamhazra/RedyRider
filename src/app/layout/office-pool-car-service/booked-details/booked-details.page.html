@@ -110,7 +110,7 @@
       <ion-grid>
         <ion-row>
           <ion-col size="8" style="padding-right: 0px;">
-            <ion-input formControlName="coupon_code" autofocus="on" type="text" clearInput="true" color="primary" inputmode="text" required="true" style="background: #ffffff;height:45px;font-size: 18px;" required></ion-input>
+            <ion-input formControlName="coupon_code" autofocus="on" type="text" clearInput="true" color="primary" inputmode="text" required="true" placeholder="Enter coupon code" style="background: #ffffff;height:45px;font-size: 18px;" required></ion-input>
           </ion-col>
           <ion-col size="4" style="padding: 0 0 0 0;">
             <ion-button class="ion-margin-top" size="large" style="margin-top: 0px;border-radius:0px;padding: 4px 0px 6px 0px;"   type="button" [disabled]="net_connection_check || form.invalid" color="success" (click)="applyCoupon()">

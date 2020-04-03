@@ -54,8 +54,6 @@ export class AppComponent {
   ) {
     this.arr = [];
     this.initializeApp();
-
-
   }
 
   initializeApp() {
@@ -119,85 +117,6 @@ export class AppComponent {
           }
         });
       });
-
-
-
-
-      /**
-       * Firebase used
-       */
-
-
-
-      // this.fcm.onTokenRefresh().subscribe(token => {
-      //   // Register your new token in your back-end if you want
-      //   // backend.registerToken(token);
-      // });
-
-
-
-
-      // this.networkService.checkNetworkDisconnect();
-      // window.addEventListener('offline', () => {
-      //   this.networkService.checkNetworkDisconnect();
-      // });
-
-
-
-      /**
-       * Background Mode Scetion
-      */
-      // this.backgroundMode.enable();
-      // console.log('backgroundMode activate');
-      // this.backgroundMode.on("activate").subscribe(()=>{
-      //   this.storage.clear();
-      // });
-
-
-      // this.fcmService.addDemoData(data).subscribe(
-      //   res => {
-      //     console.log("result_devive_token", res);
-      //   },
-      //   error => {
-      //     console.log("error::::" + error);
-      //   });
-
-
-
-
-
-
-
-      // const config: BackgroundGeolocationConfig = {
-      //   desiredAccuracy: 10,
-      //   stationaryRadius: 20,
-      //   interval: 60000,
-      //   distanceFilter: 30,
-      //   debug: true, //  enable this hear sounds for background-geolocation life-cycle.
-      //   stopOnTerminate: false, // enable this to clear background location settings when the app terminates
-      // };
-      // this.backgroundGeolocation.configure(config).then(() => {
-
-      //   this.backgroundGeolocation.on(BackgroundGeolocationEvents.location).subscribe(
-      //     (location: BackgroundGeolocationResponse) => {
-      //       console.log(location);
-      //       var locationstr = localStorage.getItem("location");
-      //       if (locationstr == null) {
-      //         this.arr.push(location);
-      //       } else {
-      //         var locationarr = JSON.parse(locationstr);
-      //         this.arr = locationstr
-      //       }
-      //       localStorage.setItem("location", JSON.stringify(this.arr));
-      //       // IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
-      //       // and the background-task may be completed.  You must do this regardless if your operations are successful or not.
-      //       // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
-      //       //this.backgroundGeolocation.finish(); // FOR IOS ONLY
-      //     });
-
-      // });
-      // window.app = this
-      //console.log('USER_INFO', this.storage.get('USER_INFO'))
 
     });
   }
