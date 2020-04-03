@@ -4,7 +4,6 @@ import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { LoginRegisterService } from '../../core/services/login-register.service';
 import { ToasterService } from '../../core/services/toaster.service';
 import { LoadingService } from '../../core/services/loading.service';
-// import { ForgotPasswordModalPage } from './../forgot-password-modal/forgot-password-modal.page';
 import { ModalService } from '../../core/services/modal.service';
 import { Storage } from '@ionic/storage';
 import { Events } from '@ionic/angular';
@@ -25,18 +24,15 @@ export class ForgotPasswordPage implements OnInit {
   contact: any;
   otp_res: any;
   resend: boolean;
-  from_which_page:string;
-
+  from_which_page: string;
   otp1: any = "";
   otp2: any = "";
   otp3: any = "";
   otp4: any = "";
-
   potp1: any = "";
   potp2: any = "";
   potp3: any = "";
   potp4: any = "";
-
   constructor(
     private loginRegisterService: LoginRegisterService,
     private router: Router,
@@ -51,7 +47,6 @@ export class ForgotPasswordPage implements OnInit {
 
   ) { }
   ngOnInit() {
-    //this.loadingService.present();
     this.form = this.formBuilder.group({
       potp1: ['', Validators.required],
       potp2: ['', Validators.required],
@@ -61,15 +56,14 @@ export class ForgotPasswordPage implements OnInit {
     this.start();
     this.storage.get("user_details").then((val) => {
       console.log('val', val)
-      if(val)
+      if (val)
         this.contact = val.contact;
-      else{
+      else {
         this.storage.get("USER_INFO").then((val1) => {
           this.contact = val1.mobile;
           this.from_which_page = 'myaccount';
         });
       }
-      //this.otp_res = val.otp
     });
   }
   /**
@@ -116,16 +110,15 @@ export class ForgotPasswordPage implements OnInit {
       "contact": this.contact,
       "type": "reset"
     }
-    console.log('this.request_data',this.request_data)
+    console.log('this.request_data', this.request_data)
     this.loginRegisterService.resetPasswordService(this.request_data).subscribe(
       res => {
         this.loadingService.dismiss();
         //console.log("res:::" + res.msg);
-        if(this.from_which_page == 'myaccount'){
+        if (this.from_which_page == 'myaccount') {
           this.menuCtrl.enable(false);
           this.authenticationService.logout();
         }
-         
         else
           this.router.navigateByUrl('/login');
         this.toasterService.showToast(res.msg, 2000)
@@ -156,7 +149,5 @@ export class ForgotPasswordPage implements OnInit {
     if (($e.key == 'Backspace' && $e.keyCode == 8) || ($e.key == 'Delete' && $e.keyCode == 46)) {
       prevElement.setFocus();
     }
-
   }
-
 }

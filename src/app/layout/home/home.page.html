@@ -1,21 +1,14 @@
 <app-header></app-header>
 <ion-content>
-  
     <div class="background-gif">
       <ion-img src="/assets/svg/shuttle_small.gif" *ngIf="userType=='2'"></ion-img>
       <ion-img src="/assets/svg/shuttle.gif" *ngIf="userType=='3'"></ion-img>
     </div>
-
-      
-  
-    
     <div *ngIf="userType=='3'">
       <p class="ion-text-center cs-p">Which ride do you want to takes?
         <br>Please tap any one of them.
       </p>
       <div @slidelefttitle>
-
-      
       <!-- <ion-card (click)="goSchoolPullCarPage()"  margin no-border-radius class="_c_card-cl-bag _c_card-cl-border-cl _c_card-cl-b-r-n">
         <ion-card-content no-padding>
           <ion-grid no-padding>
@@ -154,22 +147,9 @@
                   Scan QR
                 </ion-button>
               </ion-col>
-              <!-- <ion-col no-margin no-padding>
-                <ion-button expand="full"  size="default" type="button"   (click)="reachNotify()">
-                  <fa-icon [icon]="['fas','bell']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
-                  Reached
-                </ion-button>
-              </ion-col> -->
             </ion-row>
           </ion-grid>
         </ion-card>
       </div>
     </div>
   </ion-content>
-  <!-- <ion-footer no-margin no-paading>
-    <ion-grid style="margin: 0px;padding: 0px;">
-      
-      </ion-grid>
-    
-   
-  </ion-footer> -->
