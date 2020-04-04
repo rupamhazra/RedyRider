@@ -59,7 +59,6 @@ export class BookedDetailsPage implements OnInit {
     this.form = this.formBuilder.group({
       coupon_code: ['', Validators.required],
     });
-
   }
   goPaymentPage() {
     this.router.navigateByUrl('payment-details');
@@ -72,7 +71,6 @@ export class BookedDetailsPage implements OnInit {
       "user_id": this.userId,
       "coupan_id": this.form.value.coupon_code
     };
-    //console.log('request_data', request_data)
     this.officePoolCarService.applyCouponService(request_data).subscribe(
       res => {
         //console.log('res.result', res)

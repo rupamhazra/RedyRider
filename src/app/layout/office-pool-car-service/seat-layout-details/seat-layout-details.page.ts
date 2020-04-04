@@ -4,7 +4,6 @@ import { ToasterService } from '../../../core/services/toaster.service';
 import { ModalService } from '../../../core/services/modal.service';
 import { Events } from '@ionic/angular';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { LoadingService } from '../../../core/services/loading.service';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -35,7 +34,6 @@ export class SeatLayoutDetailsPage implements OnInit {
     public modalService: ModalService,
     public seat_layout_details_event: Events,
     private officePoolCarService: OfficePoolCarService,
-    private loadingService: LoadingService,
     public storage: Storage,
   ) {
     this.progress_bar = true;
@@ -91,22 +89,17 @@ export class SeatLayoutDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-
     this.seat_layout_details_event.subscribe('check_net_connection', (data) => {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
     });
   }
   getSeatDetailsforRoundTrip(request_data) {
-    //this.loadingService.present();
     this.officePoolCarService.commonSearchService(request_data).subscribe(
       res => {
         this.allSeats_round = res.result;
       },
       error => {
-        //console.log("error::::" + error.error);
-        //this.openOtpModal();
-        //this.loadingService.dismiss();
         this.toasterService.showToast(error.error.msg, 2000)
       }
     );
@@ -135,7 +128,6 @@ export class SeatLayoutDetailsPage implements OnInit {
             val1['cars_details'][i]['seats'].push(item.seat_number);
           }
         }
-        //console.log('val1', val1['cars_details']);
         this.storage.set('route_search_parameters', val1);
         this.request_data = val1;
       });
@@ -147,38 +139,25 @@ export class SeatLayoutDetailsPage implements OnInit {
             val1['cars_details'][i]['seats'].pop(item.seat_number);
           }
         }
-        //console.log('val1', val1['cars_details']);
         this.storage.set('route_search_parameters', val1);
         this.request_data = val1;
       });
     }
-
   }
   confirmBooking() {
     this.progress_bar = true;
-    // this.storage.get('route_search_parameters').then((val) => {
-    //   this.request_data = val;
-    // });
-    //console.log('this.request_data', this.request_data)
-
     this.officePoolCarService.seatBookingService(this.request_data).subscribe(
       res => {
-        //console.log('result', res.result);
         let bookingDetails = res.result;
         this.storage.set('bookingDetails', bookingDetails);
         this.progress_bar = false;
         this.router.navigateByUrl('booked-details');
-
       },
       error => {
         console.log("error::::" + error.error);
-        //this.openOtpModal();
         this.progress_bar = false;
         this.toasterService.showToast(error.error.msg, 3000);
       }
     );
-
   }
-
-
 }

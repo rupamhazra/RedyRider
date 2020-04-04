@@ -57,9 +57,7 @@ export class SearchLocationPage implements OnInit {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
     this.autocompleteItems = [];
-
   }
-
   ngOnInit() {
     this.search_loc_page_event.subscribe('check_net_connection', (data) => {
       if (data == 'connect') this.net_connection_check = false;
@@ -72,16 +70,16 @@ export class SearchLocationPage implements OnInit {
     }
   }
   ionViewDidEnter() {
-    this.currentLocation();
+    this.currentLocation(this.which_type_search, true);
   }
-  currentLocation(which_type_search = '') {
+  currentLocation(which_type_search = '', start_flag = false) {
     this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
-      console.log('resp', resp)
-
-      this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
-      if (which_type_search) this.selectLocation('pickup')
+      if (which_type_search == 'pickup') {
+        this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
+        if (!start_flag)
+          this.selectLocation('pickup')
+      }
       this.loadMap(resp.coords.latitude, resp.coords.longitude);
-
     }).catch((error) => {
       console.log('Error getting location', error);
     });
@@ -107,41 +105,6 @@ export class SearchLocationPage implements OnInit {
       this.getGeoencoder(marker.position.lat(), marker.position.lng());
     });
   }
-  initializeItems(search_word: any = '') {
-    this.loadingService.dismiss();
-    let request_data = { "type": "auto_search", "location": search_word }
-    this.officePoolCarService.commonSearchService(request_data).subscribe(
-      res => {
-        console.log('result', res.result);
-        this.items = res.result;
-      },
-      error => {
-        console.log("error::::" + error.error);
-        //this.openOtpModal();
-        this.loadingService.dismiss();
-        //this.toasterService.showToast(error.error.msg, 2000)
-      }
-    );
-    //this.items = ["Ram", "gopi", "dravid"];
-  }
-  getItems(ev: any) {
-    const val = ev.target.value;
-    console.log('val', val)
-    let request_data = { "type": "auto_search", "location": val };
-    this.officePoolCarService.commonSearchService(request_data).subscribe(
-      res => {
-        console.log('result', res.result);
-        this.isNoItemAvailable = false;
-        this.isItemAvailable = true;
-        this.items = res.result;
-      },
-      error => {
-        console.log("error::::" + error.error);
-        this.isItemAvailable = false
-        this.isNoItemAvailable = true;
-      }
-    );
-  }
   updateSearchResults(ev: any) {
     this.isItemAvailable = false
     this.isNoItemAvailable = false;
@@ -165,7 +128,6 @@ export class SearchLocationPage implements OnInit {
         });
       });
   }
-
   selectSearchLocation(location: any, type: any) {
     this.showList = false;
     this.search_address = location;
@@ -200,49 +162,6 @@ export class SearchLocationPage implements OnInit {
     });
     this.router.navigateByUrl('office-pool-car-service');
   }
-  // selectSearchResult(item, curren_location) {
-  //   this.progress_bar = true;
-  //   console.log(item)
-  //   this.autocompleteItems = [];
-  //   var request_data
-  //   if (curren_location) {
-  //     request_data = { "type": "nearest_location_latlong", "lat": curren_location.lat, "long": curren_location.long };
-  //   } else {
-  //     request_data = { "type": "nearest_location", "address": item.description };
-  //   }
-
-  //   this.officePoolCarService.commonSearchService(request_data).subscribe(
-  //     res => {
-  //       this.progress_bar = false;
-  //       //this.autocompleteItems = [];
-  //       console.log('result', res.result);
-  //       this.isNoItemAvailable = false;
-  //       this.isItemAvailable = true;
-  //       this.items = res.result;
-  //       this.quick_actions = false;
-  //     },
-  //     error => {
-  //       this.progress_bar = false;
-  //       console.log("error::::" + error.error);
-  //       this.isItemAvailable = false
-  //       this.isNoItemAvailable = true;
-  //       this.quick_actions = false;
-  //     }
-  //   );
-  // }
-  // currentLocation() {
-  //   console.log('sdffdfsdff')
-  //   this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
-  //     console.log('resp', resp)
-  //     this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
-  //     this.selectLocation(this.search_address, 'pickup')
-
-
-  //   }).catch((error) => {
-  //     console.log('Error getting location', error);
-  //   });
-  // }
-  //geocoder method to fetch address from coordinates passed as arguments
   getGeoencoder(latitude, longitude) {
     this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
       .then((result: NativeGeocoderResult[]) => {
@@ -253,8 +172,6 @@ export class SearchLocationPage implements OnInit {
         alert('Error getting location' + JSON.stringify(error));
       });
   }
-
-  //Return Comma saperated address
   generateAddress(addressObj) {
     let obj = [];
     let address = "";
@@ -268,6 +185,4 @@ export class SearchLocationPage implements OnInit {
     }
     return address.slice(0, -2);
   }
-
-
 }

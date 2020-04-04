@@ -24,7 +24,7 @@
                 <ion-textarea  formControlName="drop_off" type="text" inputmode="text" value="{{select_drop_location}}" (click)="openSearchPage('drop')" style="font-size: 13px;" required></ion-textarea>
                 <ion-icon ios="ios-locate" md="md-locate" slot="start"></ion-icon>
               </ion-item>
-              <div class="radio-button-personal">
+              <!-- <div class="radio-button-personal">
                 <p>Select which trip want to choose</p>
                 <ion-radio-group formControlName="trip" >
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -42,19 +42,20 @@
                     </ion-item>
                   </div>
                 </ion-radio-group>
-              </div>
-              <div *ngIf="singleTripDiv">
-                <p style="margin: 0px;color:#B0B1AF;">Start Date</p>
+              </div> -->
+              <!-- <div *ngIf="singleTripDiv"> -->
+                
+                <p>Date :</p>
                 <ion-item class="rstar-border rstar-item rstar-margin-top rstar-ion-item">
                   <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="journey_date" class="rstar-date" [(ngModel)]="myDate" required></ion-datetime>
                 </ion-item>
-              </div>
-              <div *ngIf="roundTripDiv">
+              <!-- </div> -->
+              <!-- <div *ngIf="roundTripDiv">
                 <p style="margin: 0px;color:#B0B1AF;">Return Date</p>
                 <ion-item class="rstar-border rstar-item rstar-margin-top rstar-ion-item">
                   <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="return_date" class="rstar-date" [(ngModel)]="myReturnDate"  required ></ion-datetime>
                 </ion-item>
-              </div>
+              </div> -->
               
               <ion-button class="ion-margin-top"  [disabled]="net_connection_check || form.invalid"  size="large" type="button" expand="full" (click)="savaData()">
                 Save & Continue 

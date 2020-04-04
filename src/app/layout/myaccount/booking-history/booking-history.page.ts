@@ -39,35 +39,6 @@ export class BookingHistoryPage implements OnInit {
 
     });
   }
-  filterTransactions() {
-    this.actionSheet = this.actionSheetController.create({
-      header: 'Filter Transactions',
-      buttons: [
-        {
-          text: 'All',
-          handler: () => {
-            this.filter = '';
-            this.getTransactionHistory();
-          }
-        },
-        {
-          text: 'Paid',
-          handler: () => {
-            this.filter = '2';
-            this.getTransactionHistory();
-          }
-        }, {
-          text: 'Cancelled',
-          handler: () => {
-            this.filter = '3';
-            this.getTransactionHistory();
-          }
-        }]
-    }).then(actionsheet => {
-      actionsheet.present();
-    });
-
-  }
   getTransactionHistory(event?) {
     this.progress_bar = true;
     let request_data = {
