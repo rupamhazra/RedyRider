@@ -44,7 +44,7 @@ export class LocationTrackingPage implements OnInit {
   next_stoppage_list_array;
   next_stoppage_info;
   maphideMe;
-  
+
 
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
@@ -115,8 +115,8 @@ export class LocationTrackingPage implements OnInit {
             console.log(element);
             this.route_id = element.route_id;
             this.stoppage_list = element.stoppage_list;
-            this.next_stoppage_list_array=element.stoppage_list;
-            this.next_stoppage_info=this.next_stoppage_list_array[0];
+            this.next_stoppage_list_array = element.stoppage_list;
+            this.next_stoppage_info = this.next_stoppage_list_array[0];
             //console.log('next_stoppage ',this.next_stoppage_info);
             this.start_location = element.start_location;
             this.end_location = element.end_location;
@@ -620,7 +620,7 @@ export class LocationTrackingPage implements OnInit {
   alertResponseForLogout(response) {
     if (response) {
       this.stopTracking();
-
+      this.authenticationService.logout();
     }
   }
   viewRoute() {
@@ -629,55 +629,55 @@ export class LocationTrackingPage implements OnInit {
   }
 
 
-  get_next_stoppage_info(current_location){
+  get_next_stoppage_info(current_location) {
     const that = this;
-     var reached_stoppage;
+    var reached_stoppage;
 
-     //this.next_stoppage_list_array.forEach(element=>{
+    //this.next_stoppage_list_array.forEach(element=>{
 
-        let pos_marker = {
-          lat: parseFloat(this.next_stoppage_list_array[0].lat),
-          lng: parseFloat(this.next_stoppage_list_array[0].lng)
-        };
+    let pos_marker = {
+      lat: parseFloat(this.next_stoppage_list_array[0].lat),
+      lng: parseFloat(this.next_stoppage_list_array[0].lng)
+    };
 
-        this.distanceService.getDistanceMatrix({
-          origins: [current_location],
-          destinations: [pos_marker],
-          travelMode: 'DRIVING',
-          unitSystem: google.maps.UnitSystem.METRIC,
-          avoidHighways: false,
-          avoidTolls: false
-        }, function (response, status) {
-          if (status !== 'OK') {
-            alert('Error was: ' + status);
-          } else {
-  
-            // var originList = response.originAddresses;
-            // var destinationList = response.destinationAddresses;
-  
-            // var get_distance=response.rows[0].elements;
-             that.driver_distance_from_next_destination = parseFloat(response.rows[0].elements[0].distance.text);
-            if(that.driver_distance_from_next_destination<=0.2){
-              reached_stoppage=1;
-             
-            }
-          }
-        });
+    this.distanceService.getDistanceMatrix({
+      origins: [current_location],
+      destinations: [pos_marker],
+      travelMode: 'DRIVING',
+      unitSystem: google.maps.UnitSystem.METRIC,
+      avoidHighways: false,
+      avoidTolls: false
+    }, function (response, status) {
+      if (status !== 'OK') {
+        alert('Error was: ' + status);
+      } else {
 
-        if(reached_stoppage==1){
-           //console.log('laststoppage list1',that.next_stoppage_list_array);
-           this.next_stoppage_list_array.shift();
-           this.next_stoppage_info=this.next_stoppage_list_array[0];
-           console.log('next_stoppage_info ', this.next_stoppage_info.location_name);
-           //console.log('laststoppage list',that.next_stoppage_list_array);
+        // var originList = response.originAddresses;
+        // var destinationList = response.destinationAddresses;
+
+        // var get_distance=response.rows[0].elements;
+        that.driver_distance_from_next_destination = parseFloat(response.rows[0].elements[0].distance.text);
+        if (that.driver_distance_from_next_destination <= 0.2) {
+          reached_stoppage = 1;
+
         }
+      }
+    });
 
-      //})
-    
+    if (reached_stoppage == 1) {
+      //console.log('laststoppage list1',that.next_stoppage_list_array);
+      this.next_stoppage_list_array.shift();
+      this.next_stoppage_info = this.next_stoppage_list_array[0];
+      console.log('next_stoppage_info ', this.next_stoppage_info.location_name);
+      //console.log('laststoppage list',that.next_stoppage_list_array);
+    }
+
+    //})
+
 
   }
 
-  
-    
- 
+
+
+
 }
