@@ -60,7 +60,7 @@ export class HomePage implements OnInit {
   request_data: any;
   device_token: any;
   net_connection_check: boolean = false;
-  car_details_d;
+  car_details_d = {};
   clock: any = '';
   stoppage_list = [];
   start_location = '';
