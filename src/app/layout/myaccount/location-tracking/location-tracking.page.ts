@@ -447,7 +447,7 @@ export class LocationTrackingPage implements OnInit {
               // rotation: parseInt(heading[i]),
               anchor: new google.maps.Point(10, 25) // orig 10,50 back of car, 10,0 front of car, 10,25 center of car
             };
-            console.log('heading', heading);
+            //console.log('heading', heading);
             this.car_icon.rotation = heading;
             this.driver_marker.setIcon(this.car_icon);
             //this.driver_marker.rotation = heading;
@@ -458,6 +458,7 @@ export class LocationTrackingPage implements OnInit {
           this.driver_marker.setPosition(new_driver_location);
           this.map.panTo(new_driver_location);
           this.update_driver_cordinated_to_firebase();
+          this.last_driver_postion=new_driver_location;
         }
       });
     this.sendNotificationToPassengers();
