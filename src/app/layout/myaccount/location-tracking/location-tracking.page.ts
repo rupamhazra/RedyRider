@@ -429,6 +429,7 @@ export class LocationTrackingPage implements OnInit {
           let new_driver_location = new google.maps.LatLng(this.driver_current_lat, this.driver_current_lng);
 
           this.get_next_stoppage_info(new_driver_location);
+          this.driver_marker.setPosition(new_driver_location);
 
 
           if (this.last_driver_postion != undefined) {
@@ -454,7 +455,7 @@ export class LocationTrackingPage implements OnInit {
             //this.map.tilt=45;
           }
           console.log(new_driver_location);
-          this.driver_marker.setPosition(new_driver_location);
+          
           this.map.panTo(new_driver_location);
           this.update_driver_cordinated_to_firebase();
           this.last_driver_postion=new_driver_location;
@@ -532,6 +533,7 @@ export class LocationTrackingPage implements OnInit {
             this.endJourney();
             this.authenticationService.logout();
             navigator['app'].exitApp();
+            
 
 
           } else {
@@ -642,7 +644,7 @@ export class LocationTrackingPage implements OnInit {
   alertResponseForLogout(response) {
     if (response) {
       this.stopTracking();
-      this.authenticationService.logout();
+      // this.authenticationService.logout();
     }
   }
   viewRoute() {
