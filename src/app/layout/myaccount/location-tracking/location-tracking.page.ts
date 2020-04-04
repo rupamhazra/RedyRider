@@ -44,6 +44,7 @@ export class LocationTrackingPage implements OnInit {
   next_stoppage_list_array;
   next_stoppage_info;
   maphideMe;
+  car_icon;
   
 
   directionsService = new google.maps.DirectionsService;
@@ -146,6 +147,13 @@ export class LocationTrackingPage implements OnInit {
         this.anonLogin(val.user_account_no + '-' + val.name + '-' + new Date());
       }
     });
+    this.storage.get('isTracking').then((val) => {
+      if (val) {
+        //this.refer_code = val.user_account_no+'-'+val.name;
+        this.isTracking=true;
+      }
+    });
+
   }
   ngOnInit() {
     console.log('ngOnInit')
@@ -167,6 +175,7 @@ export class LocationTrackingPage implements OnInit {
           this.backgroundGeolocation.finish(); // FOR IOS ONLY
         });
     });
+    
   }
 
   ionViewDidEnter() {
@@ -182,7 +191,7 @@ export class LocationTrackingPage implements OnInit {
   loadMap(location_source, location_destination) {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       center: { lat: -34.9011, lng: -56.1645 },
-      zoom: 30,
+      zoom: 18,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       // mapTypeControl: true,
       // streetViewControl: true,
@@ -208,7 +217,7 @@ export class LocationTrackingPage implements OnInit {
       //marker.setAnimation(google.maps.Animation.BOUNCE);
       //this.markers.push(marker);
       this.map.setCenter(pos);
-      this.map.setZoom(30);
+      this.map.setZoom(18);
 
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -389,6 +398,7 @@ export class LocationTrackingPage implements OnInit {
 
   tracking_location() {
     this.isTracking = true;
+    this.storage.set('isTracking', true);
     this.back_button_visible = false;
     this.insomnia.keepAwake()
       .then(
@@ -421,10 +431,26 @@ export class LocationTrackingPage implements OnInit {
 
           this.get_next_stoppage_info(new_driver_location);
 
+          
           if (this.last_driver_postion != undefined) {
             //console.log('last postion ',this.last_driver_postion);
             var heading = google.maps.geometry.spherical.computeHeading(this.last_driver_postion, new_driver_location);
-            this.driver_marker.rotation = heading;
+            var car = "M17.402,0H5.643C2.526,0,0,3.467,0,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759c3.116,0,5.644-2.527,5.644-5.644 V6.584C23.044,3.467,20.518,0,17.402,0z M22.057,14.188v11.665l-2.729,0.351v-4.806L22.057,14.188z M20.625,10.773 c-1.016,3.9-2.219,8.51-2.219,8.51H4.638l-2.222-8.51C2.417,10.773,11.3,7.755,20.625,10.773z M3.748,21.713v4.492l-2.73-0.349 V14.502L3.748,21.713z M1.018,37.938V27.579l2.73,0.343v8.196L1.018,37.938z M2.575,40.882l2.218-3.336h13.771l2.219,3.336H2.575z M19.328,35.805v-7.872l2.729-0.355v10.048L19.328,35.805z";
+            this.car_icon = {
+              path: car,
+              scale: .7,
+              strokeColor: 'white',
+              strokeWeight: .10,
+              fillOpacity: 1,
+              fillColor: '#404040',
+              offset: '5%',
+              // rotation: parseInt(heading[i]),
+              anchor: new google.maps.Point(10, 25) // orig 10,50 back of car, 10,0 front of car, 10,25 center of car
+            };
+            console.log('heading', heading);
+            this.car_icon.rotation = heading;
+            this.driver_marker.setIcon(this.car_icon);
+            //this.driver_marker.rotation = heading;
             this.map.setHeading = heading;
             //this.map.tilt=45;
           }
@@ -452,7 +478,7 @@ export class LocationTrackingPage implements OnInit {
     const that = this;
     var ending_driver_current_lat;
     var ending_driver_current_lng;
-
+    this.storage.set('isTracking', false);
     this.geolocation.getCurrentPosition().then((resp) => {
       //console.log(resp.coords);
       //alert(1);
