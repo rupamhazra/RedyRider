@@ -515,7 +515,7 @@ export class LocationTrackingPage implements OnInit {
           console.log('destinationList', that.driver_distance_from_ending_point);
 
 
-          if (that.driver_distance_from_starting_point <= 0.5) {
+          if (that.driver_distance_from_starting_point <= 200) {
 
             that.isTracking = false;
 

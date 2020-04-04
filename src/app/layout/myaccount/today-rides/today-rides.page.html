@@ -64,10 +64,15 @@
       </ion-row>
       <ion-row text-center no-margin class="button-row">
         <ion-col style="border-right: 2px solid white;" no-padding no-margin>
-          <ion-button expand="full"  size="default" type="button"   (click)="startRide(item.car_id)" [disabled]="">
+          <ion-button expand="full"  size="default" type="button" *ngIf="item.drive_status==0"  (click)="startRide(item.car_id)" [disabled]="">
             <fa-icon [icon]="['fas','play-circle']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
             Start Ride
           </ion-button>
+          <ion-button expand="full"  size="default" type="button" *ngIf="item.drive_status==1"  (click)="startRide(item.car_id)" [disabled]="">
+            <fa-icon [icon]="['fas','play-circle']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
+            Resume Ride
+          </ion-button>
+          
         </ion-col>
         <!-- <ion-col no-margin no-padding>
           <ion-button expand="full"  size="default" type="button"   (click)="reachNotify()">

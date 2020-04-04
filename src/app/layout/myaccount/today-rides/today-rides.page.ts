@@ -48,6 +48,7 @@ export class TodayRidesPage implements OnInit {
       res => {
         //console.log('res', res)
         this.result = res.result;
+        console.log(this.result);
         //this.result.shift();
         this.progress_bar = false;
       },
