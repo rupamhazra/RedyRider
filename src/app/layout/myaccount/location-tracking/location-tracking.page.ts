@@ -19,6 +19,7 @@ import { AuthenticationService } from '../../../core/services/authentication.ser
 import { RouteStoppageModalPage } from '../../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
 
 import { ModalService } from '../../../core/services/modal.service';
+import { MenuController } from '@ionic/angular';
 
 declare var google;
 import { map } from 'rxjs/operators';
@@ -103,8 +104,10 @@ export class LocationTrackingPage implements OnInit {
     public alertController: AlertController,
     private authenticationService: AuthenticationService,
     public modalService: ModalService,
+    private menuCtrl: MenuController,
 
   ) {
+    this.menuCtrl.enable(false);
     console.log('constructor')
     this.car_id = this.route.snapshot.params['car_id'];
     this.driver_id = this.route.snapshot.params['driver_id'];
@@ -455,10 +458,10 @@ export class LocationTrackingPage implements OnInit {
             //this.map.tilt=45;
           }
           console.log(new_driver_location);
-          
+
           this.map.panTo(new_driver_location);
           this.update_driver_cordinated_to_firebase();
-          this.last_driver_postion=new_driver_location;
+          this.last_driver_postion = new_driver_location;
         }
       });
     this.sendNotificationToPassengers();
@@ -533,7 +536,7 @@ export class LocationTrackingPage implements OnInit {
             this.endJourney();
             this.authenticationService.logout();
             navigator['app'].exitApp();
-            
+
 
 
           } else {
