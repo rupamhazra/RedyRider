@@ -17,7 +17,6 @@ import { ToasterService } from '../../../core/services/toaster.service';
 import { AlertController } from '@ionic/angular';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { RouteStoppageModalPage } from '../../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
-import { MapModalPage } from '../../office-pool-car-service/route-stoppage-modal/map-modal.page';
 
 import { ModalService } from '../../../core/services/modal.service';
 
@@ -610,10 +609,6 @@ export class LocationTrackingPage implements OnInit {
         }
       );
 
-      // this.toasterService.showToast('Your seats has been confirmed, have a safe journey', 6000)
-
-      // this.toasterService.showToast('Qr code does not match! please contact to Redy Rider Help Line', 6000)
-
     }).catch(err => {
       console.log('Error', err);
     });
@@ -697,13 +692,5 @@ export class LocationTrackingPage implements OnInit {
       console.log('next_stoppage_info ', this.next_stoppage_info.location_name);
       //console.log('laststoppage list',that.next_stoppage_list_array);
     }
-
-    //})
-
-
   }
-
-
-
-
 }
