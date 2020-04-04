@@ -14,6 +14,7 @@ import { OfficePoolCarService } from '../../core/services/office-pool-car.servic
 import { RouteStoppageModalPage } from '../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
 import { ModalService } from '../../core/services/modal.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { MenuController } from '@ionic/angular';
 import {
   trigger,
   state,
@@ -81,7 +82,9 @@ export class HomePage implements OnInit {
     public officePoolCarService: OfficePoolCarService,
     public modalService: ModalService,
     private barcodeScanner: BarcodeScanner,
+    private menuCtrl: MenuController,
   ) {
+    this.menuCtrl.enable(true);
     platform.ready().then(() => {
       if (this.platform.is("cordova"))
         this.firebaseX.getToken()
