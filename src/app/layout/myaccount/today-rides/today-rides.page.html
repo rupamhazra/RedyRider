@@ -45,8 +45,8 @@
       </ion-row>
       <ion-row style="margin: 0 0 10px 0px;">
         <ion-col>
-          <p class="no_margin_p" style="">
-            <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>&nbsp;Booked Seats - <ion-text color="tertiary" *ngFor="let i of item.booked_seats_list">{{i}}</ion-text>
+          <p class="no_margin_p" style="" *ngIf="item.seat_booked != '0'">
+            <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>&nbsp;Booked Seats - <ion-text color="tertiary">{{item.booked_seats_list}}</ion-text>
           </p>
         </ion-col>
       </ion-row>

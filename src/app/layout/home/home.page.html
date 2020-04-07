@@ -117,7 +117,7 @@
             </ion-row>
             <ion-row style="margin: 0 0 10px 0px;">
               <ion-col>
-                <p class="no_margin_p" style="">
+                <p class="no_margin_p" style="" *ngIf="car_details_d.seat_booked != '0'">
                   <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>&nbsp;Booked Seats - <ion-text color="tertiary">{{car_details_d.booked_seats_list}}</ion-text>
                 </p>
               </ion-col>

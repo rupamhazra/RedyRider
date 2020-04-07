@@ -54,8 +54,11 @@ export class AppComponent {
   ) {
     this.arr = [];
     this.initializeApp();
+    this.getNotification();
   }
+  getNotification() {
 
+  }
   initializeApp() {
 
     //console.log('this.platform', this.platform.is("android"))
@@ -77,6 +80,14 @@ export class AppComponent {
             navigator['app'].exitApp();
           }, false);
 
+        });
+
+        this.fcm.onMessageReceived().subscribe(data => {
+          if (data.wasTapped) {
+            this.router.navigateByUrl('myaccount/myaccount-common-page/notifications');
+          } else {
+            this.toasterService.showToast('Received in foreground', 3000);
+          };
         });
       }
 

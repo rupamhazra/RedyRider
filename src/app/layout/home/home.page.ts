@@ -90,6 +90,7 @@ export class HomePage implements OnInit {
         this.firebaseX.getToken()
           .then(token => this.device_token = token)
           .catch(error => console.error('Error getting token', error));
+
     })
     this.storage.get('USER_INFO').then((val) => {
       if (val) {
@@ -101,15 +102,7 @@ export class HomePage implements OnInit {
       }
     });
   }
-  getNotification() {
-    this.fcm.onMessageReceived().subscribe(data => {
-      if (data.wasTapped) {
-        this.router.navigate(['myaccount/notification', { pushes: JSON.stringify(data) }]);
-      } else {
-        this.toasterService.showToast('Received in foreground', 3000);
-      };
-    });
-  }
+
   ngOnInit() {
     this.home_page_event.subscribe('check_net_connection', (data) => {
       if (data == 'connect') this.net_connection_check = false;
