@@ -1,10 +1,9 @@
 <app-header></app-header>
 <ion-content>
     <div class="background-gif">
-      <ion-img src="/assets/svg/shuttle_small.gif" *ngIf="userType=='2'"></ion-img>
-      <ion-img src="/assets/svg/shuttle.gif" *ngIf="userType=='3'"></ion-img>
+      <ion-img src="/assets/svg/shuttle.gif"></ion-img>
     </div>
-    <div *ngIf="userType=='3'">
+    <div>
       <p class="ion-text-center cs-p">Which ride do you want to takes?
         <br>Please tap any one of them.
       </p>
@@ -66,90 +65,5 @@
         </ion-card> -->
       </div>
     </div>
-    <div *ngIf="userType=='2'">
-      <ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
-      <div class="inner_div">
-        <ion-card class="card_class">
-          <ion-grid style="margin:5px 10px 5px 10px;">
-            <ion-row>
-              <ion-col>
-                <ion-text class="ion-text-center"><p class="no_margin_p">CHECK YOUR CURRENT RIDE DETAILS &nbsp;&nbsp; <span appClock></span></p></ion-text>
-                <hr/>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col  text-center>
-                <p class="no_margin_p" style="font-size: 20px;">
-                  {{car_details_d.car_type}} - <ion-text color="success">{{car_details_d.car_no}}</ion-text>
-                </p>
-                <ion-row style="margin: 5px 0 5px 0;" no-padding no-margin>
-                  <ion-col>
-                    <p style="margin: 0px 0 0px 0;">
-                      <fa-icon [icon]="['fas','clock']" size="1x" class="rstar-icon"></fa-icon>
-                      Start at : {{car_details_d.start_time}}</p>
-                  </ion-col>
-                  <ion-col>
-                    <p style="margin: 0px 0 0px 0;" class="">
-                      <fa-icon [icon]="['fas','clock']" size="1x" class="rstar-icon"></fa-icon>
-                      Reach at : {{car_details_d.end_time}}</p>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col  text-center>
-                <p class="no_margin_p" style="font-size: 17px;">
-                  <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>Total Seats - <ion-text color="tertiary">{{car_details_d.total_seat}}</ion-text>
-                </p>
-                <ion-row style="margin: 5px 0 5px 0;" no-padding>
-                  <ion-col>
-                    <p style="margin: 0px 0 0px 0;">
-                      <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>
-                      Available : {{car_details_d.total_seat - car_details_d.seat_booked}}</p>
-                  </ion-col>
-                  <ion-col>
-                    <p style="margin: 0px 0 0px 0;" class="">
-                      <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>
-                      Booked : {{car_details_d.seat_booked}}</p>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-            </ion-row>
-            <ion-row style="margin: 0 0 10px 0px;">
-              <ion-col>
-                <p class="no_margin_p" style="" *ngIf="car_details_d.seat_booked != '0'">
-                  <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>&nbsp;Booked Seats - <ion-text color="tertiary">{{car_details_d.booked_seats_list}}</ion-text>
-                </p>
-              </ion-col>
-            </ion-row>
-            <ion-row style="">
-              <ion-col text-center style="padding: 0px;" size="1">
-                <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;"></ion-img>
-                <ion-img src="./assets/svg/dot.svg" alt="." style="width: 3px;margin: 10px 0 10px 8px;" ></ion-img>
-                <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;"></ion-img>
-              </ion-col>
-              <ion-col text-left style="padding: 0px;" size="11">
-                <p class="p_location">{{car_details_d.start_location}}</p>
-                <p style="margin: 10px 0 10px 0;color:#02A1EB;" (click)="viewRoute(car_details_d.route_id,car_details_d.start_point_id,car_details_d.end_point_id)"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
-                <p class="p_location">{{car_details_d.end_location}}</p>
-              </ion-col>
-            </ion-row>
-            <ion-row text-center no-margin class="button-row">
-              <ion-col style="border-right: 2px solid white;" no-padding no-margin>
-                <ion-button expand="full"  size="default" type="button"(click)="startRide(car_details_d.car_id)" [disabled]="">
-                  <fa-icon [icon]="['fas','play-circle']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
-                  Start Ride
-                </ion-button>
-              </ion-col>
-              <ion-col no-margin no-padding>
-                <ion-button expand="full"  size="default" type="button" (click)="scanQrCode(car_details_d.car_id)">
-                  <ion-icon ios="ios-qr-scanner" md="md-qr-scanner"></ion-icon>&nbsp;
-                  Scan QR
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card>
-      </div>
-    </div>
+   
   </ion-content>

@@ -71,6 +71,7 @@ export class PasswordModalPage implements OnInit {
     this.request_data = {
       'type': 'log',
       'contact': this.mobile,
+      'user_type': '3',
       'pass': this.form.value.otp1 + this.form.value.otp2 + this.form.value.otp3 + this.form.value.otp4
     }
     this.loginRegisterService.loginService(this.request_data).subscribe(
