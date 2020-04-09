@@ -6,7 +6,7 @@ import { Network } from '@ionic-native/network/ngx';
 import { AlertService } from '../../services/alert.service';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 import { ToasterService } from '../../../core/services/toaster.service';
-import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+//import { Firebase } from "@ionic-native/firebase/ngx";
 
 
 @Component({
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
     private network: Network,
     private officePoolCarService: OfficePoolCarService,
     private toasterService: ToasterService,
-    private fcm: FirebaseX,
+    //private fcm: Firebase,
 
   ) {
 

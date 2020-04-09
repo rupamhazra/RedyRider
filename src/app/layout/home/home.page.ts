@@ -6,7 +6,7 @@ import { LoadingService } from '../../core/services/loading.service';
 import { ToasterService } from '../../core/services/toaster.service';
 import { Platform } from '@ionic/angular';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+//import { Firebase } from '@ionic-native/firebase/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { HomeService } from '../../core/services/home.service';
 import { Events } from '@ionic/angular';
@@ -75,8 +75,8 @@ export class HomePage implements OnInit {
     private device: Device,
     public platform: Platform,
     public localNotifications: LocalNotifications,
-    private fcm: FirebaseX,
-    private firebaseX: FirebaseX,
+    //private fcm: Firebase,
+    //private firebaseX: Firebase,
     public homeService: HomeService,
     public home_page_event: Events,
     public officePoolCarService: OfficePoolCarService,
@@ -86,10 +86,10 @@ export class HomePage implements OnInit {
   ) {
     this.menuCtrl.enable(true);
     platform.ready().then(() => {
-      if (this.platform.is("cordova"))
-        this.firebaseX.getToken()
-          .then(token => this.device_token = token)
-          .catch(error => console.error('Error getting token', error));
+      if (this.platform.is("cordova")) { }
+      // this.firebaseX.getToken()
+      //   .then(token => this.device_token = token)
+      //   .catch(error => console.error('Error getting token', error));
 
     })
     this.storage.get('USER_INFO').then((val) => {

@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar class="header-menu">
+    <ion-buttons slot="start" *ngIf="back_button_visible" class="border_button">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title slot="start" style="padding: 0px 0 0 10px;">
+        Tracking
+    </ion-title>
+    <ion-card class="qr_card" slot="end" type="button" style="display:none" (click)="maphideMe = !maphideMe">
+      <fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon" style="font-size: 21px;"></fa-icon>
+      <p class="no_margin_p" style="font-size:13px;">Map</p>
+    </ion-card>
+    <ion-card class="qr_card" slot="end" type="button" (click)="scanQrCode()">
+      <ion-icon ios="ios-qr-scanner" md="md-qr-scanner" style="font-size: 21px;"></ion-icon>
+      <p class="no_margin_p" style="font-size:13px;">Scan QR</p>
+    </ion-card>
+
+  </ion-toolbar>
+</ion-header>
+<ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+<ion-content>
+  <div #map id="map"  style="height: 300px;"></div>
+  
+  <ion-card style="display:none">
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>previous locations</ion-label>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      last Stoppage
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Next Stop</ion-card-subtitle>
+      <ion-card-title *ngIf="next_stoppage_info" >{{next_stoppage_info.location_name}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-badge color="primary" *ngIf="next_stoppage_info" >{{next_stoppage_info.total_passenger}}</ion-badge>
+       Boardings
+    </ion-card-content>
+  </ion-card>
+  
+  
+
+  <ion-card>
+    <ion-item class="ion-activated" *ngFor="let stoppage of stoppage_list; let i = index; let lst = last;">
+      <ion-icon name="wifi" slot="start"></ion-icon>
+      
+      <ion-label><ion-badge color="primary">{{stoppage.total_passenger}} Boardings</ion-badge> {{stoppage.location_name}}</ion-label>
+    </ion-item>
+  
+  </ion-card>
+  
+ 
+  <!-- <ion-button type="button"  size="default" color="tertiary" (click)="startTracking()">
+    <ion-icon name="locate"></ion-icon>
+    Start
+  </ion-button>
+  <ion-button type="button"  size="default" color="tertiary" (click)="stopTracking()">
+      <ion-icon name="hand"></ion-icon>
+      Stop
+  </ion-button>
+  <ion-button type="button"  size="default" color="tertiary" (click)="GetLocations()">
+    <ion-icon name="hand"></ion-icon>
+    GetLocations
+</ion-button> -->
+
+  <!-- <ion-list-header><ion-label>Previous Tracks History</ion-label></ion-list-header>
+  <ion-grid>
+    
+      <ion-row *ngFor="let pos of locations | async">
+
+        <ion-col>
+          <p>Lat: {{ pos.lat }}</p>
+          <p>Lng: {{ pos.lng }}</p>
+          <p>
+            {{ pos.timestamp | date:'short' }}
+          </p>
+          <p>
+            {{ pos.address}}
+          </p>
+        <button ion-button clear item-end (click)="showHistoryRoute(locations)">View Route</button>
+      </ion-col>
+      </ion-row>
+
+     
+
+    
+  </ion-grid> -->
+</ion-content>
+<ion-footer class="footer-bus-route-details">
+  <ion-grid no-margin no-paading>
+    <ion-row text-center no-margin>
+      <ion-col no-margin style="font-size: 20px;" (click)="startTracking()" *ngIf="!isTracking">
+        <fa-icon [icon]="['fas','play-circle']" size="1x" class="rstar-icon"></fa-icon>
+        START 
+      </ion-col>
+    </ion-row>
+    <ion-row text-center no-margin>
+      <ion-col no-margin style="font-size: 20px;" (click)="stopConfirm()" *ngIf="isTracking">
+        <fa-icon [icon]="['fas','stop-circle']" size="1x" class="rstar-icon"></fa-icon>
+        STOP
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

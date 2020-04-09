@@ -1,0 +1,86 @@
+<app-header></app-header>
+<ion-content>
+  <ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
+  <ion-card class="card_class" *ngFor="let item of result">
+    <ion-grid style="margin:5px 10px 5px 10px;" no-padding>
+      <ion-row class="">
+        <ion-col>
+          <p class="no_margin_p" style="font-size: 18px; padding: 6px;
+          background: #02A1EB;
+          color: white;" text-center>
+            {{item.car_type}} - {{item.car_no}}
+          </p>
+          <ion-row style="margin: 5px 0 5px 0;" no-padding>
+            <ion-col>
+              <p style="margin: 0px 0 0px 0;">
+                <fa-icon [icon]="['fas','clock']" size="1x" class="rstar-icon"></fa-icon>
+                Start at :  {{item.start_time}}</p>
+            </ion-col>
+            <ion-col>
+              <p style="margin: 0px 0 0px 0;" class="">
+                <fa-icon [icon]="['fas','clock']" size="1x" class="rstar-icon"></fa-icon>
+                Reach at : {{item.end_time}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col  text-center>
+          <p class="no_margin_p" style="font-size: 17px;">
+            <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>Total Seats - <ion-text color="tertiary">{{item.total_seat}}</ion-text>
+          </p>
+          <ion-row style="margin: 5px 0 5px 0;" no-padding>
+            <ion-col>
+              <p style="margin: 0px 0 0px 0;">
+                <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>
+                Available : {{item.total_seat - item.seat_booked}}</p>
+            </ion-col>
+            <ion-col>
+              <p style="margin: 0px 0 0px 0;" class="">
+                <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>
+                Booked : {{item.seat_booked}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin: 0 0 10px 0px;">
+        <ion-col>
+          <p class="no_margin_p" style="" *ngIf="item.seat_booked != '0'">
+            <fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>&nbsp;Booked Seats - <ion-text color="tertiary">{{item.booked_seats_list}}</ion-text>
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row style="">
+        <ion-col text-center style="padding: 0px;" size="1">
+          <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;"></ion-img>
+          <ion-img src="./assets/svg/dot.svg" alt="." style="width: 3px;margin: 10px 0 10px 8px;" ></ion-img>
+          <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;"></ion-img>
+        </ion-col>
+        <ion-col text-left style="padding: 0px;" size="11">
+          <p class="p_location">{{item.start_location}}</p>
+          <p style="margin: 10px 0 10px 0;color:#02A1EB;" (click)="viewRoute(item.route_id,item.start_point_id,item.end_point_id)"> <fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
+          <p class="p_location">{{item.end_location}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row text-center no-margin class="button-row">
+        <ion-col style="border-right: 2px solid white;" no-padding no-margin>
+          <ion-button expand="full"  size="default" type="button" *ngIf="item.drive_status==0"  (click)="startRide(item.car_id)" [disabled]="">
+            <fa-icon [icon]="['fas','play-circle']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
+            Start Ride
+          </ion-button>
+          <ion-button expand="full"  size="default" type="button" *ngIf="item.drive_status==1"  (click)="startRide(item.car_id)" [disabled]="">
+            <fa-icon [icon]="['fas','play-circle']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
+            Resume Ride
+          </ion-button>
+          
+        </ion-col>
+        <!-- <ion-col no-margin no-padding>
+          <ion-button expand="full"  size="default" type="button"   (click)="reachNotify()">
+            <fa-icon [icon]="['fas','bell']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
+            Reached
+          </ion-button>
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 import { ToasterService } from './core/services/toaster.service';
 import { Network } from '@ionic-native/network/ngx';
 import { AlertService } from './core/services/alert.service';
-import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+//import { Firebase } from "@ionic-native/firebase/ngx";
 import { Events } from '@ionic/angular';
 
 declare var window;
@@ -48,7 +48,7 @@ export class AppComponent {
     private alertService: AlertService,
     public app_component_event: Events,
     //private navCtrl: NavController,
-    private fcm: FirebaseX,
+    //private fcm: Firebase,
     //public fcmService: FcmService,
     //private device: Device,
   ) {
@@ -81,15 +81,20 @@ export class AppComponent {
           }, false);
 
         });
-        var self = this
-        this.fcm.onMessageReceived().subscribe(data => {
-          if (data.wasTapped) {
-            this.toasterService.showToast('Received in foreground', 3000);
-          } else {
-            self.router.navigateByUrl('myaccount/myaccount-common-page/notifications');
-
-          };
-        });
+        // var self = this
+        // let per = this.fcm.hasPermission();
+        // console.log('per', per)
+        // if (!per) {
+        //   let c = this.fcm.grantPermission();
+        //   console.log('c', c)
+        // }
+        // this.fcm.onNotificationOpen().subscribe(data => {
+        //   if (data.wasTapped) {
+        //     self.router.navigateByUrl('myaccount/myaccount-common-page/notifications');
+        //   } else {
+        //     this.toasterService.showToast('Received in foreground', 3000);
+        //   };
+        // });
       }
 
       /**
