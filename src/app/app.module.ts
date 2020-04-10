@@ -55,7 +55,7 @@ import { Network } from '@ionic-native/network/ngx';
 /**
  * For Firebae Notification
  */
-//import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 import { Device } from '@ionic-native/device/ngx';
 
@@ -152,7 +152,7 @@ import { Insomnia } from '@ionic-native/insomnia/ngx';
     Geolocation,
     NativeGeocoder,
     Network,
-    //Firebase,
+    FirebaseX,
     Device,
     LocalNotifications,
     SocialSharing,
