@@ -14,7 +14,7 @@
             <ion-input autofocus="on" type="number" formControlName="amount" maxlength="10" clearInput="true" inputmode="number" required="true" style="font-size: 30px;" placeholder="Amount"></ion-input>
             <fa-icon [icon]="['fas','rupee-sign']" size="2x" slot="start" class="rupee_sign"></fa-icon> 
         </ion-item>
-        <ion-button class="ion-margin-top"  size="large" type="button" [disabled]="form.invalid || net_connection_check" expand="full" (click)="addMoneyToWallet()">
+        <ion-button class="ion-margin-top" color="button"  size="large" type="button" [disabled]="form.invalid || net_connection_check" expand="full" (click)="addMoneyToWallet()">
             Proceed To Add Money 
             <ion-icon name="arrow-round-forward"></ion-icon>
         </ion-button>

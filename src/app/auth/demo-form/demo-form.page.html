@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>demo-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form  [formGroup]="form" novalidate>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="ion-align-self-center">
+          <ng-template ngFor let-field [ngForOf]="fields">
+            <ion-item *ngIf="field.displayType === 'text'">
+              <ion-label position="floating">{{field.label}}</ion-label>
+              <ion-input [formControlName]="field.name" clearInput="true" required></ion-input>
+            </ion-item>
+            <ion-item *ngIf="field.displayType === 'textarea'">
+              <ion-label position="floating">{{field.label}}</ion-label>
+              <ion-textarea [formControlName]="field.name" clearInput="true"></ion-textarea>
+            </ion-item>
+            <ion-item *ngIf="field.displayType === 'dropdown'">
+              <ion-label position="floating">{{field.label}}</ion-label>
+              <ion-select value="brown" okText="Okay" cancelText="Dismiss" [formControlName]="field.name">
+                <ion-select-option value="{{option}}" *ngFor="let option of field.options">{{option}}</ion-select-option>
+              </ion-select>
+              
+            </ion-item>
+            <ion-item *ngIf="field.displayType === 'radio'">
+              <ion-label position="floating">{{field.label}}</ion-label>
+              <ion-radio-group  [formControlName]="field.name">
+                <ion-item *ngFor="let option of field.options">
+                  <ion-label>{{option}}</ion-label>
+                  <ion-radio value="{{option}}"></ion-radio>
+                </ion-item>
+                
+              </ion-radio-group>
+              
+            </ion-item>
+            </ng-template>
+            <ion-button class="ion-margin-top" color="button"  size="large" [disabled]="form.invalid"  type="button" expand="full" (click)="save()">
+              SAVE & CONTINUE 
+              <ion-icon name="arrow-round-forward"></ion-icon>
+            </ion-button>
+      </ion-col>
+      </ion-row>
+      </ion-grid>
+  </form>
+</ion-content>

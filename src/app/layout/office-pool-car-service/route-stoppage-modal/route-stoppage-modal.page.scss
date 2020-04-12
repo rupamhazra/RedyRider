@@ -73,3 +73,31 @@ ion-title{
     margin-top: 13px;
     opacity: 0.4;
 }
+.otp-input2 {
+    ion-input {
+      display: inline-block;
+        text-align: center;
+        line-height: 30px;
+        font-size: 30px;
+        border-bottom: 2px solid #86888f;
+        width: 20%;
+    }
+    input {
+      text-align: center;
+    }
+  }
+  .otp-input2 button {
+    margin-top: 5%;
+  }
+  .item-md.item-input:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+  .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+  .item-md.item-input.item-input-has-focus .item-inner,
+  .item-md.item-input.input-has-focus .item-inner,
+  .item-md.item-input:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+  .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    border-bottom-color: transparent;
+    box-shadow: none;
+  }
+  .otp-margin-right{
+    margin-right: 10px;
+  }

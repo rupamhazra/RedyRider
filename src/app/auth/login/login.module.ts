@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
 import { ComponentsModule } from "../../core/components/components.module";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 const routes: Routes = [
   {
@@ -22,7 +24,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
+    FontAwesomeModule
   ],
   declarations: [LoginPage]
 })

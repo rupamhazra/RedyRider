@@ -1,8 +1,9 @@
 
-ion-button{
-    font-size: 11px;
+ion-button {
+    padding: 8px 0 0 0px;
+    text-transform: initial;
+    font-weight: normal;
 }
-.app-heading h1{text-transform: uppercase; letter-spacing: 1px;}
 ._cs_icon_class{
     zoom:4.0;
 }
@@ -17,5 +18,14 @@ ion-button{
     border-top: 1px solid #ddd;
 }
 a{
-    color: initial !important;
+    color: #085a9a !important;
+}
+ion-item{
+    border-radius: 4px;
+}
+ion-content {
+    --background: url('/assets/svg/login_screen_user_back.svg') no-repeat center center / cover;
+}
+p{
+    color:#085a9a !important;
 }

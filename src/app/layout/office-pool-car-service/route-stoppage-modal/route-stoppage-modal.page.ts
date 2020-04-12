@@ -9,7 +9,10 @@ import { Events } from '@ionic/angular';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { LoginRegisterService } from '../../../core/services/login-register.service';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 
+declare var SMSReceive: any;
 @Component({
   selector: 'app-route-stoppage-modal',
   templateUrl: './route-stoppage-modal.page.html',
@@ -21,6 +24,7 @@ export class RouteStoppageModalPage implements OnInit {
   form_personal: FormGroup;
   form_add: FormGroup;
   form_booking: FormGroup;
+
   result_data: any = {};
   net_connection_check: boolean = false;
   countries: any;
@@ -31,6 +35,22 @@ export class RouteStoppageModalPage implements OnInit {
   city_selected = {};
   qr_image;
   stoppage_list;
+
+
+  otp1: any = "";
+  otp2: any = "";
+  otp3: any = "";
+  otp4: any = "";
+  request_data: any;
+  passwordShown: boolean = false;
+  mobile;
+  form_password: FormGroup;
+
+  form_forget_password: FormGroup;
+
+  userDetails: any;
+  OTP: string = '';
+  register_otp: string;
   constructor(
     public modalService: ModalService,
     private officePoolCarService: OfficePoolCarService,
@@ -41,13 +61,10 @@ export class RouteStoppageModalPage implements OnInit {
     public route_stoppage_details_event: Events,
     private router: Router,
     private storage: Storage,
-  ) {
-
-
-  }
-
+    private loginRegisterService: LoginRegisterService,
+    private authService: AuthenticationService,
+  ) { }
   ngOnInit() {
-
     this.route_stoppage_details_event.subscribe('check_net_connection', (data) => {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
@@ -101,6 +118,25 @@ export class RouteStoppageModalPage implements OnInit {
     }
     if (this.calling_page == 'location-tracking-page') {
       this.stoppage_list = this.navParams.get('stoppage_list');
+    }
+    if (this.calling_page == 'login-password-page') {
+      this.mobile = this.navParams.get('mobile');
+      this.form_password = this.formBuilder.group({
+        otp1: ['', Validators.required],
+        otp2: ['', Validators.required],
+        otp3: ['', Validators.required],
+        otp4: ['', Validators.required]
+      });
+    }
+    if (this.calling_page == 'login-forget-password-page') {
+      this.form_forget_password = this.formBuilder.group({
+        contact: [Validators.required],
+      });
+    }
+    if (this.calling_page == 'login-otp-page' || this.calling_page == 'register') {
+      this.register_otp = this.navParams.get('register_otp');
+      this.userDetails = this.navParams.get('user_details');
+      this.start();
     }
 
   }
@@ -266,5 +302,127 @@ export class RouteStoppageModalPage implements OnInit {
       }
     );
 
+  }
+  signIn() {
+    //this.authService.login();
+    this.loadingService.present();
+    this.request_data = {
+      'type': 'log',
+      'contact': this.mobile,
+      'user_type': '3',
+      'pass': this.form_password.value.otp1 + this.form_password.value.otp2 + this.form_password.value.otp3 + this.form_password.value.otp4
+    }
+    this.loginRegisterService.loginService(this.request_data).subscribe(
+      res => {
+        //console.log("res:::" + res.msg);
+        if (res.status.toLowerCase() == 'success') {
+          this.form_password.reset();
+          this.loadingService.dismiss();
+          this.modalService.closeModal();
+          this.authService.login(res.result);
+        }
+      },
+      error => {
+        //console.log("error::::" + error.error.msg);
+        this.loadingService.dismiss();
+        this.toasterService.showToast(error.error.msg, 2000)
+      }
+    );
+  }
+  moveFocus(nextElement, $e, prevElement) {
+    //console.log('key details', $e);
+    if (nextElement) {
+      nextElement.setFocus();
+    }
+    if (($e.key == 'Backspace' && $e.keyCode == 8) || ($e.key == 'Delete' && $e.keyCode == 46)) {
+      prevElement.setFocus();
+    }
+
+  }
+  togglePassword() {
+    if (this.passwordShown) {
+      this.passwordShown = false;
+    }
+    else {
+      this.passwordShown = true;
+    }
+  }
+  sendOTP(resendOtp: boolean = false) {
+    //this.router.navigateByUrl('/forgot-password')
+    //this.modalService.closeModal();
+    this.loadingService.present();
+    this.form_forget_password.value['type'] = 'log_by_otp';
+    this.loginRegisterService.loginService(this.form_forget_password.value).subscribe(
+      res => {
+        //console.log("res:::" + res.msg);
+        this.storage.set('user_details', {
+          "contact": res.result.mobile, 'resend': resendOtp
+        })
+        this.modalService.closeModal();
+        this.loadingService.dismiss();
+        this.router.navigateByUrl('/forgot-password')
+      },
+      error => {
+        this.loadingService.dismiss();
+        this.toasterService.showToast(error.error.msg, 2000)
+      }
+    );
+  }
+  start() {
+    console.log('start..')
+    SMSReceive.startWatch(
+      () => {
+        document.addEventListener('onSMSArrive', (e: any) => {
+          var IncomingSMS = e.data;
+          console.log('IncomingSMS', IncomingSMS)
+          this.processSMS(IncomingSMS);
+        });
+      },
+      () => { this.loadingService.dismiss(); console.log('watch start failed') }
+    )
+  }
+  processSMS(data) {
+    this.loadingService.dismiss();
+    console.log('data', data);
+    const message = data.body;
+    if (message) {
+      this.OTP = data.body.slice(0, 4);
+      this.otp1 = this.OTP[0]
+      this.otp2 = this.OTP[1]
+      this.otp3 = this.OTP[2]
+      this.otp4 = this.OTP[3]
+      this.stop();
+    }
+  }
+  stop() {
+    SMSReceive.stopWatch(
+      () => { console.log('watch stopped') },
+      () => { console.log('watch stop failed') }
+    )
+  }
+  otpVerify() {
+    this.loadingService.present()
+    this.modalService.closeModal();
+    if (this.calling_page == 'login-otp-page') {
+      this.loadingService.dismiss();
+      this.authService.login(this.userDetails)
+    } else if (this.calling_page == 'register') {
+      this.registerService(this.userDetails)
+    }
+  }
+  registerService(userRegisterDetails) {
+    this.loginRegisterService.registerService(userRegisterDetails).subscribe(
+      res => {
+        //console.log('res_details', res)
+        if (res.status.toLowerCase() == 'success') {
+          this.authService.login(res.result);
+          this.loadingService.dismiss();
+        }
+      },
+      error => {
+        this.loadingService.dismiss();
+        this.toasterService.showToast(error.error.msg, 2000)
+      }
+    );
   }
 }

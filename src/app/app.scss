@@ -16,11 +16,11 @@ $font-family-base: "Roboto", sans-serif !default;
 }
 
 // For Toaster
-.my-toast{
-    --background: #ffce00;
-    --color: white;
-    --border-radius: 0px;
-}
+// .my-toast{
+//     --background: #ffce00;
+//     --color: white;
+//     --border-radius: 0px;
+// }
 
 
 ._c_modal_css .modal-wrapper {
@@ -37,7 +37,7 @@ $font-family-base: "Roboto", sans-serif !default;
     border-radius: 10px;
  }
  ion-content{
-    --ion-background-color:#f5f5f5;
+    --ion-background-color:#fafafa;
 }
 .picker-toolbar.sc-ion-picker-md{
     background-color: #4285F4 !important;
@@ -59,15 +59,11 @@ $font-family-base: "Roboto", sans-serif !default;
     color:#f04141 !important;
 }
 .menu-footer{
-    border-bottom: 10px solid #02A1EB;
+    border-bottom: 10px solid #085a9a;
     background-color: #f5f5f5 !important;
 }
 .item-has-focus ion-label {
     color: initial !important;
-}
-ion-header {
-    --ion-background-color: linear-gradient(45deg, #0A5999 0%, #02A1EB 100%);
-    --ion-text-color:#fff;
 }
 .item-class{
     --ion-background-color:#fff;
@@ -100,7 +96,6 @@ ion-header {
 }
 ion-button{
     padding: 6px;
-    --background: linear-gradient(45deg, #0A5999 0%, #02A1EB 100%);
 }
 .personal-fields{
     margin-top: 15px;

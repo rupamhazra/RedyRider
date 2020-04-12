@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header *ngIf="!(calling_page==='login-password-page' || calling_page==='login-forget-password-page' || calling_page === 'login-otp-page' || calling_page === 'register')">
+  <ion-toolbar color="primary">
     <ion-title *ngIf="calling_page=='refer-earn-page-earn'">How To Earn</ion-title>
     <ion-title *ngIf="calling_page=='refer-earn-page-terms'">Terms & Conditions</ion-title>
     <ion-title *ngIf="calling_page=='bus-route-details-page'">Route Stoppage</ion-title>
@@ -105,7 +105,7 @@
                   </div>
                 </ion-radio-group>
               </div>
-              <ion-button class="ion-margin-top"  size="large" [disabled]="form_personal.invalid || net_connection_check"  type="button" expand="full" (click)="saveProfile()">
+              <ion-button class="ion-margin-top" color="button"  size="large" [disabled]="form_personal.invalid || net_connection_check"  type="button" expand="full" (click)="saveProfile()">
                 SAVE 
                 <ion-icon name="arrow-round-forward"></ion-icon>
               </ion-button>
@@ -174,7 +174,7 @@
                 <ion-input autofocus="on" formControlName="pin_code" clearInput="true"  type="tel" inputmode="tel" required="true" ngModel value="{{result_data.pin_code}}"></ion-input>
                 <ion-icon ios="ios-pin" md="md-pin" slot="start"></ion-icon>
               </ion-item>
-              <ion-button class="ion-margin-top"  size="large" [disabled]="form_add.invalid || net_connection_check"  type="button" expand="full" (click)="saveAddress()">
+              <ion-button class="ion-margin-top"  color="button"  size="large" [disabled]="form_add.invalid || net_connection_check"  type="button" expand="full" (click)="saveAddress()">
                 SAVE 
                 <ion-icon name="arrow-round-forward"></ion-icon>
               </ion-button>
@@ -209,5 +209,66 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <div class="ion-text-center ion-padding" *ngIf="calling_page=='login-password-page'">
+      <ion-text>
+        <p>Enter 4 digit password</p>
+      </ion-text>
+      <form  [formGroup]="form_password" novalidate>
+        <ion-item class="ion-text-center ion-margin-bottom" lines="none">
+          <div class="otp-input2">
+            <ion-input #pField1 autofocus="true" [style.-webkit-text-security]="passwordShown === false ? 'disc':''" formControlName="otp1" type="tel" [(ngModel)]="otp1" maxlength="1" tabindex="1"   (keyup)="moveFocus(pField2,$event,pField1)"   class="otp-margin-right"></ion-input>
+  
+            <ion-input #pField2 autofocus="true" formControlName="otp2" [style.-webkit-text-security]="passwordShown === false ? 'disc':''" type="tel" [(ngModel)]="otp2" tabindex="2"  maxlength="1" (keyup)="moveFocus(pField3,$event,pField1)" class="otp-margin-right"></ion-input>
+  
+            <ion-input #pField3 autofocus="true" formControlName="otp3" [style.-webkit-text-security]="passwordShown === false ? 'disc':''"  type="tel" [(ngModel)]="otp3" tabindex="3"  maxlength="1" (keyup)="moveFocus(pField4,$event,pField2)" class="otp-margin-right"></ion-input>
+  
+            <ion-input #pField4 autofocus="true" formControlName="otp4" [style.-webkit-text-security]="passwordShown === false ? 'disc':''" type="tel" tabindex="4"  [(ngModel)]="otp4" maxlength="1" (keyup)="moveFocus(pField4,$event,pField3)"></ion-input>
+          </div>
+          <ion-icon name="lock" slot="start" style=" margin-right: 0px;"></ion-icon>
+          <ion-text name="eye" style="    margin-left: 0px;" *ngIf="!passwordShown" slot="end" (click)="togglePassword()">Show</ion-text>
+          <ion-text name="eye" style="    margin-left: 0px;" *ngIf="passwordShown" slot="end" (click)="togglePassword()">HIde</ion-text>
+        </ion-item>
+      </form>
+      <div style="margin-top: 15px;">
+        <ion-button size="default"  type="button" color="danger" (click)="closeModal()">Cancel</ion-button>
+        <ion-button size="default" color="button" type="button" [disabled]="form_password.invalid" (click)="signIn()">Sign In</ion-button>
+      </div>
+    </div>
+    <div class="ion-padding ion-text-center" *ngIf="calling_page=='login-forget-password-page'">
+      <ion-text>
+        <h4 style="margin-top: 0px;">Forgot Password</h4>
+      </ion-text>
+      <form  [formGroup]="form_forget_password" novalidate>
+        <ion-item>
+          <ion-label position="floating">10 digit registered number</ion-label>
+          <ion-input autofocus="on" formControlName="contact" maxlength="10" clearInput="true" inputmode="tel" type="tel" pattern="[0-9]{10}" required="true" ngModel></ion-input>
+          <ion-icon name="phone-portrait" slot="start"></ion-icon>
+        </ion-item>
+      </form>
+      <div style="margin-top: 15px;">
+        <ion-button size="default"  type="button" color="danger" (click)="closeModal()">Cancel</ion-button>
+        <ion-button size="default" color="button"  type="button" [disabled]="form_forget_password.invalid || net_connection_check" (click)="sendOTP()">Continue</ion-button>
+      </div>
+    </div>
+    <div class="ion-text-center ion-padding" *ngIf="calling_page=='login-otp-page' || calling_page=='register'">
+      <ion-text>
+         <h5>4 digit otp code</h5>
+      </ion-text>
+        <ion-item class="ion-text-center ion-margin-bottom" lines="none">
+          <div class="otp-input2">
+            <ion-input #Field1 type="tel" [(ngModel)]="otp1" maxlength="1" class="otp-margin-right" readonly></ion-input>
+            <ion-input #Field2 type="tel" [(ngModel)]="otp2" maxlength="1" class="otp-margin-right" readonly></ion-input>
+            <ion-input #Field3 [(ngModel)]="otp3" maxlength="1" class="otp-margin-right" readonly></ion-input>
+            <ion-input #Field4 [(ngModel)]="otp4" maxlength="1" readonly></ion-input>
+          </div>
+          <ion-icon name="chatbubbles" slot="start" style=" margin-right: 0px;"></ion-icon>
+        </ion-item>
+        <div>
+          <ion-button size="default"  type="button" color="danger" (click)="closeModal()">Cancel</ion-button>
+          <ion-button size="default" color="button"  type="button" (click)="otpVerify()">Continue</ion-button>
+        </div>
+    </div>
+  
   </div>
+
 </ion-content>

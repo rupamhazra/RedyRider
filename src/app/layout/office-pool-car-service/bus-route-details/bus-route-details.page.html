@@ -68,8 +68,8 @@
       </ion-infinite-scroll> -->
     </div>
 </ion-content>
-<ion-footer class="footer-bus-route-details" (click)="goToNextPage()" *ngIf="!no_bus_saturday">
-  <ion-toolbar>
+<ion-footer (click)="goToNextPage()" *ngIf="!no_bus_saturday">
+  <ion-toolbar color="button">
     <p style="margin: 0px 20px 0px 0px;color: white;text-align: center;"><fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon> &nbsp;RESERVE YOUR SEAT</p>
   </ion-toolbar>
 </ion-footer>

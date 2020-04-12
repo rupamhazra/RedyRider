@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="header-menu">
+  <ion-toolbar  color="primary">
     <ion-buttons slot="start" class="border_button">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
@@ -123,7 +123,7 @@
 <ion-footer class="footer-bus-route-details">
   <ion-grid no-padding>
     <ion-row>
-      <ion-col text-center >
+      <ion-col text-center style="border-right: 1px solid white;">
         <fa-icon [icon]="['fas','qrcode']" size="x" class="rstar-icon" style="font-size: 20px;" (click)="scanQrCode(result_data.qr_code)"></fa-icon>
         <p class="no_margin_p" style="font-size:13px;">QR Code</p>
       </ion-col>

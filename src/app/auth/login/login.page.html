@@ -1,32 +1,39 @@
-<app-header></app-header>
+
 <ion-content>
-    <div class="inner_div">
+    <div class="inner_div"> 
+      <div text-center margin>
+        <ion-img src="./assets/svg/logo_login.svg" style="width: 130px;margin: 0 auto;"></ion-img>
+      </div>
       <form [formGroup]="form"  novalidate>
         <ion-grid>
           <ion-row justify-content-center>
             <ion-col align-self-center>
-                
-              <div style="padding-top: 10px;">
+              <div style="">
                 <ion-item>
                     <ion-label position="floating">10 digit mobile number</ion-label>
                     <ion-input autofocus="on" formControlName="contact" maxlength="10" clearInput="true" inputmode="tel" pattern="[0-9]{10}" required="true"></ion-input>
-                    <ion-icon name="phone-portrait" slot="start"></ion-icon>
+                    <fa-icon [icon]="['fas','mobile-alt']" size="2x" style="margin-top: 10px;" class="rstar-icon"  slot="start"></fa-icon> 
+                    
                 </ion-item>
-            </div>
-            <div text-center margin>
-              <!-- <ion-icon name="ios-finger-print" class="_cs_icon_class" (click)="showFingerprintAuthDlg()"></ion-icon> -->
-              <ion-button size="default"  type="button" [disabled]="form.invalid || net_connection_check" (click)="otpModal()">Login with OTP</ion-button>
-              <ion-text><p>OR</p></ion-text>
-              <ion-button  size="default"  type="button" [disabled]="form.invalid || net_connection_check" (click)="passwordModal()">Login with Password</ion-button>
-             
-            </div>
+                <ion-button size="large" expand="block" color="button"  type="button" [disabled]="form.invalid || net_connection_check" (click)="otpModal()">Login with OTP</ion-button>
+                <div style="padding: 5% 5%; text-align: center;color:#085a9a;">OR</div>
+                <ion-button  size="large" expand="block" color="button"  type="button" [disabled]="form.invalid || net_connection_check" (click)="passwordModal()">Login with Password</ion-button>
+                <p class="no_text_decoration" text-right>
+                  <a (click)="forgotPasswordModal()">Forgot Your Password?</a>
+                </p>
+              </div>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
               <ion-text text-center>
                 <p class="no_text_decoration">
-                  <a routerLink='/register'>New User</a> | <a (click)="forgotPasswordModal()">Forgot Password</a>
+                  <a routerLink='/register'>Don't have account ? Sign Up</a> 
+                </p>
+                <p>
+                  <a style="display: inline-block;" (click)="goToPage('contact-us')">Contact Us</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                  <a (click)="goToPage('terms-conditions')">Terms</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+                  <a (click)="goToPage('privacy-policy')">Privacy Policy</a>
                 </p>
               </ion-text>
               </ion-col>
@@ -35,18 +42,13 @@
         </ion-grid>
       </form>
     </div>
-    <div class="background-gif">
+    <!-- <div class="background-gif">
       <ion-img src="/assets/images/car_home.png"></ion-img>
-    </div>
+    </div> -->
     <ion-grid>
       <ion-row>
         <ion-col>
           <ion-text text-center>
-            <p>
-              <a style="display: inline-block;" (click)="goToPage('contact-us')">Contact Us</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a (click)="goToPage('terms-conditions')">Terms</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
-              <a (click)="goToPage('privacy-policy')">Privacy Policy</a>
-            </p>
             <p class="no_text_decoration" style="margin-top: 22px;">
               Copyright &copy; 2020 Redy Rider.
             </p>
@@ -54,6 +56,4 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    
-    
 </ion-content>

@@ -3,10 +3,10 @@ import { Router } from "@angular/router";
 import { LoginRegisterService } from '../../core/services/login-register.service';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { ToasterService } from '../../core/services/toaster.service';
-import { OtpVerificationPage } from './../otp-verification/otp-verification.page';
 import { ModalService } from '../../core/services/modal.service';
 import { LoadingService } from '../../core/services/loading.service';
 import { Events } from '@ionic/angular';
+import { RouteStoppageModalPage } from '../../layout/office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -70,7 +70,7 @@ export class RegisterPage implements OnInit {
         //console.log('res', res)
         if (res.status.toLowerCase() == 'success') {
           let data = {
-            "which_page": "register",
+            "from_which_page": "register",
             "user_details": {
               "ref_applied_no": this.form.controls['ref_applied_no'].value,
               "name": this.form.controls['name'].value,
@@ -83,7 +83,7 @@ export class RegisterPage implements OnInit {
             },
           }
           this.loadingService.dismiss();
-          this.modalService.openModal(OtpVerificationPage, data, '_c_modal_otp_css');
+          this.modalService.openModal(RouteStoppageModalPage, data, '_c_modal_otp_css');
         }
       },
       error => {
@@ -113,6 +113,6 @@ export class RegisterPage implements OnInit {
   }
   goToPage(whichPage: string) {
     if (whichPage === 'terms-conditions')
-      this.router.navigateByUrl('terms-condition')
+      this.router.navigateByUrl('common-page/terms-condition')
   }
 }

@@ -34,14 +34,14 @@
             <ion-grid no-margin no-padding>
                 <ion-row no-margin no-padding>
                     <ion-col size="4">
-                        <ion-button size="default" style="margin-top: 0px;border-radius:0px;font-size: 12px;padding: 0px;--background: linear-gradient(45deg, #02A1EB 0%, #0A5999 100%);"   type="button"[disabled]=" net_connection_check" (click)="payDirect()">
+                        <ion-button size="default" color="button" style="margin-top: 0px;border-radius:0px;font-size: 12px;padding: 0px;"   type="button"[disabled]=" net_connection_check" (click)="payDirect()">
                             <fa-icon [icon]="['fas','money-bill-alt']" size="1x" class="rstar-icon"></fa-icon>&nbsp;
                             PAY DIRECT
                         </ion-button>
                     </ion-col>
                     <ion-col size="1">&nbsp;</ion-col>
                     <ion-col size="6">
-                        <ion-button size="default" style="margin-top: 0px;border-radius:0px;font-size: 12px;padding: 0px;--background: linear-gradient(45deg, #0A5999 0%, #02A1EB 100%);"   type="button"[disabled]=" net_connection_check" (click)="payThroughWallet()">
+                        <ion-button size="default" color="button" style="margin-top: 0px;border-radius:0px;font-size: 12px;padding: 0px;"   type="button"[disabled]=" net_connection_check" (click)="payThroughWallet()">
                             <ion-icon name="ios-wallet"></ion-icon>
                             &nbsp;PAY THROUGH WALLET
                             
