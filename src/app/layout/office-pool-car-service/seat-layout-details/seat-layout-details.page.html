@@ -1,5 +1,4 @@
 <app-header></app-header>
-<ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
 <ion-content>
   <div class="inner_div">
     <ion-grid class="rstar-grid-top">
@@ -60,10 +59,10 @@
         </ion-row>
         
     </ion-grid>
-
-
-    
-    <div class="rstar-seat-div">
+    <div class="center">
+      <mat-progress-spinner *ngIf="progress_bar" diameter=50 mode="indeterminate" color="accent"></mat-progress-spinner> 
+    </div>
+    <div class="rstar-seat-div" *ngIf="!progress_bar">
       <ion-grid class="rstar-first-grid rstar-grid">
           <!-- First row with extra seat-->
         <ion-row class="rstar-row-bottom">

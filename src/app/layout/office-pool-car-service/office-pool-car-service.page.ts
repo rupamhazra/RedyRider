@@ -1,17 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { ModalService } from '../../core/services/modal.service';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from '../../core/components/format-datepicker';
+
 declare var google;
 @Component({
   selector: 'app-office-pool-car-service',
   templateUrl: './office-pool-car-service.page.html',
   styleUrls: ['./office-pool-car-service.page.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+  ]
 })
 export class OfficePoolCarServicePage implements OnInit {
   form: FormGroup;
@@ -63,6 +70,7 @@ export class OfficePoolCarServicePage implements OnInit {
       if (data == 'disconnect') this.net_connection_check = true;
     });
     this.maxDate = this.today.getFullYear() + 1;
+    //journey_date = new FormControl(moment());
     this.form = this.formBuilder.group({
       pick_up: ['', Validators.required],
       drop_off: ['', Validators.required],
@@ -94,20 +102,30 @@ export class OfficePoolCarServicePage implements OnInit {
     return address.slice(0, -2);
   }
   savaData() {
+
+    let d = new Date(Date.parse(this.form.value.journey_date))
+    let month = d.getMonth() + 1;
+    let date = d.getFullYear() + '-' + month + '-' + d.getDate();
+    //console.log('date', d)
     let route_search_parameters = {
       'user_id': this.userId,
       'type': 'src',
       'pickup_location': this.form.value.pick_up,
       'drop_location': this.form.value.drop_off,
       'single_or_round': 0,
-      'traval_date': this.form.value.journey_date,
+      'traval_date': date,
       'traval_time': '',
       'return_date': this.form.value.return_date,
       'return_time': '',
       'cars_details': []
     };
+    //console.log('route_search_parameters', route_search_parameters);
     this.storage.set('route_search_parameters', route_search_parameters);
     this.router.navigateByUrl('bus-route-details');
+  }
+  parseISOString(s) {
+    var b = s.split(/\D+/);
+    return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
   }
   openSearchPage(type: any) {
     this.router.navigate(['search-location', { type: type }]);

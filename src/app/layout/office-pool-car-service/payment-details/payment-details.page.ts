@@ -184,6 +184,7 @@ export class PaymentDetailsPage implements OnInit {
           this.storage.remove('bookingDetails');
           this.storage.remove('route_search_parameters');
           console.log('check')
+          this.loadingService.dismiss();
           this.router.navigateByUrl('booking-thankyou');
         }
 

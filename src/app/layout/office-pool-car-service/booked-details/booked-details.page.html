@@ -31,7 +31,7 @@
               <ion-toolbar class="toolbar-class">
                 <fa-icon [icon]="['fas','chair']" size="1x" class="icon-margin-top" style="font-size: 15px;margin-right: 5px;margin-left: 5px;" slot="start"></fa-icon>
                 <p class="no_margin_p_travel_details">
-                  <ion-badge *ngFor="let s_number of bookedDetails.seat_details.seats">{{s_number}}&nbsp; </ion-badge>
+                  <mat-icon matBadge="{{s_number}}" matBadgeColor="primary" *ngFor="let s_number of bookedDetails.seat_details.seats"></mat-icon>
                 </p>
               </ion-toolbar>
               <ion-toolbar class="toolbar-class">

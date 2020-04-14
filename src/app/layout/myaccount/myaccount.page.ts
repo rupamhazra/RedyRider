@@ -33,6 +33,8 @@ export class MyaccountPage implements OnInit {
   lastImage: any;
   currentDate: any;
   profile_img: any;
+
+  panelOpenState = false;
   constructor(
     public modalService: ModalService,
     private storage: Storage,
@@ -68,7 +70,7 @@ export class MyaccountPage implements OnInit {
         this.contact = val.mobile
         this.device_details = val.user_device;
         this.profile_img = val.photo;
-        this.getData('myaccount-address', val.id);
+        //this.getData('myaccount-address', val.id);
         this.getData('myaccount-personal', val.id);
         this.visible_myaccount_details_div = true
       }

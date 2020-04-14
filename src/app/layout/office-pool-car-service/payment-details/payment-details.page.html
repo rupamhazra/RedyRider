@@ -1,7 +1,9 @@
 <app-header></app-header>
-<ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
 <ion-content>
-    <div class="inner_div">
+    <div class="center">
+        <mat-progress-spinner *ngIf="progress_bar" diameter=50 mode="indeterminate" color="accent"></mat-progress-spinner> 
+    </div>
+    <div class="inner_div" *ngIf="!progress_bar">
         <ion-toolbar class="toolbar-class">
             <ion-title slot="start" class="toolbar-class">
                 <p>Credit Point Balance</p>

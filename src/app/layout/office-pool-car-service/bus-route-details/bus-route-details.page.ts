@@ -47,7 +47,7 @@ export class BusRouteDetailsPage implements OnInit {
   form: FormGroup;
   net_connection_check: boolean = false;
   request_data: any;
-  dataList: any;
+  dataList = [];
   dataList_show: boolean;
   disabled_button: boolean = false;
   disabled_button_text = 'SELECT THIS CAR'

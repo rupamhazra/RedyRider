@@ -39,7 +39,7 @@ ion-icon{
     color: white;
 }
 .no_margin_p_travel_details{
-    margin: 0px;
+    margin: 5px 0 0 0;
     opacity: 0.7;
 }
 .fare_details_class{
@@ -59,4 +59,9 @@ ion-button{
 .p_location{
     // text-align: left;
     margin: 0 0 0 0px;
+}
+.mat-icon{
+    height: 8px !important;
+    width: 14px !important;
+    margin: 0 10px 0 0;
 }

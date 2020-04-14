@@ -4,16 +4,18 @@ import { HeaderComponent } from './header/header.component';
 import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
-  MatTableModule,
-  MatStepperModule,
-  MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
   MatOptionModule,
   MatSelectModule,
   MatIconModule,
   MatPaginatorModule,
-  MatSortModule
+  MatSortModule,
+  MatExpansionModule,
+  MatBadgeModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatProgressSpinnerModule
 } from "@angular/material";
 
 @NgModule({
@@ -25,16 +27,18 @@ import {
   ],
   exports: [
     HeaderComponent,
-    MatTableModule,
-    MatStepperModule,
-    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatOptionModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatExpansionModule,
+    MatBadgeModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ComponentsModule { }

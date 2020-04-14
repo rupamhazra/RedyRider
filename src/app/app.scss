@@ -132,7 +132,7 @@ hr {
 .clear {clear: both;}
 
 .progress_bar{
-    --progress-background: #ffce00 !important;
+    --progress-background: #e91e63 !important;
 }
 .border_button{
     border: 1px solid #ffffff;
@@ -140,4 +140,12 @@ hr {
     border-radius: 26px;
     background: white;
     color: #0A5999;
+}
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
 }

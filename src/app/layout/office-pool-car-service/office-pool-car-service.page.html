@@ -45,10 +45,18 @@
               </div> -->
               <!-- <div *ngIf="singleTripDiv"> -->
                 
-                <p>Date :</p>
-                <ion-item class="rstar-border rstar-item rstar-margin-top rstar-ion-item">
-                  <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="journey_date" class="rstar-date" [(ngModel)]="myDate" required></ion-datetime>
-                </ion-item>
+               
+                
+                  <!-- <ion-datetime min="{{minDate}}"  displayFormat="YYYY-MM-DD" max="{{maxDate}}" placeholder="YYYY-MM-DD" formControlName="journey_date" class="rstar-date" [(ngModel)]="myDate" required></ion-datetime> -->
+
+                
+                <mat-form-field color="primary">
+                  <mat-label>Journey Date</mat-label>
+                  <input matInput min="{{minDate}}" max="{{maxDate}}" formControlName="journey_date" [(ngModel)]="myDate" [matDatepicker]="dp" placeholder="Choose a date" required>
+                  <mat-datepicker-toggle matSuffix [for]="dp" ></mat-datepicker-toggle>
+                  <mat-datepicker #dp touchUi color="accent"></mat-datepicker>
+                </mat-form-field>
+               
               <!-- </div> -->
               <!-- <div *ngIf="roundTripDiv">
                 <p style="margin: 0px;color:#B0B1AF;">Return Date</p>

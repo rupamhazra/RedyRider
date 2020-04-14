@@ -1,7 +1,9 @@
 <app-header></app-header>
-<ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
 <ion-content>
     <div class="inner_div">
+      <div class="center">
+        <mat-progress-spinner *ngIf="progress_bar" diameter=50 mode="indeterminate" color="accent"></mat-progress-spinner> 
+      </div>
       <ion-card *ngIf="no_bus_saturday">
         <ion-text color="danger" text-center>
           <p style="padding: 10px;">{{no_bus_saturday_msg}}</p>
@@ -68,7 +70,7 @@
       </ion-infinite-scroll> -->
     </div>
 </ion-content>
-<ion-footer (click)="goToNextPage()" *ngIf="!no_bus_saturday">
+<ion-footer (click)="goToNextPage()" *ngIf="!(no_bus_saturday || dataList.length==0)">
   <ion-toolbar color="button">
     <p style="margin: 0px 20px 0px 0px;color: white;text-align: center;"><fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon> &nbsp;RESERVE YOUR SEAT</p>
   </ion-toolbar>

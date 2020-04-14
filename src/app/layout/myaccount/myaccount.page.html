@@ -5,8 +5,8 @@
     <ion-thumbnail class="_c_top_image">
       <img [(src)] = "profile_img" alt="" style="opacity: 0.8;" /> 
       <ion-icon ios="ios-camera" md="md-camera" (click)="presentActionSheet()" style="    position: absolute;
-      top: 55px;
-      right: 28px;
+      top: 114px;
+      right: 62px;
       font-size: 25px;
   "></ion-icon>
     </ion-thumbnail>
@@ -24,26 +24,12 @@
         <ion-row>
           <ion-col>
             <ion-toolbar class="toolbar-class">
-              <ion-text class="ion-text-center"><p><fa-icon [icon]="['fas','address-card']" style="font-size: 15px;opacity: 0.4;margin-bottom: 15px;"></fa-icon>&nbsp;ADDRESS</p></ion-text>
-              <hr class="hr-border">
-              <fa-icon [icon]="['fas','edit']" style="font-size: 17px;opacity: 0.4;margin-bottom: 15px;" (click)="openModal1('myaccount-address')" slot="end"></fa-icon>
+              <ion-text class="ion-text-center"><p style="margin: 0px;"><fa-icon [icon]="['fas','address-card']" style="font-size: 15px;opacity: 0.4;margin-bottom: 15px;"></fa-icon>&nbsp;ADDRESS</p></ion-text>
+              
+              <fa-icon [icon]="['fas','edit']" style="font-size: 17px;opacity: 0.4;" (click)="openModal1('myaccount-address')" slot="end"></fa-icon>
             </ion-toolbar>
             
-            <ion-toolbar class="toolbar-class">
-              <ion-title>Address : {{address_details.address}} </ion-title>
-            </ion-toolbar>
-            <ion-toolbar class="toolbar-class">
-              <ion-title>Country : {{address_details.country_name}}</ion-title>
-            </ion-toolbar>
-            <ion-toolbar class="toolbar-class">
-              <ion-title>City : {{address_details.city_name}}</ion-title>
-            </ion-toolbar>
-            <ion-toolbar class="toolbar-class">
-              <ion-title>State : {{address_details.state_name}}</ion-title>
-            </ion-toolbar>
-            <ion-toolbar class="toolbar-class">
-              <ion-title>Pincocde : {{address_details.pin_code}}</ion-title>
-            </ion-toolbar>
+            
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -71,5 +57,6 @@
         </ion-row>
       </ion-grid>
     </ion-card>
+    
   </div>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { ToasterService } from '../../../core/services/toaster.service';
+import { LoadingService } from '../../../core/services/loading.service';
 import { ModalService } from '../../../core/services/modal.service';
 import { Events } from '@ionic/angular';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
@@ -35,6 +36,7 @@ export class SeatLayoutDetailsPage implements OnInit {
     public seat_layout_details_event: Events,
     private officePoolCarService: OfficePoolCarService,
     public storage: Storage,
+    private loadingService: LoadingService
   ) {
     this.progress_bar = true;
     this.storage.get('route_search_parameters').then((val) => {
@@ -145,17 +147,17 @@ export class SeatLayoutDetailsPage implements OnInit {
     }
   }
   confirmBooking() {
-    this.progress_bar = true;
+    this.loadingService.present();
     this.officePoolCarService.seatBookingService(this.request_data).subscribe(
       res => {
         let bookingDetails = res.result;
         this.storage.set('bookingDetails', bookingDetails);
-        this.progress_bar = false;
+        this.loadingService.dismiss();
         this.router.navigateByUrl('booked-details');
       },
       error => {
         console.log("error::::" + error.error);
-        this.progress_bar = false;
+        this.loadingService.dismiss();
         this.toasterService.showToast(error.error.msg, 3000);
       }
     );
