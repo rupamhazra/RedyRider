@@ -44,6 +44,12 @@ ion-badge{
 .p_location{
     // text-align: left;
     margin: 0 0 0 0px;
+    font-size: 13px;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
 }
 .mat-icon{
     height: 8px !important;

@@ -28,30 +28,64 @@ ion-toolbar{
     --background:transparent;
 }
 
-ion-button{
-    --background: #0ec254;
+.col_back{
+    background: #0ec254;
     color: white;
-    --border-color: #0ec254;
+    border-color: #0ec254;
     font-size: 13px;
-    padding: 0px;
     margin: 0px;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
 }
 .car_selected{
-    --background: #0ec254;
+    background: #0ec254;
     color: white;
-    --border-color: #0ec254;
+    border-color: #0ec254;
     font-size: 13px;
-    padding: 0px;
     margin: 0px;
     opacity: 0.5; 
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
 }
 
 .p_location{
     margin: 0 0 0 0px;
     font-size: 13px;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
 }
-
-
+.not_avai{
+    background: #e91e63;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    opacity: 0.5;
+}
+.margin-top{
+    margin-top: 10px;
+}
+.margin-bottom-10{
+    margin-bottom: 10px;
+}
+::ng-deep .mat-expansion-panel-header > .mat-expansion-indicator {
+    margin: 0px 0 0px 0 !important;
+}
+::ng-deep .mat-expansion-panel-header-car {
+    box-shadow: none !important;
+}
+::ng-deep .mat-expansion-panel-header-car > .mat-expansion-panel-header{
+    padding: 0 24px 0 0;
+    border-radius: 0px;
+}
+.col-pad{
+    padding: 13px 0px 2px 15px;
+}
 
 
 

@@ -14,30 +14,48 @@
           <p>No car has been available </p>
         </ion-text>
       </ion-card>
-      <ion-virtual-scroll [items]="dataList"  @fadein>
-        <ion-card class="card_back" [disabled]="net_connection_check" *virtualItem="let item">
+     
+        <div class="margin-top">
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let item of dataList"  class="mat-expansion-panel-header-car">
+            <mat-expansion-panel-header class="second-back mat-expansion-panel-header margin-bottom-10" collapsedHeight="auto" expandedHeight="auto">
+              <mat-panel-description>
+              <ion-grid no-padding no-margin>
+                <ion-row no-padding no-margin>
+                  <ion-col size="2" class="primary-back col-pad"><mat-icon>directions_bus</mat-icon></ion-col>
+                  <ion-col size="10" class="second-back col-pad font-13">{{item.carname | uppercase}} - {{item.carno}}</ion-col>
+                  <!-- <ion-col size="1" class="primary-back col-pad font-13">&nbsp;</ion-col> -->
+                </ion-row>
+              </ion-grid>
+              
+            </mat-panel-description>
+                
+              
+              
+            </mat-expansion-panel-header>
+          
             <ion-grid no-padding margin-top>
               
               <ion-row style="margin: 0 8px 0 10px;">
                 <ion-col text-center style="padding: 0px;" size="1">
-                  <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;margin-top: 5px;"></ion-img>
-                  <ion-img src="./assets/svg/dot.svg" alt="." style="width: 3px;margin: 10px 0 10px 8px;" ></ion-img>
-                  <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 20px;"></ion-img>
+                  <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 14px;"></ion-img>
+                  <ion-img src="./assets/svg/dot.svg" alt="." style="width: 3px;margin: 5px 0 7px 5px;" ></ion-img>
+                  <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 14px;"></ion-img>
                 </ion-col>
                 <ion-col text-left style="padding: 0px;" size="11">
                   <p class="p_location">{{item.start_point}}</p>
-                  <p style="margin: 10px 0 10px 0;color:#02A1EB;" (click)="viewRoute(item.route_master_id,item.start_point_id,item.end_point_id)"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
+                  <p style="margin: 10px 0 12px 0;color:#02A1EB;" (click)="viewRoute(item.route_master_id,item.start_point_id,item.end_point_id)"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
                   <p class="p_location">{{item.end_point}}</p>
                 </ion-col>
               </ion-row>
               <ion-row no-padding no-margin style="margin-left: 10px;">
-                <ion-col no-padding no-margin>
+                <ion-col no-padding no-margin text-left>
                   <ion-toolbar style="--min-height:35px;">
-                    <ion-icon name="bus" slot="start"></ion-icon>
-                    <p style="margin:0px;">&nbsp;{{item.carname}}</p>
-                    <p style="margin:0 26px 0px 0px;font-size: 13px;" slot="end"><fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>&nbsp;&nbsp;Available Seats : <ion-text color="success">{{item.available_seat}}</ion-text></p>
+                    
+                    
+                    <p style="margin:0 26px 0px 0px;font-size: 13px;" slot="start"><fa-icon [icon]="['fas','chair']" size="1x" class="rstar-icon"></fa-icon>&nbsp;&nbsp;Available Seats : <ion-text color="success">{{item.available_seat}}</ion-text></p>
                   </ion-toolbar>
-                  <p style="margin:-7px 0px 2px 24px;">&nbsp;{{item.carno}}</p>
+
                 </ion-col>
               </ion-row>
               <ion-row>
@@ -53,15 +71,24 @@
                 </ion-col>
               </ion-row>
               <ion-row no-padding no-margin>
-                <ion-col>
-                  <ion-button [ngClass]="{'car_selected': item.car_selected}" size="large" type="button"  expand="block"  (click)="reserveSeat(item,$event)">
-                    SELECT THIS CAR
-                  </ion-button>
+              <!-- <ion-row no-padding no-margin *ngIf="item.car_status"> -->
+                <ion-col *ngIf="item.car_status" [ngClass]="{'car_selected': item.car_selected,'col_back':!item.car_selected}" (click)="reserveSeat(item,$event)">
+                  SELECT THIS CAR
+                  
+                </ion-col>
+                <ion-col *ngIf="!item.car_status" class="not_avai">
+                    NOT AVAILABLE THIS TIME
                 </ion-col>
               </ion-row>
+              
             </ion-grid>
-        </ion-card>
-      </ion-virtual-scroll>
+          
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+          
+          
+     
       <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" *ngIf="dataList!=0">
         <ion-infinite-scroll-content
           loadingSpinner="bubbles"

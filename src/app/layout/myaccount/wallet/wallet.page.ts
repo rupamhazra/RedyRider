@@ -184,13 +184,15 @@ export class WalletPage implements OnInit {
             this.filter = '2';
             this.getTransactionHistory();
           }
-        }, {
-          text: 'Add',
-          handler: () => {
-            this.filter = '1';
-            this.getTransactionHistory();
-          }
-        }, {
+        },
+        // {
+        //   text: 'Add',
+        //   handler: () => {
+        //     this.filter = '1';
+        //     this.getTransactionHistory();
+        //   }
+        // }, 
+        {
           text: 'Cancelled',
           handler: () => {
             this.filter = '3';

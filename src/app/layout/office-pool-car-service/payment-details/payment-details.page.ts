@@ -141,6 +141,7 @@ export class PaymentDetailsPage implements OnInit {
       modal: {
         ondismiss: function () {
           console.log('dismissed')
+
         }
       }
     };
@@ -165,7 +166,8 @@ export class PaymentDetailsPage implements OnInit {
         "amount": 0.00,
         "rz_txn_no": 'CANCEL',
         "booking_details": this.booking_details,
-        "rz_status": "failure"
+        "rz_status": "failed",
+        "status": 3,
       };
       //alert('request_data' + request_data)
       this.savePaymentData(request_data, '3');
