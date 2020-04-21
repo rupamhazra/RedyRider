@@ -17,8 +17,8 @@
      
         <div class="margin-top">
           <mat-accordion>
-            <mat-expansion-panel *ngFor="let item of dataList"  class="mat-expansion-panel-header-car">
-            <mat-expansion-panel-header class="second-back mat-expansion-panel-header margin-bottom-10" collapsedHeight="auto" expandedHeight="auto">
+            <mat-expansion-panel *ngFor="let item of dataList"  class="mat-expansion-panel-header-car margin-bottom-10">
+            <mat-expansion-panel-header class="second-back mat-expansion-panel-header" collapsedHeight="auto" expandedHeight="auto">
               <mat-panel-description>
               <ion-grid no-padding no-margin>
                 <ion-row no-padding no-margin>
@@ -33,9 +33,7 @@
               
               
             </mat-expansion-panel-header>
-          
             <ion-grid no-padding margin-top>
-              
               <ion-row style="margin: 0 8px 0 10px;">
                 <ion-col text-center style="padding: 0px;" size="1">
                   <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 14px;"></ion-img>
@@ -44,7 +42,7 @@
                 </ion-col>
                 <ion-col text-left style="padding: 0px;" size="11">
                   <p class="p_location">{{item.start_point}}</p>
-                  <p style="margin: 10px 0 12px 0;color:#02A1EB;" (click)="viewRoute(item.route_master_id,item.start_point_id,item.end_point_id)"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
+                  <p style="margin: 10px 0 12px 0;color:#02A1EB;" (click)="viewRoute(item.route_master_id,item.start_point_id,item.end_point_id,item.route_timing_id)"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
                   <p class="p_location">{{item.end_point}}</p>
                 </ion-col>
               </ion-row>

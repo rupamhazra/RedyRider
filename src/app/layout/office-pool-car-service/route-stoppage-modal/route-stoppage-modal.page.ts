@@ -74,10 +74,11 @@ export class RouteStoppageModalPage implements OnInit {
     let route_id = this.navParams.get('route_id');
     let end_point = this.navParams.get('end_point');
     let start_point = this.navParams.get('start_point');
+    let route_timing_id = this.navParams.get('route_timing_id');
     this.qr_image = this.navParams.get('qr_image');
     if (this.calling_page == 'bus-route-details-page') {
       this.loadingService.present();
-      let request_data = { "type": "stoppage_details", "route_id": route_id, 'start_loc': start_point, 'end_loc': end_point };
+      let request_data = { "type": "stoppage_details", "route_id": route_id, 'start_loc': start_point, 'end_loc': end_point, 'route_timing_id': route_timing_id };
       this.officePoolCarService.commonSearchService(request_data).subscribe(
         res => {
           //console.log("res:::" + res.msg);

@@ -69,12 +69,12 @@
         <ion-row style="margin: 10px 8px 10px 10px;">
         <ion-col text-center style="padding: 0px;" size="1">
           <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 14px;"></ion-img>
-                  <ion-img src="./assets/svg/dot.svg" alt="." style="width: 3px;margin: 3px 0 2px 5px;" ></ion-img>
-                  <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 14px;"></ion-img>
+          <ion-img src="./assets/svg/dot.svg" alt="." style="width: 3px;margin: 3px 0 2px 5px;" ></ion-img>
+          <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 14px;"></ion-img>
         </ion-col>
         <ion-col text-left style="padding: 0px;" size="11">
           <p class="p_location">{{result_data.pick_up}}</p>
-          <p style="margin: 10px 0 12px 0;color:#02A1EB;" (click)="viewRoute(result_data.route_master_id,result_data.stoppage_start_id,result_data.stoppage_end_id)"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
+          <p style="margin: 10px 0 12px 0;color:#02A1EB;" (click)="viewRoute(result_data.route_master_id,result_data.stoppage_start_id,result_data.stoppage_end_id,result_data.route_timing_id)"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;View Route</p>
           <p class="p_location">{{result_data.drop}}</p>
         </ion-col>
         </ion-row>
