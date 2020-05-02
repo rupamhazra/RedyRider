@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 import { LoadingService } from '../../../core/services/loading.service';
 import { ToasterService } from '../../../core/services/toaster.service';
+import { AlertService } from '../../../core/services/alert.service';
 
 declare var RazorpayCheckout: any;
 @Component({
@@ -38,6 +39,7 @@ export class PaymentDetailsPage implements OnInit {
     private officePoolCarService: OfficePoolCarService,
     private loadingService: LoadingService,
     public storage: Storage,
+    private alertService: AlertService
   ) {
     this.progress_bar = true;
     this.storage.get('USER_INFO').then((val) => {
@@ -63,6 +65,7 @@ export class PaymentDetailsPage implements OnInit {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
     });
+
   }
   buyCreditPoints() {
     this.router.navigateByUrl('myaccount/wallet')
@@ -94,6 +97,7 @@ export class PaymentDetailsPage implements OnInit {
     );
   }
   payThroughWallet() {
+
     this.loadingService.present();
     let request_data = {
       "type": "wallet_pay",
@@ -122,7 +126,10 @@ export class PaymentDetailsPage implements OnInit {
 
   }
   payDirect() {
-    console.log('sdsdsd')
+
+    //var check_status = this.checkPrePaymentForSeatBookStatus();
+    console.log('payDirect')
+    // console.log('sdsdsd')
     var options = {
       description: 'Credits towards consultation',
       // image: 'https://i.imgur.com/3g7nmJC.png',
@@ -173,6 +180,29 @@ export class PaymentDetailsPage implements OnInit {
       this.savePaymentData(request_data, '3');
     };
     RazorpayCheckout.open(options, successCallback, cancelCallback);
+  }
+  checkPrePaymentForSeatBookStatus() {
+    this.loadingService.present();
+    let request_data = { 'type': 'direct_pay_status', "user_id": this.userId, "booking_details": this.booking_details }
+    this.officePoolCarService.payThroughWalletService(request_data).subscribe(
+      res => {
+        console.log('result', res.status)
+        this.loadingService.dismiss();
+        if (res.status == 'failed') {
+          console.log('failed');
+          this.alertService.presentAlertConfirm(res.msg, 'gohome')
+          //this.router.navigateByUrl('/office-pool-car-service')
+        } else {
+          this.payDirect();
+        }
+
+      },
+      error => {
+        //console.log("error::::" + error.error.msg);
+        this.loadingService.dismiss();
+        this.toasterService.showToast(error.error.msg, 2000)
+      }
+    );
   }
   savePaymentData(request_data: any, status = '') {
     this.loadingService.present();

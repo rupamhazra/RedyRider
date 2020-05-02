@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { AuthenticationService } from './authentication.service';
 import { MenuController } from '@ionic/angular';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class AlertService {
     public alertController: AlertController,
     private authenticationService: AuthenticationService,
     private menuCtrl: MenuController,
+    private router: Router,
   ) { }
 
   async presentAlert(message, header = 'Info', subHeader = '', button_text = 'Retry') {
@@ -60,8 +62,10 @@ export class AlertService {
           handler: () => {
             if (type == 'logout')
               this.alertResponseForLogout(true);
-            if (type = "exit")
-              navigator['app'].exitApp();
+            // if (type = "exit")
+            //   navigator['app'].exitApp();
+            if (type == 'gohome')
+              this.router.navigateByUrl('/home');
           }
         }
       ]
@@ -179,73 +183,6 @@ export class AlertService {
           name: 'radio6',
           type: 'radio',
           label: 'Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 ',
-          value: 'value6'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: () => {
-            console.log('Confirm Ok');
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
-  async presentAlertCheckbox() {
-    const alert = await this.alertController.create({
-      header: 'Checkbox',
-      inputs: [
-        {
-          name: 'checkbox1',
-          type: 'checkbox',
-          label: 'Checkbox 1',
-          value: 'value1',
-          checked: true
-        },
-
-        {
-          name: 'checkbox2',
-          type: 'checkbox',
-          label: 'Checkbox 2',
-          value: 'value2'
-        },
-
-        {
-          name: 'checkbox3',
-          type: 'checkbox',
-          label: 'Checkbox 3',
-          value: 'value3'
-        },
-
-        {
-          name: 'checkbox4',
-          type: 'checkbox',
-          label: 'Checkbox 4',
-          value: 'value4'
-        },
-
-        {
-          name: 'checkbox5',
-          type: 'checkbox',
-          label: 'Checkbox 5',
-          value: 'value5'
-        },
-
-        {
-          name: 'checkbox6',
-          type: 'checkbox',
-          label: 'Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6',
           value: 'value6'
         }
       ],
