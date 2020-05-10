@@ -29,26 +29,18 @@ ion-toolbar{
 }
 
 .col_back{
-    background: #0ec254;
-    color: white;
-    border-color: #0ec254;
-    font-size: 13px;
-    margin: 0px;
-    text-align: center;
-    padding: 10px;
-    font-weight: bold;
+    border-radius: 0px;
+    padding: 0 24px 0 0;
+    background: #069fe3 !important;
+    color:white;
 }
 .car_selected{
-    background: #0ec254;
-    color: white;
-    border-color: #0ec254;
-    font-size: 13px;
-    margin: 0px;
-    opacity: 0.5; 
-    text-align: center;
-    padding: 10px;
-    font-weight: bold;
-}
+    background: #069fe3 !important;
+    border-radius: 0px;
+    opacity: 0.5;
+    padding: 0 24px 0 0;
+    color:white;
+} 
 
 .p_location{
     margin: 0 0 0 0px;
@@ -79,14 +71,32 @@ ion-toolbar{
 ::ng-deep .mat-expansion-panel-header-car {
     box-shadow: none !important;
 }
-::ng-deep .mat-expansion-panel-header-car > .mat-expansion-panel-header{
-    padding: 0 24px 0 0;
-    border-radius: 0px;
+// ::ng-deep .mat-expansion-panel-header-car > .mat-expansion-panel-header{
+//     padding: 0 24px 0 0;
+//     border-radius: 0px;
+//     //opacity: 0.5 !important;
+// }
+.select_row{
+    padding: 10px;
+    background: #069fe3;
+    color: white;
 }
 .col-pad{
     padding: 13px 0px 2px 15px;
 }
-
-
-
-
+.no_margin_p{
+    color:white;
+    font-size: 13px;
+}
+.mat-badge-content {
+    width: auto;
+    display: grid;
+    min-width: 25px;
+    min-height: 25px;
+    text-align: center;
+    align-items: center;
+    padding: 1px 1px;
+    font-size: 15px;
+    top: 2px !important;
+    right: 0px !important;
+    }

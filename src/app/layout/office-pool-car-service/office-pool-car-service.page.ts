@@ -38,6 +38,7 @@ export class OfficePoolCarServicePage implements OnInit {
   myReturnDate = new Date().toISOString();
   roundTripDiv: boolean = false;
   singleTripDiv: boolean = false;
+  free_mode: boolean;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -62,6 +63,7 @@ export class OfficePoolCarServicePage implements OnInit {
     });
     this.storage.get('USER_INFO').then((val) => {
       this.userId = val.id;
+      this.free_mode = val.free_mode;
     });
   }
   ngOnInit() {
@@ -117,7 +119,8 @@ export class OfficePoolCarServicePage implements OnInit {
       'traval_time': '',
       'return_date': this.form.value.return_date,
       'return_time': '',
-      'cars_details': []
+      'cars_details': [],
+      'free_mode': this.free_mode
     };
     //console.log('route_search_parameters', route_search_parameters);
     this.storage.set('route_search_parameters', route_search_parameters);

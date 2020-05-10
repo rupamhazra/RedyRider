@@ -23,6 +23,7 @@ export class BookedDetailsPage implements OnInit {
   pickup_location: any;
   drop_location: any;
   progress_bar: boolean = false;
+  freeMode: boolean;
   constructor(
     private router: Router,
     public booked_details_event: Events,
@@ -49,6 +50,7 @@ export class BookedDetailsPage implements OnInit {
     this.progress_bar = false;
     this.storage.get('USER_INFO').then((val) => {
       this.userId = val['id'];
+      this.freeMode = val['free_mode'];
     });
   }
   ngOnInit() {
@@ -61,7 +63,42 @@ export class BookedDetailsPage implements OnInit {
     });
   }
   goPaymentPage() {
-    this.router.navigateByUrl('payment-details');
+    if (this.freeMode) {
+      this.confirmBookingForFreeRide();
+    }
+    else this.router.navigateByUrl('payment-details');
+  }
+  confirmBookingForFreeRide() {
+    this.loadingService.present();
+    let request_data = {
+      "type": "free_pay",
+      "user_id": this.userId,
+      "booking_details": this.bookedDetails_res,
+      "status": 4
+    }
+    //console.log('request_data', request_data);
+    this.officePoolCarService.payThroughWalletService(request_data).subscribe(
+      res => {
+        //.log('result', res.result);
+        this.storage.set('transactionDetails', res.result);
+        this.storage.remove('bookingDetails');
+        this.storage.remove('route_search_parameters');
+        this.storage.get('USER_INFO').then((val) => {
+          let val1 = val
+          val1['free_mode'] = false;
+          this.storage.set('USER_INFO', val1);
+        });
+        this.loadingService.dismiss();
+        this.router.navigateByUrl('booking-thankyou')
+      },
+      error => {
+        console.log("error::::" + error.error);
+        //this.openOtpModal();
+        this.loadingService.dismiss();
+        this.toasterService.showToast(error.error.msg, 3000)
+        //this.router.navigateByUrl('booking-thankyou')
+      }
+    );
   }
   applyCoupon() {
     this.loadingService.present();

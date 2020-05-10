@@ -117,6 +117,16 @@
             </ion-toolbar>
           </ion-col>
         </ion-row>
+        <ion-row *ngIf="result_data.is_cancel==1" text-center>
+          <ion-col>
+            <ion-button color="danger" size="large" expand="full" (click)='cancelRide(result_data.pay_booking_id)'>Cancel this Ride</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="result_data.is_cancel==2" text-center>
+          <ion-col>
+            <ion-button color="danger" size="large" expand="full" disabled="true">Cancelled</ion-button>
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </ion-card>
 </ion-content>

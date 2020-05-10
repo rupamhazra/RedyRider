@@ -18,12 +18,18 @@
         <div class="margin-top">
           <mat-accordion>
             <mat-expansion-panel *ngFor="let item of dataList"  class="mat-expansion-panel-header-car margin-bottom-10">
-            <mat-expansion-panel-header class="second-back mat-expansion-panel-header" collapsedHeight="auto" expandedHeight="auto">
+            <mat-expansion-panel-header [ngClass]="{'car_selected': item.car_selected,'col_back':!item.car_selected}" collapsedHeight="auto" expandedHeight="auto">
               <mat-panel-description>
               <ion-grid no-padding no-margin>
                 <ion-row no-padding no-margin>
                   <ion-col size="2" class="primary-back col-pad"><mat-icon>directions_bus</mat-icon></ion-col>
-                  <ion-col size="10" class="second-back col-pad font-13">{{item.carname | uppercase}} - {{item.carno}}</ion-col>
+                  <ion-col text-center class="color-light">
+                    <p class="no_margin_p">
+                      {{item.start_point}}
+                    </p>
+                    <mat-icon matBadge="to" matBadgeColor="primary"></mat-icon>
+                    <p class="no_margin_p">{{item.end_point}}</p>
+                  </ion-col>
                   <!-- <ion-col size="1" class="primary-back col-pad font-13">&nbsp;</ion-col> -->
                 </ion-row>
               </ion-grid>
@@ -34,6 +40,9 @@
               
             </mat-expansion-panel-header>
             <ion-grid no-padding margin-top>
+              <ion-row text-center class="margin-top margin-bottom-10">
+                <ion-col class="col-pad font-13">{{item.carname | uppercase}} - {{item.carno}}</ion-col>
+              </ion-row>
               <ion-row style="margin: 0 8px 0 10px;">
                 <ion-col text-center style="padding: 0px;" size="1">
                   <ion-img src="./assets/svg/logo.svg" alt="redy rider" style="width: 14px;"></ion-img>
@@ -68,9 +77,9 @@
                   <p style="margin:0px 0px 5px 27px;opacity: 0.6;font-size: 13px;">{{item.arrival_time}}</p>
                 </ion-col>
               </ion-row>
-              <ion-row no-padding no-margin>
+              <ion-row text-center  [ngClass]="{'car_selected': item.car_selected,'col_back':!item.car_selected}">
               <!-- <ion-row no-padding no-margin *ngIf="item.car_status"> -->
-                <ion-col *ngIf="item.car_status" [ngClass]="{'car_selected': item.car_selected,'col_back':!item.car_selected}" (click)="reserveSeat(item,$event)">
+                <ion-col *ngIf="item.car_status"  (click)="reserveSeat(item,$event)">
                   SELECT THIS CAR
                   
                 </ion-col>

@@ -7,6 +7,7 @@ import { ModalService } from '../../core/services/modal.service';
 import { LoadingService } from '../../core/services/loading.service';
 import { Events } from '@ionic/angular';
 import { RouteStoppageModalPage } from '../../layout/office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
+import { Sim } from '@ionic-native/sim/ngx';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -33,9 +34,12 @@ export class RegisterPage implements OnInit {
     public modalService: ModalService,
     private loadingService: LoadingService,
     public reg_event: Events,
+    private sim: Sim
   ) {
+    this.simHasPermission();
   }
   ngOnInit() {
+
     this.reg_event.subscribe('check_net_connection', (data) => {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
@@ -56,6 +60,30 @@ export class RegisterPage implements OnInit {
     this.reg_event.subscribe('resendOTPRegisterModal', (data) => {
       this.registerUser(true);
     });
+  }
+  simHasPermission() {
+    this.sim.hasReadPermission().then(
+      (info) => {
+        console.log('Has permission: ', info)
+        if (!info) this.requestPermission();
+        else this.getSimInfo();
+      }
+    );
+  }
+  requestPermission() {
+    this.sim.requestReadPermission().then(
+      () => {
+        console.log('Permission granted')
+        this.getSimInfo();
+      },
+      () => console.log('Permission denied')
+    );
+  }
+  getSimInfo() {
+    this.sim.getSimInfo().then(
+      (info) => console.log('Sim info: ', info),
+      (err) => console.log('Unable to get sim info: ', err)
+    );
   }
   registerUser(resendOtp: boolean = false) {
     //let data = {};

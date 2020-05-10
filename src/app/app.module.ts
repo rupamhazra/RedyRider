@@ -54,6 +54,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Insomnia } from '@ionic-native/insomnia/ngx';
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
+import { Sim } from '@ionic-native/sim/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -99,7 +103,10 @@ import { Insomnia } from '@ionic-native/insomnia/ngx';
     EmailComposer,
     BarcodeScanner,
     FileTransfer,
-    Insomnia
+    Insomnia,
+    TextToSpeech,
+    SpeechRecognition,
+    Sim
 
   ],
   bootstrap: [AppComponent],

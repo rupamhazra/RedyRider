@@ -6,6 +6,7 @@ import { OfficePoolCarService } from '../../../core/services/office-pool-car.ser
 import { LoadingService } from '../../../core/services/loading.service';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { AlertService } from '../../../core/services/alert.service';
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 
 declare var RazorpayCheckout: any;
 @Component({
@@ -39,7 +40,8 @@ export class PaymentDetailsPage implements OnInit {
     private officePoolCarService: OfficePoolCarService,
     private loadingService: LoadingService,
     public storage: Storage,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private tts: TextToSpeech
   ) {
     this.progress_bar = true;
     this.storage.get('USER_INFO').then((val) => {
@@ -105,15 +107,19 @@ export class PaymentDetailsPage implements OnInit {
       "booking_details": this.booking_details,
       "status": 2
     }
-    //console.log('request_data', request_data);
+    console.log('request_data', request_data);
     this.officePoolCarService.payThroughWalletService(request_data).subscribe(
       res => {
         //.log('result', res.result);
         this.storage.set('transactionDetails', res.result);
         this.storage.remove('bookingDetails');
         this.storage.remove('route_search_parameters');
+
+        this.tts.speak('Congratulations your booking has been confirmed')
+          .then(() => this.router.navigateByUrl('booking-thankyou'))
+          .catch((reason: any) => console.log(reason));
         this.loadingService.dismiss();
-        this.router.navigateByUrl('booking-thankyou')
+
       },
       error => {
         console.log("error::::" + error.error);

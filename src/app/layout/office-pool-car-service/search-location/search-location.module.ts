@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SearchLocationPage } from './search-location.page';
 import { ComponentsModule } from "../../../core/components/components.module";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
+    FontAwesomeModule
   ],
   declarations: [SearchLocationPage]
 })

@@ -419,4 +419,21 @@ export class BookingHistoryDetailsPage implements OnInit {
     let data = { 'route_id': route_id, 'from_which_page': 'bus-route-details-page', 'start_point': start_point, 'end_point': end_point, 'route_timing_id': route_timing_id }
     this.modalService.openModal(RouteStoppageModalPage, data, 'stoppage_modal_css');
   }
+  cancelRide(pay_booking_id) {
+    this.loadingService.present();
+    let request_data = { "type": "booking_cancel", "pay_booking_id": pay_booking_id };
+    this.officePoolCarService.applyCouponService(request_data).subscribe(
+      res => {
+
+        this.result_data = res.result;
+        this.loadingService.dismiss();
+        this.toasterService.showToast(res.result.msg, 4000)
+      },
+      error => {
+        //console.log("error::::" + error.error.msg);
+        this.loadingService.dismiss();
+        this.toasterService.showToast(error.error.msg, 2000)
+      }
+    );
+  }
 }

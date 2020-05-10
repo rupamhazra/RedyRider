@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar style="padding:0 10px 0px 0px;" color="primary">
-    <ion-searchbar type="text" debounce="10000"  (ionInput)="updateSearchResults($event)" [(placeholder)]="location_placeholder" [(ngModel)]="search_address"></ion-searchbar>
+    <ion-searchbar type="text" debounce="1200"  (ionChange)="updateSearchResults($event,which_type_search)" [(placeholder)]="location_placeholder" [(ngModel)]="search_address"></ion-searchbar>
+    <fa-icon [icon]="['fas','microphone']" size="1x" class="rstar-icon" slot="end" style="margin: 0 8px;" (click)="startListing(which_type_search)"></fa-icon>
     <ion-buttons slot="start" class="border_button">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
@@ -9,15 +10,17 @@
 </ion-header>
 <ion-content>
   <ion-progress-bar type="indeterminate" class="progress_bar" *ngIf="progress_bar"></ion-progress-bar>
-  <div #map id="map"></div>
-    <ion-list [hidden]="autocompleteItems.length == 0" class="ion-list-class" *ngIf="showList">
-      <ion-item *ngFor="let item of autocompleteItems" tappable lines="full" class="item-class" (click)="selectSearchLocation(item.description,which_type_search)"><p>{{ item.description  }}</p></ion-item>
-    </ion-list>
-    <ion-text color="danger" *ngIf="isNoItemAvailable" >
-      <p style="text-align: center;">No location Found</p>
-    </ion-text>
+  <div #map id="map" *ngIf="which_type_search=='pickup'"></div>
+  <ion-list [hidden]="autocompleteItems.length == 0" [class]="which_type_search=='pickup' ? 'ion-list-class':''" *ngIf="showList">
+    <ion-item *ngFor="let item of autocompleteItems" tappable lines="full" class="item-class" (click)="selectSearchLocation(item.description,which_type_search)">
+      <p>{{ item.description  }}</p>
+    </ion-item>
+  </ion-list>
+  <ion-text color="danger" *ngIf="isNoItemAvailable" >
+    <p style="text-align: center;">No location Found</p>
+  </ion-text>
 </ion-content>
-<ion-footer class="footer-bus-route-details">
+<ion-footer class="footer-bus-route-details" *ngIf="which_type_search=='pickup'">
   <ion-grid no-padding>
     <ion-row>
       <ion-col text-center no-padding no-margin>

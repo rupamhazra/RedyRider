@@ -13,8 +13,9 @@ export class BookingThankyouPage implements OnInit {
   transactionDetails: any;
   constructor(
     private router: Router,
-    public storage: Storage,
+    public storage: Storage
   ) {
+
     this.storage.get('transactionDetails').then((val) => {
       this.transactionDetails = val;
 

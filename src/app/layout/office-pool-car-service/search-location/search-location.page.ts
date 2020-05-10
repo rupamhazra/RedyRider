@@ -6,6 +6,7 @@ import { OfficePoolCarService } from '../../../core/services/office-pool-car.ser
 import { LoadingService } from '../../../core/services/loading.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 
 
 declare var google;
@@ -53,12 +54,14 @@ export class SearchLocationPage implements OnInit {
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder,
     public search_loc_page_event: Events,
+    private speechRecognition: SpeechRecognition
   ) {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
     this.autocompleteItems = [];
   }
   ngOnInit() {
+    this.checkPermission();
     this.search_loc_page_event.subscribe('check_net_connection', (data) => {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
@@ -70,7 +73,8 @@ export class SearchLocationPage implements OnInit {
     }
   }
   ionViewDidEnter() {
-    this.currentLocation(this.which_type_search, true);
+    if (this.which_type_search == 'pickup')
+      this.currentLocation(this.which_type_search, true);
   }
   currentLocation(which_type_search = '', start_flag = false) {
     this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
@@ -105,36 +109,81 @@ export class SearchLocationPage implements OnInit {
       this.getGeoencoder(marker.position.lat(), marker.position.lng());
     });
   }
-  updateSearchResults(ev: any) {
+  updateSearchResults(ev: any, which_type_search, voice = false) {
     this.isItemAvailable = false
     this.isNoItemAvailable = false;
-
-    const val = ev.target.value;
+    var val = ''
+    if (voice) {
+      val = ev;
+    } else {
+      val = ev.target.value;
+    }
     if (val == '') {
       this.autocompleteItems = [];
       this.quick_actions = true;
       return;
     }
-    console.log('this.autocomplete.input', val)
-    this.GoogleAutocomplete.getPlacePredictions({ input: val },
-      (predictions, status) => {
-        this.quick_actions = false;
-        this.autocompleteItems = [];
-        this.zone.run(() => {
-          this.showList = true;
-          predictions.forEach((prediction) => {
-            this.autocompleteItems.push(prediction);
+    console.log('this.autocomplete.input', val);
+    console.log('which_type_serach', which_type_search);
+    if (which_type_search == 'pickup') {
+      this.GoogleAutocomplete.getPlacePredictions({ input: val },
+        (predictions, status) => {
+          this.quick_actions = false;
+          this.autocompleteItems = [];
+          this.zone.run(() => {
+            this.showList = true;
+            predictions.forEach((prediction) => {
+              this.autocompleteItems.push(prediction);
+            });
           });
         });
-      });
+    } else {
+      this.autocompleteItems = [];
+      this.showList = true;
+      this.getDropLocations(val);
+    }
+  }
+  getDropLocations(val) {
+    let request_data = { 'type': 'nearest_location', 'address': val }
+    this.officePoolCarService.commonSearchService(request_data).subscribe(
+      res => {
+        //console.log('res.result', res.result.length)
+        this.autocompleteItems = res.result;
+        this.progress_bar = false;
+        if (this.autocompleteItems.length == 0)
+          this.isNoItemAvailable = true;
+        //}
+      },
+      error => {
+        //console.log("error::::" + error.error.msg);
+        this.progress_bar = false;
+        //this.toasterService.showToast(error.error.msg, 2000)
+      }
+    );
+    //this.autocompleteItems.push({ 'description': 'test ..' });
+
   }
   selectSearchLocation(location: any, type: any) {
-    this.showList = false;
-    this.search_address = location;
-    let geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ 'address': location }, (results, status) => {
-      this.loadMap(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-    });
+    console.log('type', type);
+    if (type == 'pickup') {
+      this.showList = false;
+      this.search_address = location;
+      let geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ 'address': location }, (results, status) => {
+        this.loadMap(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+      });
+    }
+    else {
+      this.storage.get('select_location').then((val) => {
+        if (val != null) {
+          let val1 = val;
+          val1['drop_location'] = location;
+          this.storage.set('select_location', val1);
+        }
+      });
+      this.router.navigateByUrl('office-pool-car-service');
+    }
+
   }
   selectLocation(type: any) {
     this.storage.get('select_location').then((val) => {
@@ -185,4 +234,33 @@ export class SearchLocationPage implements OnInit {
     }
     return address.slice(0, -2);
   }
+  checkPermission() {
+    this.speechRecognition.hasPermission().then((permission) => {
+      if (permission) {
+
+      } else {
+        this.requestPermission();
+      }
+    }, (err) => {
+      alert(JSON.stringify(err));
+    })
+  }
+  requestPermission() {
+    this.speechRecognition.requestPermission().then((data) => {
+      //alert(JSON.stringify(data));
+    },
+      (err) => {
+        alert(JSON.stringify(err));
+      })
+  }
+  startListing(which_type_search) {
+    this.speechRecognition.startListening().subscribe((speeches) => {
+      console.log('speeches', speeches)
+      //this.updateSearchResults(speeches, which_type_search, true)
+      this.search_address = speeches[0];
+    }, (err) => {
+      alert(JSON.stringify(err));
+    })
+  }
+
 }

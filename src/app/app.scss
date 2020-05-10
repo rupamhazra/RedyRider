@@ -16,11 +16,12 @@ $font-family-base: "Roboto", sans-serif !default;
 }
 
 // For Toaster
-// .my-toast{
-//     --background: #ffce00;
-//     --color: white;
-//     --border-radius: 0px;
-// }
+.my-toast{
+    //--background: #ffce00;
+    --color: #e2467b;
+    font-weight: bold;
+    //--border-radius: 0px;
+}
 
 
 ._c_modal_css .modal-wrapper {
@@ -163,4 +164,7 @@ hr {
 .second-back{
     background: #069fe3 !important;
     color: #ffffff;
+}
+.color-light{
+    color: white;
 }

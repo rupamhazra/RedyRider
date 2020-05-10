@@ -81,5 +81,42 @@ export class BookingHistoryPage implements OnInit {
     //let data = { 'from_which_page': 'my-booking-history', 'userId': this.userId, 'booking_id': booking_id }
     this.router.navigateByUrl('myaccount/booking-history-details/' + booking_id)
   }
+  filterRides() {
+    this.actionSheet = this.actionSheetController.create({
+      header: 'Filter Rides',
+      buttons: [
+        {
+          text: 'All',
+          handler: () => {
+            this.filter = '';
+            this.getTransactionHistory();
+          }
+        },
+        {
+          text: 'Completed',
+          handler: () => {
+            this.filter = '2';
+            this.getTransactionHistory();
+          }
+        },
+        {
+          text: 'Current',
+          handler: () => {
+            this.filter = '2';
+            this.getTransactionHistory();
+          }
+        },
+        {
+          text: 'Cancelled',
+          handler: () => {
+            this.filter = '3';
+            this.getTransactionHistory();
+          }
+        }]
+    }).then(actionsheet => {
+      actionsheet.present();
+    });
+
+  }
 
 }
