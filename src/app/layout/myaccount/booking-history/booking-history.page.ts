@@ -14,13 +14,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./booking-history.page.scss'],
 })
 export class BookingHistoryPage implements OnInit {
-  filter: string;
+  filter: string = "today";
   actionSheet: any;
   userId: string;
   page = 1;
   maximumPages = 10;
   transactionList = [];
   progress_bar: boolean = false;
+  filter_text: string = "Today's";
   constructor(
     private storage: Storage,
     public modalService: ModalService,
@@ -44,9 +45,10 @@ export class BookingHistoryPage implements OnInit {
     let request_data = {
       "type": "booking_list",
       "user_id": this.userId,
-      "filter_by": this.filter,
+      //"filter_by": this.filter,
       "page": this.page,
       "count": 6,
+      "booking_list status": this.filter
 
     };
     this.officePoolCarService.applyCouponService(request_data).subscribe(
@@ -89,27 +91,39 @@ export class BookingHistoryPage implements OnInit {
           text: 'All',
           handler: () => {
             this.filter = '';
+            this.filter_text = 'All';
             this.getTransactionHistory();
           }
         },
         {
           text: 'Completed',
           handler: () => {
-            this.filter = '2';
+            this.filter = 'complete';
+            this.filter_text = 'Completed';
             this.getTransactionHistory();
           }
         },
         {
-          text: 'Current',
+          text: 'Upcoming',
           handler: () => {
-            this.filter = '2';
+            this.filter = 'up_come_today';
+            this.filter_text = 'Upcoming';
+            this.getTransactionHistory();
+          }
+        },
+        {
+          text: "Today's",
+          handler: () => {
+            this.filter = 'today';
+            this.filter_text = "Today's";
             this.getTransactionHistory();
           }
         },
         {
           text: 'Cancelled',
           handler: () => {
-            this.filter = '3';
+            this.filter = 'cancelled';
+            this.filter_text = 'Cancelled';
             this.getTransactionHistory();
           }
         }]

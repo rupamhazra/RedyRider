@@ -427,7 +427,9 @@ export class BookingHistoryDetailsPage implements OnInit {
 
         this.result_data = res.result;
         this.loadingService.dismiss();
+        this.getData(pay_booking_id);
         this.toasterService.showToast(res.result.msg, 4000)
+
       },
       error => {
         //console.log("error::::" + error.error.msg);

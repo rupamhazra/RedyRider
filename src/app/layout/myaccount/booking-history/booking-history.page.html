@@ -3,7 +3,7 @@
 <div slot="fixed" *ngIf="!progress_bar">
   <div class="inner_div">
     <ion-toolbar>
-      <p class="no_margin_p" slot="start">Current Rides</p>
+      <p class="no_margin_p" slot="start">{{filter_text}} Rides</p>
       <ion-chip slot="end" color="tertiary" outline="true" (click)="filterRides()">Filter<ion-icon name="ios-options" ></ion-icon></ion-chip>
     </ion-toolbar>
   </div>
