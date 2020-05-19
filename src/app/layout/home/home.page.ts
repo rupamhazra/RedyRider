@@ -44,7 +44,7 @@ export class HomePage implements OnInit {
   background_gif = '';
   name: any;
   title: any;
-  medie_url: any = environment.imageURL
+
   visibleKey: boolean = false;
   result: [];
   userId: any;

@@ -13,7 +13,7 @@ export class HomeService {
   constructor(private http: HttpClient, private networkService: NetworkService) { }
   insertDeviceDetailsService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'usr/', data)
+      return this.http.post(environment.apiEndpoint + 'usr.php/', data)
   }
 }
 

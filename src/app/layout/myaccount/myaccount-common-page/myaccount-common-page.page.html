@@ -8,7 +8,7 @@
       </div>
       <div style="text-align: center;">
           <ion-text><h2 style="margin: 0 0 10px 0px;">Refer & Earn upto Rs 200</h2></ion-text>
-          <p class="no_margin_p">Get Rs 50 when your friend completes his/her first trip with us.</p>
+          <p class="no_margin_p">Get Rs 50 when your friend completes his/her registration with us.</p>
           <p style="margin: 15px 0 5px 0;">Your Code</p>
           <div class="div_class">
               <ion-text text-center>{{refer_code}} </ion-text>
@@ -59,7 +59,7 @@
           No Notification Found
       </p>
       <ion-grid no-marign no-padding *ngIf="!blank_div">
-          <ion-row *ngFor="let item of dataList">
+          <ion-row *ngFor="let item of dataList" style="border-bottom:1px solid gray;">
               <ion-col>
                   <p style="margin-top: 10px;font-weight: bold;margin: 10px 0 0 0;">{{item.notice_title}}</p>
                   <ion-row>
@@ -73,6 +73,12 @@
                   <p style="opacity: 0.5;font-size: 11px;">{{item.notice_body.notice_date}}</p>
               </ion-col>
           </ion-row>
+          <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
       </ion-grid>
   </div> 
   </div>

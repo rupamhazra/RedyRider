@@ -52,8 +52,9 @@ export class PaymentDetailsPage implements OnInit {
       this.userPhone = val['mobile'];
       this.refer_code = val.referral_no;
       this.generate_link = 'https://google.com/' + this.refer_code;
-      this.getBalance('wallet_balance');
-      this.getBalance('referral_balance');
+      //this.getBalance('wallet_balance');
+      //this.getBalance('referral_balance');
+      this.getBalance('referral_wallet_balance');
     });
     this.storage.get('bookingDetails').then((val) => {
       this.payableFare = val['total_fare_details']['payable_fare'];
@@ -83,14 +84,11 @@ export class PaymentDetailsPage implements OnInit {
     }
     this.officePoolCarService.payThroughWalletService(request_data).subscribe(
       res => {
-        if (type == 'wallet_balance') {
-          this.wallet_balance = res.result.current_wallet_balance;
-          this.progress_bar = false;
-        }
-        if (type == 'referral_balance') {
-          this.referral_balance = res.result.referral_balance;
-          this.progress_bar = false;
-        }
+
+        this.wallet_balance = res.result.current_wallet_balance;
+        this.referral_balance = res.result.referral_balance;
+        this.progress_bar = false;
+
       },
       error => {
         this.progress_bar = false;

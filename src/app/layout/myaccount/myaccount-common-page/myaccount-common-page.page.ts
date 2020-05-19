@@ -22,6 +22,7 @@ export class MyaccountCommonPagePage implements OnInit {
   blank_div: boolean = false;
   device_token: string;
   progress_bar: boolean = false;
+  page = 1;
   constructor(
     private route: ActivatedRoute,
     private storage: Storage,
@@ -40,10 +41,10 @@ export class MyaccountCommonPagePage implements OnInit {
         this.userId = val['id'];
         this.refer_code = val.referral_no;
         this.generate_link = 'https://google.com/' + this.refer_code;
-        this.message = 'Your friend has invited you to join RedyRider instant and safe carpooling with verified users.Use promo code ' + this.refer_code + ' on sign up.Click here';
+        this.message = 'Your friend has invited you to join RedyRider instant and safe carpooling with verified users.Use referral code ' + this.refer_code + ' on sign up.Click here';
         this.progress_bar = false;
         this.device_token = val.user_device['device_token'];
-        this.notificationDetails();
+        this.notificationDetails(false, false);
       }
     });
   }
@@ -53,7 +54,7 @@ export class MyaccountCommonPagePage implements OnInit {
   }
   referFriends() {
     var options = {
-      message: 'Your friend has invited you to join RedyRider instant and safe carpooling with verified users.Use promo code ' + this.refer_code + ' on sign up.Click here',
+      message: 'Your friend has invited you to join RedyRider instant and safe carpooling with verified users.Use referral code ' + this.refer_code + ' on sign up.Click here',
       // subject: 'this is a test subject',
       // files:[],
       // chooserTitle: 'RedyRider',
@@ -82,12 +83,15 @@ export class MyaccountCommonPagePage implements OnInit {
     let data = { 'from_which_page': 'refer-earn-page-earn' }
     this.modalService.openModal(RouteStoppageModalPage, data, '_c_modal_css');
   }
-  notificationDetails() {
-    this.progress_bar = true;
+  notificationDetails(event, isFirstLoad) {
+    if (!event)
+      this.progress_bar = true;
     let request_data = {
       "type": "notification",
       "user_id": this.userId,
-      "device_token": this.device_token
+      "device_token": this.device_token,
+      "page": this.page,
+      "count": 6,
     };
 
     this.officePoolCarService.notificationService(request_data).subscribe(
@@ -95,14 +99,25 @@ export class MyaccountCommonPagePage implements OnInit {
         //console.log('res.result', res.result)
         if (res.result.length == 0) {
           this.blank_div = true;
+          this.dataList = res.result;
         }
+        let res_arr = res.result;
+        for (let i = 0; i < res_arr.length; i++) {
+          this.dataList.push(res_arr[i]);
+        }
+        this.page++;
         this.dataList = res.result;
-        this.progress_bar = false;
+        if (!event)
+          this.progress_bar = false;
       },
       error => {
-        this.progress_bar = false;
+        if (!event)
+          this.progress_bar = false;
         this.toasterService.showToast(error.error.msg, 2000);
       }
     );
+  }
+  loadData(event) {
+    this.notificationDetails(event, true);
   }
 }

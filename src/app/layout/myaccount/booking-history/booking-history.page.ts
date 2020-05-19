@@ -36,32 +36,36 @@ export class BookingHistoryPage implements OnInit {
     this.storage.get('USER_INFO').then((val) => {
       //console.log('USER_INFO', val);
       this.userId = val['id'];
-      this.getTransactionHistory();
+      this.getTransactionHistory(false, false);
 
     });
   }
-  getTransactionHistory(event?) {
-    this.progress_bar = true;
+  getTransactionHistory(event, isFirstLoad) {
+    if (!event)
+      this.progress_bar = true;
     let request_data = {
       "type": "booking_list",
       "user_id": this.userId,
       //"filter_by": this.filter,
       "page": this.page,
       "count": 6,
-      "booking_list status": this.filter
+      "status": this.filter
 
     };
     this.officePoolCarService.applyCouponService(request_data).subscribe(
       res => {
+        this.progress_bar = false;
         //console.log('this.transactionList', res.result['payment_history'].length);
         if (res.result.length == 0) {
-          event.target.complete();
-        } else {
-          this.transactionList = this.transactionList.concat(res.result);
+          this.transactionList = res.result;
         }
-
-        this.progress_bar = false;
-        if (event) {
+        let res_arr = res.result;
+        for (let i = 0; i < res_arr.length; i++) {
+          this.transactionList.push(res_arr[i]);
+        }
+        this.page++;
+        if (!event) this.progress_bar = false;
+        if (isFirstLoad) {
           event.target.complete();
         }
       },
@@ -73,11 +77,7 @@ export class BookingHistoryPage implements OnInit {
     );
   }
   loadData(event) {
-    this.page++;
-    this.getTransactionHistory(event);
-    if (this.page === this.maximumPages) {
-      event.target.disabled = true;
-    }
+    this.getTransactionHistory(event, true);
   }
   openBooking(booking_id) {
     //let data = { 'from_which_page': 'my-booking-history', 'userId': this.userId, 'booking_id': booking_id }
@@ -88,27 +88,19 @@ export class BookingHistoryPage implements OnInit {
       header: 'Filter Rides',
       buttons: [
         {
-          text: 'All',
-          handler: () => {
-            this.filter = '';
-            this.filter_text = 'All';
-            this.getTransactionHistory();
-          }
-        },
-        {
           text: 'Completed',
           handler: () => {
             this.filter = 'complete';
             this.filter_text = 'Completed';
-            this.getTransactionHistory();
+            this.getTransactionHistory(false, false);
           }
         },
         {
           text: 'Upcoming',
           handler: () => {
-            this.filter = 'up_come_today';
+            this.filter = 'up_come';
             this.filter_text = 'Upcoming';
-            this.getTransactionHistory();
+            this.getTransactionHistory(false, false);
           }
         },
         {
@@ -116,7 +108,7 @@ export class BookingHistoryPage implements OnInit {
           handler: () => {
             this.filter = 'today';
             this.filter_text = "Today's";
-            this.getTransactionHistory();
+            this.getTransactionHistory(false, false);
           }
         },
         {
@@ -124,7 +116,7 @@ export class BookingHistoryPage implements OnInit {
           handler: () => {
             this.filter = 'cancelled';
             this.filter_text = 'Cancelled';
-            this.getTransactionHistory();
+            this.getTransactionHistory(false, false);
           }
         }]
     }).then(actionsheet => {

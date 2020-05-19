@@ -30,7 +30,6 @@ export class AppComponent {
   public name: any;
   number: string;
   public profile_img: any
-  medie_url: any = environment.imageURL
   visibility: any
   public appPages = [];
   connection: any;

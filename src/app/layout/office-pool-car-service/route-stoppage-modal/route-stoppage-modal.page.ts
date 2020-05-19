@@ -416,7 +416,7 @@ export class RouteStoppageModalPage implements OnInit {
       res => {
         //console.log('res_details', res)
         if (res.status.toLowerCase() == 'success') {
-          this.toasterService.showToast('Congrats you got your first ride free of cost.');
+          this.toasterService.showToast('Congrats you got your first ride free of cost.', 3000);
           this.authService.login(res.result);
           this.loadingService.dismiss();
         }

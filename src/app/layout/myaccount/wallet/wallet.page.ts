@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 import { LoadingService } from '../../../core/services/loading.service';
 import { ToasterService } from '../../../core/services/toaster.service';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, IonContent } from '@ionic/angular';
 declare var RazorpayCheckout: any;
 
 
@@ -15,6 +15,7 @@ declare var RazorpayCheckout: any;
   styleUrls: ['./wallet.page.scss'],
 })
 export class WalletPage implements OnInit {
+  @ViewChild(IonContent) ionContent: IonContent;
   actionSheet: any;
   toggle_check: boolean;
   form: FormGroup;
@@ -45,7 +46,7 @@ export class WalletPage implements OnInit {
       this.userName = val['name'];
       this.userEmail = val['email'];
       this.userPhone = val['mobile'];
-      this.getTransactionHistory();
+      this.getTransactionHistory(false, false);
 
     });
   }
@@ -58,8 +59,9 @@ export class WalletPage implements OnInit {
       amount: ['', Validators.required]
     });
   }
-  getTransactionHistory(event?) {
-    this.progress_bar = true;
+  getTransactionHistory(event, isFirstLoad: boolean) {
+    if (!event)
+      this.progress_bar = true;
     let request_data = {
       "type": "wallet",
       "user_id": this.userId,
@@ -75,13 +77,18 @@ export class WalletPage implements OnInit {
         if (res.result['payment_history'].length == 0) {
           this.transactionList = res.result['payment_history'];
         } else {
-          this.transactionList = this.transactionList.concat(res.result['payment_history']);
+          let res_arr = res.result['payment_history'];
+          for (let i = 0; i < res_arr.length; i++) {
+            this.transactionList.push(res_arr[i]);
+          }
+          this.page++;
         }
 
-        this.progress_bar = false;
-        if (event) {
+        if (!event) this.progress_bar = false;
+        if (isFirstLoad) {
           event.target.complete();
         }
+
       },
       error => {
         //console.log("error::::" + error.error.msg);
@@ -91,11 +98,12 @@ export class WalletPage implements OnInit {
     );
   }
   loadData(event) {
-    this.page++;
-    this.getTransactionHistory(event);
-    if (this.page === this.maximumPages) {
-      event.target.disabled = true;
-    }
+    //this.page++;
+    this.getTransactionHistory(event, true);
+    //this.ionContent.scrollToBottom();
+    // if (this.page === this.maximumPages) {
+    //   event.target.disabled = true;
+    // }
   }
   addMoneyToWallet() {
     var options = {
@@ -153,7 +161,7 @@ export class WalletPage implements OnInit {
     this.officePoolCarService.payThroughWalletService(request_data).subscribe(
       res => {
         //alert('result' + res.result);
-        this.getTransactionHistory();
+        this.getTransactionHistory(false, false);
         if (status == '3')
           this.toasterService.showToast('Your transaction has been cancelled', 2000);
         else
@@ -175,21 +183,21 @@ export class WalletPage implements OnInit {
           text: 'All',
           handler: () => {
             this.filter = '';
-            this.getTransactionHistory();
+            this.getTransactionHistory(false, false);
           }
         },
         {
           text: 'Paid',
           handler: () => {
             this.filter = '2';
-            this.getTransactionHistory();
+            this.getTransactionHistory(false, false);
           }
         },
         {
           text: 'Cancelled',
           handler: () => {
             this.filter = '3';
-            this.getTransactionHistory();
+            this.getTransactionHistory(false, false);
           }
         }]
     }).then(actionsheet => {

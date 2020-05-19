@@ -18,25 +18,25 @@ export class LoginRegisterService {
   }
   registerService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'usr/', data)
+      return this.http.post(environment.apiEndpoint + 'usr.php/', data)
   }
   registerOTPService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'usr/', data)
+      return this.http.post(environment.apiEndpoint + 'usr.php/', data)
   }
   OTPService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'usr/', data)
+      return this.http.post(environment.apiEndpoint + 'usr.php/', data)
   }
   loginService(data: any): Observable<any> {
     console.log(data);
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'usr/', data)
+      return this.http.post(environment.apiEndpoint + 'usr.php/', data)
   }
   resetPasswordService(data: any): Observable<any> {
     console.log(data);
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'usr/', data)
+      return this.http.post(environment.apiEndpoint + 'usr.php/', data)
   }
   checkService(data: any): Observable<any> {
     console.log(data);

@@ -83,10 +83,14 @@
                   SELECT THIS CAR
                   
                 </ion-col>
-                <ion-col *ngIf="!item.car_status" class="not_avai">
-                    NOT AVAILABLE THIS TIME
-                </ion-col>
+               
               </ion-row>
+              <ion-row text-center >
+                  <ion-col *ngIf="!item.car_status" class="not_avai">
+                      NOT AVAILABLE THIS TIME
+                  </ion-col>
+                </ion-row>
+
               
             </ion-grid>
           

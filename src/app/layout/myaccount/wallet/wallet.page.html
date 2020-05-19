@@ -21,24 +21,25 @@
     </div>
 <hr class="hr_1"> 
 <hr class="hr_2">   
+<div class=" inner_div_1">
+    <ion-toolbar>
+        <p class="no_margin_p" slot="start">Recent Transactions</p>
+        <ion-chip slot="end" color="tertiary" outline="true" (click)="filterTransactions()">Filter<ion-icon name="ios-options" ></ion-icon></ion-chip>
+    </ion-toolbar>
+</div>
 </div>
 <ion-content>
     <div class="center">
         <mat-progress-spinner *ngIf="progress_bar" diameter=50 mode="indeterminate" color="accent"></mat-progress-spinner> 
     </div>
     <div  *ngIf="!progress_bar">
-        <div class=" inner_div_1">
-            <ion-toolbar>
-                <p class="no_margin_p" slot="start">Recent Transactions</p>
-                <ion-chip slot="end" color="tertiary" outline="true" (click)="filterTransactions()">Filter<ion-icon name="ios-options" ></ion-icon></ion-chip>
-            </ion-toolbar>
-        </div>
+        
         <ion-text>
                 <p *ngIf="transactionList.length==0" padding>No Transaction History Found</p>
         </ion-text>
-        <ion-virtual-scroll [items]="transactionList">
+        <!-- <ion-virtual-scroll [items]="transactionList"> -->
             
-            <div *virtualItem="let item">
+            <div *ngFor="let item of transactionList">
                 <p style="margin: 15px 0px 15px 15px;">{{item.trans_date}}</p>
                 <ion-card no-padding no-margin>
                     <ion-grid no-margin no-padding>
@@ -73,8 +74,8 @@
                 </ion-grid>
                 </ion-card>
             </div>
-        </ion-virtual-scroll> 
-        <ion-infinite-scroll threshold="300px" (ionInfinite)="loadData($event)" position="bottom">
+        <!-- </ion-virtual-scroll>  -->
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
             <ion-infinite-scroll-content
             loadingSpinner="bubbles"
             loadingText="Loading more data...">

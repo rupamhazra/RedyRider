@@ -10,20 +10,12 @@
 //   fcmEndpoint: 'https://fcm.googleapis.com/fcm/'
 // };
 
-
-/************* Staging 1 ********************/
-// export const environment = {
-//   production: true,
-//   apiEndpoint: 'http://192.168.0.7/saha-tour-travels/api/',
-//   imageURL: 'http://192.168.0.7/saha-tour-travels/media/',
-//   fcmEndpoint: 'https://fcm.googleapis.com/fcm/'
-// };
-
 /************* Staging ********************/
 export const environment = {
   production: false,
+  //apiEndpoint: 'https://redyrider.com/api/',
   apiEndpoint: 'http://tobuekalabya.com/carservice_manage/api/',
-  imageURL: 'http://tobuekalabya.com/carservice_manage/uploads/',
+  //imageURL: 'https://redyrider.com/uploads/',
   fcmEndpoint: 'https://fcm.googleapis.com/fcm/',
   firebase: {
     // apiKey: "AIzaSyBNW49l9wDIkWl4gMXAst2vgo8KegoYOyA",

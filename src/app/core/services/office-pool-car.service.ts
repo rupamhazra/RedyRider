@@ -15,39 +15,39 @@ export class OfficePoolCarService {
   ) { }
   commonSearchService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'search/', data);
+      return this.http.post(environment.apiEndpoint + 'search.php/', data);
   }
   seatBookingService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'booking/', data);
+      return this.http.post(environment.apiEndpoint + 'booking.php/', data);
   }
   payThroughWalletService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'wallet/', data);
+      return this.http.post(environment.apiEndpoint + 'wallet.php/', data);
   }
   applyCouponService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'booking/', data);
+      return this.http.post(environment.apiEndpoint + 'booking.php/', data);
   }
   notificationService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'notifications/', data);
+      return this.http.post(environment.apiEndpoint + 'notifications.php/', data);
   }
   personalService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'personal_details/', data);
+      return this.http.post(environment.apiEndpoint + 'personal_details.php/', data);
   }
   addressService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'address_details/', data);
+      return this.http.post(environment.apiEndpoint + 'address_details.php/', data);
   }
   profileService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'profile/', data);
+      return this.http.post(environment.apiEndpoint + 'profile.php/', data);
   }
   todayRidesService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'usr/', data);
+      return this.http.post(environment.apiEndpoint + 'usr.php/', data);
   }
 
 

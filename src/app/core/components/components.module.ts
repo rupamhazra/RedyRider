@@ -20,6 +20,9 @@ import {
   MatTabsModule
 } from "@angular/material";
 
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+
+
 @NgModule({
   declarations: [HeaderComponent],
   imports: [
@@ -42,7 +45,8 @@ import {
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatButtonToggleModule,
-    MatTabsModule
+    MatTabsModule,
+    ScrollDispatchModule
   ]
 })
 export class ComponentsModule { }

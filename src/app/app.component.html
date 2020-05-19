@@ -18,7 +18,7 @@
         <div *ngFor="let p of appPages">
           <!-- Standard Menu Item -->
           <ion-menu-toggle *ngIf="p.url">
-            <ion-item class="item-class"  [routerLink]="p.url" routerDirection="root" routerLinkActive="active" lines="none">
+            <ion-item class="item-class"  [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
               <!-- <ion-icon [name]="p.icon" slot="start"></ion-icon> -->
               <ion-icon [src] ="p.icon" slot="start" style="width: 40px;"></ion-icon>
               <ion-label>
