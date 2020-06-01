@@ -209,7 +209,7 @@ export class MyaccountPage implements OnInit {
 
     const fileTransfer: FileTransferObject = this.transfer.create()
     this.loadingService.present();
-    fileTransfer.upload(targetPath, environment.apiEndpoint + 'usr/', options).then(data => {
+    fileTransfer.upload(targetPath, environment.apiEndpoint + 'usr.php/', options).then(data => {
       this.loadingService.dismiss()
       this.toasterService.showToast('Image succesful uploaded.', 3000);
       var userUpdateImg = JSON.parse(data.response);

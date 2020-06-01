@@ -33,6 +33,7 @@ export class PaymentDetailsPage implements OnInit {
   userName: string;
   userPhone: string;
   userEmail: string;
+  razor_pay_key: string;
   constructor(
     public payment_details_event: Events,
     private router: Router,
@@ -52,6 +53,7 @@ export class PaymentDetailsPage implements OnInit {
       this.userPhone = val['mobile'];
       this.refer_code = val.referral_no;
       this.generate_link = 'https://google.com/' + this.refer_code;
+      this.razor_pay_key = val['razor_pay_key'];
       //this.getBalance('wallet_balance');
       //this.getBalance('referral_balance');
       this.getBalance('referral_wallet_balance');
@@ -138,7 +140,7 @@ export class PaymentDetailsPage implements OnInit {
       description: 'Credits towards consultation',
       // image: 'https://i.imgur.com/3g7nmJC.png',
       currency: 'INR',
-      key: 'rzp_test_W1Bgb5JMuCx6Oy',
+      key: this.razor_pay_key,
       amount: parseFloat(this.payableFare) * 100,
       name: this.userName,
       prefill: {

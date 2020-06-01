@@ -30,7 +30,7 @@ export class WalletPage implements OnInit {
   transactionList = [];
   filter: string;
   progress_bar: boolean = false;
-
+  razor_pay_key: string;
   constructor(
     private formBuilder: FormBuilder,
     public wallet_event: Events,
@@ -46,6 +46,7 @@ export class WalletPage implements OnInit {
       this.userName = val['name'];
       this.userEmail = val['email'];
       this.userPhone = val['mobile'];
+      this.razor_pay_key = val['razor_pay_key'];
       this.getTransactionHistory(false, false);
 
     });
@@ -110,7 +111,7 @@ export class WalletPage implements OnInit {
       description: 'Credits towards consultation',
       // image: 'https://i.imgur.com/3g7nmJC.png',
       currency: 'INR',
-      key: 'rzp_test_W1Bgb5JMuCx6Oy',
+      key: this.razor_pay_key,
       amount: this.form.value.amount,
       name: this.userName,
       prefill: {
