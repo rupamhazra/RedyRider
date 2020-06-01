@@ -49,6 +49,15 @@ export class OfficePoolCarService {
     if (!this.networkService.checkNetworkDisconnect())
       return this.http.post(environment.apiEndpoint + 'usr.php/', data);
   }
+  commonPageContentService(data: any): Observable<any> {
+    if (!this.networkService.checkNetworkDisconnect())
+      return this.http.post(environment.apiEndpoint + 'usr.php/', data);
+  }
+  refundRazorPayService(data: any): Observable<any> {
+    if (!this.networkService.checkNetworkDisconnect())
+      return this.http.post('https://<rzp_test_W1Bgb5JMuCx6Oy>:<qAlYTNBvQRlXyzlalC1zaKVE>@api.razorpay.com/v1/payments/' + data + '/refund', data);
+    //https://<YOUR_KEY_ID>:<YOUR_KEY_SECRET>@api.razorpay.com/v1/payments/pay_DgExayLn3RBbZX/refund
+  }
 
 
 }

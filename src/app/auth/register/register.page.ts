@@ -8,6 +8,10 @@ import { LoadingService } from '../../core/services/loading.service';
 import { Events } from '@ionic/angular';
 import { RouteStoppageModalPage } from '../../layout/office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
 import { Sim } from '@ionic-native/sim/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { Platform } from '@ionic/angular';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -26,6 +30,8 @@ export class RegisterPage implements OnInit {
   otp_verification_div: boolean = false;
   net_connection_check: boolean = false;
   showReferralCode: boolean = false;
+  device_details: any;
+  device_token: string;
   constructor(
     private loginRegisterService: LoginRegisterService,
     private router: Router,
@@ -34,12 +40,31 @@ export class RegisterPage implements OnInit {
     public modalService: ModalService,
     private loadingService: LoadingService,
     public reg_event: Events,
-    private sim: Sim
+    private sim: Sim,
+    private device: Device,
+    public platform: Platform,
+    private fcm: FirebaseX,
   ) {
     this.simHasPermission();
+    platform.ready().then(() => {
+      if (this.platform.is("cordova")) { }
+      this.fcm.getToken()
+        .then(token => this.device_token = token)
+        .catch(error => console.error('Error getting token', error));
+
+    })
   }
   ngOnInit() {
-
+    if (this.platform.is("cordova")) {
+      this.device_details = {
+        "uuid": this.device.uuid,
+        "model": this.device.model,
+        "platform": this.device.platform,
+        "serial": this.device.serial,
+        "version": this.device.version,
+        "manufacturer": this.device.manufacturer
+      }
+    }
     this.reg_event.subscribe('check_net_connection', (data) => {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
@@ -107,7 +132,10 @@ export class RegisterPage implements OnInit {
               "password": (this.form.controls['otp1'].value + this.form.controls['otp2'].value + this.form.controls['otp3'].value + this.form.controls['otp4'].value),
               "gender": this.form.controls['gender'].value,
               "type": "reg",
-              "otp_pass": res.result.otp_pass
+              "otp_pass": res.result.otp_pass,
+              'device_details': JSON.stringify(this.device_details),
+              'device_uuid': this.device.uuid,
+              'device_token': this.device_token
             },
           }
           this.loadingService.dismiss();
@@ -117,7 +145,7 @@ export class RegisterPage implements OnInit {
       error => {
         console.log("error::::" + error.error);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }

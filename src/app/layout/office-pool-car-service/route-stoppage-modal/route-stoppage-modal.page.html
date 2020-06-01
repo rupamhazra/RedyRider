@@ -31,15 +31,7 @@
       <fa-icon [icon]="['fas','gift']" style="font-size: 40px;color:#7e57ff;display: block;text-align: center;"  class="rstar-icon" slot="start"></fa-icon>
     </div>
     <ion-toolbar *ngIf="calling_page=='refer-earn-page-terms'" style="padding:10px;">
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      </p>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      </p>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      </p>
+      <p>{{items}}</p>
     </ion-toolbar>
     <ion-grid *ngIf="calling_page=='bus-route-details-page'">
       <ion-row>
@@ -265,7 +257,7 @@
         </ion-item>
         <div>
           <ion-button size="default"  type="button" color="danger" (click)="closeModal()">Cancel</ion-button>
-          <ion-button size="default" color="button"  type="button" (click)="otpVerify()">Continue</ion-button>
+          <ion-button size="default" color="button"  type="button" (click)="otpVerify()" [disabled]="!(otp1 && otp2 && otp3 && otp4) || net_connection_check">Continue</ion-button>
         </div>
     </div>
   

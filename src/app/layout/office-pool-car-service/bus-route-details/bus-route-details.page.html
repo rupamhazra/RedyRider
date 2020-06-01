@@ -24,11 +24,14 @@
                 <ion-row no-padding no-margin>
                   <ion-col size="2" class="primary-back col-pad"><mat-icon>directions_bus</mat-icon></ion-col>
                   <ion-col text-center class="color-light">
+                    
+                    <div class="widgets_div"><fa-icon [icon]="['fas','clock']" size="1x" class="rstar-icon"></fa-icon>&nbsp;{{item.start_time}}</div>
                     <p class="no_margin_p">
                       {{item.start_point}}
                     </p>
                     <mat-icon matBadge="to" matBadgeColor="primary"></mat-icon>
                     <p class="no_margin_p">{{item.end_point}}</p>
+                    
                   </ion-col>
                   <!-- <ion-col size="1" class="primary-back col-pad font-13">&nbsp;</ion-col> -->
                 </ion-row>

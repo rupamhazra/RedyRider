@@ -17,12 +17,13 @@ export class MyaccountCommonPagePage implements OnInit {
   refer_code: string = '';
   generate_link: string;
   message: string = "";
-  dataList: any;
+  dataList = [];
   userId: string;
   blank_div: boolean = false;
   device_token: string;
   progress_bar: boolean = false;
   page = 1;
+  result: any;
   constructor(
     private route: ActivatedRoute,
     private storage: Storage,
@@ -47,10 +48,29 @@ export class MyaccountCommonPagePage implements OnInit {
         this.notificationDetails(false, false);
       }
     });
+    this.getRouteMap();
+  }
+  getRouteMap() {
+    let request_data = {
+      "type": "up_map_img"
+    };
+
+    this.officePoolCarService.commonPageContentService(request_data).subscribe(
+      res => {
+        //console.log('res.result', res.result)
+        this.result = res.result
+
+      },
+      error => {
+        if (!event)
+          this.progress_bar = false;
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+      }
+    );
   }
   copyText(input) {
     this.clipboard.copy(input);
-    this.toasterService.showToast('Copied to clipboard', 1000, true, false);
+    this.toasterService.showToast('Copied to clipboard', 2000, true, false, '', '', 'my-toast');
   }
   referFriends() {
     var options = {
@@ -102,18 +122,24 @@ export class MyaccountCommonPagePage implements OnInit {
           this.dataList = res.result;
         }
         let res_arr = res.result;
+        //console.log('res_arr', res_arr)
         for (let i = 0; i < res_arr.length; i++) {
           this.dataList.push(res_arr[i]);
         }
         this.page++;
-        this.dataList = res.result;
+        //this.dataList = res.result;
+        //console.log('data', this.dataList)
         if (!event)
           this.progress_bar = false;
+
+        if (isFirstLoad) {
+          event.target.complete();
+        }
       },
       error => {
         if (!event)
           this.progress_bar = false;
-        this.toasterService.showToast(error.error.msg, 2000);
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }

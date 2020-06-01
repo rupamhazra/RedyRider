@@ -92,7 +92,7 @@ export class PaymentDetailsPage implements OnInit {
       },
       error => {
         this.progress_bar = false;
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -138,7 +138,7 @@ export class PaymentDetailsPage implements OnInit {
       description: 'Credits towards consultation',
       // image: 'https://i.imgur.com/3g7nmJC.png',
       currency: 'INR',
-      key: 'rzp_test_5oKpHg5DYNOtKG',
+      key: 'rzp_test_W1Bgb5JMuCx6Oy',
       amount: parseFloat(this.payableFare) * 100,
       name: this.userName,
       prefill: {
@@ -204,7 +204,7 @@ export class PaymentDetailsPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -229,7 +229,8 @@ export class PaymentDetailsPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+
       }
     );
   }

@@ -7,7 +7,7 @@ import { ToastController } from '@ionic/angular';
 export class ToasterService {
 
   constructor(private toastController: ToastController) { }
-  showToast(msg = '', duration = 0, animated = true, showCloseButton = false, closeButtonText = 'OK', for_which: string = '') {
+  showToast(msg = '', duration = 0, animated = true, showCloseButton = false, closeButtonText = 'OK', for_which: string = '', cssClass: string = 'my-toast') {
     if (for_which == 'ok_cancel_btn') {
       console.log('for_which', for_which)
       this.toastController.create({
@@ -46,7 +46,7 @@ export class ToasterService {
         animated: animated,
         showCloseButton: showCloseButton,
         closeButtonText: closeButtonText,
-        cssClass: "my-toast",
+        cssClass: cssClass,
         position: "top"
       }).then((obj) => {
         obj.present();

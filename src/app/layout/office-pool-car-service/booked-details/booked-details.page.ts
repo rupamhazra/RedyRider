@@ -95,7 +95,7 @@ export class BookedDetailsPage implements OnInit {
         console.log("error::::" + error.error);
         //this.openOtpModal();
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 3000)
+        this.toasterService.showToast(error.error.msg, 3000, true, false, '', '', 'my-error-toast');
         //this.router.navigateByUrl('booking-thankyou')
       }
     );
@@ -123,7 +123,7 @@ export class BookedDetailsPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }

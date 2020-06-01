@@ -37,10 +37,10 @@ export class RouteStoppageModalPage implements OnInit {
   stoppage_list;
 
 
-  otp1: any = "";
-  otp2: any = "";
-  otp3: any = "";
-  otp4: any = "";
+  otp1: any;
+  otp2: any;
+  otp3: any;
+  otp4: any;
   request_data: any;
   passwordShown: boolean = false;
   mobile;
@@ -88,7 +88,7 @@ export class RouteStoppageModalPage implements OnInit {
         error => {
           //console.log("error::::" + error.error.msg);
           this.loadingService.dismiss();
-          this.toasterService.showToast(error.error.msg, 2000)
+          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
         }
       );
     }
@@ -139,6 +139,25 @@ export class RouteStoppageModalPage implements OnInit {
       this.userDetails = this.navParams.get('user_details');
       this.start();
     }
+    if (this.calling_page == 'refer-earn-page-terms') {
+      this.loadingService.present();
+      let request_data = {
+        "content_type": this.calling_page,
+        "type": "site_content"
+      };
+      this.officePoolCarService.commonPageContentService(request_data).subscribe(
+        res => {
+          //console.log('res', res)
+          this.loadingService.dismiss();
+          this.items = res.result
+        },
+        error => {
+          console.log("error::::" + error.error);
+          this.loadingService.dismiss();
+          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+        }
+      );
+    }
 
   }
   closeModal() {
@@ -158,7 +177,7 @@ export class RouteStoppageModalPage implements OnInit {
         error => {
           //console.log("error::::" + error.error.msg);
           this.loadingService.dismiss();
-          this.toasterService.showToast(error.error.msg, 2000)
+          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
         }
       );
     }
@@ -178,7 +197,7 @@ export class RouteStoppageModalPage implements OnInit {
         error => {
           //console.log("error::::" + error.error.msg);
           this.loadingService.dismiss();
-          this.toasterService.showToast(error.error.msg, 2000)
+          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
         }
       );
     }
@@ -197,7 +216,7 @@ export class RouteStoppageModalPage implements OnInit {
       //   error => {
       //     //console.log("error::::" + error.error.msg);
       //     this.loadingService.dismiss();
-      //     this.toasterService.showToast(error.error.msg, 2000)
+      //     this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       //   }
       // );
     }
@@ -217,7 +236,7 @@ export class RouteStoppageModalPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -232,7 +251,7 @@ export class RouteStoppageModalPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -250,7 +269,7 @@ export class RouteStoppageModalPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
     console.log('port:', event.value);
@@ -269,7 +288,7 @@ export class RouteStoppageModalPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
     console.log('port:', event.value);
@@ -299,7 +318,7 @@ export class RouteStoppageModalPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
 
@@ -326,7 +345,7 @@ export class RouteStoppageModalPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -365,7 +384,7 @@ export class RouteStoppageModalPage implements OnInit {
       },
       error => {
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -416,14 +435,15 @@ export class RouteStoppageModalPage implements OnInit {
       res => {
         //console.log('res_details', res)
         if (res.status.toLowerCase() == 'success') {
-          this.toasterService.showToast('Congrats you got your first ride free of cost.', 3000);
+
           this.authService.login(res.result);
+          this.toasterService.showToast('Congrats you got your first ride free of cost.', 3000);
           this.loadingService.dismiss();
         }
       },
       error => {
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }

@@ -411,7 +411,7 @@ export class BookingHistoryDetailsPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.progress_bar = false;
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -428,13 +428,33 @@ export class BookingHistoryDetailsPage implements OnInit {
         this.result_data = res.result;
         this.loadingService.dismiss();
         this.getData(pay_booking_id);
-        this.toasterService.showToast(res.result.msg, 4000)
+        this.toasterService.showToast(res.result.msg, 4000, true, false, '', '', 'my-toast');
 
       },
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+      }
+    );
+  }
+  cancelRideByrazorPay(pay_booking_id) {
+    this.loadingService.present();
+    let request_data = 'pay_DgExayLn3RBbZX'
+    this.officePoolCarService.refundRazorPayService(request_data).subscribe(
+      res => {
+
+        this.result_data = res.result;
+        this.loadingService.dismiss();
+        console.log('data', res.result)
+        // this.getData(pay_booking_id);
+        // this.toasterService.showToast(res.result.msg, 4000)
+
+      },
+      error => {
+        //console.log("error::::" + error.error.msg);
+        this.loadingService.dismiss();
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }

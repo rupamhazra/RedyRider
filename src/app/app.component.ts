@@ -91,7 +91,7 @@ export class AppComponent {
           if (data.wasTapped) {
             self.router.navigateByUrl('myaccount/myaccount-common-page/notifications');
           } else {
-            this.toasterService.showToast('Received in foreground', 3000);
+            //this.toasterService.showToast('Received in foreground', 3000);
           };
         });
       }
@@ -172,6 +172,12 @@ export class AppComponent {
         title: 'My Rides',
         url: '/myaccount/booking-history',
         icon: './assets/svg/my_ride.svg',
+        chileMenu: []
+      },
+      {
+        title: 'Route Map',
+        url: '/myaccount/myaccount-common-page/route-maps',
+        icon: './assets/svg/routemap_svg.svg',
         chileMenu: []
       },
     ];

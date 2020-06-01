@@ -72,7 +72,7 @@ export class BookingHistoryPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.progress_bar = false;
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -92,6 +92,7 @@ export class BookingHistoryPage implements OnInit {
           handler: () => {
             this.filter = 'complete';
             this.filter_text = 'Completed';
+            this.page = 1;
             this.getTransactionHistory(false, false);
           }
         },
@@ -100,6 +101,7 @@ export class BookingHistoryPage implements OnInit {
           handler: () => {
             this.filter = 'up_come';
             this.filter_text = 'Upcoming';
+            this.page = 1;
             this.getTransactionHistory(false, false);
           }
         },
@@ -108,6 +110,7 @@ export class BookingHistoryPage implements OnInit {
           handler: () => {
             this.filter = 'today';
             this.filter_text = "Today's";
+            this.page = 1;
             this.getTransactionHistory(false, false);
           }
         },
@@ -116,6 +119,7 @@ export class BookingHistoryPage implements OnInit {
           handler: () => {
             this.filter = 'cancelled';
             this.filter_text = 'Cancelled';
+            this.page = 1;
             this.getTransactionHistory(false, false);
           }
         }]

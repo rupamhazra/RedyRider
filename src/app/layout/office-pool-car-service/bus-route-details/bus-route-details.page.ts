@@ -152,11 +152,11 @@ export class BusRouteDetailsPage implements OnInit {
     // console.log('this.car_count', this.car_count)
     // console.log('this.round_mode', this.mode)
     if (this.mode == '1' && this.car_count < 2) {
-      this.toasterService.showToast('Please select two cars for your round trip', 3000);
+      this.toasterService.showToast('Please select two cars for your round trip', 3000, true, false, '', '', 'my-error-toast');
     } else if (this.mode == '0' && this.car_count == 1) {
       this.router.navigateByUrl('/seat-layout-details');
     } else {
-      this.toasterService.showToast('Please select one car for your single trip', 3000);
+      this.toasterService.showToast('Please select one car for your single trip', 3000, true, false, '', '', 'my-error-toast');
     }
 
   }

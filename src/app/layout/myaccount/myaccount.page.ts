@@ -98,7 +98,7 @@ export class MyaccountPage implements OnInit {
       },
       error => {
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -113,7 +113,7 @@ export class MyaccountPage implements OnInit {
         },
         error => {
           this.progress_bar = false;
-          this.toasterService.showToast(error.error.msg, 2000)
+          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
         }
       );
     } else {
@@ -125,7 +125,7 @@ export class MyaccountPage implements OnInit {
         },
         error => {
           this.progress_bar = false;
-          this.toasterService.showToast(error.error.msg, 2000)
+          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
         }
       );
     }
@@ -223,7 +223,7 @@ export class MyaccountPage implements OnInit {
       });
     }, err => {
       this.loadingService.dismiss()
-      this.toasterService.showToast('Error while uploading file.', 3000);
+      this.toasterService.showToast('Error while uploading file.', 3000, true, false, '', '', 'my-error-toast');
     });
   }
   public pathForImage(img) {

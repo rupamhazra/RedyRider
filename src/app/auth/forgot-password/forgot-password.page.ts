@@ -126,7 +126,7 @@ export class ForgotPasswordPage implements OnInit {
       error => {
         //console.log("error::::" + error.error.msg);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }

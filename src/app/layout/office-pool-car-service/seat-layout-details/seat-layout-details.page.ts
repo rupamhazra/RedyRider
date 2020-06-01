@@ -102,7 +102,7 @@ export class SeatLayoutDetailsPage implements OnInit {
         this.allSeats_round = res.result;
       },
       error => {
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -116,7 +116,7 @@ export class SeatLayoutDetailsPage implements OnInit {
       error => {
         //console.log("error::::" + error.error);
         this.progress_bar = false;
-        this.toasterService.showToast(error.error.msg, 2000)
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }
@@ -158,7 +158,7 @@ export class SeatLayoutDetailsPage implements OnInit {
       error => {
         console.log("error::::" + error.error);
         this.loadingService.dismiss();
-        this.toasterService.showToast(error.error.msg, 3000);
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
   }

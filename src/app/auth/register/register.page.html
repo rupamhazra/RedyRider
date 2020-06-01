@@ -71,13 +71,13 @@
               </ion-item>
               <ion-item *ngIf="showReferralCode">
                 <ion-label position="floating">Referral code if any</ion-label>
-                <ion-input autofocus="on" formControlName="ref_applied_no" minlength="5"  clearInput="true" inputmode="text" type="text"></ion-input>
+                <ion-input autofocus="on" formControlName="ref_applied_no" minlength="5" [(required)]="showReferralCode"  clearInput="true" inputmode="text" type="text"></ion-input>
                 <ion-icon name="heart" slot="start"></ion-icon>
               </ion-item>
               <ion-text text-center>
                 <p>By clicking save & continue you are accepting to our <a (click)="goToPage('terms-conditions')">Terms & Conditions</a></p>
               </ion-text>
-              <ion-button class="ion-margin-top" color="button"  size="large" [disabled]="form.invalid || net_connection_check"  type="button" expand="full" (click)="registerUser()">
+              <ion-button class="ion-margin-top" color="button"  size="large" [disabled]="(form.invalid && showReferralCode) || net_connection_check"  type="button" expand="full" (click)="registerUser()">
                 SAVE & CONTINUE 
                 <ion-icon name="arrow-round-forward"></ion-icon>
               </ion-button>

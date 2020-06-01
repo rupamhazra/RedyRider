@@ -183,6 +183,11 @@ export class HeaderComponent implements OnInit {
       this.title_section_visible = true;
       this.title = "Notifications";
     }
+    if (this.router.url.includes('myaccount/myaccount-common-page/route-map')) {
+      this.back_button_visible = true;
+      this.title_section_visible = true;
+      this.title = "Route Map";
+    }
     if (this.router.url.includes('booking-history')) {
       this.back_button_visible = true;
       this.title_section_visible = true;

@@ -17,10 +17,14 @@ $font-family-base: "Roboto", sans-serif !default;
 
 // For Toaster
 .my-toast{
-    //--background: #ffce00;
-    --color: #e2467b;
-    //font-weight: bold;
-    //--border-radius: 0px;
+    --color: #3c763d;
+    --background: #dff0d8;
+    --border-color: #d6e9c6;
+}
+.my-error-toast{
+    --color: #a94442;
+    --background: #f2dede;
+    --border-color: #ebccd1;
 }
 
 
