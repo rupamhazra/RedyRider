@@ -37,6 +37,35 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:140417380423:android:42c7e718cab2a18567c162",
+        "android_client_info": {
+          "package_name": "com.redyrider.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140417380423-99g05o6t9n11ko84q2ojnnhde1j8tshs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEzsuTjxG8yf7d2pcmWADth_XLugMdFXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140417380423-99g05o6t9n11ko84q2ojnnhde1j8tshs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:140417380423:android:b9a9f8911da0293c67c162",
         "android_client_info": {
           "package_name": "com.redyrider.driver"
