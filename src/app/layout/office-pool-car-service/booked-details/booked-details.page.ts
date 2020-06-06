@@ -35,6 +35,7 @@ export class BookedDetailsPage implements OnInit {
   ) {
     this.progress_bar = true;
     this.storage.get('select_location').then((val) => {
+      //console.log('select_location',val);
       this.bookedDetails_res = val.booking_details;
       this.pickup_location = val.pickup_location;
       this.drop_location = val.drop_location;
