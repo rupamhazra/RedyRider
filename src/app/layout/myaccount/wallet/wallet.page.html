@@ -33,48 +33,44 @@
         <mat-progress-spinner *ngIf="progress_bar" diameter=50 mode="indeterminate" color="accent"></mat-progress-spinner> 
     </div>
     <div  *ngIf="!progress_bar">
-        
-        <ion-text>
-                <p *ngIf="transactionList.length==0" padding>No Transaction History Found</p>
+        <ion-text  *ngIf="!this.transactionList">
+                <p style="text-align: center;">No Transaction History Found</p>
         </ion-text>
-        <!-- <ion-virtual-scroll [items]="transactionList"> -->
-            
-            <div *ngFor="let item of transactionList">
-                <p style="margin: 15px 0px 15px 15px;">{{item.trans_date}}</p>
-                <ion-card no-padding no-margin>
-                    <ion-grid no-margin no-padding>
-                        <ion-row no-margin>
-                        <ion-col>
-                            <ion-toolbar>
-                                <ion-img src="./assets/svg/my_wallet_blue.svg" slot="start"  class="icon-payment" *ngIf="item.pay_for_no == '2'" style="width: 48px;"></ion-img>
-                            
-                            <fa-icon [icon]="['fas','bus']" slot="start" class="icon-payment" *ngIf="item.pay_for_no == '1'"></fa-icon>
-
-                            <ion-img src="./assets/svg/referal_blue.svg" slot="start"  class="" *ngIf="item.pay_for_no == '3'" style="width: 48px;"></ion-img>
-
+        <div *ngFor="let item of transactionList">
+            <p style="margin: 15px 0px 15px 15px;">{{item.trans_date}}</p>
+            <ion-card no-padding no-margin>
+                <ion-grid no-margin no-padding>
+                    <ion-row no-margin>
+                    <ion-col>
+                        <ion-toolbar>
+                            <ion-img src="./assets/svg/my_wallet_blue.svg" slot="start"  class="icon-payment" *ngIf="item.pay_for_no == '2'" style="width: 48px;"></ion-img>
                         
-                            <p slot="start" style="font-size:16px;margin:0px 0px 0px 10px;">
-                                {{item.pay_for}}
-                                <span style="display: block;
-                                opacity: 0.6;
-                                font-size: 12px;">
-                                    {{item.transaction_id}}
-                                </span>
-                            </p>
-                            <p slot="end" style="color: red;" *ngIf="item.transaction_type=='Debit'"> - <fa-icon [icon]="['fas','rupee-sign']" size="1x" class=""></fa-icon> {{item.amount}}</p>
-                            <p slot="end" *ngIf="item.transaction_type=='Credit'" style="color:green;"> + <fa-icon [icon]="['fas','rupee-sign']" size="1x" class=""></fa-icon> {{item.amount}}</p>
-                        </ion-toolbar>
-                        <ion-toolbar style="--min-height:45px;">
-                            <p slot="start" style="margin: 0 0 0 60px;
-                            opacity: 0.6;">{{item.trans_time}}</p>
-                            <p slot="end" style="opacity: 0.6;">Closing Balance : <fa-icon [icon]="['fas','rupee-sign']" size="1x" class=""></fa-icon> {{item.closing_balance ? item.closing_balance : 0.00}}</p>
-                        </ion-toolbar>
-                    </ion-col>
-                    </ion-row>
-                </ion-grid>
-                </ion-card>
-            </div>
-        <!-- </ion-virtual-scroll>  -->
+                        <fa-icon [icon]="['fas','bus']" slot="start" class="icon-payment" *ngIf="item.pay_for_no == '1'"></fa-icon>
+
+                        <ion-img src="./assets/svg/referal_blue.svg" slot="start"  class="" *ngIf="item.pay_for_no == '3'" style="width: 48px;"></ion-img>
+
+                    
+                        <p slot="start" style="font-size:16px;margin:0px 0px 0px 10px;">
+                            {{item.pay_for}}
+                            <span style="display: block;
+                            opacity: 0.6;
+                            font-size: 12px;">
+                                {{item.transaction_id}}
+                            </span>
+                        </p>
+                        <p slot="end" style="color: red;" *ngIf="item.transaction_type=='Debit'"> - <fa-icon [icon]="['fas','rupee-sign']" size="1x" class=""></fa-icon> {{item.amount}}</p>
+                        <p slot="end" *ngIf="item.transaction_type=='Credit'" style="color:green;"> + <fa-icon [icon]="['fas','rupee-sign']" size="1x" class=""></fa-icon> {{item.amount}}</p>
+                    </ion-toolbar>
+                    <ion-toolbar style="--min-height:45px;">
+                        <p slot="start" style="margin: 0 0 0 60px;
+                        opacity: 0.6;">{{item.trans_time}}</p>
+                        <p slot="end" style="opacity: 0.6;">Closing Balance : <fa-icon [icon]="['fas','rupee-sign']" size="1x" class=""></fa-icon> {{item.closing_balance ? item.closing_balance : 0.00}}</p>
+                    </ion-toolbar>
+                </ion-col>
+                </ion-row>
+            </ion-grid>
+            </ion-card>
+        </div>
         <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
             <ion-infinite-scroll-content
             loadingSpinner="bubbles"

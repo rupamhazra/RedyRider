@@ -74,15 +74,19 @@ export class WalletPage implements OnInit {
     this.officePoolCarService.payThroughWalletService(request_data).subscribe(
       res => {
         this.walletAmount = res.result['current_wallet_balance'];
-        console.log('this.transactionList', res.result['payment_history'].length);
-        if (res.result['payment_history'].length == 0) {
-          this.transactionList = res.result['payment_history'];
-        } else {
+        //console.log('this.transactionList', res.result['payment_history'].length);
+        if (res.result['payment_history']) {
           let res_arr = res.result['payment_history'];
           for (let i = 0; i < res_arr.length; i++) {
             this.transactionList.push(res_arr[i]);
           }
           this.page++;
+
+        } else {
+          if (this.page == 1) {
+            this.progress_bar = false;
+            this.transactionList = res.result['payment_history'];
+          }
         }
 
         if (!event) this.progress_bar = false;

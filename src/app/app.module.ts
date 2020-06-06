@@ -44,7 +44,6 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 library.add(fas, far, fab);
 
 import { CallNumber } from '@ionic-native/call-number/ngx';
-import { SMS } from '@ionic-native/sms/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { environment } from '../environments/environment';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
@@ -56,7 +55,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Insomnia } from '@ionic-native/insomnia/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
-import { Sim } from '@ionic-native/sim/ngx';
 
 
 @NgModule({
@@ -99,14 +97,12 @@ import { Sim } from '@ionic-native/sim/ngx';
     SocialSharing,
     Clipboard,
     CallNumber,
-    SMS,
     EmailComposer,
     BarcodeScanner,
     FileTransfer,
     Insomnia,
     TextToSpeech,
-    SpeechRecognition,
-    Sim
+    SpeechRecognition
 
   ],
   bootstrap: [AppComponent],

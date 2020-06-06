@@ -9,7 +9,9 @@ import { Storage } from '@ionic/storage';
 import { Events } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { AuthenticationService } from '../../core/services/authentication.service';
-declare var SMSReceive: any;
+
+
+
 
 @Component({
   selector: 'app-forgot-password',
@@ -33,6 +35,9 @@ export class ForgotPasswordPage implements OnInit {
   potp2: any = "";
   potp3: any = "";
   potp4: any = "";
+  net_connection_check: boolean = false;
+  otp_pass: any;
+  showPasswordDiv: boolean = false;
   constructor(
     private loginRegisterService: LoginRegisterService,
     private router: Router,
@@ -44,20 +49,26 @@ export class ForgotPasswordPage implements OnInit {
     public pass_event: Events,
     private authenticationService: AuthenticationService,
     private menuCtrl: MenuController,
+    public forget_password: Events,
 
   ) { }
   ngOnInit() {
+    this.forget_password.subscribe('check_net_connection', (data) => {
+      if (data == 'connect') this.net_connection_check = false;
+      if (data == 'disconnect') this.net_connection_check = true;
+    });
     this.form = this.formBuilder.group({
       potp1: ['', Validators.required],
       potp2: ['', Validators.required],
       potp3: ['', Validators.required],
       potp4: ['', Validators.required]
     });
-    this.start();
     this.storage.get("user_details").then((val) => {
       console.log('val', val)
-      if (val)
-        this.contact = val.contact;
+      if (val) {
+        this.contact = val.contact_no;
+        this.otp_pass = val.otp_pass;
+      }
       else {
         this.storage.get("USER_INFO").then((val1) => {
           this.contact = val1.mobile;
@@ -66,43 +77,6 @@ export class ForgotPasswordPage implements OnInit {
       }
     });
   }
-  /**
-   * For SMS read autometically
-   */
-  start() {
-    SMSReceive.startWatch(
-      () => {
-        document.addEventListener('onSMSArrive', (e: any) => {
-          var IncomingSMS = e.data;
-          this.processSMS(IncomingSMS);
-        });
-      },
-      () => { console.log('watch start failed') }
-    )
-  }
-  stop() {
-    SMSReceive.stopWatch(
-      () => { console.log('watch stopped') },
-      () => { console.log('watch stop failed') }
-    )
-  }
-  processSMS(data) {
-    this.loadingService.dismiss();
-    //console.log('data', data);
-    const message = data.body;
-    if (message) {
-      this.OTP = data.body.slice(0, 4);
-      this.otp1 = this.OTP[0]
-      this.otp2 = this.OTP[1]
-      this.otp3 = this.OTP[2]
-      this.otp4 = this.OTP[3]
-      //console.log('this.OTP', this.otp1);
-      this.stop();
-    }
-  }
-  /**
-   * End
-   */
   public saveNewPassword() {
     this.loadingService.present();
     this.request_data = {
@@ -148,6 +122,18 @@ export class ForgotPasswordPage implements OnInit {
     }
     if (($e.key == 'Backspace' && $e.keyCode == 8) || ($e.key == 'Delete' && $e.keyCode == 46)) {
       prevElement.setFocus();
+    }
+  }
+  cancel() {
+    this.router.navigateByUrl('/login');
+  }
+  otpVerify() {
+    let otp = this.otp1 + this.otp2 + this.otp3 + this.otp4;
+    console.log('userdetails', this.otp_pass)
+    if (otp == this.otp_pass) {
+      this.showPasswordDiv = true
+    } else {
+      this.toasterService.showToast("OTP is invalid", 2000, true, false, '', '', 'my-error-toast');
     }
   }
 }

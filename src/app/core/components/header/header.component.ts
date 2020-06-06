@@ -101,7 +101,7 @@ export class HeaderComponent implements OnInit {
       this.menu_button_visible = false;
       this.title_section_visible = true;
       this.cart_button_visible = false;
-      this.title = "Retrieve Password";
+      this.title = "Reset Password";
       this.back_button_visible = true;
     }
     if (this.router.url.includes('home')) {

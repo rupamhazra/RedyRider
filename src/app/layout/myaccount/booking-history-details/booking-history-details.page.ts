@@ -8,7 +8,6 @@ import { Events } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
-import { SMS } from '@ionic-native/sms/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
@@ -77,7 +76,6 @@ export class BookingHistoryDetailsPage implements OnInit {
     private route: ActivatedRoute,
     private geolocation: Geolocation,
     private callNumber: CallNumber,
-    private sms: SMS,
     private emailComposer: EmailComposer,
     private barcodeScanner: BarcodeScanner,
     private socialSharing: SocialSharing,
@@ -335,11 +333,23 @@ export class BookingHistoryDetailsPage implements OnInit {
       .catch(err => console.log('Error launching dialer', err));
   }
   smsNow() {
-    if (this.sms.hasPermission()) {
-      this.sms.send(this.sos_number, 'This is an emergency in bus.Please look into it immediately.').then((val) => {
-        //console.log('val', val)
-      });
-    }
+    this.loadingService.present();
+    //console.log('getData myaccount-personal')
+    //this.loadingService.present();
+    let request_data = { "type": "msg_emergency", "contact": this.sos_number };
+    this.officePoolCarService.commonPageContentService(request_data).subscribe(
+      res => {
+        this.loadingService.dismiss();
+        this.toasterService.showToast(res.msg, 2000, true, false, '', '', 'my-toast');
+      },
+      error => {
+        //console.log("error::::" + error.error.msg);
+        this.progress_bar = false;
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+      }
+    );
+
+
   }
   sendMail() {
     let email = {

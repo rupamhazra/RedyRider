@@ -93,6 +93,7 @@ export class MyaccountPage implements OnInit {
     let request_data = { 'type': 'log_by_otp', 'contact': this.contact }
     this.loginRegisterService.loginService(request_data).subscribe(
       res => {
+        this.storage.set('user_details', res.result);
         this.loadingService.dismiss();
         this.router.navigateByUrl('/forgot-password')
       },

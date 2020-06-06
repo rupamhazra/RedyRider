@@ -7,7 +7,6 @@ import { ModalService } from '../../core/services/modal.service';
 import { LoadingService } from '../../core/services/loading.service';
 import { Events } from '@ionic/angular';
 import { RouteStoppageModalPage } from '../../layout/office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
-import { Sim } from '@ionic-native/sim/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Platform } from '@ionic/angular';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
@@ -32,6 +31,7 @@ export class RegisterPage implements OnInit {
   showReferralCode: boolean = false;
   device_details: any;
   device_token: string;
+  ref_div = true;
   constructor(
     private loginRegisterService: LoginRegisterService,
     private router: Router,
@@ -40,12 +40,10 @@ export class RegisterPage implements OnInit {
     public modalService: ModalService,
     private loadingService: LoadingService,
     public reg_event: Events,
-    private sim: Sim,
     private device: Device,
     public platform: Platform,
     private fcm: FirebaseX,
   ) {
-    this.simHasPermission();
     platform.ready().then(() => {
       if (this.platform.is("cordova")) { }
       this.fcm.getToken()
@@ -86,33 +84,13 @@ export class RegisterPage implements OnInit {
       this.registerUser(true);
     });
   }
-  simHasPermission() {
-    this.sim.hasReadPermission().then(
-      (info) => {
-        console.log('Has permission: ', info)
-        if (!info) this.requestPermission();
-        else this.getSimInfo();
-      }
-    );
-  }
-  requestPermission() {
-    this.sim.requestReadPermission().then(
-      () => {
-        console.log('Permission granted')
-        this.getSimInfo();
-      },
-      () => console.log('Permission denied')
-    );
-  }
-  getSimInfo() {
-    this.sim.getSimInfo().then(
-      (info) => console.log('Sim info: ', info),
-      (err) => console.log('Unable to get sim info: ', err)
-    );
-  }
   registerUser(resendOtp: boolean = false) {
     //let data = {};
     //this.modalService.openModal(OtpVerificationPage, data, '_c_modal_otp_css');
+    if (this.showReferralCode && this.form.controls['ref_applied_no'].value == '') {
+      this.toasterService.showToast("Please enter referral no.", 2000, true, false, '', '', 'my-error-toast');
+      return false;
+    }
     this.loadingService.present();
     this.request_data = {
       "mobile": this.form.controls['mobile'].value,

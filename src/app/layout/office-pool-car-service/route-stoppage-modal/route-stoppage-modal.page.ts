@@ -12,7 +12,6 @@ import { Storage } from '@ionic/storage';
 import { LoginRegisterService } from '../../../core/services/login-register.service';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 
-declare var SMSReceive: any;
 @Component({
   selector: 'app-route-stoppage-modal',
   templateUrl: './route-stoppage-modal.page.html',
@@ -137,7 +136,6 @@ export class RouteStoppageModalPage implements OnInit {
     if (this.calling_page == 'login-otp-page' || this.calling_page == 'register') {
       this.register_otp = this.navParams.get('register_otp');
       this.userDetails = this.navParams.get('user_details');
-      this.start();
     }
     if (this.calling_page == 'refer-earn-page-terms') {
       this.loadingService.present();
@@ -375,9 +373,7 @@ export class RouteStoppageModalPage implements OnInit {
     this.loginRegisterService.loginService(this.form_forget_password.value).subscribe(
       res => {
         //console.log("res:::" + res.msg);
-        this.storage.set('user_details', {
-          "contact": res.result.mobile, 'resend': resendOtp
-        })
+        this.storage.set('user_details', res.result);
         this.modalService.closeModal();
         this.loadingService.dismiss();
         this.router.navigateByUrl('/forgot-password')
@@ -388,44 +384,23 @@ export class RouteStoppageModalPage implements OnInit {
       }
     );
   }
-  start() {
-    console.log('start..')
-    SMSReceive.startWatch(
-      () => {
-        document.addEventListener('onSMSArrive', (e: any) => {
-          var IncomingSMS = e.data;
-          console.log('IncomingSMS', IncomingSMS)
-          this.processSMS(IncomingSMS);
-        });
-      },
-      () => { this.loadingService.dismiss(); console.log('watch start failed') }
-    )
-  }
-  processSMS(data) {
-    this.loadingService.dismiss();
-    console.log('data', data);
-    const message = data.body;
-    if (message) {
-      this.OTP = data.body.slice(0, 4);
-      this.otp1 = this.OTP[0]
-      this.otp2 = this.OTP[1]
-      this.otp3 = this.OTP[2]
-      this.otp4 = this.OTP[3]
-      this.stop();
-    }
-  }
-  stop() {
-    SMSReceive.stopWatch(
-      () => { console.log('watch stopped') },
-      () => { console.log('watch stop failed') }
-    )
-  }
+
   otpVerify() {
     this.loadingService.present()
     this.modalService.closeModal();
+    console.log('userdetails', this.userDetails)
     if (this.calling_page == 'login-otp-page') {
+      let otp = this.otp1 + this.otp2 + this.otp3 + this.otp4
+      //console.log('otp', otp)
+      if (otp == this.userDetails.otp_pass) {
+        //console.log('successs')
+        this.authService.login(this.userDetails)
+      } else {
+        this.toasterService.showToast("OTP is invalid", 2000, true, false, '', '', 'my-error-toast');
+      }
+
       this.loadingService.dismiss();
-      this.authService.login(this.userDetails)
+      //this.authService.login(this.userDetails)
     } else if (this.calling_page == 'register') {
       this.registerService(this.userDetails)
     }
