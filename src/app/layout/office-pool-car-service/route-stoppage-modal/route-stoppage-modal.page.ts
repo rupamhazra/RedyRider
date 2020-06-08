@@ -387,13 +387,13 @@ export class RouteStoppageModalPage implements OnInit {
 
   otpVerify() {
     this.loadingService.present()
-    this.modalService.closeModal();
     console.log('userdetails', this.userDetails)
     if (this.calling_page == 'login-otp-page') {
       let otp = this.otp1 + this.otp2 + this.otp3 + this.otp4
       //console.log('otp', otp)
       if (otp == this.userDetails.otp_pass) {
         //console.log('successs')
+        this.modalService.closeModal();
         this.authService.login(this.userDetails)
       } else {
         this.toasterService.showToast("OTP is invalid", 2000, true, false, '', '', 'my-error-toast');
