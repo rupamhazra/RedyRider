@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { LoginRegisterService } from '../../core/services/login-register.service';
+import { OfficePoolCarService } from '../../core/services/office-pool-car.service';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
-import { ToasterService } from '../../core/services/toaster.service';
-import { ModalService } from '../../core/services/modal.service';
-import { LoadingService } from '../../core/services/loading.service';
+import { LoadingService, ModalService, ToasterService } from '../../core/globalMethods/global-methods';
 import { Events } from '@ionic/angular';
 import { RouteStoppageModalPage } from '../../layout/office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
 import { Device } from '@ionic-native/device/ngx';
@@ -33,7 +31,7 @@ export class RegisterPage implements OnInit {
   device_token: string;
   ref_div = true;
   constructor(
-    private loginRegisterService: LoginRegisterService,
+    private loginRegisterService: OfficePoolCarService,
     private router: Router,
     private formBuilder: FormBuilder,
     private toasterService: ToasterService,

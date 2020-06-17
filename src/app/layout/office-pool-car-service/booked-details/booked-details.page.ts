@@ -3,8 +3,7 @@ import { Router } from "@angular/router";
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { LoadingService } from '../../../core/services/loading.service';
-import { ToasterService } from '../../../core/services/toaster.service';
+import { ToasterService, LoadingService } from '../../../core/globalMethods/global-methods';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({

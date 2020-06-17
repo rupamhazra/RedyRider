@@ -18,7 +18,9 @@
       <ion-icon ios="ios-notifications" md="md-notifications" style="font-size: 26px;margin-top: 5px;" ></ion-icon></ion-title>
     <ion-title *ngIf="referral_bal_show" slot="end">Earn : <fa-icon [icon]="['fas','rupee-sign']" size="1x" class="rstar-icon"></fa-icon> {{referral_balance}}</ion-title>
     <ion-buttons slot="start" *ngIf="back_button_visible" class="border_button">
-      <ion-back-button defaultHref="home"></ion-back-button>
+
+      <ion-back-button defaultHref="home"  (click)="back()" *ngIf="back_button_visible_click"></ion-back-button>
+      <ion-back-button defaultHref="home"  *ngIf="!back_button_visible_click"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
   <div class="{{network_check_class}}" *ngIf="network_check_class_show" [style.background]="network_check_class=='disconnect'?'red':'#4CAF50'">{{network_msg}}</div>

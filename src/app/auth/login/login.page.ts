@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { LoginRegisterService } from '../../core/services/login-register.service';
-import { ToasterService } from '../../core/services/toaster.service';
-import { LoadingService } from '../../core/services/loading.service';
-import { ModalService } from '../../core/services/modal.service';
+import { OfficePoolCarService } from '../../core/services/office-pool-car.service';
+import { ToasterService, LoadingService, ModalService } from '../../core/globalMethods/global-methods';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { RouteStoppageModalPage } from '../../layout/office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
@@ -21,7 +19,7 @@ export class LoginPage implements OnInit {
   passwordShown: boolean = false;
   net_connection_check: boolean = false;
   constructor(
-    private loginRegisterService: LoginRegisterService,
+    private loginRegisterService: OfficePoolCarService,
     private router: Router,
     private formBuilder: FormBuilder,
     private toasterService: ToasterService,

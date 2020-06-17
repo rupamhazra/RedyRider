@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { ToasterService } from '../../../core/services/toaster.service';
 import { Device } from '@ionic-native/device/ngx';
-import { ModalService } from '../../../core/services/modal.service';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { LoadingService } from '../../../core/services/loading.service';
+import { LoadingService, ModalService, ToasterService } from '../../../core/globalMethods/global-methods';
 import { IonInfiniteScroll, IonVirtualScroll } from '@ionic/angular';
 import { RouteStoppageModalPage } from '../route-stoppage-modal/route-stoppage-modal.page';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
@@ -57,6 +55,7 @@ export class BusRouteDetailsPage implements OnInit {
   progress_bar: boolean = false;
   no_bus_saturday: boolean = false;
   no_bus_saturday_msg = '';
+  result: any;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -106,8 +105,9 @@ export class BusRouteDetailsPage implements OnInit {
           this.dataList = [];
           this.dataList_show = true;
           this.progress_bar = false;
+          this.getRouteMap();
         }
-        console.log('this.dataList',res.result);
+        console.log('this.dataList', res.result);
         this.dataList = res.result;
         this.progress_bar = false;
         //}
@@ -180,6 +180,27 @@ export class BusRouteDetailsPage implements OnInit {
   viewRoute(route_id: string, start_point, end_point, route_timing_id) {
     let data = { 'route_id': route_id, 'from_which_page': 'bus-route-details-page', 'start_point': start_point, 'end_point': end_point, 'route_timing_id': route_timing_id }
     this.modalService.openModal(RouteStoppageModalPage, data, 'stoppage_modal_css');
+  }
+
+  getRouteMap() {
+    this.loadingService.present();
+    let request_data = {
+      "type": "up_map_img"
+    };
+
+    this.officePoolCarService.commonPageContentService(request_data).subscribe(
+      res => {
+        //console.log('res.result', res.result)
+        this.result = res.result;
+        this.loadingService.dismiss();
+
+      },
+      error => {
+
+        this.loadingService.dismiss();
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+      }
+    );
   }
 
 }

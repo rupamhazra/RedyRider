@@ -3,9 +3,8 @@ import { Router } from '@angular/router';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network/ngx';
-import { AlertService } from '../../services/alert.service';
+import { AlertService, ToasterService } from '../../globalMethods/global-methods';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { ToasterService } from '../../../core/services/toaster.service';
 //import { Firebase } from "@ionic-native/firebase/ngx";
 
 
@@ -30,6 +29,8 @@ export class HeaderComponent implements OnInit {
   notification_show: boolean = false;
   notification_count = 0;
   sos_button: boolean = false;
+  back_button_visible_click = false;
+  userId = '';
   constructor(
     private router: Router,
     public header_event: Events,
@@ -43,19 +44,30 @@ export class HeaderComponent implements OnInit {
   ) {
 
   }
-
+  getNotificationCount(user_id) {
+    let request_data = { "type": 'notification_status', "user_id": user_id }
+    this.officePoolCarService.commonPageContentService(request_data).subscribe(
+      res => {
+        this.notification_count = res.result;
+      },
+      error => {
+        //this.toasterService.showToast(error.error.msg, 2000);
+      }
+    );
+  }
   ngOnInit() {
     /**
-     * 
+     * Notification Unread Count
      */
-
-    this.header_event.subscribe('notification_count', (data) => {
-      this.notification_count = 1;
+    this.storage.get('USER_INFO').then((val) => {
+      if (val) {
+        this.userId = val['id'];
+        this.getNotificationCount(this.userId);
+      }
     });
     /**
      * Network connection check
     */
-
     this.network.onDisconnect().subscribe(() => {
       this.network_check_class_show = true;
       this.storage.set('network_connection', "disconnected");
@@ -86,16 +98,13 @@ export class HeaderComponent implements OnInit {
       this.menu_button_visible = false;
       this.title_section_visible = true;
       this.cart_button_visible = false;
-      // this.back_button_visible = true;
-      //this.logout_visible = false;
+      this.back_button_visible_click = false;
     }
     if (this.router.url.includes('login')) {
       this.menu_button_visible = false;
       this.title_section_visible = true;
       this.cart_button_visible = false;
-      //this.title = "Saha Tour and Travel";
       this.back_button_visible = false;
-      //this.logout_visible = false;
     }
     if (this.router.url.includes('forgot-password')) {
       this.menu_button_visible = false;
@@ -103,12 +112,16 @@ export class HeaderComponent implements OnInit {
       this.cart_button_visible = false;
       this.title = "Reset Password";
       this.back_button_visible = true;
+      this.back_button_visible_click = false;
     }
     if (this.router.url.includes('home')) {
+
       this.menu_button_visible = true;
       this.title_section_visible = true;
       this.cart_button_visible = true;
       this.notification_show = true;
+
+
     }
     if (this.router.url.includes('office-pool-car-service')) {
       this.back_button_visible = true;
@@ -117,7 +130,6 @@ export class HeaderComponent implements OnInit {
     if (this.router.url.includes('date-time')) {
       this.back_button_visible = true;
       this.title_section_visible = true;
-      //this.title = "School Pull Car";
     }
     if (this.router.url.includes('bus-route-details')) {
       this.back_button_visible = true;
@@ -148,16 +160,25 @@ export class HeaderComponent implements OnInit {
       this.back_button_visible = true;
       this.title_section_visible = true;
       this.title = "Contact Us";
+      this.back_button_visible_click = false;
     }
     if (this.router.url.includes('common-page/privacy-policy')) {
       this.back_button_visible = true;
       this.title_section_visible = true;
       this.title = "Privacy Policy";
+      this.back_button_visible_click = false;
     }
     if (this.router.url.includes('common-page/terms-condition')) {
       this.back_button_visible = true;
       this.title_section_visible = true;
       this.title = "Terms and Conditions";
+      this.back_button_visible_click = false;
+    }
+    if (this.router.url.includes('common-page/popup-details')) {
+      this.back_button_visible = true;
+      this.title_section_visible = true;
+      this.title = "Details";
+
     }
     if (this.router.url.includes('myaccount')) {
       this.back_button_visible = true;
@@ -182,6 +203,7 @@ export class HeaderComponent implements OnInit {
       this.back_button_visible = true;
       this.title_section_visible = true;
       this.title = "Notifications";
+
     }
     if (this.router.url.includes('myaccount/myaccount-common-page/route-map')) {
       this.back_button_visible = true;
@@ -214,20 +236,15 @@ export class HeaderComponent implements OnInit {
       this.title = "Tour and Travels";
     }
     if (this.router.url.includes('tour-details')) {
-      //this.cart_button_visible = false;
       this.menu_button_visible = false;
       this.title_section_visible = true;
       this.title = "Tour Details";
     }
     if (this.router.url.includes('tour-details-package-form')) {
-      //this.cart_button_visible = false;
-      //this.menu_button_visible = false;
       this.title_section_visible = true;
       this.title = "";
     }
     if (this.router.url.includes('school-pool-car')) {
-      //this.cart_button_visible = false;
-      //this.menu_button_visible = false;
       this.title_section_visible = true;
       this.title = "School Pull Car";
     }
@@ -247,8 +264,14 @@ export class HeaderComponent implements OnInit {
     this.alertService.presentAlertConfirm("Are you sure you want to end this session?", "logout");
   }
   goToPage(page) {
-    if (page == 'notifications')
-      this.router.navigateByUrl('myaccount/myaccount-common-page/notifications')
+    if (page == 'notifications') {
+      this.router.navigateByUrl('myaccount/myaccount-common-page/notifications');
+    }
+    //this.router.navigateByUrl('myaccount/myaccount-common-page/notifications')
+  }
+  back() {
+    this.getNotificationCount(this.userId);
+    this.router.navigateByUrl('/home');
   }
 
 }

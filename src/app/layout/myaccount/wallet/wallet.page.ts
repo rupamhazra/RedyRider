@@ -3,8 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { LoadingService } from '../../../core/services/loading.service';
-import { ToasterService } from '../../../core/services/toaster.service';
+import { ToasterService, LoadingService } from '../../../core/globalMethods/global-methods';
 import { ActionSheetController, IonContent } from '@ionic/angular';
 declare var RazorpayCheckout: any;
 
@@ -116,7 +115,7 @@ export class WalletPage implements OnInit {
       // image: 'https://i.imgur.com/3g7nmJC.png',
       currency: 'INR',
       key: this.razor_pay_key,
-      amount: this.form.value.amount,
+      amount: parseFloat(this.form.value.amount) * 100,
       name: this.userName,
       prefill: {
         email: this.userEmail,

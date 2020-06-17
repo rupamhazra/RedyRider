@@ -1,11 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
-import { ModalService } from '../../core/services/modal.service';
-import { ToasterService } from '../../core/services/toaster.service';
-import { LoadingService } from '../../core/services/loading.service';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { RouteStoppageModalPage } from '../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
-import { LoginRegisterService } from '../../core/services/login-register.service';
 import { OfficePoolCarService } from '../../core/services/office-pool-car.service';
 import { Events, ActionSheetController, Platform } from '@ionic/angular';
 import { File } from '@ionic-native/File/ngx';
@@ -13,7 +9,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 import { environment } from '../../../environments/environment';
-import { AlertService } from '../../core/services/alert.service';
+import { AlertService, ToasterService, LoadingService, ModalService } from '../../core/globalMethods/global-methods';
 
 declare var cordova: any;
 @Component({
@@ -39,7 +35,6 @@ export class MyaccountPage implements OnInit {
     public modalService: ModalService,
     private storage: Storage,
     private router: Router,
-    private loginRegisterService: LoginRegisterService,
     private toasterService: ToasterService,
     private loadingService: LoadingService,
     private officePoolCarService: OfficePoolCarService,
@@ -91,7 +86,7 @@ export class MyaccountPage implements OnInit {
   changePassword(resendOtp: boolean = false) {
     this.loadingService.present();
     let request_data = { 'type': 'log_by_otp', 'contact': this.contact }
-    this.loginRegisterService.loginService(request_data).subscribe(
+    this.officePoolCarService.loginService(request_data).subscribe(
       res => {
         this.storage.set('user_details', res.result);
         this.loadingService.dismiss();

@@ -1,9 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { ModalService } from '../../../core/services/modal.service';
-import { ToasterService } from '../../../core/services/toaster.service';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { LoadingService } from '../../../core/services/loading.service';
+import { LoadingService, ToasterService, ModalService } from '../../../core/globalMethods/global-methods';
 import { Events } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';

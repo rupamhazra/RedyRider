@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
-import { LoadingService } from '../../core/services/loading.service';
 import { Platform } from '@ionic/angular';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import { HomeService } from '../../core/services/home.service';
 import { Events } from '@ionic/angular';
 import { OfficePoolCarService } from '../../core/services/office-pool-car.service';
 import { MenuController } from '@ionic/angular';
+import { AppRate } from '@ionic-native/app-rate/ngx';
+import { RouteStoppageModalPage } from '../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
+import { ModalService, LoadingService } from '../../core/globalMethods/global-methods';
+
+
 import {
   trigger,
   state,
@@ -60,10 +62,11 @@ export class HomePage implements OnInit {
     private device: Device,
     public platform: Platform,
     private fcm: FirebaseX,
-    public homeService: HomeService,
     public home_page_event: Events,
     public officePoolCarService: OfficePoolCarService,
     private menuCtrl: MenuController,
+    private appRate: AppRate,
+    public modalService: ModalService,
   ) {
     this.menuCtrl.enable(true);
     platform.ready().then(() => {
@@ -81,8 +84,44 @@ export class HomePage implements OnInit {
       }
     });
   }
-
+  giveRating() {
+    /**
+       * App Rating
+       */
+    // this.appRate.preferences = {
+    //   inAppReview: true,
+    //   displayAppName: 'RedyRider',
+    //   usesUntilPrompt: 3,
+    //   promptAgainForEachNewVersion: true,
+    //   storeAppURL: {
+    //     android: 'market://details?id=com.redyrider.app',
+    //   },
+    //   customLocale: {
+    //     title: 'Do you enjoy %@?',
+    //     message: 'If you enjoy %@. would you mind talking to rate it?',
+    //     cancelButtonLabel: 'No, Thanks',
+    //     laterButtonLabel: 'Remind Me Later',
+    //     rateButtonLabel: 'Rate It Now'
+    //   },
+    //   callbacks: {
+    //     onRateDialogShow: function (callback) {
+    //       console.log('User Prompt for Rating');
+    //     },
+    //     onButtonClicked: function (buttonIndex) {
+    //       console.log('Selected Button Index', buttonIndex);
+    //     }
+    //   }
+    // }
+    // this.appRate.promptForRating(true);
+  }
   ngOnInit() {
+    this.storage.get('popup_msg').then((val) => {
+      this.openPopup();
+      // if (val !== 'yes') {
+      //   this.openPopup();
+      // }
+    });
+
     this.home_page_event.subscribe('check_net_connection', (data) => {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
@@ -110,7 +149,7 @@ export class HomePage implements OnInit {
   }
   public insertDeviceDetails(request_data) {
     console.log('request_data', request_data)
-    this.homeService.insertDeviceDetailsService(request_data).subscribe(
+    this.officePoolCarService.insertDeviceDetailsService(request_data).subscribe(
       res => {
         if (res.status.toLowerCase() == 'success') {
         }
@@ -128,4 +167,9 @@ export class HomePage implements OnInit {
   goToPage(name) {
     this.router.navigateByUrl('/' + name);
   }
+  openPopup() {
+    let data = { 'from_which_page': 'global-popup' }
+    this.modalService.openModal(RouteStoppageModalPage, data, 'pop_up_stoppage_modal_css');
+  }
+
 }

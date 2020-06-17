@@ -4,8 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { RouteStoppageModalPage } from '../../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
-import { ModalService } from '../../../core/services/modal.service';
-import { ToasterService } from '../../../core/services/toaster.service';
+import { ToasterService, ModalService } from '../../../core/globalMethods/global-methods';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 @Component({
   selector: 'app-myaccount-common-page',
@@ -35,6 +34,7 @@ export class MyaccountCommonPagePage implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.which_page = this.route.snapshot.params['which-page'];
     this.progress_bar = true;
     this.storage.get('USER_INFO').then((val) => {
@@ -46,9 +46,28 @@ export class MyaccountCommonPagePage implements OnInit {
         this.progress_bar = false;
         this.device_token = val.user_device['device_token'];
         this.notificationDetails(false, false);
+        this.readStatusUpdate();
       }
     });
     this.getRouteMap();
+  }
+  readStatusUpdate() {
+    let request_data = {
+      "type": "update_notification_status",
+      "user_id": this.userId
+    };
+
+    this.officePoolCarService.commonPageContentService(request_data).subscribe(
+      res => {
+        //console.log('res.result', res.result)
+        //this.result = res.result
+
+      },
+      error => {
+        //this.progress_bar = false;
+        //this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+      }
+    );
   }
   getRouteMap() {
     let request_data = {

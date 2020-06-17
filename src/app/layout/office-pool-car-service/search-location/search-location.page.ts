@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { LoadingService } from '../../../core/services/loading.service';
+import { LoadingService } from '../../../core/globalMethods/global-methods';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
@@ -44,6 +44,7 @@ export class SearchLocationPage implements OnInit {
   markers = [];
   showList: boolean = false;
   net_connection_check: boolean = false;
+  result: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,

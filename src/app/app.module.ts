@@ -13,8 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { IonicStorageModule } from '@ionic/storage';
-import { AuthGuardService } from './core/services/auth-guard.service';
-import { AuthenticationService } from './core/services/authentication.service';
+import { AuthGuardService, AuthenticationService } from './core/globalMethods/global-methods';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -56,6 +55,8 @@ import { Insomnia } from '@ionic-native/insomnia/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 
+import { AppRate } from '@ionic-native/app-rate/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -80,8 +81,8 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
   providers: [
     StatusBar,
     SplashScreen,
-    AuthGuardService,
-    AuthenticationService,
+    // AuthGuardService,
+    // AuthenticationService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Camera,
     File,
@@ -102,7 +103,8 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
     FileTransfer,
     Insomnia,
     TextToSpeech,
-    SpeechRecognition
+    SpeechRecognition,
+    AppRate
 
   ],
   bootstrap: [AppComponent],

@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from '../../../core/services/modal.service';
-import { ToasterService } from '../../../core/services/toaster.service';
-import { LoadingService } from '../../../core/services/loading.service';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 import { NavParams } from '@ionic/angular';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
@@ -9,8 +6,7 @@ import { Events } from '@ionic/angular';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { LoginRegisterService } from '../../../core/services/login-register.service';
-import { AuthenticationService } from '../../../core/services/authentication.service';
+import { AuthenticationService, ToasterService, LoadingService, ModalService } from '../../../core/globalMethods/global-methods';
 
 @Component({
   selector: 'app-route-stoppage-modal',
@@ -23,7 +19,6 @@ export class RouteStoppageModalPage implements OnInit {
   form_personal: FormGroup;
   form_add: FormGroup;
   form_booking: FormGroup;
-
   result_data: any = {};
   net_connection_check: boolean = false;
   countries: any;
@@ -34,8 +29,6 @@ export class RouteStoppageModalPage implements OnInit {
   city_selected = {};
   qr_image;
   stoppage_list;
-
-
   otp1: any;
   otp2: any;
   otp3: any;
@@ -44,9 +37,7 @@ export class RouteStoppageModalPage implements OnInit {
   passwordShown: boolean = false;
   mobile;
   form_password: FormGroup;
-
   form_forget_password: FormGroup;
-
   userDetails: any;
   OTP: string = '';
   register_otp: string;
@@ -60,7 +51,6 @@ export class RouteStoppageModalPage implements OnInit {
     public route_stoppage_details_event: Events,
     private router: Router,
     private storage: Storage,
-    private loginRegisterService: LoginRegisterService,
     private authService: AuthenticationService,
   ) { }
   ngOnInit() {
@@ -75,6 +65,7 @@ export class RouteStoppageModalPage implements OnInit {
     let start_point = this.navParams.get('start_point');
     let route_timing_id = this.navParams.get('route_timing_id');
     this.qr_image = this.navParams.get('qr_image');
+
     if (this.calling_page == 'bus-route-details-page') {
       this.loadingService.present();
       let request_data = { "type": "stoppage_details", "route_id": route_id, 'start_loc': start_point, 'end_loc': end_point, 'route_timing_id': route_timing_id };
@@ -156,7 +147,25 @@ export class RouteStoppageModalPage implements OnInit {
         }
       );
     }
-
+    if (this.calling_page == 'global-popup') {
+      //this.loadingService.present();
+      this.storage.set('popup_msg', 'yes');
+      let request_data = {
+        "type": "popup_msg"
+      };
+      this.officePoolCarService.commonPageContentService(request_data).subscribe(
+        res => {
+          //console.log('res', res)
+          //this.loadingService.dismiss();
+          this.result_data = res.result
+        },
+        error => {
+          console.log("error::::" + error.error);
+          //this.loadingService.dismiss();
+          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+        }
+      );
+    }
   }
   closeModal() {
     this.modalService.closeModal();
@@ -330,7 +339,7 @@ export class RouteStoppageModalPage implements OnInit {
       'user_type': '3',
       'pass': this.form_password.value.otp1 + this.form_password.value.otp2 + this.form_password.value.otp3 + this.form_password.value.otp4
     }
-    this.loginRegisterService.loginService(this.request_data).subscribe(
+    this.officePoolCarService.loginService(this.request_data).subscribe(
       res => {
         //console.log("res:::" + res.msg);
         if (res.status.toLowerCase() == 'success') {
@@ -370,7 +379,7 @@ export class RouteStoppageModalPage implements OnInit {
     //this.modalService.closeModal();
     this.loadingService.present();
     this.form_forget_password.value['type'] = 'log_by_otp';
-    this.loginRegisterService.loginService(this.form_forget_password.value).subscribe(
+    this.officePoolCarService.loginService(this.form_forget_password.value).subscribe(
       res => {
         //console.log("res:::" + res.msg);
         this.storage.set('user_details', res.result);
@@ -384,7 +393,6 @@ export class RouteStoppageModalPage implements OnInit {
       }
     );
   }
-
   otpVerify() {
     this.loadingService.present()
     console.log('userdetails', this.userDetails)
@@ -406,7 +414,7 @@ export class RouteStoppageModalPage implements OnInit {
     }
   }
   registerService(userRegisterDetails) {
-    this.loginRegisterService.registerService(userRegisterDetails).subscribe(
+    this.officePoolCarService.registerService(userRegisterDetails).subscribe(
       res => {
         //console.log('res_details', res)
         if (res.status.toLowerCase() == 'success') {
@@ -421,5 +429,9 @@ export class RouteStoppageModalPage implements OnInit {
         this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }
     );
+  }
+  popupDetails() {
+    this.modalService.closeModal();
+    this.router.navigateByUrl('/common-page/popup-details');
   }
 }

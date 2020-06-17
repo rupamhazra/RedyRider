@@ -1,4 +1,4 @@
-<ion-header *ngIf="!(calling_page==='login-password-page' || calling_page==='login-forget-password-page' || calling_page === 'login-otp-page' || calling_page === 'register')">
+<ion-header *ngIf="!(calling_page==='login-password-page' || calling_page==='login-forget-password-page' || calling_page === 'login-otp-page' || calling_page === 'register' || calling_page==='global-popup')">
   <ion-toolbar color="primary">
     <ion-title *ngIf="calling_page=='refer-earn-page-earn'">How To Earn</ion-title>
     <ion-title *ngIf="calling_page=='refer-earn-page-terms'">Terms & Conditions</ion-title>
@@ -13,7 +13,15 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="inner_div">
+  <div class="ion-text-center" *ngIf="calling_page=='global-popup'">
+    <div>
+      <ion-icon ios="ios-close-circle" md="md-close-circle" (click)="closeModal();"></ion-icon>
+    </div>
+    
+    <div [innerHTML]="result_data.noto_body" (click)="popupDetails()"></div>
+   
+  </div>
+  <div class="inner_div" *ngIf="!(calling_page=='global-popup')">
     <div style="padding: 0px 15px 0px 15px;" *ngIf="calling_page=='refer-earn-page-earn'">
       <p>FOLLOW THESE STEPS </p>
       <ion-toolbar> 
@@ -260,6 +268,7 @@
           <ion-button size="default" color="button"  type="button" (click)="otpVerify()" [disabled]="!(otp1 && otp2 && otp3 && otp4) || net_connection_check">Continue</ion-button>
         </div>
     </div>
+    
   
   </div>
 

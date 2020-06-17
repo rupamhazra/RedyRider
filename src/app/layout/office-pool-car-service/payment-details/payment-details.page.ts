@@ -3,9 +3,7 @@ import { Events } from '@ionic/angular';
 import { Router } from "@angular/router";
 import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { LoadingService } from '../../../core/services/loading.service';
-import { ToasterService } from '../../../core/services/toaster.service';
-import { AlertService } from '../../../core/services/alert.service';
+import { AlertService, LoadingService, ToasterService } from '../../../core/globalMethods/global-methods';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 
 declare var RazorpayCheckout: any;

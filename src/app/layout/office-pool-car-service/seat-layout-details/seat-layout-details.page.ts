@@ -1,8 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from "@angular/router";
-import { ToasterService } from '../../../core/services/toaster.service';
-import { LoadingService } from '../../../core/services/loading.service';
-import { ModalService } from '../../../core/services/modal.service';
+import { ModalService, LoadingService, ToasterService } from '../../../core/globalMethods/global-methods';
 import { Events } from '@ionic/angular';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 import { Storage } from '@ionic/storage';
@@ -132,38 +130,38 @@ export class SeatLayoutDetailsPage implements OnInit {
 
   ////////Priyam Distance api google 05.06.2020/////////////
 
-  Distance_api(){
+  Distance_api() {
 
     let distance;
-    const that =this;
-    let star_lat_lng={lat: parseFloat(this.allSeats.start_point_lat),lng: parseFloat(this.allSeats.start_point_long)};
-    let end_lat_lng={lat: parseFloat(this.allSeats.end_point_lat),lng: parseFloat(this.allSeats.end_point_long)};
+    const that = this;
+    let star_lat_lng = { lat: parseFloat(this.allSeats.start_point_lat), lng: parseFloat(this.allSeats.start_point_long) };
+    let end_lat_lng = { lat: parseFloat(this.allSeats.end_point_lat), lng: parseFloat(this.allSeats.end_point_long) };
     this.distanceService.getDistanceMatrix({
-        origins: [star_lat_lng],
-        destinations: [end_lat_lng],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.METRIC,
-        avoidHighways: false,
-        avoidTolls: false
-      }, function (response, status) {
-        if (status !== 'OK') {
-          alert('Start distance matrix Error was: ' + status);
-        } else {
-          //console.log(response.rows[0].elements[0].distance.text);
-          distance=response.rows[0].elements[0].distance.text;
+      origins: [star_lat_lng],
+      destinations: [end_lat_lng],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      avoidHighways: false,
+      avoidTolls: false
+    }, function (response, status) {
+      if (status !== 'OK') {
+        alert('Start distance matrix Error was: ' + status);
+      } else {
+        //console.log(response.rows[0].elements[0].distance.text);
+        distance = response.rows[0].elements[0].distance.text;
 
-          that.storage.get('route_search_parameters').then((val) => {
-            let val1 = val;
-            val1['distance'] = distance;
-            
-            that.storage.set('route_search_parameters', val1);
-          })
-    
+        that.storage.get('route_search_parameters').then((val) => {
+          let val1 = val;
+          val1['distance'] = distance;
 
-        }
-      });
+          that.storage.set('route_search_parameters', val1);
+        })
 
-      
+
+      }
+    });
+
+
   }
 
 

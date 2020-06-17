@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalService } from '../../../core/services/modal.service';
+import { ModalService } from '../../../core/globalMethods/global-methods';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavParams } from '@ionic/angular';
 

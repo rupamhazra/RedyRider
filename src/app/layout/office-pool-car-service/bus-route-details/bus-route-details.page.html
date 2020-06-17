@@ -9,12 +9,26 @@
           <p style="padding: 10px;">{{no_bus_saturday_msg}}</p>
         </ion-text>
       </ion-card>
-      <ion-card  *ngIf="dataList_show">
+      <div *ngIf="dataList_show">
         <ion-text color="danger" text-center>
           <p>No car has been available </p>
         </ion-text>
+        <ion-card>  
+          <mat-accordion>
+            <mat-expansion-panel class="mat-expansion-panel-header-car">
+              <mat-expansion-panel-header class="col_back">
+                <mat-panel-description>
+                  <ion-grid text-center>
+                    <ion-col size="2"><fa-icon [icon]="['fas','route']" size="1x" class="rstar-icon"></fa-icon>&nbsp;</ion-col>
+                    <ion-col class="color-light" size="9">Check the Route Map</ion-col>
+                  </ion-grid>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <ion-img src="{{this.result}}"></ion-img>
+            </mat-expansion-panel>
+          </mat-accordion>
       </ion-card>
-     
+    </div>
         <div class="margin-top">
           <mat-accordion>
             <mat-expansion-panel *ngFor="let item of dataList"  class="mat-expansion-panel-header-car margin-bottom-10">

@@ -83,6 +83,20 @@ $font-family-base: "Roboto", sans-serif !default;
     display: block;
     width:90%;
  }
+ .pop_up_stoppage_modal_css .modal-wrapper {
+    height: 80%;    
+    position: absolute; 
+    display: block;
+    width:85%;
+    position: relative;
+ }
+ .pop_up_stoppage_modal_css ion-icon{
+    zoom: 2.5;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: white;
+ }
  .p_class{
     color: initial !important;
  }
@@ -171,4 +185,7 @@ hr {
 }
 .color-light{
     color: white;
+}
+.rstar-icon{
+    font-size: 20px;
 }

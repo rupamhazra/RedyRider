@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { RouteStoppageModalPage } from '../../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
-import { ModalService } from '../../../core/services/modal.service';
-import { ToasterService } from '../../../core/services/toaster.service';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 import { ActionSheetController } from '@ionic/angular';
-import { LoadingService } from '../../../core/services/loading.service';
+import { LoadingService, ToasterService, ModalService } from '../../../core/globalMethods/global-methods';
 import { Router } from '@angular/router';
 
 @Component({

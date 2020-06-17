@@ -2,16 +2,15 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AuthenticationService } from './core/services/authentication.service';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { environment } from '../environments/environment';
-import { ToasterService } from './core/services/toaster.service';
 import { Network } from '@ionic-native/network/ngx';
-import { AlertService } from './core/services/alert.service';
+import { AlertService, AuthenticationService, ToasterService } from './core/globalMethods/global-methods';
 import { FirebaseX } from "@ionic-native/firebase-x/ngx";
 import { Events } from '@ionic/angular';
+import { AppRate } from '@ionic-native/app-rate/ngx';
 
 declare var window;
 
@@ -19,6 +18,7 @@ declare var window;
   selector: 'app-root',
   templateUrl: 'app.component.html',
 })
+
 export class AppComponent {
   arr: any;
   pushes: any;
@@ -46,17 +46,51 @@ export class AppComponent {
     private network: Network,
     private alertService: AlertService,
     public app_component_event: Events,
-    //private navCtrl: NavController,
+    private appRate: AppRate,
     private fcm: FirebaseX,
     //public fcmService: FcmService,
     //private device: Device,
   ) {
     this.arr = [];
     this.initializeApp();
-    this.getNotification();
-  }
-  getNotification() {
+    this.platform.ready().then(() => {
+      appRate.preferences = {
+        inAppReview: true,
+        useLanguage: 'en',
+        displayAppName: 'RedyRider',
+        usesUntilPrompt: 3,
+        promptAgainForEachNewVersion: true,
+        storeAppURL: {
+          ios: '<app_id>',
+          android: 'market://details?id=com.redyrider.app',
+          windows: 'ms-windows-store://review/?ProductId=<store_id>'
+        },
+        customLocale: {
+          title: 'Do you enjoy the ride with %@?',
+          message: 'If you enjoy using %@ service. would you mind talking to rate it?',
+          cancelButtonLabel: 'No, Thanks',
+          laterButtonLabel: 'Remind Me Later',
+          rateButtonLabel: 'Rate It Now'
 
+        },
+        callbacks: {
+          onRateDialogShow: function (callback) {
+            console.log('dfcsd');
+          },
+          onButtonClicked: function (buttonIndex) {
+            console.log('Selected Index is ' + buttonIndex);
+          }
+        },
+        simpleMode: true,
+      }
+
+    });
+  }
+  giveRating() {
+    /**
+     * App Rating
+     */
+    this.appRate.promptForRating(true);
   }
   initializeApp() {
 
@@ -133,6 +167,8 @@ export class AppComponent {
           }
         });
       });
+
+
 
     });
   }
