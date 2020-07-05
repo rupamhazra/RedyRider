@@ -1,5 +1,17 @@
 <app-header></app-header>
 <ion-content>
-  <div class="inner_div" [innerHTML]="result">
+  <div class="inner_div" [innerHTML]="result" *ngIf="!(which_page == 'check-in')">
+  </div>
+  <div *ngIf="which_page == 'check-internet-connection'" class="margin-top-50">
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+          <ion-img src="./assets/svg/logo-color.svg" style="margin:0 auto;width: 70px;"></ion-img>
+          <h5> OOPS! Something went wrong</h5>
+          <p>We encountered a problem while updating your data.Please check your internet and try again.</p>
+          <ion-button size="default" >Retry</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

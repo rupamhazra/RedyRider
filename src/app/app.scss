@@ -84,7 +84,7 @@ $font-family-base: "Roboto", sans-serif !default;
     width:90%;
  }
  .pop_up_stoppage_modal_css .modal-wrapper {
-    height: 80%;    
+    height: 75%;    
     position: absolute; 
     display: block;
     width:85%;
@@ -188,4 +188,7 @@ hr {
 }
 .rstar-icon{
     font-size: 20px;
+}
+.margin-top-50{
+    margin-top: 50px;
 }

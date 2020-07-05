@@ -45,7 +45,7 @@ export class WalletPage implements OnInit {
       this.userName = val['name'];
       this.userEmail = val['email'];
       this.userPhone = val['mobile'];
-      this.razor_pay_key = val['razor_pay_key'];
+      //this.razor_pay_key = val['razor_pay_key'];
       this.getTransactionHistory(false, false);
 
     });
@@ -58,6 +58,20 @@ export class WalletPage implements OnInit {
     this.form = this.formBuilder.group({
       amount: ['', Validators.required]
     });
+    this.getApiKeyDetails();
+  }
+  getApiKeyDetails() {
+    let request_data = {
+      "type": "rzr_pay_api",
+    }
+    this.officePoolCarService.commonPageContentService(request_data).subscribe(
+      res => {
+        this.razor_pay_key = res.result.razor_pay_key
+      },
+      error => {
+
+      }
+    );
   }
   getTransactionHistory(event, isFirstLoad: boolean) {
     if (!event)
@@ -110,6 +124,7 @@ export class WalletPage implements OnInit {
     // }
   }
   addMoneyToWallet() {
+    console.log('API KEY', this.razor_pay_key);
     var options = {
       description: 'Credits towards consultation',
       // image: 'https://i.imgur.com/3g7nmJC.png',
@@ -136,7 +151,7 @@ export class WalletPage implements OnInit {
       let request_data = {
         "type": "add_to_wallet",
         "user_id": this.userId,
-        "amount": options.amount,
+        "amount": parseFloat(this.form.value.amount),
         "transaction_no": payment_id,
         "referal_coupon_code_id": "0",
         "recharge_by": "razorpay",
@@ -146,7 +161,6 @@ export class WalletPage implements OnInit {
       this.addToWallet(request_data);
     };
     var cancelCallback = (error) => {
-      console.log(error.description + ' (Error ' + error.code + ')');
       let request_data = {
         "type": "add_to_wallet",
         "user_id": this.userId,
@@ -167,7 +181,7 @@ export class WalletPage implements OnInit {
         //alert('result' + res.result);
         this.getTransactionHistory(false, false);
         if (status == '3')
-          this.toasterService.showToast('Your transaction has been cancelled', 2000);
+          this.toasterService.showToast('Your transaction has been cancelled', 2000, true, false, '', '', 'my-error-toast');
         else
           this.toasterService.showToast('Your amound has been added to your wallet', 2000);
         this.loadingService.dismiss();

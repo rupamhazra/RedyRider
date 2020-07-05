@@ -20,7 +20,7 @@ export class CommonPagePage implements OnInit {
   ) { }
   ngOnInit() {
     this.which_page = this.route.snapshot.params['which-page'];
-    this.getContent(this.which_page);
+    if (!(this.which_page == 'check-internet-connection')) this.getContent(this.which_page);
   }
   getContent(which_page) {
     this.loadingService.present();
@@ -41,7 +41,6 @@ export class CommonPagePage implements OnInit {
         this.result = res.result
       },
       error => {
-        console.log("error::::" + error.error);
         this.loadingService.dismiss();
         this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }

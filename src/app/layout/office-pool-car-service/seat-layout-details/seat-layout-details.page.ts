@@ -48,7 +48,6 @@ export class SeatLayoutDetailsPage implements OnInit {
       val1['type'] = 'booked';
       this.request_data = val1;
       this.storage.set('route_search_parameters', val1);
-      console.log('route_search_parameters', val)
       this.journy_date = val.traval_date;
       this.journy_time = val.traval_time;
       this.mode = val['single_or_round'];
@@ -112,7 +111,6 @@ export class SeatLayoutDetailsPage implements OnInit {
     );
   }
   getSeatDetails(request_data) {
-    console.log('request_data', request_data)
     this.officePoolCarService.commonSearchService(request_data).subscribe(
       res => {
         //console.log('this.allSeats',res.result);

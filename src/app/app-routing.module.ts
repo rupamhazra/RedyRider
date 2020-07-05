@@ -25,7 +25,6 @@ const routes: Routes = [
     loadChildren: './auth/forgot-password/forgot-password.module#ForgotPasswordPageModule'
   },
   { path: 'common-page/:which-page', loadChildren: './common-page/common-page.module#CommonPagePageModule' },
-  { path: 'demo-form', loadChildren: './auth/demo-form/demo-form.module#DemoFormPageModule' },
 
 
 

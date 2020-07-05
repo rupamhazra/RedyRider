@@ -147,7 +147,6 @@ export class OfficePoolCarServicePage implements OnInit {
     });
   }
   tripSelect(trip_val) {
-    console.log('trip_val', trip_val)
     if (trip_val == '1') {
       this.roundTripDiv = true;
       this.singleTripDiv = true;

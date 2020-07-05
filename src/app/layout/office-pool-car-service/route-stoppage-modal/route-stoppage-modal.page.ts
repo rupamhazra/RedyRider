@@ -6,7 +6,7 @@ import { Events } from '@ionic/angular';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { AuthenticationService, ToasterService, LoadingService, ModalService } from '../../../core/globalMethods/global-methods';
+import { AuthenticationService, ToasterService, LoadingService, ModalService, NetworkService } from '../../../core/globalMethods/global-methods';
 
 @Component({
   selector: 'app-route-stoppage-modal',
@@ -47,6 +47,7 @@ export class RouteStoppageModalPage implements OnInit {
     private navParams: NavParams,
     private loadingService: LoadingService,
     private toasterService: ToasterService,
+    private networkService: NetworkService,
     private formBuilder: FormBuilder,
     public route_stoppage_details_event: Events,
     private router: Router,
@@ -59,112 +60,112 @@ export class RouteStoppageModalPage implements OnInit {
       if (data == 'disconnect') this.net_connection_check = true;
     });
     this.calling_page = this.navParams.get('from_which_page');
-    console.log('this.calling_page', this.calling_page)
     let route_id = this.navParams.get('route_id');
     let end_point = this.navParams.get('end_point');
     let start_point = this.navParams.get('start_point');
     let route_timing_id = this.navParams.get('route_timing_id');
     this.qr_image = this.navParams.get('qr_image');
+    if (!this.networkService.checkNetworkDisconnect()) {
+      if (this.calling_page == 'bus-route-details-page') {
+        this.loadingService.present();
+        let request_data = { "type": "stoppage_details", "route_id": route_id, 'start_loc': start_point, 'end_loc': end_point, 'route_timing_id': route_timing_id };
+        this.officePoolCarService.commonSearchService(request_data).subscribe(
+          res => {
+            //console.log("res:::" + res.msg);
+            this.items = res.result;
+            this.loadingService.dismiss();
+          },
+          error => {
+            //console.log("error::::" + error.error.msg);
+            this.loadingService.dismiss();
+            this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+          }
+        );
+      }
+      else if (this.calling_page == 'myaccount-personal') {
+        console.log('myaccount-personal')
+        this.getData(this.calling_page, this.navParams.get('userId'));
+        this.form_personal = this.formBuilder.group({
+          name: [Validators.required],
+          email: [Validators.required],
+          gender: [''],
+          type: ['update'],
+          user_id: [this.navParams.get('userId')]
+        });
+      }
+      else if (this.calling_page == 'myaccount-address') {
+        console.log('myaccount-address')
+        this.countryList();
+        this.getData(this.calling_page, this.navParams.get('userId'));
+        this.form_add = this.formBuilder.group({
+          address: [Validators.required],
+          country_id: [Validators.required],
+          state_id: [Validators.required],
+          city_id: [Validators.required],
+          pin_code: [Validators.required],
+          type: ['update'],
+          user_id: [this.navParams.get('userId')]
+        });
+      }
+      if (this.calling_page == 'location-tracking-page') {
+        this.stoppage_list = this.navParams.get('stoppage_list');
+      }
+      if (this.calling_page == 'login-password-page') {
+        this.mobile = this.navParams.get('mobile');
+        this.form_password = this.formBuilder.group({
+          otp1: ['', Validators.required],
+          otp2: ['', Validators.required],
+          otp3: ['', Validators.required],
+          otp4: ['', Validators.required]
+        });
+      }
+      if (this.calling_page == 'login-forget-password-page') {
+        this.form_forget_password = this.formBuilder.group({
+          contact: [Validators.required],
+        });
+      }
+      if (this.calling_page == 'login-otp-page' || this.calling_page == 'register') {
+        this.register_otp = this.navParams.get('register_otp');
+        this.userDetails = this.navParams.get('user_details');
+      }
+      if (this.calling_page == 'refer-earn-page-terms') {
+        this.loadingService.present();
+        let request_data = {
+          "content_type": this.calling_page,
+          "type": "site_content"
+        };
+        this.officePoolCarService.commonPageContentService(request_data).subscribe(
+          res => {
+            //console.log('res', res)
+            this.loadingService.dismiss();
+            this.items = res.result
+          },
+          error => {
+            console.log("error::::" + error.error);
+            this.loadingService.dismiss();
+            this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+          }
+        );
+      }
+      if (this.calling_page == 'global-popup') {
+        //this.loadingService.present();
+        this.storage.set('popup_msg', 'yes');
+        let request_data = {
+          "type": "popup_msg"
+        };
+        this.officePoolCarService.commonPageContentService(request_data).subscribe(
+          res => {
+            //console.log('res', res)
+            //this.loadingService.dismiss();
+            this.result_data = res.result
+          },
+          error => {
 
-    if (this.calling_page == 'bus-route-details-page') {
-      this.loadingService.present();
-      let request_data = { "type": "stoppage_details", "route_id": route_id, 'start_loc': start_point, 'end_loc': end_point, 'route_timing_id': route_timing_id };
-      this.officePoolCarService.commonSearchService(request_data).subscribe(
-        res => {
-          //console.log("res:::" + res.msg);
-          this.items = res.result;
-          this.loadingService.dismiss();
-        },
-        error => {
-          //console.log("error::::" + error.error.msg);
-          this.loadingService.dismiss();
-          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
-        }
-      );
-    }
-    else if (this.calling_page == 'myaccount-personal') {
-      console.log('myaccount-personal')
-      this.getData(this.calling_page, this.navParams.get('userId'));
-      this.form_personal = this.formBuilder.group({
-        name: [Validators.required],
-        email: [Validators.required],
-        gender: [''],
-        type: ['update'],
-        user_id: [this.navParams.get('userId')]
-      });
-    }
-    else if (this.calling_page == 'myaccount-address') {
-      console.log('myaccount-address')
-      this.countryList();
-      this.getData(this.calling_page, this.navParams.get('userId'));
-      this.form_add = this.formBuilder.group({
-        address: [Validators.required],
-        country_id: [Validators.required],
-        state_id: [Validators.required],
-        city_id: [Validators.required],
-        pin_code: [Validators.required],
-        type: ['update'],
-        user_id: [this.navParams.get('userId')]
-      });
-    }
-    if (this.calling_page == 'location-tracking-page') {
-      this.stoppage_list = this.navParams.get('stoppage_list');
-    }
-    if (this.calling_page == 'login-password-page') {
-      this.mobile = this.navParams.get('mobile');
-      this.form_password = this.formBuilder.group({
-        otp1: ['', Validators.required],
-        otp2: ['', Validators.required],
-        otp3: ['', Validators.required],
-        otp4: ['', Validators.required]
-      });
-    }
-    if (this.calling_page == 'login-forget-password-page') {
-      this.form_forget_password = this.formBuilder.group({
-        contact: [Validators.required],
-      });
-    }
-    if (this.calling_page == 'login-otp-page' || this.calling_page == 'register') {
-      this.register_otp = this.navParams.get('register_otp');
-      this.userDetails = this.navParams.get('user_details');
-    }
-    if (this.calling_page == 'refer-earn-page-terms') {
-      this.loadingService.present();
-      let request_data = {
-        "content_type": this.calling_page,
-        "type": "site_content"
-      };
-      this.officePoolCarService.commonPageContentService(request_data).subscribe(
-        res => {
-          //console.log('res', res)
-          this.loadingService.dismiss();
-          this.items = res.result
-        },
-        error => {
-          console.log("error::::" + error.error);
-          this.loadingService.dismiss();
-          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
-        }
-      );
-    }
-    if (this.calling_page == 'global-popup') {
-      //this.loadingService.present();
-      this.storage.set('popup_msg', 'yes');
-      let request_data = {
-        "type": "popup_msg"
-      };
-      this.officePoolCarService.commonPageContentService(request_data).subscribe(
-        res => {
-          //console.log('res', res)
-          //this.loadingService.dismiss();
-          this.result_data = res.result
-        },
-        error => {
-          console.log("error::::" + error.error);
-          //this.loadingService.dismiss();
-          this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
-        }
-      );
+            //this.loadingService.dismiss();
+            this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+          }
+        );
+      }
     }
   }
   closeModal() {
@@ -410,6 +411,7 @@ export class RouteStoppageModalPage implements OnInit {
       this.loadingService.dismiss();
       //this.authService.login(this.userDetails)
     } else if (this.calling_page == 'register') {
+      this.modalService.closeModal();
       this.registerService(this.userDetails)
     }
   }
@@ -420,7 +422,7 @@ export class RouteStoppageModalPage implements OnInit {
         if (res.status.toLowerCase() == 'success') {
 
           this.authService.login(res.result);
-          this.toasterService.showToast('Congrats you got your first ride free of cost.', 3000);
+          this.toasterService.showToast('Congrats you got your first seat free of cost.', 3000);
           this.loadingService.dismiss();
         }
       },

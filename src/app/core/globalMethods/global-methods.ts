@@ -39,8 +39,7 @@ export class AuthenticationService {
     }
     logout() {
         return this.storage.remove('USER_INFO').then(() => {
-            this.storage.remove('popup_msg');
-            this.storage.remove('user_details');
+            this.storage.clear();
             this.authState.next(false);
         });
     }
@@ -70,7 +69,7 @@ export class ToasterService {
     constructor(private toastController: ToastController) { }
     showToast(msg = '', duration = 0, animated = true, showCloseButton = false, closeButtonText = 'OK', for_which: string = '', cssClass: string = 'my-toast') {
         if (for_which == 'ok_cancel_btn') {
-            console.log('for_which', for_which)
+
             this.toastController.create({
                 message: msg,
                 duration: duration,
@@ -210,16 +209,7 @@ export class AlertService {
         await alert.present();
     }
 
-    async presentAlertMultipleButtons() {
-        const alert = await this.alertController.create({
-            header: 'Alert',
-            subHeader: 'Subtitle',
-            message: 'This is an alert message.',
-            buttons: ['Cancel', 'Open Modal', 'Delete']
-        });
 
-        await alert.present();
-    }
 
     async presentAlertConfirm(message, type: any = '') {
         const alert = await this.alertController.create({
@@ -258,132 +248,9 @@ export class AlertService {
         }
 
     }
-    async presentAlertPrompt() {
-        const alert = await this.alertController.create({
-            header: 'Prompt!',
-            inputs: [
-                {
-                    name: 'name1',
-                    type: 'text',
-                    placeholder: 'Placeholder 1'
-                },
-                {
-                    name: 'name2',
-                    type: 'text',
-                    id: 'name2-id',
-                    value: 'hello',
-                    placeholder: 'Placeholder 2'
-                },
-                {
-                    name: 'name3',
-                    value: 'http://ionicframework.com',
-                    type: 'url',
-                    placeholder: 'Favorite site ever'
-                },
-                // input date with min & max
-                {
-                    name: 'name4',
-                    type: 'date',
-                    min: '2017-03-01',
-                    max: '2018-01-12'
-                },
-                // input date without min nor max
-                {
-                    name: 'name5',
-                    type: 'date'
-                },
-                {
-                    name: 'name6',
-                    type: 'number',
-                    min: -5,
-                    max: 10
-                },
-                {
-                    name: 'name7',
-                    type: 'number'
-                }
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                    handler: () => {
-                        console.log('Confirm Cancel');
-                    }
-                }, {
-                    text: 'Ok',
-                    handler: () => {
-                        console.log('Confirm Ok');
-                    }
-                }
-            ]
-        });
 
-        await alert.present();
-    }
 
-    async presentAlertRadio() {
-        const alert = await this.alertController.create({
-            header: 'Radio',
-            inputs: [
-                {
-                    name: 'radio1',
-                    type: 'radio',
-                    label: 'Radio 1',
-                    value: 'value1',
-                    checked: true
-                },
-                {
-                    name: 'radio2',
-                    type: 'radio',
-                    label: 'Radio 2',
-                    value: 'value2'
-                },
-                {
-                    name: 'radio3',
-                    type: 'radio',
-                    label: 'Radio 3',
-                    value: 'value3'
-                },
-                {
-                    name: 'radio4',
-                    type: 'radio',
-                    label: 'Radio 4',
-                    value: 'value4'
-                },
-                {
-                    name: 'radio5',
-                    type: 'radio',
-                    label: 'Radio 5',
-                    value: 'value5'
-                },
-                {
-                    name: 'radio6',
-                    type: 'radio',
-                    label: 'Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 ',
-                    value: 'value6'
-                }
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                    handler: () => {
-                        console.log('Confirm Cancel');
-                    }
-                }, {
-                    text: 'Ok',
-                    handler: () => {
-                        console.log('Confirm Ok');
-                    }
-                }
-            ]
-        });
 
-        await alert.present();
-    }
 
 }
 
@@ -391,22 +258,32 @@ export class AlertService {
     providedIn: 'root'
 })
 export class NetworkService {
-    public onlineOffline: boolean = navigator.onLine;
+    public onlineOffline: boolean;
     constructor(
-        private alertService: AlertService,
-        private loadingService: LoadingService,
+        private toasterService: ToasterService,
+        private router: Router,
     ) { }
-
     // watch network for a disconnection
-    checkNetworkDisconnect() {
-        if (!navigator.onLine) {
-            this.alertService.presentAlert("Please check your internet connection!!");
-            this.loadingService.dismiss();
+    checkNetworkDisconnect(page_flag: boolean = true) {
+        if (navigator.onLine) {
+            if (page_flag) {
+                this.router.navigateByUrl('common-page/check-internet-connection');
+            } else {
+                this.toasterService.showToast('Check your internet connection', 2000, true, false, '', '', 'my-error-toast')
+            }
             return true;
         } else {
             return false;
         }
-
     }
 }
+
+@Injectable({
+    providedIn: 'root'
+})
+export class GetRouteMap {
+    constructor() { }
+
+}
+
 

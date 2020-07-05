@@ -61,7 +61,6 @@ export class ForgotPasswordPage implements OnInit {
       potp4: ['', Validators.required]
     });
     this.storage.get("user_details").then((val) => {
-      console.log('val', val)
       if (val) {
         this.contact = val.contact_no;
         this.otp_pass = val.otp_pass;
@@ -81,7 +80,6 @@ export class ForgotPasswordPage implements OnInit {
       "contact": this.contact,
       "type": "reset"
     }
-    console.log('this.request_data', this.request_data)
     this.loginRegisterService.resetPasswordService(this.request_data).subscribe(
       res => {
         this.loadingService.dismiss();

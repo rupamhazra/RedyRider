@@ -9,7 +9,7 @@ import { OfficePoolCarService } from '../../core/services/office-pool-car.servic
 import { MenuController } from '@ionic/angular';
 import { AppRate } from '@ionic-native/app-rate/ngx';
 import { RouteStoppageModalPage } from '../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
-import { ModalService, LoadingService } from '../../core/globalMethods/global-methods';
+import { ModalService, LoadingService, NetworkService } from '../../core/globalMethods/global-methods';
 
 
 import {
@@ -67,6 +67,7 @@ export class HomePage implements OnInit {
     private menuCtrl: MenuController,
     private appRate: AppRate,
     public modalService: ModalService,
+    private networkService: NetworkService
   ) {
     this.menuCtrl.enable(true);
     platform.ready().then(() => {
@@ -116,7 +117,7 @@ export class HomePage implements OnInit {
   }
   ngOnInit() {
     this.storage.get('popup_msg').then((val) => {
-      this.openPopup();
+      if (!this.networkService.checkNetworkDisconnect()) this.openPopup();
       // if (val !== 'yes') {
       //   this.openPopup();
       // }
@@ -128,24 +129,27 @@ export class HomePage implements OnInit {
     });
     this.title = this.router.url;
     if (this.platform.is("cordova"))
-      setTimeout(() => {
-        let device_details = {
-          "uuid": this.device.uuid,
-          "model": this.device.model,
-          "platform": this.device.platform,
-          "serial": this.device.serial,
-          "version": this.device.version,
-          "manufacturer": this.device.manufacturer
-        }
-        this.request_data = {
-          'userid': this.userId,
-          'device_details': JSON.stringify(device_details),
-          'device_uuid': this.device.uuid,
-          'device_token': this.device_token,
-          'type': 'user_device'
-        }
-        this.insertDeviceDetails(this.request_data);
-      }, 3000);
+      if (!this.networkService.checkNetworkDisconnect()) {
+        setTimeout(() => {
+          let device_details = {
+            "uuid": this.device.uuid,
+            "model": this.device.model,
+            "platform": this.device.platform,
+            "serial": this.device.serial,
+            "version": this.device.version,
+            "manufacturer": this.device.manufacturer
+          }
+          this.request_data = {
+            'userid': this.userId,
+            'device_details': JSON.stringify(device_details),
+            'device_uuid': this.device.uuid,
+            'device_token': this.device_token,
+            'type': 'user_device'
+          }
+          this.insertDeviceDetails(this.request_data);
+        }, 3000);
+      }
+
   }
   public insertDeviceDetails(request_data) {
     console.log('request_data', request_data)

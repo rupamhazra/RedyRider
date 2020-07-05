@@ -68,8 +68,8 @@ export class OfficePoolCarService {
       return this.http.post(environment.apiEndpoint + 'booking.php/', data);
   }
   notificationService(data: any): Observable<any> {
-    if (!this.networkService.checkNetworkDisconnect())
-      return this.http.post(environment.apiEndpoint + 'notifications.php/', data);
+    //if (!this.networkService.checkNetworkDisconnect())
+    return this.http.post(environment.apiEndpoint + 'notifications.php/', data);
   }
   personalService(data: any): Observable<any> {
     if (!this.networkService.checkNetworkDisconnect())

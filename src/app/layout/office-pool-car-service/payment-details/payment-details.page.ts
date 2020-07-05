@@ -51,7 +51,7 @@ export class PaymentDetailsPage implements OnInit {
       this.userPhone = val['mobile'];
       this.refer_code = val.referral_no;
       this.generate_link = 'https://google.com/' + this.refer_code;
-      this.razor_pay_key = val['razor_pay_key'];
+      //this.razor_pay_key = val['razor_pay_key'];
       //this.getBalance('wallet_balance');
       //this.getBalance('referral_balance');
       this.getBalance('referral_wallet_balance');
@@ -68,13 +68,25 @@ export class PaymentDetailsPage implements OnInit {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
     });
-
+    this.getApiKeyDetails();
   }
   buyCreditPoints() {
     this.router.navigateByUrl('myaccount/wallet')
   }
   referFriends() {
-    this.router.navigateByUrl('myaccount/refer-earn')
+    this.router.navigateByUrl('myaccount/myaccount-common-page/refer-earn')
+  }
+  getApiKeyDetails() {
+    let request_data = {
+      "type": "wallet",
+    }
+    this.officePoolCarService.payThroughWalletService(request_data).subscribe(
+      res => {
+        this.razor_pay_key = res.result.razor_pay_key
+      },
+      error => {
+      }
+    );
   }
   getBalance(type: string) {
 

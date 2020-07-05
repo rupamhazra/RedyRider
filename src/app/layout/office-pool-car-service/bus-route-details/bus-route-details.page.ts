@@ -107,7 +107,6 @@ export class BusRouteDetailsPage implements OnInit {
           this.progress_bar = false;
           this.getRouteMap();
         }
-        console.log('this.dataList', res.result);
         this.dataList = res.result;
         this.progress_bar = false;
         //}

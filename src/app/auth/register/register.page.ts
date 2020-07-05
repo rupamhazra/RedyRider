@@ -83,8 +83,6 @@ export class RegisterPage implements OnInit {
     });
   }
   registerUser(resendOtp: boolean = false) {
-    //let data = {};
-    //this.modalService.openModal(OtpVerificationPage, data, '_c_modal_otp_css');
     if (this.showReferralCode && this.form.controls['ref_applied_no'].value == '') {
       this.toasterService.showToast("Please enter referral no.", 2000, true, false, '', '', 'my-error-toast');
       return false;

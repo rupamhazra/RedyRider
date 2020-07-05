@@ -97,14 +97,8 @@ export class BookingHistoryDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-
-
     this.loadMap();
-
-
   }
-
-
   firebase_get_data() {
     let car_id = this.result_data.car_name + "-" + this.result_data.car_id;
     //console.log("car: ", car_id);
@@ -112,53 +106,15 @@ export class BookingHistoryDetailsPage implements OnInit {
       //this.driver_curent_live_location = 
       data.map(e => {
         if (e.payload.doc.id == car_id) {
-          //if (e.payload.doc.id == '123') {
-          // return {
-          //   id: e.payload.doc.id,
-          //   Name: e.payload.doc.data()['driver'],
-          //   lat: e.payload.doc.data()['lat'],
-          //   long: e.payload.doc.data()['long'],
-          //   driver_trip_start: e.payload.doc.data()['is_start'],
-          //   driver_trip_end: e.payload.doc.data()['is_end'],
-
-          // };
           this.driver_lat = e.payload.doc.data()['lat'];
           this.driver_long = e.payload.doc.data()['long'];
         }
       })
-
-      //alert(this.driver_curent_live_location[0].id);
-      //console.log('driver_curent_live_location', this.driver_curent_live_location);
-      //this.allocate_driver_on_map(this.driver_curent_live_location);
       this.allocate_driver_on_map();
     });
-
-    // this.driver_curent_live_location = this.firestore.collection('locations').doc(car_id).get().pipe(
-    //   map(responce=>{console.log(responce.data()['lat']);})
-
-    // );
-    // this.driver_curent_live_location = this.firestore.collection('locations').get().subscribe((snapshot)=>{
-    //   snapshot.docs.forEach(element => {
-
-    //     if(element.id==car_id){
-
-    //       this.driver_lat=element.data().lat;
-    //       this.driver_long=element.data().long;
-    //       console.log('lat:',this.driver_lat,"long:", this.driver_long);
-    //     }
-    //     //element.data()
-    //   });
-    // });
-    // //this.driver_curent_live_location = this.firestore.doc('locations/'+car_id);
-    // //console.log(this.driver_curent_live_location);
-    // this.allocate_driver_on_map();
   }
 
-
-
-
   allocate_driver_on_map() {
-
     //this.driver_lat = driver_curent_live_location[0].lat;
     //this.driver_long = driver_curent_live_location[0].long;
     if (this.driver_lat != '' && this.driver_long != '') {
@@ -180,7 +136,6 @@ export class BookingHistoryDetailsPage implements OnInit {
           // rotation: parseInt(heading[i]),
           anchor: new google.maps.Point(10, 25) // orig 10,50 back of car, 10,0 front of car, 10,25 center of car
         };
-        console.log('heading', heading);
         this.car_icon.rotation = heading;
         this.driver_marker.setIcon(this.car_icon);
         //this.driver_marker.rotation = heading;
@@ -226,31 +181,12 @@ export class BookingHistoryDetailsPage implements OnInit {
     }).then(location => {
       this.lat = location.coords.latitude;
       this.lng = location.coords.longitude
-
-
     }).catch((error) => {
       console.log('Error getting location', error);
     })
-
-    // this.DirectionsWaypoint = [
-    //   {
-    //     location: { lat: 22.571232, lng: 88.425483 },
-    //     stopover: false
-    //   }, {
-    //     location: { lat: 22.576701, lng: 88.429078 },
-    //     stopover: true
-    //   }
-    // ];
-
-    //console.log('this.stopp_list_1', JSON.stringify(this.waypoint_stoppage_list));
-
-    //alert(JSON.stringify(this.waypoint_stoppage_list));
     this.waypoint_stoppage_list.forEach(element => {
       //console.log('element',element);
       let waypoint_location;
-      //waypoint_location=JSON.stringify(element)
-      //waypoint_location=element;
-
       waypoint_location = {
         location: { lat: parseFloat(element.location.lat), lng: parseFloat(element.location.lng) },
         stopover: element.stopover
@@ -258,20 +194,11 @@ export class BookingHistoryDetailsPage implements OnInit {
       //console.log('element:',waypoint_location);
       this.DirectionsWaypoint.push(waypoint_location);
     });
-    //console.log('DirectionsWaypoint',this.DirectionsWaypoint);
 
-
-    //this.DirectionsWaypoint = JSON.stringify(this.waypoint_stoppage_list);
-
-    //let latLng = new google.maps.LatLng(this.driver_lat, this.driver_long);
-    //console.log('this.stopp_list', this.stopp_list[0])
-    //console.log('this.stopp_list_lat', this.stopp_list[0].lat)
     let sto_len = this.stopp_list.length
     this.location_source = { lat: parseFloat(this.stopp_list[0].lat), lng: parseFloat(this.stopp_list[0].lng) };
-
-    //console.log('this.location_source', this.location_source)
     this.location_destination = { lat: parseFloat(this.stopp_list[sto_len - 1].lat), lng: parseFloat(this.stopp_list[sto_len - 1].lng) };
-    //console.log('this.location_destination', this.location_destination)
+
 
     this.calculateAndDisplayRoute();
   }
@@ -332,8 +259,6 @@ export class BookingHistoryDetailsPage implements OnInit {
   }
   smsNow() {
     this.loadingService.present();
-    //console.log('getData myaccount-personal')
-    //this.loadingService.present();
     let request_data = { "type": "msg_emergency", "contact": this.sos_number };
     this.officePoolCarService.commonPageContentService(request_data).subscribe(
       res => {
@@ -369,17 +294,6 @@ export class BookingHistoryDetailsPage implements OnInit {
   scanQrCode(qr_code = '') {
     let data = { 'from_which_page': 'booking-history-details', 'qr_image': qr_code }
     this.modalService.openModal(RouteStoppageModalPage, data, 'stoppage_modal_css');
-    // this.barcodeScanner.scan().then(barcodeData => {
-    //   //console.log('Barcode data', barcodeData);
-    //   if (barcodeData.text == this.result_data.seat_qr) {
-    //     this.toasterService.showToast('Your seats has been confirmed, have a safe journey', 6000)
-    //   } else {
-    //     this.toasterService.showToast('Qr code does not match! please contact to Redy Rider Help Line', 6000)
-    //   }
-    // }).catch(err => {
-    //   console.log('Error', err);
-    // });
-
   }
   shareYourRoute() {
     let message = 'Booking Details \n -----------------\n';
@@ -395,29 +309,17 @@ export class BookingHistoryDetailsPage implements OnInit {
   }
   getData(booking_id) {
     this.progress_bar = true;
-    //console.log('getData myaccount-personal')
-    //this.loadingService.present();
     let request_data = { "type": "booking_history", "booking_id": booking_id };
     this.officePoolCarService.applyCouponService(request_data).subscribe(
       res => {
-
         this.result_data = res.result;
         this.stopp_list = res.result.stoppage_list;
         this.waypoint_stoppage_list = res.result.stoppage_list_1;
-
-
-        //console.log("res:::" + this.stopp_list.length);
-
         this.getMyLocation();
         this.firebase_get_data();
         this.progress_bar = false;
-
-        console.log(this.result_data);
-        //this.firebase_get_data();
-
       },
       error => {
-        //console.log("error::::" + error.error.msg);
         this.progress_bar = false;
         this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }

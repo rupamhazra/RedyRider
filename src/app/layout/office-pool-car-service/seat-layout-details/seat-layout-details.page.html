@@ -103,7 +103,43 @@
         
       </ion-grid>
 
-      <ion-grid class="rstar-second-grid rstar-grid" *ngIf="allSeats.car_type == 'SML 37 Seater' || allSeats.car_type == 'SML 26 Seater'">
+      <ion-grid class="rstar-third-grid rstar-grid" *ngIf="allSeats.car_type == 'SML 31 Seater'">
+        <ion-row class="">
+          
+          <ion-col class="ion-align-self-center" size="2" *ngFor="let seat_no of allSeats.third_row;let i = index">
+            <div *ngIf="seat_no.booked == true">
+              <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <g class="layer">
+                 <title>Layer 1</title>
+                 <g id="svg_1">
+                  <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                  <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                  <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                 </g>
+                </g>
+               </svg>
+               </div>
+               <div *ngIf="seat_no.booked == false" (click)="toggleClass(seat_no,allSeats.car_id)"  [ngClass]="{'selected': seat_no.selected}">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                  <g class="layer">
+                   <title>Layer 1</title>
+                   <g id="svg_1">
+                    <rect fill="none" height="33.79881" id="svg_11" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.56805" x="11.71598" y="11.70119"></rect>
+                    <rect fill="#ffffff" height="4.62722" id="svg_16" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="28.16568" x="11.91716" y="40.87278"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_17" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="37.56805" y="23.77219"></rect>
+                    <rect fill="#ffffff" height="21.72781" id="svg_20" rx="5" ry="5" stroke="#02A1EB" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" width="5.43195" x="9" y="23.77219"></rect>
+                   </g>
+                  </g>
+                 </svg>
+                </div>
+               <p>S{{allSeats.third_row[i].seat_number}}</p>
+          </ion-col>
+          <ion-col class="ion-align-self-center" size="7">&nbsp;</ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="rstar-second-grid rstar-grid" *ngIf="allSeats.car_type == 'SML 37 Seater' || allSeats.car_type == 'SML 26 Seater' || allSeats.car_type == 'SML 31 Seater'">
         <ion-row class="">
           <ion-col class="ion-align-self-center" size="7">&nbsp;</ion-col>
           <ion-col class="ion-align-self-center" size="2" *ngFor="let seat_no of allSeats.second_row;let i = index">

@@ -13,7 +13,7 @@
   <div #map id="map" *ngIf="which_type_search=='pickup'"></div>
   <ion-list [hidden]="autocompleteItems.length == 0" [class]="which_type_search=='pickup' ? 'ion-list-class':''" *ngIf="showList">
     <ion-item *ngFor="let item of autocompleteItems" tappable lines="full" class="item-class" (click)="selectSearchLocation(item.description,which_type_search)">
-      <p>{{ item.description  }}</p>
+      <p [innerHTML]="item.description"></p>
     </ion-item>
   </ion-list>
   <ion-text color="danger" *ngIf="isNoItemAvailable" >

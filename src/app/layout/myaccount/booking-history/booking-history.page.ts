@@ -32,7 +32,6 @@ export class BookingHistoryPage implements OnInit {
 
   ngOnInit() {
     this.storage.get('USER_INFO').then((val) => {
-      //console.log('USER_INFO', val);
       this.userId = val['id'];
       this.getTransactionHistory(false, false);
 
@@ -78,7 +77,6 @@ export class BookingHistoryPage implements OnInit {
     this.getTransactionHistory(event, true);
   }
   openBooking(booking_id) {
-    //let data = { 'from_which_page': 'my-booking-history', 'userId': this.userId, 'booking_id': booking_id }
     this.router.navigateByUrl('myaccount/booking-history-details/' + booking_id)
   }
   filterRides() {

@@ -4,11 +4,11 @@
   <div *ngIf="which_page == 'refer-earn'">
     <div class="inner_div">
       <div>
-          <ion-img src="/assets/svg/Gift2.svg"></ion-img>
+          <ion-img src="{{result.header_image}}"></ion-img>
       </div>
       <div style="text-align: center;">
-          <ion-text><h2 style="margin: 0 0 10px 0px;">Refer & Earn upto Rs 200</h2></ion-text>
-          <p class="no_margin_p">Get Rs 50 when your friend completes his/her registration with us.</p>
+          <ion-text><h2 style="margin: 0 0 10px 0px;">{{result.ref_title}}</h2></ion-text>
+          <p class="no_margin_p">{{result.ref_text}}</p>
           <p style="margin: 15px 0 5px 0;">Your Code</p>
           <div class="div_class">
               <ion-text text-center>{{refer_code}} </ion-text>
@@ -19,12 +19,21 @@
           </p>
           <div class="div_class" style="margin-bottom: 30px;">
               <p color="primary" class="div_link_class"> 
-                  {{generate_link}}
+                  {{result.ref_link}}
               </p>
-              <fa-icon [icon]="['far','clone']" size="1x" class="link-icon" (click)="copyText(generate_link)"></fa-icon>
+              <fa-icon [icon]="['far','clone']" size="1x" class="link-icon" (click)="copyText(result.ref_link)"></fa-icon>
           </div>
           <ion-toolbar style="border: 1px dashed;--background: white;--min-height:42px;">
-              <fa-icon [icon]="['fab','whatsapp-square']" size="1x" class="social-whatsapp-icon" (click)="shareVia('whatsapp')"></fa-icon>
+            <ion-item lines="none">
+                <ion-label *ngFor="let media of result.ref_media">
+                <ion-img src="{{media.ref_icon}}" style="height: 30px;"   (click)="shareVia(media.media_name)"></ion-img>
+                </ion-label>
+                <ion-label>
+                    <fa-icon [icon]="['fas','ellipsis-v']" size="1x" class="more-icon" (click)='referFriends()'></fa-icon>
+                </ion-label>
+            </ion-item>
+                
+              <!-- <fa-icon [icon]="['fab','whatsapp-square']" size="1x" class="social-whatsapp-icon" (click)="shareVia('whatsapp')"></fa-icon>
               <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 288 288" enable-background="new 0 0 288 288" xml:space="preserve" class="social-icon" (click)="shareVia('facebook')">
                   <g>
                       <path fill="#314A9F" d="M287.111,256.911c0,16.196-13.132,29.327-29.327,29.327H31.898c-16.196,0-29.328-13.131-29.328-29.327
@@ -43,8 +52,8 @@
                       <path fill="#EF4337" d="M35.83,25.765l108.787,97.308l107.952-97.308c0,0,15.627-4.731,20.808,11.487v17.569l-128.76,116.904
                           L15.857,57.525V37.929C15.857,37.929,19.795,20.358,35.83,25.765z"/>
                   </g>
-              </svg>
-              <fa-icon [icon]="['fas','ellipsis-v']" size="1x" class="more-icon" (click)='referFriends()'></fa-icon>
+              </svg> -->
+              
           </ion-toolbar>
           <ion-toolbar style="top:15px;">
               <p slot="start" (click)="showHowToEarn()">How To Earn ?</p>

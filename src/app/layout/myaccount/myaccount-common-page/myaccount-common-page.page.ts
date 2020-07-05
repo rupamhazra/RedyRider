@@ -22,7 +22,7 @@ export class MyaccountCommonPagePage implements OnInit {
   device_token: string;
   progress_bar: boolean = false;
   page = 1;
-  result: any;
+  result: any = {};
   constructor(
     private route: ActivatedRoute,
     private storage: Storage,
@@ -36,21 +36,42 @@ export class MyaccountCommonPagePage implements OnInit {
   ngOnInit() {
 
     this.which_page = this.route.snapshot.params['which-page'];
-    this.progress_bar = true;
+    //this.progress_bar = true;
     this.storage.get('USER_INFO').then((val) => {
       if (val) {
         this.userId = val['id'];
         this.refer_code = val.referral_no;
-        this.generate_link = 'https://google.com/' + this.refer_code;
-        this.message = 'Your friend has invited you to join RedyRider instant and safe carpooling with verified users.Use referral code ' + this.refer_code + ' on sign up.Click here';
-        this.progress_bar = false;
+        //this.progress_bar = false;
         this.device_token = val.user_device['device_token'];
         this.notificationDetails(false, false);
         this.readStatusUpdate();
+        this.getReferralSetings();
       }
     });
     this.getRouteMap();
   }
+  getReferralSetings() {
+    this.progress_bar = true;
+    let request_data = {
+      "type": "ref_settings",
+      "user_id": this.userId
+    };
+
+    this.officePoolCarService.commonPageContentService(request_data).subscribe(
+      res => {
+        //console.log('res.result', res.result)
+        this.result = res.result
+        this.generate_link = this.result.ref_link
+        this.message = this.result.ref_msg
+        this.progress_bar = false;
+      },
+      error => {
+        this.progress_bar = false;
+        this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
+      }
+    );
+  }
+
   readStatusUpdate() {
     let request_data = {
       "type": "update_notification_status",
@@ -106,10 +127,10 @@ export class MyaccountCommonPagePage implements OnInit {
     if (which == 'whatsapp') {
       this.socialSharing.shareViaWhatsApp(this.message, '', this.generate_link)
     }
-    if (which == 'facebook') {
+    if (which == 'Facebook') {
       this.socialSharing.shareViaFacebook(this.message, '', this.generate_link)
     }
-    if (which == 'gmail') {
+    if (which == 'Gmail') {
       this.message = this.message + this.generate_link
       this.socialSharing.shareViaEmail(this.message, 'Redy Rider Invitation', [])
     }

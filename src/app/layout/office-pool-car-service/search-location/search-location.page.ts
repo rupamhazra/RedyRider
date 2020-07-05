@@ -91,7 +91,6 @@ export class SearchLocationPage implements OnInit {
   }
   loadMap(lat, lng) {
     this.showList = false;
-    console.log('dsfddfdsfsdfsdf')
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       center: { lat: lat, lng: lng },
       zoom: 15,
@@ -106,7 +105,6 @@ export class SearchLocationPage implements OnInit {
   }
   lastLatLng(marker) {
     google.maps.event.addListener(marker, 'dragend', () => {
-      console.log(marker.position.lat(), marker.position.lng())
       this.getGeoencoder(marker.position.lat(), marker.position.lng());
     });
   }
@@ -124,8 +122,6 @@ export class SearchLocationPage implements OnInit {
       this.quick_actions = true;
       return;
     }
-    console.log('this.autocomplete.input', val);
-    console.log('which_type_serach', which_type_search);
     if (which_type_search == 'pickup') {
       this.GoogleAutocomplete.getPlacePredictions({ input: val },
         (predictions, status) => {
@@ -165,7 +161,6 @@ export class SearchLocationPage implements OnInit {
 
   }
   selectSearchLocation(location: any, type: any) {
-    console.log('type', type);
     if (type == 'pickup') {
       this.showList = false;
       this.search_address = location;
@@ -216,7 +211,6 @@ export class SearchLocationPage implements OnInit {
     this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
       .then((result: NativeGeocoderResult[]) => {
         this.search_address = this.generateAddress(result[0]);
-        console.log('this.search_address', this.search_address)
       })
       .catch((error: any) => {
         alert('Error getting location' + JSON.stringify(error));
@@ -256,7 +250,6 @@ export class SearchLocationPage implements OnInit {
   }
   startListing(which_type_search) {
     this.speechRecognition.startListening().subscribe((speeches) => {
-      console.log('speeches', speeches)
       //this.updateSearchResults(speeches, which_type_search, true)
       this.search_address = speeches[0];
     }, (err) => {

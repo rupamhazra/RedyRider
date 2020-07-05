@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network/ngx';
-import { AlertService, ToasterService } from '../../globalMethods/global-methods';
+import { AlertService, ToasterService, NetworkService } from '../../globalMethods/global-methods';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 //import { Firebase } from "@ionic-native/firebase/ngx";
 
@@ -39,22 +39,12 @@ export class HeaderComponent implements OnInit {
     private network: Network,
     private officePoolCarService: OfficePoolCarService,
     private toasterService: ToasterService,
-    //private fcm: Firebase,
+    private networkService: NetworkService
 
   ) {
 
   }
-  getNotificationCount(user_id) {
-    let request_data = { "type": 'notification_status', "user_id": user_id }
-    this.officePoolCarService.commonPageContentService(request_data).subscribe(
-      res => {
-        this.notification_count = res.result;
-      },
-      error => {
-        //this.toasterService.showToast(error.error.msg, 2000);
-      }
-    );
-  }
+
   ngOnInit() {
     /**
      * Notification Unread Count
@@ -62,7 +52,8 @@ export class HeaderComponent implements OnInit {
     this.storage.get('USER_INFO').then((val) => {
       if (val) {
         this.userId = val['id'];
-        this.getNotificationCount(this.userId);
+        if (!this.networkService.checkNetworkDisconnect())
+          this.getNotificationCount(this.userId);
       }
     });
     /**
@@ -178,7 +169,11 @@ export class HeaderComponent implements OnInit {
       this.back_button_visible = true;
       this.title_section_visible = true;
       this.title = "Details";
-
+    }
+    if (this.router.url.includes('common-page/check-internet-connection')) {
+      this.back_button_visible = false;
+      this.title_section_visible = true;
+      this.menu_button_visible = true;
     }
     if (this.router.url.includes('myaccount')) {
       this.back_button_visible = true;
@@ -203,6 +198,7 @@ export class HeaderComponent implements OnInit {
       this.back_button_visible = true;
       this.title_section_visible = true;
       this.title = "Notifications";
+      this.back_button_visible_click = true;
 
     }
     if (this.router.url.includes('myaccount/myaccount-common-page/route-map')) {
@@ -248,6 +244,20 @@ export class HeaderComponent implements OnInit {
       this.title_section_visible = true;
       this.title = "School Pull Car";
     }
+  }
+  getNotificationCount(user_id) {
+
+    let request_data = { "type": 'notification_status', "user_id": user_id }
+    this.officePoolCarService.commonPageContentService(request_data).subscribe(
+      res => {
+        this.notification_count = parseInt(res.result);
+      },
+      error => {
+        //this.toasterService.showToast(error.error.msg, 2000);
+      }
+    );
+
+
   }
   getBalance(userId) {
     let request_data = { "type": 'referral_balance', "user_id": userId, }

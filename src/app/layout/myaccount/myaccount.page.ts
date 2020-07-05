@@ -51,7 +51,6 @@ export class MyaccountPage implements OnInit {
   }
   ngOnInit() {
     this.myaccount_event.subscribe('profile_update', (data) => {
-      console.log('data', data)
       if (data.which == 'personal') {
         this.getData('myaccount-personal', data.user_id);
       } else {
@@ -79,7 +78,6 @@ export class MyaccountPage implements OnInit {
     this.modalService.openModal(RouteStoppageModalPage, data, 'stoppage_modal_css');
   }
   openModal1(which) {
-    console.log('which', which)
     let data = { 'from_which_page': which, 'userId': this.userId }
     this.modalService.openModal(RouteStoppageModalPage, data, 'stoppage_modal_css');
   }
@@ -193,7 +191,6 @@ export class MyaccountPage implements OnInit {
   public uploadImage() {
     var targetPath = this.pathForImage(this.lastImage);
     var filename = this.lastImage;
-    console.log('filename', filename)
     var today = new Date();
     this.currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var options = {

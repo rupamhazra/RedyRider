@@ -92,7 +92,7 @@ export class BookedDetailsPage implements OnInit {
         this.router.navigateByUrl('booking-thankyou')
       },
       error => {
-        console.log("error::::" + error.error);
+        //console.log("error::::" + error.error);
         //this.openOtpModal();
         this.loadingService.dismiss();
         this.toasterService.showToast(error.error.msg, 3000, true, false, '', '', 'my-error-toast');
