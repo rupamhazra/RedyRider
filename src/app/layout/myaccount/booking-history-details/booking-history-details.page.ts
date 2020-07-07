@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { LoadingService, ToasterService, ModalService } from '../../../core/globalMethods/global-methods';
+import { LoadingService, ToasterService, ModalService, NetworkService } from '../../../core/globalMethods/global-methods';
 import { Events } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -77,7 +77,8 @@ export class BookingHistoryDetailsPage implements OnInit {
     private emailComposer: EmailComposer,
     private barcodeScanner: BarcodeScanner,
     private socialSharing: SocialSharing,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private networkService: NetworkService
   ) {
     this.storage.get('USER_INFO').then((val) => {
       //console.log('user_details_val_val', val)
@@ -93,11 +94,11 @@ export class BookingHistoryDetailsPage implements OnInit {
     });
     this.booking_id = this.route.snapshot.params['id'];
     //console.log('this.booking_id', this.booking_id)
-    this.getData(this.booking_id);
+    if (!this.networkService.checkNetworkDisconnect()) this.getData(this.booking_id);
   }
 
   ngOnInit() {
-    this.loadMap();
+    if (!this.networkService.checkNetworkDisconnect()) this.loadMap();
   }
   firebase_get_data() {
     let car_id = this.result_data.car_name + "-" + this.result_data.car_id;

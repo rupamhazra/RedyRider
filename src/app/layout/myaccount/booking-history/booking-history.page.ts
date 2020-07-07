@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { RouteStoppageModalPage } from '../../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 import { ActionSheetController } from '@ionic/angular';
-import { LoadingService, ToasterService, ModalService } from '../../../core/globalMethods/global-methods';
+import { LoadingService, ToasterService, ModalService, NetworkService } from '../../../core/globalMethods/global-methods';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,13 +27,14 @@ export class BookingHistoryPage implements OnInit {
     private officePoolCarService: OfficePoolCarService,
     public actionSheetController: ActionSheetController,
     private loadingService: LoadingService,
-    private router: Router
+    private router: Router,
+    private networkService: NetworkService
   ) { }
 
   ngOnInit() {
     this.storage.get('USER_INFO').then((val) => {
       this.userId = val['id'];
-      this.getTransactionHistory(false, false);
+      if (!this.networkService.checkNetworkDisconnect()) this.getTransactionHistory(false, false);
 
     });
   }

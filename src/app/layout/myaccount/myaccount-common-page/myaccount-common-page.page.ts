@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { RouteStoppageModalPage } from '../../office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
-import { ToasterService, ModalService } from '../../../core/globalMethods/global-methods';
+import { ToasterService, ModalService, NetworkService } from '../../../core/globalMethods/global-methods';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 @Component({
   selector: 'app-myaccount-common-page',
@@ -31,6 +31,7 @@ export class MyaccountCommonPagePage implements OnInit {
     public modalService: ModalService,
     private toasterService: ToasterService,
     private officePoolCarService: OfficePoolCarService,
+    private networkService: NetworkService
   ) { }
 
   ngOnInit() {
@@ -43,12 +44,15 @@ export class MyaccountCommonPagePage implements OnInit {
         this.refer_code = val.referral_no;
         //this.progress_bar = false;
         this.device_token = val.user_device['device_token'];
-        this.notificationDetails(false, false);
-        this.readStatusUpdate();
-        this.getReferralSetings();
+        if (!this.networkService.checkNetworkDisconnect()) {
+          this.notificationDetails(false, false);
+          this.readStatusUpdate();
+          this.getReferralSetings();
+        }
+
       }
     });
-    this.getRouteMap();
+    if (!this.networkService.checkNetworkDisconnect()) this.getRouteMap();
   }
   getReferralSetings() {
     this.progress_bar = true;

@@ -3,7 +3,7 @@ import { Events } from '@ionic/angular';
 import { Router } from "@angular/router";
 import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { AlertService, LoadingService, ToasterService } from '../../../core/globalMethods/global-methods';
+import { AlertService, LoadingService, ToasterService, NetworkService } from '../../../core/globalMethods/global-methods';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 
 declare var RazorpayCheckout: any;
@@ -40,7 +40,8 @@ export class PaymentDetailsPage implements OnInit {
     private loadingService: LoadingService,
     public storage: Storage,
     private alertService: AlertService,
-    private tts: TextToSpeech
+    private tts: TextToSpeech,
+    private networkService: NetworkService
   ) {
     this.progress_bar = true;
     this.storage.get('USER_INFO').then((val) => {
@@ -54,7 +55,8 @@ export class PaymentDetailsPage implements OnInit {
       //this.razor_pay_key = val['razor_pay_key'];
       //this.getBalance('wallet_balance');
       //this.getBalance('referral_balance');
-      this.getBalance('referral_wallet_balance');
+      if (!this.networkService.checkNetworkDisconnect())
+        this.getBalance('referral_wallet_balance');
     });
     this.storage.get('bookingDetails').then((val) => {
       this.payableFare = val['total_fare_details']['payable_fare'];
@@ -68,7 +70,7 @@ export class PaymentDetailsPage implements OnInit {
       if (data == 'connect') this.net_connection_check = false;
       if (data == 'disconnect') this.net_connection_check = true;
     });
-    this.getApiKeyDetails();
+    if (!this.networkService.checkNetworkDisconnect()) this.getApiKeyDetails();
   }
   buyCreditPoints() {
     this.router.navigateByUrl('myaccount/wallet')

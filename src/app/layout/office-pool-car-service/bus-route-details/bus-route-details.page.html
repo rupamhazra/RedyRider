@@ -97,14 +97,14 @@
               <ion-row text-center  [ngClass]="{'car_selected': item.car_selected,'col_back':!item.car_selected}">
               <!-- <ion-row no-padding no-margin *ngIf="item.car_status"> -->
                 <ion-col *ngIf="item.car_status"  (click)="reserveSeat(item,$event)">
-                  SELECT THIS CAR
-                  
+                 
+                  {{item.button_text}}
                 </ion-col>
                
               </ion-row>
               <ion-row text-center >
                   <ion-col *ngIf="!item.car_status" class="not_avai">
-                      NOT AVAILABLE THIS TIME
+                    {{item.button_text}}
                   </ion-col>
                 </ion-row>
 

@@ -9,7 +9,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 import { environment } from '../../../environments/environment';
-import { AlertService, ToasterService, LoadingService, ModalService } from '../../core/globalMethods/global-methods';
+import { AlertService, ToasterService, LoadingService, ModalService, NetworkService } from '../../core/globalMethods/global-methods';
 
 declare var cordova: any;
 @Component({
@@ -47,14 +47,15 @@ export class MyaccountPage implements OnInit {
     private file: File,
     private alertService: AlertService,
     public my_account_event: Events,
+    private networkService: NetworkService
   ) {
   }
   ngOnInit() {
     this.myaccount_event.subscribe('profile_update', (data) => {
       if (data.which == 'personal') {
-        this.getData('myaccount-personal', data.user_id);
+        if (!this.networkService.checkNetworkDisconnect()) this.getData('myaccount-personal', data.user_id);
       } else {
-        this.getData('myaccount-address', data.user_id);
+        if (!this.networkService.checkNetworkDisconnect()) this.getData('myaccount-address', data.user_id);
       }
     });
     this.storage.get('USER_INFO').then((val) => {
@@ -65,8 +66,10 @@ export class MyaccountPage implements OnInit {
         this.device_details = val.user_device;
         this.profile_img = val.photo;
         //this.getData('myaccount-address', val.id);
-        this.getData('myaccount-personal', val.id);
-        this.visible_myaccount_details_div = true
+        if (!this.networkService.checkNetworkDisconnect()) {
+          this.getData('myaccount-personal', val.id);
+          this.visible_myaccount_details_div = true
+        }
       }
       else {
         this.visible_myaccount_details_div = false

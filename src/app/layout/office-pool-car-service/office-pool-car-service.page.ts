@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { ModalService } from '../../core/globalMethods/global-methods';
+import { ModalService, NetworkService } from '../../core/globalMethods/global-methods';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -47,12 +47,16 @@ export class OfficePoolCarServicePage implements OnInit {
     public storage: Storage,
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder,
+    private networkService: NetworkService
   ) {
-    this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
-      this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+    if (!this.networkService.checkNetworkDisconnect()) {
+      this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
+        this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+    }
+
   }
   ionViewDidEnter() {
     this.storage.get('select_location').then((val) => {

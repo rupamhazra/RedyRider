@@ -57,6 +57,9 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 
 import { AppRate } from '@ionic-native/app-rate/ngx';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InternetInterceptor } from './interceptors/internet.interceptor';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -104,7 +107,12 @@ import { AppRate } from '@ionic-native/app-rate/ngx';
     Insomnia,
     TextToSpeech,
     SpeechRecognition,
-    AppRate
+    AppRate,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: InternetInterceptor,
+    //   multi: true
+    // }
 
   ],
   bootstrap: [AppComponent],

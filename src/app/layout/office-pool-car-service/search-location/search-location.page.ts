@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { LoadingService } from '../../../core/globalMethods/global-methods';
+import { LoadingService, NetworkService } from '../../../core/globalMethods/global-methods';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
@@ -55,7 +55,8 @@ export class SearchLocationPage implements OnInit {
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder,
     public search_loc_page_event: Events,
-    private speechRecognition: SpeechRecognition
+    private speechRecognition: SpeechRecognition,
+    public networkService: NetworkService
   ) {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
@@ -74,8 +75,11 @@ export class SearchLocationPage implements OnInit {
     }
   }
   ionViewDidEnter() {
-    if (this.which_type_search == 'pickup')
-      this.currentLocation(this.which_type_search, true);
+    if (this.which_type_search == 'pickup') {
+      if (!this.networkService.checkNetworkDisconnect())
+        this.currentLocation(this.which_type_search, true);
+    }
+
   }
   currentLocation(which_type_search = '', start_flag = false) {
     this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {

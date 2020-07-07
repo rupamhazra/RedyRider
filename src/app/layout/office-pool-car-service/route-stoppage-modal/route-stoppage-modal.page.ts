@@ -65,6 +65,7 @@ export class RouteStoppageModalPage implements OnInit {
     let start_point = this.navParams.get('start_point');
     let route_timing_id = this.navParams.get('route_timing_id');
     this.qr_image = this.navParams.get('qr_image');
+
     if (!this.networkService.checkNetworkDisconnect()) {
       if (this.calling_page == 'bus-route-details-page') {
         this.loadingService.present();
@@ -161,12 +162,13 @@ export class RouteStoppageModalPage implements OnInit {
           },
           error => {
 
-            //this.loadingService.dismiss();
+            //console.log('error', error)
             this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
           }
         );
       }
     }
+
   }
   closeModal() {
     this.modalService.closeModal();

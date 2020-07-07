@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { OfficePoolCarService } from '../../core/services/office-pool-car.service';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
-import { LoadingService, ModalService, ToasterService } from '../../core/globalMethods/global-methods';
+import { LoadingService, ModalService, ToasterService, NetworkService } from '../../core/globalMethods/global-methods';
 import { Events } from '@ionic/angular';
 import { RouteStoppageModalPage } from '../../layout/office-pool-car-service/route-stoppage-modal/route-stoppage-modal.page';
 import { Device } from '@ionic-native/device/ngx';
@@ -41,6 +41,7 @@ export class RegisterPage implements OnInit {
     private device: Device,
     public platform: Platform,
     private fcm: FirebaseX,
+    private networkService: NetworkService
   ) {
     platform.ready().then(() => {
       if (this.platform.is("cordova")) { }
@@ -79,7 +80,7 @@ export class RegisterPage implements OnInit {
       gender: ['']
     });
     this.reg_event.subscribe('resendOTPRegisterModal', (data) => {
-      this.registerUser(true);
+      if (!this.networkService.checkNetworkDisconnect()) this.registerUser(true);
     });
   }
   registerUser(resendOtp: boolean = false) {

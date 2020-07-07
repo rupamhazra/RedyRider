@@ -191,7 +191,7 @@ export class HeaderComponent implements OnInit {
       this.title = "Refer & Earn";
       this.referral_bal_show = true;
       this.storage.get('USER_INFO').then((val) => {
-        this.getBalance(val['id']);
+        if (!this.networkService.checkNetworkDisconnect()) this.getBalance(val['id']);
       });
     }
     if (this.router.url.includes('myaccount/myaccount-common-page/notifications')) {
@@ -280,7 +280,7 @@ export class HeaderComponent implements OnInit {
     //this.router.navigateByUrl('myaccount/myaccount-common-page/notifications')
   }
   back() {
-    this.getNotificationCount(this.userId);
+    if (!this.networkService.checkNetworkDisconnect()) this.getNotificationCount(this.userId);
     this.router.navigateByUrl('/home');
   }
 

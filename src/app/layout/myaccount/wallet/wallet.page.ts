@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
-import { ToasterService, LoadingService } from '../../../core/globalMethods/global-methods';
+import { ToasterService, LoadingService, NetworkService } from '../../../core/globalMethods/global-methods';
 import { ActionSheetController, IonContent } from '@ionic/angular';
 declare var RazorpayCheckout: any;
 
@@ -37,7 +37,8 @@ export class WalletPage implements OnInit {
     private officePoolCarService: OfficePoolCarService,
     private loadingService: LoadingService,
     public storage: Storage,
-    public actionSheetController: ActionSheetController
+    public actionSheetController: ActionSheetController,
+    private networkService: NetworkService
   ) {
     this.storage.get('USER_INFO').then((val) => {
       //console.log('USER_INFO', val);
@@ -46,7 +47,7 @@ export class WalletPage implements OnInit {
       this.userEmail = val['email'];
       this.userPhone = val['mobile'];
       //this.razor_pay_key = val['razor_pay_key'];
-      this.getTransactionHistory(false, false);
+      if (!this.networkService.checkNetworkDisconnect()) this.getTransactionHistory(false, false);
 
     });
   }
@@ -58,7 +59,7 @@ export class WalletPage implements OnInit {
     this.form = this.formBuilder.group({
       amount: ['', Validators.required]
     });
-    this.getApiKeyDetails();
+    if (!this.networkService.checkNetworkDisconnect()) this.getApiKeyDetails();
   }
   getApiKeyDetails() {
     let request_data = {

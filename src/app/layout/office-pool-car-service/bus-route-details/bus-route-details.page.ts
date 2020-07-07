@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Device } from '@ionic-native/device/ngx';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { LoadingService, ModalService, ToasterService } from '../../../core/globalMethods/global-methods';
+import { LoadingService, ModalService, ToasterService, NetworkService } from '../../../core/globalMethods/global-methods';
 import { IonInfiniteScroll, IonVirtualScroll } from '@ionic/angular';
 import { RouteStoppageModalPage } from '../route-stoppage-modal/route-stoppage-modal.page';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
@@ -66,6 +66,7 @@ export class BusRouteDetailsPage implements OnInit {
     public storage: Storage,
     private loadingService: LoadingService,
     private officePoolCarService: OfficePoolCarService,
+    private networkService: NetworkService
   ) {
     this.progress_bar = true;
     this.storage.get('route_search_parameters').then((val) => {
@@ -75,6 +76,7 @@ export class BusRouteDetailsPage implements OnInit {
       val1['cars_details'] = [];
       this.storage.set('route_search_parameters', val1);
       this.request_data = val1;
+      //if (!this.networkService.checkNetworkDisconnect()) 
       this.routeDetails();
     });
   }

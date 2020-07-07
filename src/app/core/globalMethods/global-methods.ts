@@ -265,7 +265,7 @@ export class NetworkService {
     ) { }
     // watch network for a disconnection
     checkNetworkDisconnect(page_flag: boolean = true) {
-        if (navigator.onLine) {
+        if (!navigator.onLine) {
             if (page_flag) {
                 this.router.navigateByUrl('common-page/check-internet-connection');
             } else {

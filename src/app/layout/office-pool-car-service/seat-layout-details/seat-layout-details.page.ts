@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from "@angular/router";
-import { ModalService, LoadingService, ToasterService } from '../../../core/globalMethods/global-methods';
+import { ModalService, LoadingService, ToasterService, NetworkService } from '../../../core/globalMethods/global-methods';
 import { Events } from '@ionic/angular';
 import { OfficePoolCarService } from '../../../core/services/office-pool-car.service';
 import { Storage } from '@ionic/storage';
@@ -40,7 +40,8 @@ export class SeatLayoutDetailsPage implements OnInit {
     public seat_layout_details_event: Events,
     private officePoolCarService: OfficePoolCarService,
     public storage: Storage,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private networkService: NetworkService
   ) {
     this.progress_bar = true;
     this.storage.get('route_search_parameters').then((val) => {
@@ -62,7 +63,7 @@ export class SeatLayoutDetailsPage implements OnInit {
           'start_point_id': cars_d[0].start_point_id,
           'end_point_id': cars_d[0].end_point_id,
         }
-        this.getSeatDetails(request_data_1);
+        if (!this.networkService.checkNetworkDisconnect()) this.getSeatDetails(request_data_1);
         let request_data_2 = {
           "type": "seat_layout",
           "car_id": cars_d[1].car_id,
@@ -72,7 +73,7 @@ export class SeatLayoutDetailsPage implements OnInit {
           'start_point_id': cars_d[1].start_point,
           'end_point_id': cars_d[1].end_point
         }
-        this.getSeatDetailsforRoundTrip(request_data_2);
+        if (!this.networkService.checkNetworkDisconnect()) this.getSeatDetailsforRoundTrip(request_data_2);
       }
       else {
         let request_data_1 = {
@@ -84,7 +85,7 @@ export class SeatLayoutDetailsPage implements OnInit {
           'start_point_id': cars_d[0].start_point_id,
           'end_point_id': cars_d[0].end_point_id
         }
-        this.getSeatDetails(request_data_1);
+        if (!this.networkService.checkNetworkDisconnect()) this.getSeatDetails(request_data_1);
       }
     });
     this.storage.get('USER_INFO').then((val) => {
