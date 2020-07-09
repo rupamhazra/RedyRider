@@ -165,6 +165,7 @@ export class SearchLocationPage implements OnInit {
 
   }
   selectSearchLocation(location: any, type: any) {
+    console.log('selectSearchLocation')
     if (type == 'pickup') {
       this.showList = false;
       this.search_address = location;
@@ -174,11 +175,14 @@ export class SearchLocationPage implements OnInit {
       });
     }
     else {
+      console.log('drop location', location)
       this.storage.get('select_location').then((val) => {
         if (val != null) {
           let val1 = val;
           val1['drop_location'] = location;
           this.storage.set('select_location', val1);
+        } else {
+          this.storage.set('select_location', { 'drop_location': location })
         }
       });
       this.router.navigateByUrl('office-pool-car-service');

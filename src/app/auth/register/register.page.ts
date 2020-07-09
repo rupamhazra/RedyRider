@@ -77,7 +77,9 @@ export class RegisterPage implements OnInit {
       otp3: ['', Validators.required],
       otp4: ['', Validators.required],
       type: [''],
-      gender: ['']
+      gender: [''],
+      pincode: ['', Validators.required],
+      address: ['', Validators.required],
     });
     this.reg_event.subscribe('resendOTPRegisterModal', (data) => {
       if (!this.networkService.checkNetworkDisconnect()) this.registerUser(true);
@@ -110,7 +112,9 @@ export class RegisterPage implements OnInit {
               "otp_pass": res.result.otp_pass,
               'device_details': JSON.stringify(this.device_details),
               'device_uuid': this.device.uuid,
-              'device_token': this.device_token
+              'device_token': this.device_token,
+              "pincode": this.form.controls['pincode'].value,
+              "address": this.form.controls['address'].value
             },
           }
           this.loadingService.dismiss();

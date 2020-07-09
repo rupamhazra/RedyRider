@@ -40,6 +40,18 @@
                 <ion-text style="    margin-left: 0px;"  *ngIf="passwordShown" slot="end" (click)="togglePassword()">Hide</ion-text>
               </ion-item>
               <ion-item-divider></ion-item-divider>
+              <ion-item>
+                <ion-label position="floating">Enter your pincode</ion-label>
+                <ion-input autofocus="on" formControlName="pincode"  clearInput="true"  type="tel" inputmode="tel" required="true" ></ion-input>
+                <ion-icon name="pin" slot="start"></ion-icon>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Enter your address</ion-label>
+                <ion-textarea autofocus="on" formControlName="address"  required="true"></ion-textarea>
+                <ion-icon name="locate" slot="start"></ion-icon>
+                
+              </ion-item>
+
               <div class="radio-button-personal">
                 <p>Gender</p>
                 <ion-radio-group formControlName="gender">
@@ -65,6 +77,7 @@
                   </div>
                 </ion-radio-group>
               </div>
+
               <ion-item lines="none">
                 <ion-label> I have Referral code</ion-label>
                 <ion-toggle [(ngModel)]="showReferralCode" slot="start" formControlName="ref_applied_no_checkbox"></ion-toggle>

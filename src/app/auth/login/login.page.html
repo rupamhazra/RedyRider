@@ -25,17 +25,22 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>
+            <ion-col text-center>
               <ion-text text-center>
                 <p class="no_text_decoration">
-                  <a routerLink='/register'>Don't have account ? Sign Up</a> 
+                  Don't have account ?
+                  
                 </p>
+              </ion-text>
+              <ion-button  routerLink='/register' >  Sign Up</ion-button> 
+                <ion-text text-center>
                 <p>
                   <a style="display: inline-block;" (click)="goToPage('contact-us')">Contact Us</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                   <a (click)="goToPage('terms-conditions')">Terms</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
                   <a (click)="goToPage('privacy-policy')">Privacy Policy</a>
                 </p>
               </ion-text>
+              
               </ion-col>
           </ion-row>
           

@@ -24,13 +24,7 @@ export class CommonPagePage implements OnInit {
     private location: Location,
     private networkService: NetworkService
   ) {
-    this.currentUrl = this.router.url;
-    router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.previousUrl = this.currentUrl;
-        this.currentUrl = event.url;
-      }
-    });
+
   }
   ngOnInit() {
     console.log('check')
@@ -63,7 +57,7 @@ export class CommonPagePage implements OnInit {
   }
   retry() {
     if (!this.networkService.checkNetworkDisconnect()) {
-      this.previousUrl = this.currentUrl;
+      this.location.back();
     } else {
       return false
     }

@@ -13,7 +13,7 @@
 /************* Staging ********************/
 export const environment = {
   production: false,
-  apiEndpoint: 'https://redyrider.com/api/',
+  apiEndpoint: 'http://52.66.138.162/api/',
   //apiEndpoint: 'http://tobuekalabya.com/carservice_manage/api/',
   //imageURL: 'https://redyrider.com/uploads/',
   fcmEndpoint: 'https://fcm.googleapis.com/fcm/',

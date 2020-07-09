@@ -67,6 +67,7 @@ export class RouteStoppageModalPage implements OnInit {
     this.qr_image = this.navParams.get('qr_image');
 
     if (!this.networkService.checkNetworkDisconnect()) {
+
       if (this.calling_page == 'bus-route-details-page') {
         this.loadingService.present();
         let request_data = { "type": "stoppage_details", "route_id": route_id, 'start_loc': start_point, 'end_loc': end_point, 'route_timing_id': route_timing_id };
@@ -167,6 +168,7 @@ export class RouteStoppageModalPage implements OnInit {
           }
         );
       }
+
     }
 
   }

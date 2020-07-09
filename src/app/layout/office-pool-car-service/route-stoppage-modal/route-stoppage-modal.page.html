@@ -258,8 +258,8 @@
           <div class="otp-input2">
             <ion-input #Field1 type="tel" [(ngModel)]="otp1" maxlength="1" class="otp-margin-right" (keyup)="moveFocus(Field2,$event,Field1)"></ion-input>
             <ion-input #Field2 type="tel" [(ngModel)]="otp2" maxlength="1" class="otp-margin-right" (keyup)="moveFocus(Field3,$event,Field1)"></ion-input>
-            <ion-input #Field3 [(ngModel)]="otp3" maxlength="1" class="otp-margin-right" (keyup)="moveFocus(Field4,$event,Field2)"></ion-input>
-            <ion-input #Field4 [(ngModel)]="otp4" maxlength="1" (keyup)="moveFocus(Field4,$event,Field3)"></ion-input>
+            <ion-input #Field3 type="tel" [(ngModel)]="otp3" maxlength="1" class="otp-margin-right" (keyup)="moveFocus(Field4,$event,Field2)"></ion-input>
+            <ion-input #Field4 type="tel" [(ngModel)]="otp4" maxlength="1" (keyup)="moveFocus(Field4,$event,Field3)"></ion-input>
           </div>
           <ion-icon name="chatbubbles" slot="start" style=" margin-right: 0px;"></ion-icon>
         </ion-item>

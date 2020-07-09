@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar style="padding:0 10px 0px 0px;" color="primary">
-    <ion-searchbar type="text" debounce="1100"  (ionChange)="updateSearchResults($event,which_type_search)" [(placeholder)]="location_placeholder" [(ngModel)]="search_address"></ion-searchbar>
+    <ion-searchbar type="text" debounce="1000"  (ionChange)="updateSearchResults($event,which_type_search)" [(placeholder)]="location_placeholder" [(ngModel)]="search_address"></ion-searchbar>
     <fa-icon [icon]="['fas','microphone']" size="1x" class="rstar-icon" slot="end" style="margin: 0 8px;" (click)="startListing(which_type_search)"></fa-icon>
     <ion-buttons slot="start" class="border_button">
       <ion-back-button defaultHref="home"></ion-back-button>
