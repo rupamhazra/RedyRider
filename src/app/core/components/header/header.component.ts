@@ -52,8 +52,8 @@ export class HeaderComponent implements OnInit {
     this.storage.get('USER_INFO').then((val) => {
       if (val) {
         this.userId = val['id'];
-        if (!this.networkService.checkNetworkDisconnect())
-          this.getNotificationCount(this.userId);
+        //if (!this.networkService.checkNetworkDisconnect())
+        this.getNotificationCount(this.userId);
       }
     });
     /**
@@ -280,7 +280,8 @@ export class HeaderComponent implements OnInit {
     //this.router.navigateByUrl('myaccount/myaccount-common-page/notifications')
   }
   back() {
-    if (!this.networkService.checkNetworkDisconnect()) this.getNotificationCount(this.userId);
+    //if (!this.networkService.checkNetworkDisconnect()) 
+    this.getNotificationCount(this.userId);
     this.router.navigateByUrl('/home');
   }
 

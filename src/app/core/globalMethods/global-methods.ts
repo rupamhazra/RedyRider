@@ -265,11 +265,12 @@ export class NetworkService {
     ) { }
     // watch network for a disconnection
     checkNetworkDisconnect(page_flag: boolean = true) {
+        console.log('calling..')
         if (!navigator.onLine) {
             if (page_flag) {
                 this.router.navigateByUrl('common-page/check-internet-connection');
             } else {
-                this.toasterService.showToast('Check your internet connection', 2000, true, false, '', '', 'my-error-toast')
+                //this.toasterService.showToast('Check your internet connection', 2000, true, false, '', '', 'my-error-toast')
             }
             return true;
         } else {

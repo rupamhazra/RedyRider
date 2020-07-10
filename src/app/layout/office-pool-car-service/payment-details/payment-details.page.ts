@@ -80,13 +80,14 @@ export class PaymentDetailsPage implements OnInit {
   }
   getApiKeyDetails() {
     let request_data = {
-      "type": "wallet",
+      "type": "rzr_pay_api",
     }
-    this.officePoolCarService.payThroughWalletService(request_data).subscribe(
+    this.officePoolCarService.commonPageContentService(request_data).subscribe(
       res => {
         this.razor_pay_key = res.result.razor_pay_key
       },
       error => {
+
       }
     );
   }

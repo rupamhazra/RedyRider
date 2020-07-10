@@ -47,7 +47,7 @@ export class WalletPage implements OnInit {
       this.userEmail = val['email'];
       this.userPhone = val['mobile'];
       //this.razor_pay_key = val['razor_pay_key'];
-      if (!this.networkService.checkNetworkDisconnect()) this.getTransactionHistory(false, false);
+      this.getTransactionHistory(false, false);
 
     });
   }
@@ -59,7 +59,7 @@ export class WalletPage implements OnInit {
     this.form = this.formBuilder.group({
       amount: ['', Validators.required]
     });
-    if (!this.networkService.checkNetworkDisconnect()) this.getApiKeyDetails();
+    //if (!this.networkService.checkNetworkDisconnect()) this.getApiKeyDetails();
   }
   getApiKeyDetails() {
     let request_data = {
@@ -110,7 +110,6 @@ export class WalletPage implements OnInit {
 
       },
       error => {
-        //console.log("error::::" + error.error.msg);
         this.progress_bar = false;
         this.toasterService.showToast(error.error.msg, 2000, true, false, '', '', 'my-error-toast');
       }

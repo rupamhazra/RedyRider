@@ -108,11 +108,11 @@ import { InternetInterceptor } from './interceptors/internet.interceptor';
     TextToSpeech,
     SpeechRecognition,
     AppRate,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: InternetInterceptor,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InternetInterceptor,
+      multi: true
+    }
 
   ],
   bootstrap: [AppComponent],
